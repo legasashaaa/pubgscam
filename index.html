@@ -108,19 +108,19 @@
         .prize-wheel {
             width: 100%;
             height: 100%;
-            z-index: 1; /* Ð¢ÐµÐ¿ÐµÑÑ Ð¿Ð¾Ð´ wheel-base */
+            z-index: 1; /* Теперь под wheel-base */
         }
 
         .wheel-base {
-            width: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
-            height: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
-            z-index: 2; /* Ð¢ÐµÐ¿ÐµÑÑ Ð¿Ð¾Ð²ÐµÑÑ wheel.png */
+            width: 55%; /* Изменено с 53% на 55% */
+            height: 55%; /* Изменено с 53% на 55% */
+            z-index: 2; /* Теперь поверх wheel.png */
             filter: brightness(1.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: contain;
-            pointer-events: none; /* Ð§ÑÐ¾Ð±Ñ Ð½Ðµ Ð¼ÐµÑÐ°Ð» ÐºÐ»Ð¸ÐºÐ°Ð¼ */
+            pointer-events: none; /* Чтобы не мешал кликам */
         }
 
         .spin-button {
@@ -140,7 +140,7 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             position: relative;
             overflow: hidden;
-            z-index: 3; /* ÐÐ½Ð¾Ð¿ÐºÐ° Ð¿Ð¾Ð²ÐµÑÑ Ð²ÑÐµÐ³Ð¾ */
+            z-index: 3; /* Кнопка поверх всего */
             pointer-events: auto;
         }
 
@@ -189,8 +189,8 @@
             }
             
             .wheel-base {
-                width: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
-                height: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
+                width: 55%; /* Изменено с 53% на 55% */
+                height: 55%; /* Изменено с 53% на 55% */
             }
             
             .spin-button {
@@ -212,8 +212,8 @@
             }
             
             .wheel-base {
-                width: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
-                height: 55%; /* ÐÐ·Ð¼ÐµÐ½ÐµÐ½Ð¾ Ñ 53% Ð½Ð° 55% */
+                width: 55%; /* Изменено с 53% на 55% */
+                height: 55%; /* Изменено с 53% на 55% */
             }
             
             .spin-button {
@@ -234,12 +234,12 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
+        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
     <script>
@@ -271,21 +271,21 @@
 
         spinButton.addEventListener('click', spinRoulette);
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð½Ð° Ð²ÑÐµÐ¹ ÑÑÑÐ°Ð½Ð¸ÑÐµ Ð¿ÑÐ¸ ÐºÐ°ÑÐ°Ð½Ð¸Ð¸ ÑÑÐ»ÐµÑÐºÐ¸
+        // Блокируем скролл на всей странице при касании рулетки
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÐºÐ¾Ð»ÐµÑÐ¸ÐºÐ¾ Ð¼ÑÑÐ¸ Ð½Ð° ÑÑÐ»ÐµÑÐºÐµ
+        // Блокируем колесико мыши на рулетке
         document.addEventListener('wheel', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐµÐ»Ð°ÐµÐ¼ ÑÑÐ»ÐµÑÐºÑ ÑÑÐ°ÑÐ¸ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¸ ÑÐºÑÐ¾Ð»Ð»Ðµ
+        // Делаем рулетку статичной при скролле
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
