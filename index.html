@@ -172,7 +172,7 @@
             left: 100%;
         }
 
-        /* Стили для модального окна */
+        /* Стили для модальных окон */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -180,7 +180,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -190,6 +190,7 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
+            text-align: center;
         }
 
         .modal-image {
@@ -198,6 +199,48 @@
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             cursor: pointer;
+        }
+
+        .social-modal-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+        }
+
+        .social-modal-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-social-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 215, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+            z-index: 1002;
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-social-modal:hover {
+            background: gold;
+            transform: scale(1.1);
         }
 
         @keyframes wheelGlow {
@@ -226,6 +269,10 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
+            
+            .social-modal-image {
+                max-width: 350px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -248,6 +295,18 @@
                 padding: 10px 30px;
                 font-size: 1.2rem;
                 margin: 15px auto;
+            }
+            
+            .social-modal-image {
+                max-width: 300px;
+            }
+            
+            .close-social-modal {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
             }
         }
     </style>
@@ -277,11 +336,22 @@
         </div>
     </div>
 
+    <!-- Модальное окно с выбором соцсетей -->
+    <div class="modal-overlay" id="socialModal">
+        <div class="social-modal-content">
+            <div class="close-social-modal" id="closeSocialModal">×</div>
+            <img src="stranica.png" alt="Выбор соцсетей" class="social-modal-image" id="socialImage">
+        </div>
+    </div>
+
     <script>
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
         const prizeImage = document.getElementById('prizeImage');
+        const socialModal = document.getElementById('socialModal');
+        const socialImage = document.getElementById('socialImage');
+        const closeSocialModal = document.getElementById('closeSocialModal');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -300,7 +370,7 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // После завершения вращения показываем модальное окно
+            // После завершения вращения показываем модальное окно с выигрышем
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
@@ -310,26 +380,54 @@
 
         function showWinModal() {
             winModal.style.display = 'flex';
-            // Блокируем скролл при открытом модальном окне
             document.body.style.overflow = 'hidden';
         }
 
         function hideWinModal() {
             winModal.style.display = 'none';
-            // Восстанавливаем скролл
+            // После закрытия окна с выигрышем показываем окно с соцсетями
+            showSocialModal();
+        }
+
+        function showSocialModal() {
+            socialModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideSocialModal() {
+            socialModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Закрытие модального окна при клике на картинку
+        // Закрытие модального окна с выигрышем при клике на картинку
         prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
-        // Закрытие модального окна при клике вне картинки
+        // Закрытие модального окна с выигрышем при клике вне картинки
         winModal.addEventListener('click', function(e) {
             if (e.target === winModal) {
                 hideWinModal();
             }
+        });
+
+        // Закрытие модального окна с соцсетями
+        closeSocialModal.addEventListener('click', function() {
+            hideSocialModal();
+        });
+
+        // Закрытие модального окна с соцсетями при клике вне картинки
+        socialModal.addEventListener('click', function(e) {
+            if (e.target === socialModal) {
+                hideSocialModal();
+            }
+        });
+
+        // Клик по картинке с соцсетями (можно добавить обработчики для кнопок соцсетей)
+        socialImage.addEventListener('click', function(e) {
+            // Здесь можно добавить логику для обработки кликов по конкретным соцсетям
+            // Например, определить координаты клика и открыть соответствующую ссылку
+            console.log('Клик по изображению соцсетей');
         });
 
         spinButton.addEventListener('click', spinRoulette);
