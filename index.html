@@ -172,7 +172,7 @@
             left: 100%;
         }
 
-        /* Стили для модального окна */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -198,31 +198,6 @@
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             cursor: pointer;
-            position: relative;
-        }
-
-        /* Стили для кнопок на картинке */
-        .image-button {
-            position: absolute;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            width: 120px;
-            height: 40px;
-            z-index: 1001;
-        }
-
-        .cancel-button {
-            /* Позиция для кнопки Cancel */
-            bottom: 30px;
-            left: 50px;
-        }
-
-        .ok-button {
-            /* Позиция для кнопки OK */
-            bottom: 30px;
-            right: 50px;
         }
 
         @keyframes wheelGlow {
@@ -251,21 +226,6 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
-            
-            .image-button {
-                width: 100px;
-                height: 35px;
-            }
-            
-            .cancel-button {
-                bottom: 25px;
-                left: 40px;
-            }
-            
-            .ok-button {
-                bottom: 25px;
-                right: 40px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -289,21 +249,6 @@
                 font-size: 1.2rem;
                 margin: 15px auto;
             }
-            
-            .image-button {
-                width: 80px;
-                height: 30px;
-            }
-            
-            .cancel-button {
-                bottom: 20px;
-                left: 30px;
-            }
-            
-            .ok-button {
-                bottom: 20px;
-                right: 30px;
-            }
         }
     </style>
 </head>
@@ -317,21 +262,18 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
+        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
     </div>
 
-    <!-- Модальное окно с картинкой выигрыша -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ñ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¾Ð¹ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
-            <!-- Прозрачные кнопки поверх картинки -->
-            <button class="image-button cancel-button" id="cancelButton"></button>
-            <button class="image-button ok-button" id="okButton"></button>
         </div>
     </div>
 
@@ -340,8 +282,6 @@
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
         const prizeImage = document.getElementById('prizeImage');
-        const cancelButton = document.getElementById('cancelButton');
-        const okButton = document.getElementById('okButton');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -360,7 +300,7 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // После завершения вращения показываем модальное окно
+            // ÐÐ¾ÑÐ»Ðµ Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
@@ -370,33 +310,22 @@
 
         function showWinModal() {
             winModal.style.display = 'flex';
-            // Блокируем скролл при открытом модальном окне
+            // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð¿ÑÐ¸ Ð¾ÑÐºÑÑÑÐ¾Ð¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð¼ Ð¾ÐºÐ½Ðµ
             document.body.style.overflow = 'hidden';
         }
 
         function hideWinModal() {
             winModal.style.display = 'none';
-            // Восстанавливаем скролл
+            // ÐÐ¾ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐºÑÐ¾Ð»Ð»
             document.body.style.overflow = 'auto';
         }
 
-        // Закрытие модального окна при клике на картинку
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ
         prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
-        // Закрытие модального окна при клике на кнопки
-        cancelButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Предотвращаем срабатывание клика на картинке
-            hideWinModal();
-        });
-
-        okButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // Предотвращаем срабатывание клика на картинке
-            hideWinModal();
-        });
-
-        // Закрытие модального окна при клике вне картинки
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð²Ð½Ðµ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¸
         winModal.addEventListener('click', function(e) {
             if (e.target === winModal) {
                 hideWinModal();
@@ -405,21 +334,21 @@
 
         spinButton.addEventListener('click', spinRoulette);
 
-        // Блокируем скролл на всей странице при касании рулетки
+        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð½Ð° Ð²ÑÐµÐ¹ ÑÑÑÐ°Ð½Ð¸ÑÐµ Ð¿ÑÐ¸ ÐºÐ°ÑÐ°Ð½Ð¸Ð¸ ÑÑÐ»ÐµÑÐºÐ¸
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // Блокируем колесико мыши на рулетке
+        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÐºÐ¾Ð»ÐµÑÐ¸ÐºÐ¾ Ð¼ÑÑÐ¸ Ð½Ð° ÑÑÐ»ÐµÑÐºÐµ
         document.addEventListener('wheel', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // Делаем рулетку статичной при скролле
+        // ÐÐµÐ»Ð°ÐµÐ¼ ÑÑÐ»ÐµÑÐºÑ ÑÑÐ°ÑÐ¸ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¸ ÑÐºÑÐ¾Ð»Ð»Ðµ
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
