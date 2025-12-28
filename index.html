@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Roulette</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .backgrounds-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background-top {
+            flex: 1;
+            background-image: url('phon.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 50vh;
+            position: relative;
+        }
+
+        .background-bottom {
+            flex: 1;
+            background-image: url('phon2.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 50vh;
+            position: relative;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.3) 30%, 
+                rgba(0, 0, 0, 0.7) 70%, 
+                transparent 100%);
+            z-index: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 40px 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: auto;
+        }
+
+        .roulette-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 25px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel {
+            position: absolute;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            transform-origin: center;
+        }
+
+        .prize-wheel {
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Теперь под wheel-base */
+        }
+
+        .wheel-base {
+            width: 53%; /* Изменено с 51% на 53% */
+            height: 53%; /* Изменено с 51% на 53% */
+            z-index: 2; /* Теперь поверх wheel.png */
+            filter: brightness(1.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            pointer-events: none; /* Чтобы не мешал кликам */
+        }
+
+        .spin-button {
+            display: block;
+            margin: 25px auto;
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black;
+            background: linear-gradient(45deg, gold, #ffd700);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            z-index: 3; /* Кнопка поверх всего */
+            pointer-events: auto;
+        }
+
+        .spin-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+            background: linear-gradient(45deg, #ffd700, gold);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .spin-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes wheelGlow {
+            0% { filter: drop-shadow(0 0 5px gold); }
+            50% { filter: drop-shadow(0 0 20px gold); }
+            100% { filter: drop-shadow(0 0 5px gold); }
+        }
+
+        .spinning {
+            animation: wheelGlow 1s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .roulette-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .wheel-base {
+                width: 53%; /* Изменено с 51% на 53% */
+                height: 53%; /* Изменено с 51% на 53% */
+            }
+            
+            .spin-button {
+                padding: 12px 40px;
+                font-size: 1.3rem;
+                margin: 20px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .roulette-container {
+                width: 280px;
+                height: 280px;
+                margin-bottom: 20px;
+            }
+            
+            .wheel-base {
+                width: 53%; /* Изменено с 51% на 53% */
+                height: 53%; /* Изменено с 51% на 53% */
+            }
+            
+            .spin-button {
+                padding: 10px 30px;
+                font-size: 1.2rem;
+                margin: 15px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="backgrounds-container">
+        <div class="background-top"></div>
+        <div class="background-bottom"></div>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <div class="container">
+        <div class="roulette-container">
+            <div class="wheel-container">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+            </div>
+        </div>
+
+        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
+    </div>
+
+    <script>
+        const spinButton = document.getElementById('spinButton');
+        const prizeWheel = document.getElementById('prizeWheel');
+
+        let isSpinning = false;
+        let currentRotation = 0;
+
+        function spinRoulette() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            spinButton.disabled = true;
+            
+            const spins = 5 + Math.floor(Math.random() * 3);
+            const extraDegrees = Math.floor(Math.random() * 360);
+            const totalRotation = (spins * 360) + extraDegrees;
+            
+            prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            currentRotation += totalRotation;
+            prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(() => {
+                isSpinning = false;
+                spinButton.disabled = false;
+            }, 4000);
+        }
+
+        spinButton.addEventListener('click', spinRoulette);
+
+        // Блокируем скролл на всей странице при касании рулетки
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Блокируем колесико мыши на рулетке
+        document.addEventListener('wheel', function(e) {
+            if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Делаем рулетку статичной при скролле
+        window.addEventListener('scroll', function() {
+            document.querySelector('.container').style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
