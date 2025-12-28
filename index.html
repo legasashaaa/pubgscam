@@ -108,19 +108,19 @@
         .prize-wheel {
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 1; /* Теперь под wheel-base */
         }
 
         .wheel-base {
-            width: 55%;
-            height: 55%;
-            z-index: 2;
+            width: 55%; /* Изменено с 53% на 55% */
+            height: 55%; /* Изменено с 53% на 55% */
+            z-index: 2; /* Теперь поверх wheel.png */
             filter: brightness(1.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: contain;
-            pointer-events: none;
+            pointer-events: none; /* Чтобы не мешал кликам */
         }
 
         .spin-button {
@@ -140,7 +140,7 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             position: relative;
             overflow: hidden;
-            z-index: 3;
+            z-index: 3; /* Кнопка поверх всего */
             pointer-events: auto;
         }
 
@@ -172,126 +172,6 @@
             left: 100%;
         }
 
-        /* Окно выигрыша */
-        .prize-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .prize-popup.active {
-            display: flex;
-            opacity: 1;
-            animation: popupShow 0.5s ease forwards;
-        }
-
-        @keyframes popupShow {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .prize-content {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            border: 3px solid gold;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
-            position: relative;
-        }
-
-        .prize-title {
-            font-size: 2rem;
-            color: gold;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-        }
-
-        .prize-image-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid gold;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .prize-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .prize-name {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: white;
-            font-weight: bold;
-        }
-
-        .prize-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .prize-button {
-            padding: 12px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 140px;
-        }
-
-        .prize-button.cancel {
-            background: #333;
-            color: white;
-        }
-
-        .prize-button.cancel:hover {
-            background: #444;
-            transform: translateY(-3px);
-        }
-
-        .prize-button.ok {
-            background: linear-gradient(45deg, gold, #ffd700);
-            color: black;
-        }
-
-        .prize-button.ok:hover {
-            background: linear-gradient(45deg, #ffd700, gold);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-        }
-
         @keyframes wheelGlow {
             0% { filter: drop-shadow(0 0 5px gold); }
             50% { filter: drop-shadow(0 0 20px gold); }
@@ -309,24 +189,14 @@
             }
             
             .wheel-base {
-                width: 55%;
-                height: 55%;
+                width: 55%; /* Изменено с 53% на 55% */
+                height: 55%; /* Изменено с 53% на 55% */
             }
             
             .spin-button {
                 padding: 12px 40px;
                 font-size: 1.3rem;
                 margin: 20px auto;
-            }
-            
-            .prize-content {
-                padding: 30px;
-                max-width: 350px;
-            }
-            
-            .prize-image-container {
-                width: 180px;
-                height: 180px;
             }
         }
 
@@ -342,45 +212,14 @@
             }
             
             .wheel-base {
-                width: 55%;
-                height: 55%;
+                width: 55%; /* Изменено с 53% на 55% */
+                height: 55%; /* Изменено с 53% на 55% */
             }
             
             .spin-button {
                 padding: 10px 30px;
                 font-size: 1.2rem;
                 margin: 15px auto;
-            }
-            
-            .prize-content {
-                padding: 25px 20px;
-                max-width: 300px;
-            }
-            
-            .prize-image-container {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 20px;
-            }
-            
-            .prize-title {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
-            
-            .prize-name {
-                font-size: 1.2rem;
-                margin-bottom: 30px;
-            }
-            
-            .prize-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .prize-button {
-                width: 100%;
-                min-width: auto;
             }
         }
     </style>
@@ -403,62 +242,12 @@
         <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
-    <!-- Окно выигрыша -->
-    <div class="prize-popup" id="prizePopup">
-        <div class="prize-content">
-            <h2 class="prize-title">Поздравляем!</h2>
-            <div class="prize-image-container">
-                <img id="prizeImage" class="prize-image" alt="Выигранный приз">
-            </div>
-            <div class="prize-name" id="prizeName">Название приза</div>
-            <div class="prize-buttons">
-                <button class="prize-button cancel" id="cancelButton">Cancel</button>
-                <button class="prize-button ok" id="okButton">OK</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
-        const prizePopup = document.getElementById('prizePopup');
-        const prizeImage = document.getElementById('prizeImage');
-        const prizeName = document.getElementById('prizeName');
-        const cancelButton = document.getElementById('cancelButton');
-        const okButton = document.getElementById('okButton');
 
         let isSpinning = false;
         let currentRotation = 0;
-
-        // Список призов с именами и картинками
-        const prizes = [
-            { name: "PHARAOH SKIN", image: "pharaon.jpg" },
-            { name: "SPECIAL MATERIAL", image: "material.jpg" },
-            { name: "M416 LEDNIK", image: "m416lednik.jpg" },
-            { name: "MUMMY SKIN", image: "mummy.jpg" },
-            { name: "M416 SHUT", image: "m416shut.jpg" },
-            { name: "8500 UC", image: "8500uc.jpg" },
-            { name: "SHORTI SKIN", image: "shorti.jpg" },
-            { name: "M416 SKIN", image: "m416skin.jpg" },
-            { name: "KALASH SKIN", image: "kalash.jpg" },
-            { name: "M416 SKIN 2", image: "m416skin2.jpg" },
-            { name: "M16 SKIN", image: "m16.jpg" },
-            { name: "TOLSTOVKA", image: "tolstovka.jpg" }
-        ];
-
-        function getRandomPrize() {
-            return prizes[Math.floor(Math.random() * prizes.length)];
-        }
-
-        function showPrizePopup(prize) {
-            prizeImage.src = prize.image;
-            prizeName.textContent = prize.name;
-            prizePopup.classList.add('active');
-        }
-
-        function hidePrizePopup() {
-            prizePopup.classList.remove('active');
-        }
 
         function spinRoulette() {
             if (isSpinning) return;
@@ -475,25 +264,12 @@
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
             setTimeout(() => {
-                const wonPrize = getRandomPrize();
-                showPrizePopup(wonPrize);
-                
                 isSpinning = false;
                 spinButton.disabled = false;
             }, 4000);
         }
 
         spinButton.addEventListener('click', spinRoulette);
-        
-        cancelButton.addEventListener('click', hidePrizePopup);
-        okButton.addEventListener('click', hidePrizePopup);
-
-        // Закрытие попапа при клике на фон
-        prizePopup.addEventListener('click', function(e) {
-            if (e.target === prizePopup) {
-                hidePrizePopup();
-            }
-        });
 
         // Блокируем скролл на всей странице при касании рулетки
         document.addEventListener('touchmove', function(e) {
