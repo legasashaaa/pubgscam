@@ -197,43 +197,7 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .modal-buttons {
-            position: absolute;
-            bottom: 20%;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .modal-button {
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            min-width: 120px;
-        }
-
-        .cancel-button {
-            background: linear-gradient(45deg, #ff4444, #cc0000);
-            color: white;
-        }
-
-        .ok-button {
-            background: linear-gradient(45deg, #44ff44, #00cc00);
-            color: white;
-        }
-
-        .modal-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         @keyframes wheelGlow {
@@ -262,12 +226,6 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
-            
-            .modal-button {
-                padding: 10px 25px;
-                font-size: 1.1rem;
-                min-width: 100px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -290,17 +248,6 @@
                 padding: 10px 30px;
                 font-size: 1.2rem;
                 margin: 15px auto;
-            }
-            
-            .modal-buttons {
-                bottom: 15%;
-                gap: 15px;
-            }
-            
-            .modal-button {
-                padding: 8px 20px;
-                font-size: 1rem;
-                min-width: 90px;
             }
         }
     </style>
@@ -326,11 +273,7 @@
     <!-- Модальное окно с картинкой выигрыша -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
-            <img src="prize.png" alt="Congratulations" class="modal-image">
-            <div class="modal-buttons">
-                <button class="modal-button cancel-button" id="cancelButton">Cancel</button>
-                <button class="modal-button ok-button" id="okButton">OK</button>
-            </div>
+            <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
         </div>
     </div>
 
@@ -338,8 +281,7 @@
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
-        const cancelButton = document.getElementById('cancelButton');
-        const okButton = document.getElementById('okButton');
+        const prizeImage = document.getElementById('prizeImage');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -378,14 +320,8 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Обработчики для кнопок модального окна
-        cancelButton.addEventListener('click', function() {
-            console.log('Cancel clicked');
-            hideWinModal();
-        });
-
-        okButton.addEventListener('click', function() {
-            console.log('OK clicked');
+        // Закрытие модального окна при клике на картинку
+        prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
