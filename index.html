@@ -192,56 +192,37 @@
             max-height: 90%;
         }
 
-        /* Обертка для изображения с кнопками */
-        .prize-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
         .modal-image {
             width: 100%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            display: block;
+            cursor: pointer;
+            position: relative;
         }
 
-        /* Прозрачные кнопки */
-        .invisible-btn {
+        /* Стили для кнопок на картинке */
+        .image-button {
             position: absolute;
-            opacity: 0; /* Полная прозрачность */
-            background: transparent; /* Прозрачный фон */
-            border: none; /* Убираем границу */
-            cursor: pointer; /* Курсор-указатель при наведении */
+            background: transparent;
+            border: none;
+            cursor: pointer;
             padding: 0;
-            margin: 0;
-            transition: opacity 0.2s;
-            border-radius: 5px;
+            width: 120px;
+            height: 40px;
+            z-index: 1001;
         }
 
-        /* При наведении делаем кнопку слегка видимой для отладки */
-        .invisible-btn:hover {
-            opacity: 0.3;
-            background-color: rgba(255, 0, 0, 0.3);
+        .cancel-button {
+            /* Позиция для кнопки Cancel */
+            bottom: 30px;
+            left: 50px;
         }
 
-        /* Точные координаты для кнопки Cancel */
-        #cancelBtn {
-            /* Располагаем точно на кнопке Cancel на картинке */
-            left: 22%; /* Отступ слева */
-            bottom: 18%; /* Отступ снизу */
-            width: 24%; /* Ширина кнопки */
-            height: 10%; /* Высота кнопки */
-        }
-
-        /* Точные координаты для кнопки OK */
-        #okBtn {
-            /* Располагаем точно на кнопке OK на картинке */
-            right: 22%; /* Отступ справа */
-            bottom: 18%; /* Отступ снизу */
-            width: 24%; /* Ширина кнопки */
-            height: 10%; /* Высота кнопки */
+        .ok-button {
+            /* Позиция для кнопки OK */
+            bottom: 30px;
+            right: 50px;
         }
 
         @keyframes wheelGlow {
@@ -271,19 +252,19 @@
                 margin: 20px auto;
             }
             
-            /* Адаптивные позиции для мобильных */
-            #cancelBtn {
-                left: 20%;
-                bottom: 16%;
-                width: 26%;
-                height: 12%;
+            .image-button {
+                width: 100px;
+                height: 35px;
             }
             
-            #okBtn {
-                right: 20%;
-                bottom: 16%;
-                width: 26%;
-                height: 12%;
+            .cancel-button {
+                bottom: 25px;
+                left: 40px;
+            }
+            
+            .ok-button {
+                bottom: 25px;
+                right: 40px;
             }
         }
 
@@ -309,19 +290,19 @@
                 margin: 15px auto;
             }
             
-            /* Адаптивные позиции для маленьких экранов */
-            #cancelBtn {
-                left: 18%;
-                bottom: 14%;
-                width: 28%;
-                height: 14%;
+            .image-button {
+                width: 80px;
+                height: 30px;
             }
             
-            #okBtn {
-                right: 18%;
-                bottom: 14%;
-                width: 28%;
-                height: 14%;
+            .cancel-button {
+                bottom: 20px;
+                left: 30px;
+            }
+            
+            .ok-button {
+                bottom: 20px;
+                right: 30px;
             }
         }
     </style>
@@ -344,19 +325,13 @@
         <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
-    <!-- Модальное окно с картинкой выигрыша и прозрачными кнопками -->
+    <!-- Модальное окно с картинкой выигрыша -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
-            <div class="prize-wrapper">
-                <!-- Основное изображение -->
-                <img src="IMG_0195.png" alt="Congratulations" class="modal-image">
-                
-                <!-- Прозрачная кнопка CANCEL -->
-                <button class="invisible-btn" id="cancelBtn"></button>
-                
-                <!-- Прозрачная кнопка OK -->
-                <button class="invisible-btn" id="okBtn"></button>
-            </div>
+            <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
+            <!-- Прозрачные кнопки поверх картинки -->
+            <button class="image-button cancel-button" id="cancelButton"></button>
+            <button class="image-button ok-button" id="okButton"></button>
         </div>
     </div>
 
@@ -364,8 +339,9 @@
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const okBtn = document.getElementById('okBtn');
+        const prizeImage = document.getElementById('prizeImage');
+        const cancelButton = document.getElementById('cancelButton');
+        const okButton = document.getElementById('okButton');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -404,25 +380,23 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Обработчик для кнопки Cancel
-        cancelBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Предотвращаем всплытие события
-            console.log('Cancel button clicked');
+        // Закрытие модального окна при клике на картинку
+        prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
-        // Обработчик для кнопки OK
-        okBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Предотвращаем всплытие события
-            console.log('OK button clicked');
+        // Закрытие модального окна при клике на кнопки
+        cancelButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем срабатывание клика на картинке
             hideWinModal();
-            
-            // Дополнительные действия при нажатии OK
-            // Например, перенаправление на сайт
-            // window.location.href = 'https://leggasahaaa.github.io';
         });
 
-        // Закрытие модального окна при клике вне изображения
+        okButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем срабатывание клика на картинке
+            hideWinModal();
+        });
+
+        // Закрытие модального окна при клике вне картинки
         winModal.addEventListener('click', function(e) {
             if (e.target === winModal) {
                 hideWinModal();
@@ -449,56 +423,6 @@
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
-
-        // Функция для отладки: показывает границы прозрачных кнопок
-        let debugMode = false;
-        function toggleDebugButtons() {
-            debugMode = !debugMode;
-            const buttons = document.querySelectorAll('.invisible-btn');
-            buttons.forEach(btn => {
-                btn.style.opacity = debugMode ? '0.3' : '0';
-                btn.style.backgroundColor = debugMode ? 'rgba(255,0,0,0.3)' : 'transparent';
-                btn.style.border = debugMode ? '1px solid red' : 'none';
-            });
-            
-            if (debugMode) {
-                console.log('Режим отладки ВКЛЮЧЕН - кнопки видны');
-                console.log('Нажмите Ctrl+D еще раз, чтобы скрыть кнопки');
-            } else {
-                console.log('Режим отладки ВЫКЛЮЧЕН - кнопки невидимы');
-            }
-        }
-
-        // Для отладки: нажмите Ctrl+D чтобы увидеть/скрыть кнопки
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'd') {
-                e.preventDefault();
-                toggleDebugButtons();
-            }
-            
-            // Быстрая проверка модального окна: Ctrl+M
-            if (e.ctrlKey && e.key === 'm') {
-                e.preventDefault();
-                if (winModal.style.display === 'flex') {
-                    hideWinModal();
-                } else {
-                    showWinModal();
-                }
-            }
-        });
-
-        // Инструкция для отладки
-        console.log('=== ИНСТРУКЦИЯ ПО ОТЛАДКЕ ===');
-        console.log('1. Нажмите Ctrl+D - чтобы увидеть/скрыть прозрачные кнопки');
-        console.log('2. Нажмите Ctrl+M - чтобы быстро открыть/закрыть модальное окно');
-        console.log('3. Нажмите "Крутить рулетку" - обычный процесс игры');
-        console.log('=== ===================== ===');
-
-        // Автоматически включить режим отладки при загрузке (для тестирования)
-        setTimeout(() => {
-            toggleDebugButtons();
-            setTimeout(() => toggleDebugButtons(), 2000); // Через 2 секунды выключить
-        }, 1000);
     </script>
 </body>
 </html>
