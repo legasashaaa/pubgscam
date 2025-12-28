@@ -68,7 +68,7 @@
             width: 100%;
             max-width: 100%;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px; /* Увеличил верхний отступ */
             position: fixed;
             bottom: 0;
             left: 0;
@@ -84,7 +84,7 @@
             position: relative;
             width: 350px;
             height: 350px;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px; /* Увеличил нижний отступ */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -112,8 +112,8 @@
         }
 
         .wheel-base {
-            width: 50%; /* Сильно уменьшил до 50% */
-            height: 50%; /* Сильно уменьшил до 50% */
+            width: 85%; /* Увеличил до 85% */
+            height: 85%; /* Увеличил до 85% */
             z-index: 1;
             filter: brightness(1.2);
             top: 50%;
@@ -123,7 +123,7 @@
 
         .spin-button {
             display: block;
-            margin: 20px auto;
+            margin: 25px auto; /* Увеличил отступ */
             padding: 15px 50px;
             font-size: 1.5rem;
             font-weight: bold;
@@ -187,30 +187,37 @@
             }
             
             .wheel-base {
-                width: 45%;
-                height: 45%;
+                width: 80%; /* Для планшетов */
+                height: 80%;
             }
             
             .spin-button {
                 padding: 12px 40px;
                 font-size: 1.3rem;
+                margin: 20px auto;
             }
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px; /* Меньше отступ для телефонов */
+            }
+            
             .roulette-container {
                 width: 280px;
                 height: 280px;
+                margin-bottom: 20px;
             }
             
             .wheel-base {
-                width: 40%;
-                height: 40%;
+                width: 75%; /* Для телефонов */
+                height: 75%;
             }
             
             .spin-button {
                 padding: 10px 30px;
                 font-size: 1.2rem;
+                margin: 15px auto;
             }
         }
     </style>
