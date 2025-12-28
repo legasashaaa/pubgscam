@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Контейнер для фонов */
         .backgrounds-container {
             position: fixed;
             top: 0;
@@ -32,7 +31,6 @@
             flex-direction: column;
         }
 
-        /* Верхний фон */
         .background-top {
             flex: 1;
             background-image: url('phon.png');
@@ -42,7 +40,6 @@
             position: relative;
         }
 
-        /* Нижний фон */
         .background-bottom {
             flex: 1;
             background-image: url('phon2.png');
@@ -52,7 +49,6 @@
             position: relative;
         }
 
-        /* Градиент между фонами для плавного перехода */
         .gradient-overlay {
             position: absolute;
             top: 0;
@@ -67,62 +63,24 @@
             z-index: 1;
         }
 
-        /* Основной контейнер */
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        /* Шапка */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-top: 20px;
-        }
-
-        .header h1 {
-            color: gold;
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            margin-bottom: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            display: inline-block;
-            padding: 10px 30px;
-            border-radius: 10px;
-            border: 2px solid gold;
-        }
-
-        .header .subtitle {
-            color: #ffd700;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: rgba(0, 0, 0, 0.7);
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 5px;
-        }
-
-        /* Карточка с контентом */
-        .content-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 3px solid gold;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Рулетка - уменьшенный размер */
         .roulette-container {
             position: relative;
-            width: 220px; /* Уменьшено с 300px */
-            height: 220px; /* Уменьшено с 300px */
-            margin: 0 auto 30px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
         }
 
         .wheel-container {
@@ -139,7 +97,6 @@
             left: 0;
             transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
             transform-origin: center;
-            border-radius: 50%;
         }
 
         .prize-wheel {
@@ -149,48 +106,24 @@
         .wheel-base {
             z-index: 1;
             filter: brightness(1.2);
-            border: 5px solid #8B4513;
-            background: radial-gradient(circle, #D2691E 0%, #8B4513 70%, #654321 100%);
-            box-shadow: 
-                inset 0 0 20px rgba(0,0,0,0.5),
-                0 0 30px rgba(139, 69, 19, 0.7);
         }
 
-        /* Указатель Lucky - уменьшенный */
         .pointer {
             position: absolute;
-            top: -25px; /* Уменьшено с -40px */
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px; /* Уменьшено с 80px */
-            height: 60px; /* Уменьшено с 80px */
+            width: 80px;
+            height: 80px;
             z-index: 4;
-            filter: drop-shadow(0 0 10px red);
-            background: linear-gradient(45deg, #FF0000, #FF4500, #FF0000);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            border-radius: 10px 10px 0 0;
+            filter: drop-shadow(0 0 15px gold);
         }
 
-        .pointer::before {
-            content: "LUCKY";
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px black;
-            letter-spacing: 1px;
-        }
-
-        /* Кнопка вращения */
         .spin-button {
             display: block;
-            margin: 25px auto; /* Уменьшено с 30px */
-            padding: 12px 40px; /* Уменьшено с 15px 50px */
-            font-size: 1.3rem; /* Уменьшено с 1.5rem */
+            margin: 30px auto;
+            padding: 15px 50px;
+            font-size: 1.5rem;
             font-weight: bold;
             color: black;
             background: linear-gradient(45deg, gold, #ffd700);
@@ -200,7 +133,7 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             position: relative;
             overflow: hidden;
             z-index: 2;
@@ -208,7 +141,7 @@
 
         .spin-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
             background: linear-gradient(45deg, #ffd700, gold);
         }
 
@@ -234,476 +167,107 @@
             left: 100%;
         }
 
-        /* Кнопки в стиле скриншота */
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px; /* Уменьшено с 20px */
-            margin-top: 25px; /* Уменьшено с 30px */
-        }
-
-        .action-button {
-            padding: 12px 30px; /* Уменьшено с 15px 40px */
-            font-size: 1.1rem; /* Уменьшено с 1.2rem */
-            font-weight: bold;
-            border: 2px solid gold;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            min-width: 130px; /* Уменьшено с 150px */
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cancel-btn {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-        }
-
-        .ok-btn {
-            background: linear-gradient(45deg, gold, #ffd700);
-            color: black;
-        }
-
-        .action-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
-        }
-
-        /* Сообщение о выигрыше */
-        .prize-display {
-            text-align: center;
-            margin: 15px 0; /* Уменьшено с 20px */
-            padding: 12px; /* Уменьшено с 15px */
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid gold;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .prize-display h3 {
-            color: gold;
-            margin-bottom: 8px; /* Уменьшено с 10px */
-            font-size: 1.3rem; /* Уменьшено */
-        }
-
-        /* Сектора рулетки */
-        .wheel-sectors {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .sector {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 50%;
-            transform-origin: 100% 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sector-text {
-            position: absolute;
-            top: 30px;
-            left: -40px;
-            width: 80px;
-            text-align: center;
-            font-size: 10px; /* Уменьшен текст */
-            font-weight: bold;
-            color: white;
-            text-shadow: 1px 1px 2px black;
-            transform: rotate(45deg);
-        }
-
-        /* Анимация вращения */
         @keyframes wheelGlow {
-            0% { filter: drop-shadow(0 0 3px gold) brightness(1.1); }
-            50% { filter: drop-shadow(0 0 12px gold) brightness(1.3); }
-            100% { filter: drop-shadow(0 0 3px gold) brightness(1.1); }
+            0% { filter: drop-shadow(0 0 5px gold); }
+            50% { filter: drop-shadow(0 0 20px gold); }
+            100% { filter: drop-shadow(0 0 5px gold); }
         }
 
         .spinning {
-            animation: wheelGlow 0.8s infinite;
+            animation: wheelGlow 1s infinite;
         }
 
-        /* Центральная круглая кнопка */
-        .center-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px; /* Уменьшено */
-            height: 50px; /* Уменьшено */
-            background: radial-gradient(circle, gold 0%, #FFD700 50%, #DAA520 100%);
-            border: 3px solid #8B4513;
-            border-radius: 50%;
-            z-index: 5;
-            cursor: pointer;
-            box-shadow: 
-                inset 0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 215, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #8B4513;
-            font-size: 11px; /* Уменьшено */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-
-        .center-button:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 
-                inset 0 0 15px rgba(255, 215, 0, 1),
-                0 0 30px rgba(255, 215, 0, 0.8);
-        }
-
-        /* Адаптивность */
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-                padding: 8px 20px;
-            }
-            
-            .header .subtitle {
-                font-size: 1.2rem;
-            }
-            
             .roulette-container {
-                width: 200px; /* Уменьшено для мобильных */
+                width: 250px;
+                height: 250px;
+            }
+            
+            .pointer {
+                width: 60px;
+                height: 60px;
+                top: -30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .roulette-container {
+                width: 200px;
                 height: 200px;
             }
             
             .pointer {
                 width: 50px;
                 height: 50px;
-                top: -20px;
-            }
-            
-            .center-button {
-                width: 45px;
-                height: 45px;
-                font-size: 10px;
-            }
-            
-            .button-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .action-button {
-                width: 100%;
-                max-width: 200px; /* Уменьшено */
-            }
-            
-            .backgrounds-container {
-                flex-direction: column;
-            }
-            
-            .sector-text {
-                font-size: 9px;
-                top: 25px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .roulette-container {
-                width: 180px;
-                height: 180px;
-            }
-            
-            .pointer {
-                width: 45px;
-                height: 45px;
-                top: -18px;
-            }
-            
-            .center-button {
-                width: 40px;
-                height: 40px;
-                font-size: 9px;
+                top: -25px;
             }
             
             .spin-button {
-                padding: 10px 30px;
-                font-size: 1.1rem;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .sector-text {
-                font-size: 8px;
-                top: 20px;
+                padding: 12px 30px;
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Два фона одновременно -->
     <div class="backgrounds-container">
         <div class="background-top"></div>
         <div class="background-bottom"></div>
         <div class="gradient-overlay"></div>
     </div>
 
-    <!-- Основной контент -->
     <div class="container">
-        <header class="header">
-            <h1>MEXICO ROYAL</h1>
-            <div class="subtitle">ROYALE PASS S</div>
-        </header>
-
-        <div class="content-card">
-            <h2 style="color: gold; text-align: center; margin-bottom: 15px; text-transform: uppercase; font-size: 1.5rem;">
-                PUBG MOBILE METRO ROYALE PASS
-            </h2>
-            
-            <div class="roulette-container">
-                <div class="wheel-container">
-                    <!-- Основание колеса -->
-                    <div class="wheel wheel-base" id="wheelBase"></div>
-                    
-                    <!-- Сектора рулетки -->
-                    <div class="wheel-sectors" id="wheelSectors"></div>
-                    
-                    <!-- Основное колесо с призами -->
-                    <div class="wheel prize-wheel" id="prizeWheel"></div>
-                    
-                    <!-- Центральная кнопка -->
-                    <div class="center-button" id="centerButton">SPIN</div>
-                    
-                    <!-- Стрелка указатель Lucky -->
-                    <div class="pointer" id="pointer"></div>
-                </div>
-            </div>
-
-            <button class="spin-button" id="spinButton">Крутить рулетку</button>
-            
-            <div id="prizeResult" class="prize-display">
-                <h3>🎉 ПОЗДРАВЛЯЕМ! 🎉</h3>
-                <p id="prizeText">Вы выиграли: <span style="color: gold; font-weight: bold;">ROYAL PASS</span></p>
-            </div>
-
-            <div class="button-group">
-                <button class="action-button cancel-btn" id="cancelBtn">Отмена</button>
-                <button class="action-button ok-btn" id="okBtn">OK</button>
+        <div class="roulette-container">
+            <div class="wheel-container">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="pointer.png" alt="Стрелка" class="pointer" id="pointer">
             </div>
         </div>
 
-        <div class="content-card">
-            <h3 style="color: gold; margin-bottom: 15px; text-align: center;">
-                Congratulations!
-            </h3>
-            <p style="text-align: center; font-size: 1.1rem; line-height: 1.5;">
-                Вы получили доступ к эксклюзивному контенту ROYALE PASS.<br>
-                Откройте уникальные награды и предметы!
-            </p>
-        </div>
+        <button class="spin-button" id="spinButton">Крутить рулетку</button>
     </div>
 
     <script>
-        // Элементы
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
-        const wheelSectors = document.getElementById('wheelSectors');
         const pointer = document.getElementById('pointer');
-        const prizeResult = document.getElementById('prizeResult');
-        const prizeText = document.getElementById('prizeText');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const okBtn = document.getElementById('okBtn');
-        const centerButton = document.getElementById('centerButton');
 
-        // Состояние рулетки
         let isSpinning = false;
         let currentRotation = 0;
 
-        // Список призов (8 секторов)
-        const prizes = [
-            "ROYAL PASS",
-            "1000 COINS",
-            "SPECIAL SKIN",
-            "500 COINS",
-            "ELITE SET",
-            "2000 COINS",
-            "LEGENDARY ITEM",
-            "MYSTERY BOX"
-        ];
-
-        // Цвета для секторов
-        const sectorColors = [
-            "#FF0000", "#FF8C00", "#FFD700", "#32CD32",
-            "#1E90FF", "#8A2BE2", "#FF1493", "#00CED1"
-        ];
-
-        // Создаем сектора рулетки
-        function createWheelSectors() {
-            wheelSectors.innerHTML = '';
-            
-            for (let i = 0; i < 8; i++) {
-                const sector = document.createElement('div');
-                sector.className = 'sector';
-                sector.style.transform = `rotate(${i * 45}deg)`;
-                sector.style.background = `conic-gradient(
-                    from ${i * 45}deg at 50% 50%,
-                    ${sectorColors[i]} 0deg,
-                    ${sectorColors[i]} 45deg,
-                    ${sectorColors[(i + 1) % 8]} 45deg
-                )`;
-                
-                const text = document.createElement('div');
-                text.className = 'sector-text';
-                text.textContent = prizes[i];
-                text.style.color = i % 2 === 0 ? 'white' : 'black';
-                
-                sector.appendChild(text);
-                wheelSectors.appendChild(sector);
-            }
-        }
-
-        // Создаем основное колесо с градиентом
-        function createMainWheel() {
-            prizeWheel.style.background = `conic-gradient(
-                ${sectorColors.map((color, i) => `${color} ${i * 45}deg ${(i + 1) * 45}deg`).join(', ')}
-            )`;
-            prizeWheel.style.boxShadow = 'inset 0 0 30px rgba(0,0,0,0.7)';
-            prizeWheel.style.border = '8px solid #654321';
-        }
-
-        // Функция вращения рулетки
         function spinRoulette() {
             if (isSpinning) return;
             
             isSpinning = true;
             spinButton.disabled = true;
-            centerButton.disabled = true;
-            prizeResult.style.display = 'none';
             
-            // Добавляем свечение
             pointer.classList.add('spinning');
-            prizeWheel.style.filter = 'brightness(1.3)';
             
-            // Генерируем случайное количество полных оборотов + дополнительный угол
             const spins = 5 + Math.floor(Math.random() * 3);
             const extraDegrees = Math.floor(Math.random() * 360);
             const totalRotation = (spins * 360) + extraDegrees;
             
-            // Вращаем колесо
-            prizeWheel.style.transition = 'transform 3.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // Анимация стрелки
-            pointer.style.transform = 'translateX(-50%) scale(1.3)';
+            pointer.style.transform = 'translateX(-50%) scale(1.2) rotate(10deg)';
             
-            // Определяем выигранный приз
             setTimeout(() => {
-                const normalizedRotation = currentRotation % 360;
-                const prizeIndex = Math.floor((360 - normalizedRotation) / 45) % 8;
-                const wonPrize = prizes[prizeIndex];
-                
-                // Показываем результат
-                prizeText.innerHTML = `Вы выиграли: <span style="color: ${sectorColors[prizeIndex]}; font-weight: bold; font-size: 1.3em;">${wonPrize}</span>`;
-                prizeResult.style.display = 'block';
-                
-                // Возвращаем стили
-                pointer.style.transform = 'translateX(-50%)';
+                pointer.style.transform = 'translateX(-50%) scale(1) rotate(0deg)';
                 pointer.classList.remove('spinning');
-                prizeWheel.style.filter = 'brightness(1)';
                 
                 isSpinning = false;
                 spinButton.disabled = false;
-                centerButton.disabled = false;
-                
-                // Показываем сообщение
-                showNotification(`🎊 ВЫИГРЫШ: ${wonPrize} 🎊`);
-                
-            }, 3500);
+            }, 4000);
         }
 
-        // Функция показа уведомления
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(45deg, gold, #ffd700);
-                color: black;
-                padding: 12px 20px;
-                border-radius: 10px;
-                font-weight: bold;
-                z-index: 1000;
-                animation: slideIn 0.5s ease;
-                box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
-                border: 2px solid white;
-                font-size: 0.9rem;
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.5s ease';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 500);
-            }, 3000);
-        }
-
-        // Добавляем стили для анимации уведомлений
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Инициализация рулетки
-        createWheelSectors();
-        createMainWheel();
-
-        // Обработчики кнопок
         spinButton.addEventListener('click', spinRoulette);
-        centerButton.addEventListener('click', spinRoulette);
-        
-        cancelBtn.addEventListener('click', () => {
-            if (confirm('Вы уверены, что хотите отменить?')) {
-                showNotification('Действие отменено');
-            }
-        });
-        
-        okBtn.addEventListener('click', () => {
-            showNotification('Успешно подтверждено!');
-        });
 
-        // Эффекты при наведении
         prizeWheel.addEventListener('mouseenter', () => {
             if (!isSpinning) {
-                prizeWheel.style.filter = 'brightness(1.2) drop-shadow(0 0 15px gold)';
+                prizeWheel.style.filter = 'brightness(1.2) drop-shadow(0 0 10px gold)';
             }
         });
 
@@ -713,14 +277,11 @@
             }
         });
 
-        // Запускаем небольшую анимацию при загрузке
         window.onload = function() {
             setTimeout(() => {
-                pointer.style.transform = 'translateX(-50%) scale(1.2)';
-                centerButton.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                pointer.style.transform = 'translateX(-50%) scale(1.1)';
                 setTimeout(() => {
-                    pointer.style.transform = 'translateX(-50%)';
-                    centerButton.style.transform = 'translate(-50%, -50%)';
+                    pointer.style.transform = 'translateX(-50%) scale(1)';
                 }, 300);
             }, 500);
         };
