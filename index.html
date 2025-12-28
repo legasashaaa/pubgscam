@@ -112,8 +112,8 @@
         }
 
         .wheel-base {
-            width: 85%; /* Уменьшено с 100% */
-            height: 85%; /* Уменьшено с 100% */
+            width: 70%; /* Еще уменьшил с 85% до 70% */
+            height: 70%; /* Еще уменьшил с 85% до 70% */
             z-index: 1;
             filter: brightness(1.2);
             top: 50%;
@@ -186,6 +186,11 @@
                 height: 300px;
             }
             
+            .wheel-base {
+                width: 65%; /* Адаптивный размер для мобильных */
+                height: 65%;
+            }
+            
             .spin-button {
                 padding: 12px 40px;
                 font-size: 1.3rem;
@@ -196,6 +201,11 @@
             .roulette-container {
                 width: 280px;
                 height: 280px;
+            }
+            
+            .wheel-base {
+                width: 60%; /* Еще меньше для очень маленьких экранов */
+                height: 60%;
             }
             
             .spin-button {
