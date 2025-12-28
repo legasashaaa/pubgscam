@@ -217,6 +217,7 @@
             padding: 0;
             margin: 0;
             transition: opacity 0.2s;
+            border-radius: 5px;
         }
 
         /* При наведении делаем кнопку слегка видимой для отладки */
@@ -225,21 +226,22 @@
             background-color: rgba(255, 0, 0, 0.3);
         }
 
-        /* Конкретные позиции для кнопок (настройте под вашу картинку) */
+        /* Точные координаты для кнопки Cancel */
         #cancelBtn {
-            /* Примерные координаты для кнопки Cancel */
-            left: 30%; /* Отступ слева */
-            bottom: 25%; /* Отступ снизу */
-            width: 20%; /* Ширина кнопки */
-            height: 10%; /* Высота кнопки */
+            /* Располагаем точно на кнопке Cancel на картинке */
+            left: 20%; /* Отступ слева */
+            bottom: 15%; /* Отступ снизу */
+            width: 25%; /* Ширина кнопки */
+            height: 12%; /* Высота кнопки */
         }
 
+        /* Точные координаты для кнопки OK */
         #okBtn {
-            /* Примерные координаты для кнопки OK */
-            right: 30%; /* Отступ справа */
-            bottom: 25%; /* Отступ снизу */
-            width: 20%; /* Ширина кнопки */
-            height: 10%; /* Высота кнопки */
+            /* Располагаем точно на кнопке OK на картинке */
+            right: 20%; /* Отступ справа */
+            bottom: 15%; /* Отступ снизу */
+            width: 25%; /* Ширина кнопки */
+            height: 12%; /* Высота кнопки */
         }
 
         @keyframes wheelGlow {
@@ -271,17 +273,17 @@
             
             /* Адаптивные позиции для мобильных */
             #cancelBtn {
-                left: 25%;
-                bottom: 20%;
-                width: 25%;
-                height: 12%;
+                left: 18%;
+                bottom: 12%;
+                width: 28%;
+                height: 15%;
             }
             
             #okBtn {
-                right: 25%;
-                bottom: 20%;
-                width: 25%;
-                height: 12%;
+                right: 18%;
+                bottom: 12%;
+                width: 28%;
+                height: 15%;
             }
         }
 
@@ -309,17 +311,17 @@
             
             /* Адаптивные позиции для маленьких экранов */
             #cancelBtn {
-                left: 20%;
-                bottom: 18%;
+                left: 15%;
+                bottom: 10%;
                 width: 30%;
-                height: 15%;
+                height: 18%;
             }
             
             #okBtn {
-                right: 20%;
-                bottom: 18%;
+                right: 15%;
+                bottom: 10%;
                 width: 30%;
-                height: 15%;
+                height: 18%;
             }
         }
     </style>
@@ -347,7 +349,7 @@
         <div class="modal-content">
             <div class="prize-wrapper">
                 <!-- Основное изображение -->
-                <img src="prize.png" alt="Congratulations" class="modal-image">
+                <img src="IMG_0194.png" alt="Congratulations" class="modal-image">
                 
                 <!-- Прозрачная кнопка CANCEL -->
                 <button class="invisible-btn" id="cancelBtn"></button>
@@ -402,20 +404,30 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Обработчики для прозрачных кнопок
+        // Обработчик для кнопки Cancel
         cancelBtn.addEventListener('click', function(e) {
             e.stopPropagation(); // Предотвращаем всплытие события
             console.log('Cancel button clicked');
             hideWinModal();
+            
+            // Дополнительные действия при нажатии Cancel
+            // Например, можно сбросить что-то или показать другое сообщение
         });
 
+        // Обработчик для кнопки OK
         okBtn.addEventListener('click', function(e) {
             e.stopPropagation(); // Предотвращаем всплытие события
             console.log('OK button clicked');
             hideWinModal();
             
             // Здесь можно добавить дополнительную логику при нажатии OK
-            // Например: перенаправление, показ другого контента и т.д.
+            // Например:
+            // 1. Перенаправление на другую страницу
+            // 2. Показ другого модального окна
+            // 3. Активация бонуса и т.д.
+            
+            // Пример: перенаправление на главную страницу
+            // window.location.href = 'https://leggasahaaa.github.io';
         });
 
         // Закрытие модального окна при клике вне изображения
@@ -447,23 +459,47 @@
         });
 
         // Функция для отладки: показывает границы прозрачных кнопок
-        function debugButtons(show) {
+        let debugMode = false;
+        function toggleDebugButtons() {
+            debugMode = !debugMode;
             const buttons = document.querySelectorAll('.invisible-btn');
             buttons.forEach(btn => {
-                btn.style.opacity = show ? '0.3' : '0';
-                btn.style.backgroundColor = show ? 'rgba(255,0,0,0.3)' : 'transparent';
-                btn.style.border = show ? '1px solid red' : 'none';
+                btn.style.opacity = debugMode ? '0.3' : '0';
+                btn.style.backgroundColor = debugMode ? 'rgba(255,0,0,0.3)' : 'transparent';
+                btn.style.border = debugMode ? '1px solid red' : 'none';
             });
+            
+            if (debugMode) {
+                console.log('Режим отладки ВКЛЮЧЕН - кнопки видны');
+                console.log('Нажмите Ctrl+D еще раз, чтобы скрыть кнопки');
+            } else {
+                console.log('Режим отладки ВЫКЛЮЧЕН - кнопки невидимы');
+            }
         }
 
-        // Для отладки: нажмите Ctrl+D чтобы увидеть кнопки
+        // Для отладки: нажмите Ctrl+D чтобы увидеть/скрыть кнопки
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'd') {
                 e.preventDefault();
-                const buttonsVisible = document.querySelector('.invisible-btn').style.opacity === '0.3';
-                debugButtons(!buttonsVisible);
+                toggleDebugButtons();
+            }
+            
+            // Быстрая проверка модального окна: Ctrl+M
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                if (winModal.style.display === 'flex') {
+                    hideWinModal();
+                } else {
+                    showWinModal();
+                }
             }
         });
+
+        // Инструкция для отладки
+        console.log('Инструкция по отладке:');
+        console.log('1. Нажмите Ctrl+D - чтобы увидеть/скрыть прозрачные кнопки');
+        console.log('2. Нажмите Ctrl+M - чтобы быстро открыть/закрыть модальное окно');
+        console.log('3. Нажмите "Крутить рулетку" - обычный процесс игры');
     </script>
 </body>
 </html>
