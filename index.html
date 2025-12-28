@@ -108,19 +108,19 @@
         .prize-wheel {
             width: 100%;
             height: 100%;
-            z-index: 1; /* Теперь под wheel-base */
+            z-index: 1;
         }
 
         .wheel-base {
-            width: 55%; /* Изменено с 53% на 55% */
-            height: 55%; /* Изменено с 53% на 55% */
-            z-index: 2; /* Теперь поверх wheel.png */
+            width: 55%;
+            height: 55%;
+            z-index: 2;
             filter: brightness(1.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: contain;
-            pointer-events: none; /* Чтобы не мешал кликам */
+            pointer-events: none;
         }
 
         .spin-button {
@@ -140,7 +140,7 @@
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             position: relative;
             overflow: hidden;
-            z-index: 3; /* Кнопка поверх всего */
+            z-index: 3;
             pointer-events: auto;
         }
 
@@ -172,6 +172,70 @@
             left: 100%;
         }
 
+        /* Стили для модального окна */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .modal-buttons {
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .modal-button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            min-width: 120px;
+        }
+
+        .cancel-button {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            color: white;
+        }
+
+        .ok-button {
+            background: linear-gradient(45deg, #44ff44, #00cc00);
+            color: white;
+        }
+
+        .modal-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
         @keyframes wheelGlow {
             0% { filter: drop-shadow(0 0 5px gold); }
             50% { filter: drop-shadow(0 0 20px gold); }
@@ -189,14 +253,20 @@
             }
             
             .wheel-base {
-                width: 55%; /* Изменено с 53% на 55% */
-                height: 55%; /* Изменено с 53% на 55% */
+                width: 55%;
+                height: 55%;
             }
             
             .spin-button {
                 padding: 12px 40px;
                 font-size: 1.3rem;
                 margin: 20px auto;
+            }
+            
+            .modal-button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
+                min-width: 100px;
             }
         }
 
@@ -212,14 +282,25 @@
             }
             
             .wheel-base {
-                width: 55%; /* Изменено с 53% на 55% */
-                height: 55%; /* Изменено с 53% на 55% */
+                width: 55%;
+                height: 55%;
             }
             
             .spin-button {
                 padding: 10px 30px;
                 font-size: 1.2rem;
                 margin: 15px auto;
+            }
+            
+            .modal-buttons {
+                bottom: 15%;
+                gap: 15px;
+            }
+            
+            .modal-button {
+                padding: 8px 20px;
+                font-size: 1rem;
+                min-width: 90px;
             }
         }
     </style>
@@ -242,9 +323,23 @@
         <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
+    <!-- Модальное окно с картинкой выигрыша -->
+    <div class="modal-overlay" id="winModal">
+        <div class="modal-content">
+            <img src="prize.png" alt="Congratulations" class="modal-image">
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button" id="cancelButton">Cancel</button>
+                <button class="modal-button ok-button" id="okButton">OK</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
+        const winModal = document.getElementById('winModal');
+        const cancelButton = document.getElementById('cancelButton');
+        const okButton = document.getElementById('okButton');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -263,11 +358,43 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
+            // После завершения вращения показываем модальное окно
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
+                showWinModal();
             }, 4000);
         }
+
+        function showWinModal() {
+            winModal.style.display = 'flex';
+            // Блокируем скролл при открытом модальном окне
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideWinModal() {
+            winModal.style.display = 'none';
+            // Восстанавливаем скролл
+            document.body.style.overflow = 'auto';
+        }
+
+        // Обработчики для кнопок модального окна
+        cancelButton.addEventListener('click', function() {
+            console.log('Cancel clicked');
+            hideWinModal();
+        });
+
+        okButton.addEventListener('click', function() {
+            console.log('OK clicked');
+            hideWinModal();
+        });
+
+        // Закрытие модального окна при клике вне картинки
+        winModal.addEventListener('click', function(e) {
+            if (e.target === winModal) {
+                hideWinModal();
+            }
+        });
 
         spinButton.addEventListener('click', spinRoulette);
 
