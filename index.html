@@ -196,7 +196,7 @@
             padding: 0;
             width: 100%;
             max-width: 400px;
-            min-height: 600px;
+            min-height: 500px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -207,42 +207,42 @@
         /* Стили для окна выигрыша */
         .win-modal-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 25px 20px;
+            padding: 20px;
             border-bottom: 2px solid gold;
         }
 
         .win-modal-header h1 {
             color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
             text-transform: uppercase;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .win-modal-header h2 {
             color: gold;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 5px;
             font-weight: normal;
         }
 
         .win-modal-header h3 {
             color: #ccc;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: normal;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .prize-image-container {
             width: 100%;
-            padding: 30px;
+            padding: 25px;
             background: #111;
         }
 
         .prize-image {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 180px;
+            max-height: 180px;
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -251,14 +251,14 @@
         }
 
         .login-options {
-            padding: 25px 20px;
+            padding: 20px;
             background: #222;
         }
 
         .login-options h3 {
             color: #fff;
-            margin-bottom: 25px;
-            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
         }
 
         .checkbox-option {
@@ -350,7 +350,7 @@
         .facebook-modal-content {
             background: #fff;
             color: #000;
-            min-height: 700px;
+            min-height: 650px;
         }
 
         .facebook-header {
@@ -626,36 +626,36 @@
         .success-modal-content {
             background: #000;
             border: 3px solid gold;
-            min-height: 500px;
+            min-height: 450px;
         }
 
         .success-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 25px 20px;
+            padding: 20px;
             border-bottom: 2px solid gold;
         }
 
         .success-header h1 {
             color: gold;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
         .success-header h2 {
             color: #fff;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 5px;
         }
 
         .success-prize-container {
-            padding: 30px;
+            padding: 25px;
             background: #111;
         }
 
         .success-prize-image {
-            max-width: 150px;
-            max-height: 150px;
+            max-width: 140px;
+            max-height: 140px;
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -664,14 +664,14 @@
         }
 
         .success-message {
-            padding: 25px 20px;
+            padding: 20px;
             background: #222;
             text-align: center;
         }
 
         .success-message h3 {
             color: gold;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 10px;
         }
 
@@ -717,6 +717,27 @@
                 max-width: 95%;
                 min-height: auto;
             }
+
+            .win-modal-header {
+                padding: 15px;
+            }
+
+            .win-modal-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .win-modal-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .prize-image-container {
+                padding: 20px;
+            }
+
+            .prize-image {
+                max-width: 150px;
+                max-height: 150px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -741,17 +762,30 @@
                 margin: 15px auto;
             }
 
+            .modal-content {
+                max-width: 95%;
+                min-height: auto;
+            }
+
             .win-modal-header h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
 
             .win-modal-header h2 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
             .prize-image {
-                max-width: 150px;
-                max-height: 150px;
+                max-width: 140px;
+                max-height: 140px;
+            }
+
+            .login-options h3 {
+                font-size: 1.2rem;
+            }
+
+            .checkbox-option span {
+                font-size: 1rem;
             }
         }
     </style>
@@ -781,7 +815,6 @@
                 <h1>METEOR ROYAL</h1>
                 <h2>REVALE PASS S</h2>
                 <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
-                <p style="color: #ccc; margin-top: 10px;">Login to receive reward</p>
             </div>
             
             <div class="prize-image-container">
