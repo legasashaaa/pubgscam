@@ -923,7 +923,7 @@
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
             { name: "m416lednik", image: "m416lednik.png" },
-            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3
+            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3 - МУМИЯ
             { name: "m416shut", image: "m416shut.png" },
             { name: "8500uc", image: "8500uc.png" },
             { name: "shorti", image: "shorti.png" },
@@ -975,7 +975,7 @@
             selectedLoginOption = 'facebook';
         }
 
-        // Функция вращения рулетки (всегда на mummy)
+        // Функция вращения рулетки (ВСЕГДА на Mummy)
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
             
@@ -983,29 +983,37 @@
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
             
-            // Всегда выбираем приз "mummy" (индекс 3 в массиве)
-            const MUMMY_INDEX = 3; // mummy находится на 4-й позиции
-            currentPrize = prizes[MUMMY_INDEX];
+            // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
+            const TARGET_PRIZE_INDEX = 3; // mummy всегда
+            currentPrize = prizes[TARGET_PRIZE_INDEX];
             
             // Настройка вращения на приз "mummy"
             // Каждый приз расположен через 30 градусов (360/12 = 30)
-            // mummy находится под углом: MUMMY_INDEX * 30 = 3 * 30 = 90 градусов
-            // Но нам нужно чтобы стрелка указывала на приз, поэтому корректируем
-            const targetAngle = MUMMY_INDEX * 30;
+            // mummy находится под углом: 3 * 30 = 90 градусов
+            // Но чтобы стрелка указывала точно на приз, нужно учитывать смещение
+            // Добавим дополнительный угол для точного позиционирования
+            const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
+            const targetAngle = TARGET_PRIZE_INDEX * anglePerPrize;
             
-            // Делаем 5 полных оборотов плюс угол до приза
+            // Добавляем смещение, чтобы приз был точно под стрелкой
+            // Обычно нужно вычесть 15 градусов (половину сектора), чтобы 
+            // приз оказался по центру напротив стрелки
+            const offsetAngle = -15; // Смещение для центрирования
+            const adjustedAngle = targetAngle + offsetAngle;
+            
+            // Делаем 5 полных оборотов плюс скорректированный угол
             const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + targetAngle;
+            const totalRotation = (spins * 360) + adjustedAngle;
             
-            // Анимация вращения (используем cubic-bezier для реалистичного эффекта)
+            // Анимация вращения с эффектом замедления
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
-            currentRotation += totalRotation;
+            currentRotation = totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
             // Отмечаем, что вращение уже было
             hasSpun = true;
             
-            // Показ модального окна с выигрышем через 4 секунды (время анимации)
+            // Показ модального окна с выигрышем через 4 секунды
             setTimeout(() => {
                 winPrizeImage.src = currentPrize.image;
                 winModal.style.display = 'flex';
