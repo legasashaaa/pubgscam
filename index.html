@@ -987,20 +987,20 @@
             const TARGET_PRIZE_INDEX = 3; // mummy всегда
             currentPrize = prizes[TARGET_PRIZE_INDEX];
             
-            // КОРРЕКТНЫЙ УГОЛ для мумии с учетом, что она СПРАВА от текущего положения
-            // Предыдущий код давал 1980 градусов (1800 + 180)
-            // Нужно добавить еще 30 градусов, так как мумия СПРАВА
+            // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
+            // Если мумия СПРАВА от предыдущего приза, нужно ВЫЧЕСТЬ 30 градусов
             const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
             const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
             
             // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            // + ДОБАВЛЯЕМ еще 30 градусов, так как мумия СПРАВА от предыдущего приза
-            const correctionAngle = 90 + 30; // 90 + 30 = 120
-            const targetAngle = baseAngle + correctionAngle; // 90 + 120 = 210
+            // МИНУС 30 градусов, так как мумия СПРАВА (по часовой стрелке)
+            // Ранее было +90, теперь 90 - 30 = 60
+            const correctionAngle = 90 - 30; // 60 градусов
+            const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
             
             // Делаем 5 полных оборотов плюс угол до приза
             const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + targetAngle; // 1800 + 210 = 2010 градусов
+            const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 градусов
             
             // Анимация вращения с эффектом замедления
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
