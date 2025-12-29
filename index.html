@@ -990,20 +990,17 @@
             // Настройка вращения на приз "mummy"
             // Каждый приз расположен через 30 градусов (360/12 = 30)
             // mummy находится под углом: 3 * 30 = 90 градусов
-            // Но чтобы стрелка указывала точно на приз, нужно учитывать смещение
-            // Добавим дополнительный угол для точного позиционирования
+            // Нужно учитывать, что стрелка обычно находится вверху (0 градусов)
+            // Поэтому добавляем 90 градусов, чтобы мумия оказалась вверху
             const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
-            const targetAngle = TARGET_PRIZE_INDEX * anglePerPrize;
             
-            // Добавляем смещение, чтобы приз был точно под стрелкой
-            // Обычно нужно вычесть 15 градусов (половину сектора), чтобы 
-            // приз оказался по центру напротив стрелки
-            const offsetAngle = -15; // Смещение для центрирования
-            const adjustedAngle = targetAngle + offsetAngle;
+            // Вычисляем угол так, чтобы приз оказался точно напротив стрелки
+            // Стрелка обычно вверху (12 часов), поэтому приз должен быть на 180 градусов от своей позиции
+            const targetAngle = (TARGET_PRIZE_INDEX * anglePerPrize) + 180;
             
-            // Делаем 5 полных оборотов плюс скорректированный угол
+            // Делаем 5 полных оборотов плюс угол до приза
             const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + adjustedAngle;
+            const totalRotation = (spins * 360) + targetAngle;
             
             // Анимация вращения с эффектом замедления
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
@@ -1210,6 +1207,17 @@
 
         // Инициализация при загрузке
         window.addEventListener('load', initialize);
+        
+        // Добавим функцию для тестирования угла
+        function testAngle(prizeIndex) {
+            const anglePerPrize = 30;
+            const targetAngle = (prizeIndex * anglePerPrize) + 180;
+            const totalRotation = (5 * 360) + targetAngle;
+            prizeWheel.style.transition = 'transform 2s ease-out';
+            prizeWheel.style.transform = `rotate(${totalRotation}deg)`;
+        }
+        
+        // Для отладки: можно вызвать testAngle(3) чтобы проверить попадание на мумию
     </script>
 </body>
 </html>
