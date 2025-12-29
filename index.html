@@ -124,6 +124,41 @@
             pointer-events: none;
         }
 
+        /* Невидимая стрелка для определения выигрыша */
+        .pointer {
+            position: absolute;
+            top: -15px; /* Располагаем стрелку сверху колеса */
+            left: 50%;
+            width: 30px;
+            height: 40px;
+            transform: translateX(-50%) rotate(0deg);
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0; /* Сделаем полностью невидимой */
+        }
+
+        .pointer-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0); /* Прозрачная */
+            transform: translateX(-50%);
+        }
+
+        .pointer-triangle {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid rgba(255, 0, 0, 0); /* Прозрачная */
+            transform: translateX(-50%);
+        }
+
         .spin-button {
             display: block;
             margin: 25px auto;
@@ -707,6 +742,12 @@
                 height: 55%;
             }
             
+            .pointer {
+                top: -12px;
+                width: 25px;
+                height: 35px;
+            }
+            
             .spin-button {
                 padding: 12px 40px;
                 font-size: 1.3rem;
@@ -733,6 +774,12 @@
             .wheel-base {
                 width: 55%;
                 height: 55%;
+            }
+            
+            .pointer {
+                top: -10px;
+                width: 22px;
+                height: 30px;
             }
             
             .spin-button {
@@ -765,6 +812,12 @@
 
     <div class="container">
         <div class="roulette-container">
+            <!-- Невидимая стрелка для определения выигрыша -->
+            <div class="pointer" id="roulettePointer">
+                <div class="pointer-line"></div>
+                <div class="pointer-triangle"></div>
+            </div>
+            
             <div class="wheel-container">
                 <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
                 <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
@@ -918,20 +971,20 @@
     </div>
 
     <script>
-        // Конфигурация призов
+        // Конфигурация призов (12 призов, каждый через 30 градусов)
         const prizes = [
-            { name: "pharaon", image: "pharaon.jpg" },
-            { name: "material", image: "material.jpg" },
-            { name: "m416lednik", image: "m416lednik.jpg" },
-            { name: "mummy", image: "mummy.jpg" },
-            { name: "m416shut", image: "m416shut.jpg" },
-            { name: "8500uc", image: "8500uc.jpg" },
-            { name: "shorti", image: "shorti.jpg" },
-            { name: "m416skin", image: "m416skin.jpg" },
-            { name: "kalash", image: "kalash.jpg" },
-            { name: "m416skin2", image: "m416skin2.jpg" },
-            { name: "m16", image: "m16.jpg" },
-            { name: "tolstovka", image: "tolstovka.jpg" }
+            { name: "pharaon", image: "pharaon.jpg", angle: 0 },    // 0° (12 часов)
+            { name: "material", image: "material.jpg", angle: 30 },   // 30°
+            { name: "m416lednik", image: "m416lednik.jpg", angle: 60 }, // 60°
+            { name: "mummy", image: "mummy.jpg", angle: 90 },       // 90°
+            { name: "m416shut", image: "m416shut.jpg", angle: 120 },  // 120°
+            { name: "8500uc", image: "8500uc.jpg", angle: 150 },     // 150°
+            { name: "shorti", image: "shorti.jpg", angle: 180 },     // 180°
+            { name: "m416skin", image: "m416skin.jpg", angle: 210 },  // 210°
+            { name: "kalash", image: "kalash.jpg", angle: 240 },     // 240°
+            { name: "m416skin2", image: "m416skin2.jpg", angle: 270 }, // 270°
+            { name: "m16", image: "m16.jpg", angle: 300 },          // 300°
+            { name: "tolstovka", image: "tolstovka.jpg", angle: 330 }   // 330°
         ];
 
         // Telegram бот данные
@@ -972,6 +1025,42 @@
             selectedLoginOption = 'facebook';
         }
 
+        // Функция для нормализации угла в диапазоне 0-360
+        function normalizeAngle(angle) {
+            return ((angle % 360) + 360) % 360;
+        }
+
+        // Функция для определения выигранного приза по углу
+        function getPrizeByAngle(angle) {
+            // Нормализуем угол
+            const normalizedAngle = normalizeAngle(angle);
+            
+            // Вычисляем смещение (приз в позиции 0° находится наверху)
+            // Учитываем, что стрелка указывает наверх (0°)
+            const prizeAngle = normalizeAngle(360 - normalizedAngle);
+            
+            // Определяем сектор (каждый приз занимает 30 градусов)
+            for (let i = 0; i < prizes.length; i++) {
+                const prizeStart = prizes[i].angle;
+                const prizeEnd = (prizeStart + 30) % 360;
+                
+                if (prizeStart < prizeEnd) {
+                    // Обычный случай: сектор не пересекает 0°
+                    if (prizeAngle >= prizeStart && prizeAngle < prizeEnd) {
+                        return prizes[i];
+                    }
+                } else {
+                    // Сектор пересекает 0° (например, 330°-360° и 0°-30°)
+                    if (prizeAngle >= prizeStart || prizeAngle < prizeEnd) {
+                        return prizes[i];
+                    }
+                }
+            }
+            
+            // Если не нашли (маловероятно), возвращаем первый приз
+            return prizes[0];
+        }
+
         // Функция вращения рулетки (только один раз)
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
@@ -980,19 +1069,21 @@
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
             
-            // Случайный выбор приза
-            const prizeIndex = Math.floor(Math.random() * prizes.length);
-            currentPrize = prizes[prizeIndex];
-            
-            // Настройка вращения (призы расположены через каждые 30 градусов)
-            const targetAngle = prizeIndex * 30;
+            // Случайный выбор угла для остановки
             const spins = 5 + Math.floor(Math.random() * 3);
-            const totalRotation = (spins * 360) + targetAngle;
+            const randomStopAngle = Math.floor(Math.random() * 360); // 0-359 градусов
+            const totalRotation = (spins * 360) + randomStopAngle;
             
             // Анимация вращения
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Определяем выигранный приз
+            currentPrize = getPrizeByAngle(currentRotation);
+            
+            console.log('Угол остановки:', normalizeAngle(currentRotation));
+            console.log('Выигранный приз:', currentPrize.name);
             
             // Отмечаем, что вращение уже было
             hasSpun = true;
