@@ -172,34 +172,6 @@
             left: 100%;
         }
 
-        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            cursor: pointer;
-        }
-
         @keyframes wheelGlow {
             0% { filter: drop-shadow(0 0 5px gold); }
             50% { filter: drop-shadow(0 0 20px gold); }
@@ -262,26 +234,17 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
-    </div>
-
-    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ñ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¾Ð¹ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
-    <div class="modal-overlay" id="winModal">
-        <div class="modal-content">
-            <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
-        </div>
+        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
     </div>
 
     <script>
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
-        const winModal = document.getElementById('winModal');
-        const prizeImage = document.getElementById('prizeImage');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -300,55 +263,30 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // ÐÐ¾ÑÐ»Ðµ Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
+            // После завершения вращения активируем кнопку снова
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
-                showWinModal();
             }, 4000);
         }
 
-        function showWinModal() {
-            winModal.style.display = 'flex';
-            // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð¿ÑÐ¸ Ð¾ÑÐºÑÑÑÐ¾Ð¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð¼ Ð¾ÐºÐ½Ðµ
-            document.body.style.overflow = 'hidden';
-        }
-
-        function hideWinModal() {
-            winModal.style.display = 'none';
-            // ÐÐ¾ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐºÑÐ¾Ð»Ð»
-            document.body.style.overflow = 'auto';
-        }
-
-        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ
-        prizeImage.addEventListener('click', function() {
-            hideWinModal();
-        });
-
-        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð²Ð½Ðµ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¸
-        winModal.addEventListener('click', function(e) {
-            if (e.target === winModal) {
-                hideWinModal();
-            }
-        });
-
         spinButton.addEventListener('click', spinRoulette);
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð½Ð° Ð²ÑÐµÐ¹ ÑÑÑÐ°Ð½Ð¸ÑÐµ Ð¿ÑÐ¸ ÐºÐ°ÑÐ°Ð½Ð¸Ð¸ ÑÑÐ»ÐµÑÐºÐ¸
+        // Блокируем скролл на всей странице при касании рулетки
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÐºÐ¾Ð»ÐµÑÐ¸ÐºÐ¾ Ð¼ÑÑÐ¸ Ð½Ð° ÑÑÐ»ÐµÑÐºÐµ
+        // Блокируем колесико мыши на рулетке
         document.addEventListener('wheel', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // ÐÐµÐ»Ð°ÐµÐ¼ ÑÑÐ»ÐµÑÐºÑ ÑÑÐ°ÑÐ¸ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¸ ÑÐºÑÐ¾Ð»Ð»Ðµ
+        // Делаем рулетку статичной при скролле
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
