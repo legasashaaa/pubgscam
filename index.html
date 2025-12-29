@@ -172,7 +172,7 @@
             left: 100%;
         }
 
-        /* Стили для модального окна */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -184,15 +184,12 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            padding: 20px;
         }
 
         .modal-content {
             position: relative;
             max-width: 90%;
-            max-height: 80%;
-            margin-bottom: 20px;
+            max-height: 90%;
         }
 
         .modal-image {
@@ -201,58 +198,6 @@
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             cursor: pointer;
-            max-width: 500px;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .login-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 500px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .login-button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .login-facebook {
-            background: linear-gradient(45deg, #3b5998, #2d4373);
-            box-shadow: 0 0 15px rgba(59, 89, 152, 0.7);
-        }
-
-        .login-twitter {
-            background: linear-gradient(45deg, #1da1f2, #0c85d0);
-            box-shadow: 0 0 15px rgba(29, 161, 242, 0.7);
-        }
-
-        .login-button:hover {
-            transform: scale(1.05);
-        }
-
-        .login-facebook:hover {
-            box-shadow: 0 0 25px rgba(59, 89, 152, 1);
-        }
-
-        .login-twitter:hover {
-            box-shadow: 0 0 25px rgba(29, 161, 242, 1);
         }
 
         @keyframes wheelGlow {
@@ -281,15 +226,6 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
-
-            .modal-image {
-                max-width: 400px;
-            }
-
-            .login-button {
-                padding: 12px 20px;
-                font-size: 1.1rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -313,15 +249,6 @@
                 font-size: 1.2rem;
                 margin: 15px auto;
             }
-
-            .modal-image {
-                max-width: 320px;
-            }
-
-            .login-button {
-                padding: 10px 15px;
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
@@ -335,34 +262,18 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
+        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
     </div>
 
-    <!-- Модальное окно с картинкой выигрыша -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ñ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¾Ð¹ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <img src="prize.png" alt="Congratulations" class="modal-image" id="prizeImage">
-        </div>
-    </div>
-
-    <!-- Модальное окно с картинкой stranica.png -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-content">
-            <img src="stranica.png" alt="Login to receive reward" class="modal-image" id="stranicaImage">
-            
-            <div class="login-buttons">
-                <button class="login-button login-facebook">
-                    <span>Login With Facebook</span>
-                </button>
-                <button class="login-button login-twitter">
-                    <span>Login With Twitter</span>
-                </button>
-            </div>
         </div>
     </div>
 
@@ -371,8 +282,6 @@
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
         const prizeImage = document.getElementById('prizeImage');
-        const loginModal = document.getElementById('loginModal');
-        const stranicaImage = document.getElementById('stranicaImage');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -391,7 +300,7 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // После завершения вращения показываем первое модальное окно
+            // ÐÐ¾ÑÐ»Ðµ Ð·Ð°Ð²ÐµÑÑÐµÐ½Ð¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ Ð¿Ð¾ÐºÐ°Ð·ÑÐ²Ð°ÐµÐ¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
@@ -401,80 +310,45 @@
 
         function showWinModal() {
             winModal.style.display = 'flex';
-            // Блокируем скролл при открытом модальном окне
+            // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð¿ÑÐ¸ Ð¾ÑÐºÑÑÑÐ¾Ð¼ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð¼ Ð¾ÐºÐ½Ðµ
             document.body.style.overflow = 'hidden';
         }
 
         function hideWinModal() {
             winModal.style.display = 'none';
-            // Показываем второе модальное окно с картинкой stranica.png
-            showLoginModal();
-        }
-
-        function showLoginModal() {
-            loginModal.style.display = 'flex';
-        }
-
-        function hideLoginModal() {
-            loginModal.style.display = 'none';
-            // Восстанавливаем скролл
+            // ÐÐ¾ÑÑÑÐ°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ ÑÐºÑÐ¾Ð»Ð»
             document.body.style.overflow = 'auto';
         }
 
-        // Закрытие первого модального окна при клике на картинку
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð½Ð° ÐºÐ°ÑÑÐ¸Ð½ÐºÑ
         prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
-        // Закрытие первого модального окна при клике вне картинки
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ð³Ð¾ Ð¾ÐºÐ½Ð° Ð¿ÑÐ¸ ÐºÐ»Ð¸ÐºÐµ Ð²Ð½Ðµ ÐºÐ°ÑÑÐ¸Ð½ÐºÐ¸
         winModal.addEventListener('click', function(e) {
             if (e.target === winModal) {
                 hideWinModal();
             }
         });
 
-        // Закрытие второго модального окна при клике на картинку stranica.png
-        stranicaImage.addEventListener('click', function() {
-            hideLoginModal();
-        });
-
-        // Закрытие второго модального окна при клике вне картинки
-        loginModal.addEventListener('click', function(e) {
-            if (e.target === loginModal) {
-                hideLoginModal();
-            }
-        });
-
-        // Обработчики для кнопок авторизации
-        document.querySelector('.login-facebook').addEventListener('click', function() {
-            alert('Авторизация через Facebook');
-            // Здесь можно добавить реальную логику авторизации
-            hideLoginModal();
-        });
-
-        document.querySelector('.login-twitter').addEventListener('click', function() {
-            alert('Авторизация через Twitter');
-            // Здесь можно добавить реальную логику авторизации
-            hideLoginModal();
-        });
-
         spinButton.addEventListener('click', spinRoulette);
 
-        // Блокируем скролл на всей странице при касании рулетки
+        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÑÐºÑÐ¾Ð»Ð» Ð½Ð° Ð²ÑÐµÐ¹ ÑÑÑÐ°Ð½Ð¸ÑÐµ Ð¿ÑÐ¸ ÐºÐ°ÑÐ°Ð½Ð¸Ð¸ ÑÑÐ»ÐµÑÐºÐ¸
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // Блокируем колесико мыши на рулетке
+        // ÐÐ»Ð¾ÐºÐ¸ÑÑÐµÐ¼ ÐºÐ¾Ð»ÐµÑÐ¸ÐºÐ¾ Ð¼ÑÑÐ¸ Ð½Ð° ÑÑÐ»ÐµÑÐºÐµ
         document.addEventListener('wheel', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
             }
         }, { passive: false });
 
-        // Делаем рулетку статичной при скролле
+        // ÐÐµÐ»Ð°ÐµÐ¼ ÑÑÐ»ÐµÑÐºÑ ÑÑÐ°ÑÐ¸ÑÐ½Ð¾Ð¹ Ð¿ÑÐ¸ ÑÐºÑÐ¾Ð»Ð»Ðµ
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
