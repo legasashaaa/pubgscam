@@ -918,12 +918,12 @@
     </div>
 
     <script>
-        // Конфигурация призов
+        // Конфигурация призов (mummy находится на 4-й позиции, индекс 3)
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
             { name: "m416lednik", image: "m416lednik.png" },
-            { name: "mummy", image: "mummy.png" },
+            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3
             { name: "m416shut", image: "m416shut.png" },
             { name: "8500uc", image: "8500uc.png" },
             { name: "shorti", image: "shorti.png" },
@@ -965,6 +965,9 @@
             hasSpun = false;
             spinButton.disabled = false;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            prizeWheel.style.transition = 'none';
+            prizeWheel.style.transform = 'rotate(0deg)';
+            currentRotation = 0;
             
             // Установка выбора по умолчанию
             facebookOption.classList.add('active');
@@ -972,7 +975,7 @@
             selectedLoginOption = 'facebook';
         }
 
-        // Функция вращения рулетки (только один раз)
+        // Функция вращения рулетки (всегда на mummy)
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
             
@@ -980,16 +983,21 @@
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
             
-            // Случайный выбор приза
-            const prizeIndex = Math.floor(Math.random() * prizes.length);
-            currentPrize = prizes[prizeIndex];
+            // Всегда выбираем приз "mummy" (индекс 3 в массиве)
+            const MUMMY_INDEX = 3; // mummy находится на 4-й позиции
+            currentPrize = prizes[MUMMY_INDEX];
             
-            // Настройка вращения (призы расположены через каждые 30 градусов)
-            const targetAngle = prizeIndex * 30;
-            const spins = 5 + Math.floor(Math.random() * 3);
+            // Настройка вращения на приз "mummy"
+            // Каждый приз расположен через 30 градусов (360/12 = 30)
+            // mummy находится под углом: MUMMY_INDEX * 30 = 3 * 30 = 90 градусов
+            // Но нам нужно чтобы стрелка указывала на приз, поэтому корректируем
+            const targetAngle = MUMMY_INDEX * 30;
+            
+            // Делаем 5 полных оборотов плюс угол до приза
+            const spins = 5; // Фиксированное количество оборотов
             const totalRotation = (spins * 360) + targetAngle;
             
-            // Анимация вращения
+            // Анимация вращения (используем cubic-bezier для реалистичного эффекта)
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
@@ -997,7 +1005,7 @@
             // Отмечаем, что вращение уже было
             hasSpun = true;
             
-            // Показ модального окна с выигрышем
+            // Показ модального окна с выигрышем через 4 секунды (время анимации)
             setTimeout(() => {
                 winPrizeImage.src = currentPrize.image;
                 winModal.style.display = 'flex';
