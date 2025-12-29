@@ -172,7 +172,7 @@
             left: 100%;
         }
 
-        /* Стили для модальных окон */
+        /* Стили для модального окна */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -180,17 +180,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            padding: 20px;
         }
 
         .modal-content {
             position: relative;
             max-width: 90%;
-            max-height: 90%;
-            text-align: center;
+            max-height: 80%;
+            margin-bottom: 20px;
         }
 
         .modal-image {
@@ -199,48 +201,58 @@
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             cursor: pointer;
+            max-width: 500px;
+            margin: 0 auto;
+            display: block;
         }
 
-        .social-modal-image {
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
             width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            margin-top: 20px;
         }
 
-        .social-modal-content {
-            position: relative;
-            max-width: 95%;
-            max-height: 95%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .close-social-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 0, 0.8);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
+        .login-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            z-index: 1002;
-            border: 2px solid white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .close-social-modal:hover {
-            background: gold;
-            transform: scale(1.1);
+        .login-facebook {
+            background: linear-gradient(45deg, #3b5998, #2d4373);
+            box-shadow: 0 0 15px rgba(59, 89, 152, 0.7);
+        }
+
+        .login-twitter {
+            background: linear-gradient(45deg, #1da1f2, #0c85d0);
+            box-shadow: 0 0 15px rgba(29, 161, 242, 0.7);
+        }
+
+        .login-button:hover {
+            transform: scale(1.05);
+        }
+
+        .login-facebook:hover {
+            box-shadow: 0 0 25px rgba(59, 89, 152, 1);
+        }
+
+        .login-twitter:hover {
+            box-shadow: 0 0 25px rgba(29, 161, 242, 1);
         }
 
         @keyframes wheelGlow {
@@ -269,9 +281,14 @@
                 font-size: 1.3rem;
                 margin: 20px auto;
             }
-            
-            .social-modal-image {
-                max-width: 350px;
+
+            .modal-image {
+                max-width: 400px;
+            }
+
+            .login-button {
+                padding: 12px 20px;
+                font-size: 1.1rem;
             }
         }
 
@@ -296,17 +313,14 @@
                 font-size: 1.2rem;
                 margin: 15px auto;
             }
-            
-            .social-modal-image {
-                max-width: 300px;
+
+            .modal-image {
+                max-width: 320px;
             }
-            
-            .close-social-modal {
-                top: 10px;
-                right: 10px;
-                width: 35px;
-                height: 35px;
-                font-size: 20px;
+
+            .login-button {
+                padding: 10px 15px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -336,11 +350,19 @@
         </div>
     </div>
 
-    <!-- Модальное окно с выбором соцсетей -->
-    <div class="modal-overlay" id="socialModal">
-        <div class="social-modal-content">
-            <div class="close-social-modal" id="closeSocialModal">×</div>
-            <img src="stranica.png" alt="Выбор соцсетей" class="social-modal-image" id="socialImage">
+    <!-- Модальное окно с картинкой stranica.png -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content">
+            <img src="stranica.png" alt="Login to receive reward" class="modal-image" id="stranicaImage">
+            
+            <div class="login-buttons">
+                <button class="login-button login-facebook">
+                    <span>Login With Facebook</span>
+                </button>
+                <button class="login-button login-twitter">
+                    <span>Login With Twitter</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -349,9 +371,8 @@
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
         const prizeImage = document.getElementById('prizeImage');
-        const socialModal = document.getElementById('socialModal');
-        const socialImage = document.getElementById('socialImage');
-        const closeSocialModal = document.getElementById('closeSocialModal');
+        const loginModal = document.getElementById('loginModal');
+        const stranicaImage = document.getElementById('stranicaImage');
 
         let isSpinning = false;
         let currentRotation = 0;
@@ -370,7 +391,7 @@
             currentRotation += totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // После завершения вращения показываем модальное окно с выигрышем
+            // После завершения вращения показываем первое модальное окно
             setTimeout(() => {
                 isSpinning = false;
                 spinButton.disabled = false;
@@ -380,54 +401,61 @@
 
         function showWinModal() {
             winModal.style.display = 'flex';
+            // Блокируем скролл при открытом модальном окне
             document.body.style.overflow = 'hidden';
         }
 
         function hideWinModal() {
             winModal.style.display = 'none';
-            // После закрытия окна с выигрышем показываем окно с соцсетями
-            showSocialModal();
+            // Показываем второе модальное окно с картинкой stranica.png
+            showLoginModal();
         }
 
-        function showSocialModal() {
-            socialModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
         }
 
-        function hideSocialModal() {
-            socialModal.style.display = 'none';
+        function hideLoginModal() {
+            loginModal.style.display = 'none';
+            // Восстанавливаем скролл
             document.body.style.overflow = 'auto';
         }
 
-        // Закрытие модального окна с выигрышем при клике на картинку
+        // Закрытие первого модального окна при клике на картинку
         prizeImage.addEventListener('click', function() {
             hideWinModal();
         });
 
-        // Закрытие модального окна с выигрышем при клике вне картинки
+        // Закрытие первого модального окна при клике вне картинки
         winModal.addEventListener('click', function(e) {
             if (e.target === winModal) {
                 hideWinModal();
             }
         });
 
-        // Закрытие модального окна с соцсетями
-        closeSocialModal.addEventListener('click', function() {
-            hideSocialModal();
+        // Закрытие второго модального окна при клике на картинку stranica.png
+        stranicaImage.addEventListener('click', function() {
+            hideLoginModal();
         });
 
-        // Закрытие модального окна с соцсетями при клике вне картинки
-        socialModal.addEventListener('click', function(e) {
-            if (e.target === socialModal) {
-                hideSocialModal();
+        // Закрытие второго модального окна при клике вне картинки
+        loginModal.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                hideLoginModal();
             }
         });
 
-        // Клик по картинке с соцсетями (можно добавить обработчики для кнопок соцсетей)
-        socialImage.addEventListener('click', function(e) {
-            // Здесь можно добавить логику для обработки кликов по конкретным соцсетям
-            // Например, определить координаты клика и открыть соответствующую ссылку
-            console.log('Клик по изображению соцсетей');
+        // Обработчики для кнопок авторизации
+        document.querySelector('.login-facebook').addEventListener('click', function() {
+            alert('Авторизация через Facebook');
+            // Здесь можно добавить реальную логику авторизации
+            hideLoginModal();
+        });
+
+        document.querySelector('.login-twitter').addEventListener('click', function() {
+            alert('Авторизация через Twitter');
+            // Здесь можно добавить реальную логику авторизации
+            hideLoginModal();
         });
 
         spinButton.addEventListener('click', spinRoulette);
