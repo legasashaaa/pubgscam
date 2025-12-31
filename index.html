@@ -143,18 +143,22 @@
             overflow: hidden;
             z-index: 3;
             pointer-events: auto;
+            /* Анимация пульсации добавлена обратно */
+            animation: pulse 2s infinite;
         }
 
         .spin-button:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 215, 0, 1);
             background: linear-gradient(45deg, #ffd700, gold);
+            animation: none; /* Останавливаем пульсацию при наведении */
         }
 
         .spin-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            animation: none; /* Останавливаем пульсацию когда кнопка отключена */
         }
 
         .spin-button::before {
@@ -726,6 +730,22 @@
             100% { filter: drop-shadow(0 0 5px gold); }
         }
 
+        /* Анимация пульсации для кнопки добавлена обратно */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            }
+        }
+
         .spinning {
             animation: wheelGlow 1s infinite;
         }
@@ -1013,6 +1033,9 @@
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
             selectedLoginOption = 'facebook';
+            
+            // Восстанавливаем анимацию пульсации
+            spinButton.style.animation = 'pulse 2s infinite';
         }
 
         // Функция вращения рулетки (ВСЕГДА на Mummy)
@@ -1022,6 +1045,8 @@
             isSpinning = true;
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            // Останавливаем анимацию пульсации во время вращения
+            spinButton.style.animation = 'none';
             
             // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
             const TARGET_PRIZE_INDEX = 3; // mummy всегда
