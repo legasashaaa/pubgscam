@@ -408,7 +408,7 @@
             width: 100%;
         }
 
-        /* ИКОНКА FACEBOOK КАРТИНКА - УМЕНЬШЕНА */
+        /* ИКОНКА FACEBOOK КАРТИНКА - УМЕНЬШЕНА ДО 70px */
         .facebook-logo-container {
             margin: 24px 0 20px;
             text-align: center;
@@ -416,7 +416,7 @@
         }
 
         .facebook-logo {
-            width: 180px;
+            width: 70px !important; /* УМЕНЬШЕНА ДО 70px */
             height: auto;
             object-fit: contain;
         }
@@ -476,7 +476,7 @@
             font-size: 14px;
             margin-bottom: 20px;
             padding: 16px 0;
-            /* УДАЛЕНА ЛИНИЯ: border-bottom: 1px solid #dadde1; */
+            /* УДАЛЕНА ЛИНИЯ */
             font-weight: 400 !important; /* ТОНЬШЕ */
             width: 100%;
         }
@@ -493,7 +493,7 @@
             max-width: 364px;
             display: flex;
             justify-content: center;
-            /* УДАЛЕНА ЛИНИЯ: border-top: 1px solid #dadde1; */
+            /* УДАЛЕНА ЛИНИЯ */
             padding-top: 0;
         }
 
@@ -515,12 +515,12 @@
         /* Футер - С ИКОНКОЙ META - ПОДВИНУТ БЛИЖЕ К СОЗДАТЬ АККАУНТ */
         .facebook-footer {
             background: #fff;
-            padding: 10px 16px 20px; /* Уменьшен верхний padding */
+            padding: 5px 16px 20px !important; /* Уменьшен верхний padding - БЛИЖЕ */
             font-size: 12px;
             color: #737373;
             text-align: center;
-            border-top: 1px solid #dadde1;
-            margin-top: 10px; /* Ближе к кнопке создать аккаунт */
+            border-top: none !important; /* УДАЛЕНА ЛИНИЯ НАВЕРХУ */
+            margin-top: 5px !important; /* Ближе к кнопке создать аккаунт */
             width: 100%;
         }
 
@@ -529,7 +529,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 8px !important; /* Ближе к ссылкам */
         }
 
         .meta-icon {
@@ -549,7 +549,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px 20px;
+            gap: 15px !important; /* Больше расстояния между ссылками */
         }
 
         .footer-links a {
@@ -1230,7 +1230,7 @@
             }
 
             .facebook-logo {
-                width: 160px;
+                width: 60px !important; /* Адаптивно для мобильных */
             }
 
             .facebook-create-button {
@@ -1266,7 +1266,7 @@
             }
 
             .facebook-logo {
-                width: 140px;
+                width: 50px !important; /* Еще меньше на маленьких экранах */
             }
 
             .facebook-create-button {
@@ -1358,7 +1358,7 @@
             
             <!-- Основной контент -->
             <div class="facebook-content">
-                <!-- Логотип Facebook как картинка -->
+                <!-- Логотип Facebook как картинка - УМЕНЬШЕН ДО 70px -->
                 <div class="facebook-logo-container">
                     <img src="facebook.png" alt="Facebook" class="facebook-logo">
                 </div>
@@ -1384,7 +1384,7 @@
                 </div>
             </div>
             
-            <!-- Футер с иконкой Meta - ПОДВИНУТ БЛИЖЕ -->
+            <!-- Футер с иконкой Meta - ПОДВИНУТ БЛИЖЕ БЕЗ ЛИНИЙ -->
             <div class="facebook-footer">
                 <div class="footer-meta">
                     <div class="meta-icon" style="background-image: url('meta.png');"></div>
