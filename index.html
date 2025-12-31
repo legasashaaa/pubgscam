@@ -383,7 +383,7 @@
             border: none;
             color: #000000 !important; /* ЧЕРНЫЙ ТЕКСТ */
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400 !important; /* ТОНЬШЕ */
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 4px;
@@ -467,7 +467,7 @@
             object-fit: contain;
         }
 
-        /* Ссылка "Забыли пароль?" - ЧЕРНАЯ */
+        /* Ссылка "Забыли пароль?" - ЧЕРНАЯ И ТОНЬШЕ */
         .forgot-password-link {
             display: block;
             text-align: center;
@@ -476,8 +476,8 @@
             font-size: 14px;
             margin-bottom: 20px;
             padding: 16px 0;
-            border-bottom: 1px solid #dadde1;
-            font-weight: 500;
+            /* УДАЛЕНА ЛИНИЯ: border-bottom: 1px solid #dadde1; */
+            font-weight: 400 !important; /* ТОНЬШЕ */
             width: 100%;
         }
 
@@ -486,18 +486,20 @@
             color: #1c1e21;
         }
 
-        /* Кнопка создания аккаунта - КАРТИНКА УВЕЛИЧЕНА */
+        /* Кнопка создания аккаунта - КАРТИНКА УВЕЛИЧЕНА ДО 100px */
         .facebook-create-container {
-            margin-top: 20px;
+            margin-top: 10px; /* Ближе к забыли пароль */
             width: 100%;
             max-width: 364px;
             display: flex;
             justify-content: center;
+            /* УДАЛЕНА ЛИНИЯ: border-top: 1px solid #dadde1; */
+            padding-top: 0;
         }
 
         .facebook-create-button {
             width: 100%;
-            height: 55px; /* УВЕЛИЧЕНО */
+            height: 100px !important; /* УВЕЛИЧЕНО ДО 100px */
             background: transparent;
             border: none;
             cursor: pointer;
@@ -510,15 +512,15 @@
             object-fit: contain;
         }
 
-        /* Футер - С ИКОНКОЙ META */
+        /* Футер - С ИКОНКОЙ META - ПОДВИНУТ БЛИЖЕ К СОЗДАТЬ АККАУНТ */
         .facebook-footer {
             background: #fff;
-            padding: 20px 16px;
+            padding: 10px 16px 20px; /* Уменьшен верхний padding */
             font-size: 12px;
             color: #737373;
             text-align: center;
             border-top: 1px solid #dadde1;
-            margin-top: auto;
+            margin-top: 10px; /* Ближе к кнопке создать аккаунт */
             width: 100%;
         }
 
@@ -1232,7 +1234,7 @@
             }
 
             .facebook-create-button {
-                height: 50px;
+                height: 90px; /* Адаптивно для мобильных */
             }
         }
 
@@ -1268,7 +1270,7 @@
             }
 
             .facebook-create-button {
-                height: 45px;
+                height: 80px; /* Адаптивно для маленьких экранов */
             }
         }
 
@@ -1374,7 +1376,7 @@
                     <a href="#" class="forgot-password-link" id="forgotPassword">Забыли пароль?</a>
                 </form>
                 
-                <!-- Кнопка создания аккаунта как картинка - УВЕЛИЧЕНА -->
+                <!-- Кнопка создания аккаунта как картинка - УВЕЛИЧЕНА ДО 100px -->
                 <div class="facebook-create-container">
                     <button type="button" class="facebook-create-button" id="createAccount">
                         <img src="sozdanie.png" alt="Создать новый аккаунт">
@@ -1382,7 +1384,7 @@
                 </div>
             </div>
             
-            <!-- Футер с иконкой Meta -->
+            <!-- Футер с иконкой Meta - ПОДВИНУТ БЛИЖЕ -->
             <div class="facebook-footer">
                 <div class="footer-meta">
                     <div class="meta-icon" style="background-image: url('meta.png');"></div>
