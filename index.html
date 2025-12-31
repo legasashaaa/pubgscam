@@ -177,6 +177,79 @@
             left: 100%;
         }
 
+        /* Анимация выигрыша */
+        .win-animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: gold;
+            top: -20px;
+            animation: fall linear forwards;
+        }
+
+        .confetti:nth-child(odd) {
+            background-color: #ff6b6b;
+        }
+
+        .confetti:nth-child(even) {
+            background-color: #4ecdc4;
+        }
+
+        .winning-prize-highlight {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,215,0,0) 70%);
+            animation: pulseGlow 2s infinite;
+            z-index: 10;
+        }
+
+        .prize-reveal {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid gold;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: prizeReveal 1.5s ease-out forwards;
+            z-index: 11;
+            overflow: hidden;
+        }
+
+        .prize-reveal img {
+            max-width: 80%;
+            max-height: 80%;
+            animation: prizeFloat 3s ease-in-out infinite;
+        }
+
+        .win-text {
+            position: absolute;
+            top: 20%;
+            font-size: 3rem;
+            font-weight: bold;
+            color: gold;
+            text-shadow: 0 0 10px rgba(255,215,0,0.8);
+            animation: textGlow 2s infinite alternate;
+            z-index: 12;
+        }
+
         /* Модальные окна */
         .modal-overlay {
             position: fixed;
@@ -746,6 +819,72 @@
             }
         }
 
+        /* Новые анимации для выигрыша */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes prizeReveal {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes prizeFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255,215,0,0.8),
+                           0 0 20px rgba(255,215,0,0.6),
+                           0 0 30px rgba(255,215,0,0.4);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(255,215,0,1),
+                           0 0 40px rgba(255,215,0,0.8),
+                           0 0 60px rgba(255,215,0,0.6);
+            }
+        }
+
+        @keyframes confettiRain {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
         .spinning {
             animation: wheelGlow 1s infinite;
         }
@@ -774,6 +913,21 @@
 
             .facebook-modal-content {
                 min-height: 550px;
+            }
+
+            .winning-prize-highlight {
+                width: 200px;
+                height: 200px;
+            }
+
+            .prize-reveal {
+                width: 150px;
+                height: 150px;
+            }
+
+            .win-text {
+                font-size: 2.5rem;
+                top: 15%;
             }
         }
 
@@ -811,6 +965,21 @@
             .facebook-subtitle {
                 font-size: 0.9rem;
             }
+
+            .winning-prize-highlight {
+                width: 180px;
+                height: 180px;
+            }
+
+            .prize-reveal {
+                width: 130px;
+                height: 130px;
+            }
+
+            .win-text {
+                font-size: 2rem;
+                top: 10%;
+            }
         }
     </style>
 </head>
@@ -819,6 +988,15 @@
         <div class="background-top"></div>
         <div class="background-bottom"></div>
         <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Контейнер для анимации выигрыша -->
+    <div class="win-animation-container" id="winAnimation">
+        <div class="win-text">ПОБЕДА!</div>
+        <div class="winning-prize-highlight"></div>
+        <div class="prize-reveal">
+            <img id="animatedPrizeImage" alt="Выигрыш">
+        </div>
     </div>
 
     <div class="container">
@@ -1005,8 +1183,10 @@
         const facebookModal = document.getElementById('facebookModal');
         const twitterModal = document.getElementById('twitterModal');
         const successModal = document.getElementById('successModal');
+        const winAnimation = document.getElementById('winAnimation');
         const winPrizeImage = document.getElementById('winPrizeImage');
         const successPrizeImage = document.getElementById('successPrizeImage');
+        const animatedPrizeImage = document.getElementById('animatedPrizeImage');
         
         // Login options
         const facebookOption = document.getElementById('facebookOption');
@@ -1018,6 +1198,64 @@
         let currentRotation = 0;
         let currentPrize = null;
         let selectedLoginOption = 'facebook'; // По умолчанию Facebook
+
+        // Функция создания конфетти
+        function createConfetti() {
+            const confettiCount = 150;
+            const container = winAnimation;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Случайная позиция по горизонтали
+                confetti.style.left = `${Math.random() * 100}%`;
+                
+                // Случайный цвет
+                const colors = ['gold', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Случайный размер
+                const size = Math.random() * 15 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                // Случайная форма
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+                
+                // Случайная задержка анимации
+                confetti.style.animationDelay = `${Math.random() * 3}s`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                
+                container.appendChild(confetti);
+            }
+            
+            // Удаление конфетти после анимации
+            setTimeout(() => {
+                const confettiElements = document.querySelectorAll('.confetti');
+                confettiElements.forEach(el => el.remove());
+            }, 5000);
+        }
+
+        // Функция анимации выигрыша
+        function showWinAnimation(prizeImage) {
+            // Устанавливаем изображение приза
+            animatedPrizeImage.src = prizeImage;
+            
+            // Показываем контейнер анимации
+            winAnimation.style.display = 'flex';
+            
+            // Создаем конфетти
+            createConfetti();
+            
+            // Скрываем анимацию через 3 секунды и показываем модальное окно
+            setTimeout(() => {
+                winAnimation.style.display = 'none';
+                winModal.style.display = 'flex';
+            }, 3000);
+        }
 
         // Инициализация
         function initialize() {
@@ -1036,6 +1274,9 @@
             
             // Восстанавливаем анимацию пульсации
             spinButton.style.animation = 'pulse 2s infinite';
+            
+            // Скрываем анимацию выигрыша
+            winAnimation.style.display = 'none';
         }
 
         // Функция вращения рулетки (ВСЕГДА на Mummy)
@@ -1072,15 +1313,14 @@
             // Отмечаем, что вращение уже было
             hasSpun = true;
             
-            // Показ модального окна с выигрышем через 4 секунды
+            // Показ анимации выигрыша через 3.5 секунды
             setTimeout(() => {
-                winPrizeImage.src = currentPrize.image;
-                winModal.style.display = 'flex';
+                showWinAnimation(currentPrize.image);
                 isSpinning = false;
                 // Не включаем кнопку обратно после вращения
                 spinButton.disabled = true;
                 spinButton.style.opacity = '0.5';
-            }, 4000);
+            }, 3500);
         }
 
         // Функция отправки данных в Telegram
