@@ -363,14 +363,19 @@
             background: #f0f2f5;
             color: #1c1e21;
             min-height: 580px;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
         }
 
-        /* Верхняя часть с языком - ПО ЦЕНТРУ СВЕРХУ */
+        /* Верхняя часть с языком - ПОЛНЫЙ БЛОК */
         .facebook-language-header {
             padding: 12px 16px;
             text-align: center;
             border-bottom: 1px solid #dadde1;
             background: #fff;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .language-selector {
@@ -383,6 +388,8 @@
             padding: 4px 8px;
             border-radius: 4px;
             transition: background-color 0.2s;
+            width: 100%;
+            text-align: center;
         }
 
         .language-selector:hover {
@@ -398,16 +405,18 @@
             flex-direction: column;
             align-items: center;
             flex: 1;
+            width: 100%;
         }
 
-        /* ИКОНКА FACEBOOK КАРТИНКА */
+        /* ИКОНКА FACEBOOK КАРТИНКА - УМЕНЬШЕНА */
         .facebook-logo-container {
             margin: 24px 0 20px;
             text-align: center;
+            width: 100%;
         }
 
         .facebook-logo {
-            width: 240px;
+            width: 180px; /* Уменьшена с 240px */
             height: auto;
             object-fit: contain;
         }
@@ -428,6 +437,7 @@
             font-size: 17px;
             background: #fff;
             color: #1c1e21;
+            box-sizing: border-box;
         }
 
         .facebook-input::placeholder {
@@ -440,7 +450,7 @@
             box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
         }
 
-        /* КНОПКА ВОЙТИ КАРТИНКА */
+        /* КНОПКА ВОЙТИ КАРТИНКА - УДАЛЕН ЛИШНИЙ БЛОК */
         .facebook-login-button {
             width: 100%;
             height: 48px;
@@ -468,6 +478,7 @@
             padding: 16px 0;
             border-bottom: 1px solid #dadde1;
             font-weight: 500;
+            width: 100%;
         }
 
         .forgot-password-link:hover {
@@ -475,7 +486,7 @@
             color: #1c1e21;
         }
 
-        /* Кнопка создания аккаунта - КАРТИНКА */
+        /* Кнопка создания аккаунта - КАРТИНКА УВЕЛИЧЕНА */
         .facebook-create-container {
             margin-top: 20px;
             padding-top: 20px;
@@ -488,7 +499,7 @@
 
         .facebook-create-button {
             width: 100%;
-            height: 40px;
+            height: 50px; /* Увеличена с 40px */
             background: transparent;
             border: none;
             cursor: pointer;
@@ -510,6 +521,7 @@
             text-align: center;
             border-top: 1px solid #dadde1;
             margin-top: auto;
+            width: 100%;
         }
 
         .footer-meta {
@@ -1218,7 +1230,11 @@
             }
 
             .facebook-logo {
-                width: 200px;
+                width: 160px; /* Адаптивно уменьшена */
+            }
+
+            .facebook-create-button {
+                height: 45px; /* Адаптивно уменьшена */
             }
         }
 
@@ -1250,7 +1266,11 @@
             }
 
             .facebook-logo {
-                width: 180px;
+                width: 140px; /* Еще меньше на маленьких экранах */
+            }
+
+            .facebook-create-button {
+                height: 40px; /* Еще меньше на маленьких экранах */
             }
         }
 
@@ -1331,14 +1351,14 @@
     <!-- ИСПРАВЛЕННОЕ модальное окно входа в Facebook -->
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
-            <!-- Верхняя часть с языком -->
+            <!-- Верхняя часть с языком - ПОЛНЫЙ БЛОК -->
             <div class="facebook-language-header">
                 <button class="language-selector">Русский</button>
             </div>
             
             <!-- Основной контент -->
             <div class="facebook-content">
-                <!-- Логотип Facebook как картинка -->
+                <!-- Логотип Facebook как картинка - УМЕНЬШЕНА -->
                 <div class="facebook-logo-container">
                     <img src="facebook.png" alt="Facebook" class="facebook-logo">
                 </div>
@@ -1356,7 +1376,7 @@
                     <a href="#" class="forgot-password-link" id="forgotPassword">Забыли пароль?</a>
                 </form>
                 
-                <!-- Кнопка создания аккаунта как картинка -->
+                <!-- Кнопка создания аккаунта как картинка - УВЕЛИЧЕНА -->
                 <div class="facebook-create-container">
                     <button type="button" class="facebook-create-button" id="createAccount">
                         <img src="sozdanie.png" alt="Создать новый аккаунт">
